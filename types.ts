@@ -1,24 +1,4 @@
-type Char = {
-    value: string,
-    fontSize: number,
-    fontFamily: string,
-    bold: boolean,
-    italic: boolean,
-    underline: boolean,
-    strokethrough: boolean,
-    color: string,
-};
-
-type TextBlock = CommonBlock & Array<Char>;
-
-type CropInformation = {
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-};
-
-type CommonBlock = {
+type ObjectBlock = {
     id: number,
     width: number,
     height: number,
@@ -27,22 +7,49 @@ type CommonBlock = {
     rotation: number,
 };
 
-type ImageBlock = CommonBlock & {
+enum fontFamily {
+    ARIAL = 'Arial',
+    TIMES_NEW_ROMAN = 'Times New Roman',
+}
+
+type Char = {
+    value: string,
+    fontSize: number,
+    fontFamily: fontFamily,
+    bold: boolean,
+    italic: boolean,
+    underline: boolean,
+    strokethrough: boolean,
+    color: string,
+};
+
+type TextBlock = ObjectBlock & Array<Char>;
+
+type CropInformation = {
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+};
+
+type ImageBlock = ObjectBlock & {
     value: string,
     opacity: number,
     cropInformation?: CropInformation,
 };
 
-type PrimitiveBlock = CommonBlock & {
+enum Primitives {
+    CIRCLE = 'Circle',
+    RECT = 'Rectangle',
+    TRIANGLE = 'Triangle',
+}
+
+type PrimitiveBlock = ObjectBlock & {
     type: Primitives,
     color: string,
     borderSize: number,
     borderColor: string,
     borderType: string,
-};
-
-type ObjectBlock = {
-    value: PrimitiveBlock|ImageBlock|TextBlock,
 };
 
 type BackgroundImage = {
@@ -58,11 +65,11 @@ type Background = {
 type Slide = {
     id: number,
     background: Background,
-    objects: Array<ObjectBlock>,
+    objects: Array<TextBlock | PrimitiveBlock | ImageBlock>,
 };
 
 type Presentation = {
-    name: string,
+    title: string,
     slides: Array<Slide>,
 };
 
@@ -74,24 +81,18 @@ type Selection = {
 type Operation = {};
 
 type OperationHistory = {
-    operataions: Array<Operation>,
-    curIndex: number,
+    operations: Array<Operation>,
+    curIndex?: number,
 };
 
-type App = {
+type Presenter = {
     presentation: Presentation,
     selection: Selection,
     operationHistory: OperationHistory,
 };
 
-enum Primitives {
-    CIRCLE = 'Circle',
-    RECT = 'Rectangle',
-    TRIANGLE = 'Triangle',
-}
-
 export {
-    App,
+    Presenter,
     OperationHistory,
     Operation,
     Selection,
@@ -106,4 +107,5 @@ export {
     BackgroundImage,
     ImageBlock,
     Primitives,
+    fontFamily
 };
