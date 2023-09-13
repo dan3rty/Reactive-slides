@@ -9,7 +9,7 @@ type Char = {
     color: string,
 };
 
-type TextBlock = Array<Char>;
+type TextBlock = CommonBlock & Array<Char>;
 
 type CropInformation = {
     x: number,
@@ -18,14 +18,23 @@ type CropInformation = {
     height: number,
 };
 
-type ImageBlock = {
-    value: string,
-    opacity: number,
-    cropInformation: CropInformation,
+type CommonBlock = {
+    id: number,
+    width: number,
+    height: number,
+    x: number,
+    y: number,
+    rotation: number,
 };
 
-type PrimitiveBlock = {
-    type: string,
+type ImageBlock = CommonBlock & {
+    value: string,
+    opacity: number,
+    cropInformation?: CropInformation,
+};
+
+type PrimitiveBlock = CommonBlock & {
+    type: Primitives,
     color: string,
     borderSize: number,
     borderColor: string,
@@ -33,11 +42,6 @@ type PrimitiveBlock = {
 };
 
 type ObjectBlock = {
-    width: number,
-    height: number,
-    x: number,
-    y: number,
-    rotation: number,
     value: PrimitiveBlock|ImageBlock|TextBlock,
 };
 
@@ -48,10 +52,11 @@ type BackgroundImage = {
 
 type Background = {
     color: string,
-    image: BackgroundImage,
+    image?: BackgroundImage,
 };
 
 type Slide = {
+    id: number,
     background: Background,
     objects: Array<ObjectBlock>,
 };
@@ -61,9 +66,9 @@ type Presentation = {
     slides: Array<Slide>,
 };
 
-type CurrentSlide = {
-    index: number,
-    currentObject: number,
+type Selection = {
+    slideId: number,
+    objectId?: number,
 };
 
 type Operation = {};
@@ -75,15 +80,21 @@ type OperationHistory = {
 
 type App = {
     presentation: Presentation,
-    currentSlide: CurrentSlide,
+    selection: Selection,
     operationHistory: OperationHistory,
 };
+
+enum Primitives {
+    CIRCLE = 'Circle',
+    RECT = 'Rectangle',
+    TRIANGLE = 'Triangle',
+}
 
 export {
     App,
     OperationHistory,
     Operation,
-    CurrentSlide,
+    Selection,
     Presentation,
     Slide,
     ObjectBlock,
@@ -94,4 +105,5 @@ export {
     Background,
     BackgroundImage,
     ImageBlock,
+    Primitives,
 };
