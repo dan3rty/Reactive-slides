@@ -1,0 +1,14 @@
+{
+  "name": "reactive-slides",
+  "version": "1.0.0",
+  "description": "Участники: Кирилл Борисов, Даниил Долгоруков, Григорий Пошнагов",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kirill Borisov, Daniil Dolgorukov, Grigory Poshnagov",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
