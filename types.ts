@@ -69,7 +69,7 @@ type CurrentSlide = {
 type Operation = {};
 
 type OperationHistory = {
-    operataions: Array<Operation>,
+    operations: Array<Operation>,
     curIndex: number,
 };
 
