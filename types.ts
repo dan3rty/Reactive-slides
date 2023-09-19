@@ -7,7 +7,7 @@ type ObjectBlock = {
     rotation: number,
 };
 
-enum fontFamily {
+enum FontFamily {
     ARIAL = 'Arial',
     TIMES_NEW_ROMAN = 'Times New Roman',
 }
@@ -107,5 +107,5 @@ export {
     BackgroundImage,
     ImageBlock,
     Primitives,
-    fontFamily
+    FontFamily
 };
