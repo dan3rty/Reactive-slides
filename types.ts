@@ -15,7 +15,7 @@ enum FontFamily {
 type Char = {
     value: string,
     fontSize: number,
-    fontFamily: fontFamily,
+    fontFamily: FontFamily,
     bold: boolean,
     italic: boolean,
     underline: boolean,
