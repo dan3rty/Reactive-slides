@@ -23,7 +23,8 @@ type Char = {
     color: string,
 };
 
-type TextBlock = ObjectBlock & Array<Char>;
+type TextBlock = ObjectBlock &
+    {value: Array<Char>};
 
 type CropInformation = {
     x: number,
