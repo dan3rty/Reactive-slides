@@ -1,7 +1,21 @@
+type ObjectBlock = {
+    id: number,
+    width: number,
+    height: number,
+    x: number,
+    y: number,
+    rotation: number,
+};
+
+enum FontFamily {
+    ARIAL = 'Arial',
+    TIMES_NEW_ROMAN = 'Times New Roman',
+}
+
 type Char = {
     value: string,
     fontSize: number,
-    fontFamily: string,
+    fontFamily: FontFamily,
     bold: boolean,
     italic: boolean,
     underline: boolean,
@@ -9,7 +23,7 @@ type Char = {
     color: string,
 };
 
-type TextBlock = Array<Char>;
+type TextBlock = ObjectBlock & Array<Char>;
 
 type CropInformation = {
     x: number,
@@ -18,27 +32,24 @@ type CropInformation = {
     height: number,
 };
 
-type ImageBlock = {
+type ImageBlock = ObjectBlock & {
     value: string,
     opacity: number,
-    cropInformation: CropInformation,
+    cropInformation?: CropInformation,
 };
 
-type PrimitiveBlock = {
-    type: string,
+enum Primitives {
+    CIRCLE = 'Circle',
+    RECT = 'Rectangle',
+    TRIANGLE = 'Triangle',
+}
+
+type PrimitiveBlock = ObjectBlock & {
+    type: Primitives,
     color: string,
     borderSize: number,
     borderColor: string,
     borderType: string,
-};
-
-type ObjectBlock = {
-    width: number,
-    height: number,
-    x: number,
-    y: number,
-    rotation: number,
-    value: PrimitiveBlock|ImageBlock|TextBlock,
 };
 
 type BackgroundImage = {
@@ -48,42 +59,43 @@ type BackgroundImage = {
 
 type Background = {
     color: string,
-    image: BackgroundImage,
+    image?: BackgroundImage,
 };
 
 type Slide = {
+    id: number,
     background: Background,
-    objects: Array<ObjectBlock>,
+    objects: Array<TextBlock | PrimitiveBlock | ImageBlock>,
 };
 
 type Presentation = {
-    name: string,
+    title: string,
     slides: Array<Slide>,
 };
 
-type CurrentSlide = {
-    index: number,
-    currentObject: number,
+type Selection = {
+    slideId: number,
+    objectId?: number,
 };
 
 type Operation = {};
 
 type OperationHistory = {
     operations: Array<Operation>,
-    curIndex: number,
+    curIndex?: number,
 };
 
-type App = {
+type Presenter = {
     presentation: Presentation,
-    currentSlide: CurrentSlide,
+    selection: Selection,
     operationHistory: OperationHistory,
 };
 
 export {
-    App,
+    Presenter,
     OperationHistory,
     Operation,
-    CurrentSlide,
+    Selection,
     Presentation,
     Slide,
     ObjectBlock,
@@ -94,4 +106,6 @@ export {
     Background,
     BackgroundImage,
     ImageBlock,
+    Primitives,
+    FontFamily
 };
