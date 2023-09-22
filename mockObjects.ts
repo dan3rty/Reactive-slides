@@ -3,7 +3,7 @@ import * as Type from './types';
 const letterH: Type.Char = {
     value: 'H',
     fontSize: 12,
-    fontFamily: 'Arial',
+    fontFamily: Type.FontFamily.ARIAL,
     bold: false,
     italic: false,
     underline: false,
@@ -14,7 +14,7 @@ const letterH: Type.Char = {
 const letterE: Type.Char = {
     value: 'E',
     fontSize: 15,
-    fontFamily: 'Arial',
+    fontFamily: Type.FontFamily.ARIAL,
     bold: true,
     italic: true,
     underline: true,
