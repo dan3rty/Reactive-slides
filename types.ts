@@ -7,10 +7,21 @@ type ObjectBlock = {
     rotation: number,
 };
 
+enum BlockType {
+    IMAGE = 'image',
+    TEXT = 'text',
+    PRIMITIVE = 'primitive',
+}
+
 enum FontFamily {
     ARIAL = 'Arial',
     TIMES_NEW_ROMAN = 'Times New Roman',
 }
+
+type Color = {
+    value: string,
+    opacity?: number,
+};
 
 type Char = {
     value: string,
@@ -20,23 +31,35 @@ type Char = {
     italic: boolean,
     underline: boolean,
     strokethrough: boolean,
-    color: string,
+    color: Color,
 };
 
-type TextBlock = ObjectBlock &
-    {value: Array<Char>};
+type TextBlock = ObjectBlock & {
+    type: BlockType.TEXT,
+    value: Array<Char>,
+};
 
-type CropInformation = {
+type Crop = {
     x: number,
     y: number,
     width: number,
     height: number,
 };
 
-type ImageBlock = ObjectBlock & {
+enum ImageSource {
+    BINARY = 'binary',
+    PATH = 'path',
+}
+
+type BaseImage = {
+    typeValue: ImageSource,
     value: string,
+};
+
+type ImageBlock = BaseImage & ObjectBlock & {
+    type: BlockType.IMAGE,
     opacity: number,
-    cropInformation?: CropInformation,
+    crop?: Crop,
 };
 
 enum Primitives {
@@ -46,20 +69,20 @@ enum Primitives {
 }
 
 type PrimitiveBlock = ObjectBlock & {
-    type: Primitives,
-    color: string,
+    type: BlockType.PRIMITIVE,
+    figure: Primitives,
+    color: Array<Color>,
     borderSize: number,
-    borderColor: string,
+    borderColor: Color,
     borderType: string,
 };
 
-type BackgroundImage = {
-    value: string,
+type BackgroundImage = BaseImage & {
     scale: number,
 };
 
 type Background = {
-    color: string,
+    color: Array<Color>,
     image?: BackgroundImage,
 };
 
@@ -103,10 +126,13 @@ export {
     PrimitiveBlock,
     TextBlock,
     Char,
-    CropInformation,
+    Crop,
     Background,
     BackgroundImage,
     ImageBlock,
     Primitives,
-    FontFamily
+    FontFamily,
+    BlockType,
+    Color,
+    ImageSource,
 };

@@ -1,5 +1,13 @@
 import * as Type from './types';
 
+const BlackColor: Type.Color = {
+    value: "#000000",
+}
+
+const WhiteColor: Type.Color = {
+    value: "#FFFFFF",
+}
+
 const letterH: Type.Char = {
     value: 'H',
     fontSize: 12,
@@ -8,7 +16,7 @@ const letterH: Type.Char = {
     italic: false,
     underline: false,
     strokethrough: false,
-    color: '#FFFFFF',
+    color: BlackColor,
 };
 
 const letterE: Type.Char = {
@@ -19,10 +27,11 @@ const letterE: Type.Char = {
     italic: true,
     underline: true,
     strokethrough: true,
-    color: '#FFFFF2',
+    color: BlackColor,
 };
 
 const text: Type.TextBlock = {
+    type: Type.BlockType.TEXT,
     id: 1,
     width: 100,
     height: 150,
@@ -32,7 +41,7 @@ const text: Type.TextBlock = {
     value: [letterH, letterE],
 };
 
-const crop: Type.CropInformation = {
+const crop: Type.Crop = {
     x: 15,
     y: 20,
     width: 100,
@@ -40,6 +49,8 @@ const crop: Type.CropInformation = {
 }
 
 const image: Type.ImageBlock = {
+    typeValue: Type.ImageSource.PATH,
+    type: Type.BlockType.IMAGE,
     id: 2,
     width: 100,
     height: 200,
@@ -48,31 +59,32 @@ const image: Type.ImageBlock = {
     rotation: 0,
     value: "file:///",
     opacity: 50,
-    cropInformation: crop,
+    crop: crop,
 }
 
 const circle: Type.PrimitiveBlock = {
+    type: Type.BlockType.PRIMITIVE,
     id: 3,
     width: 300,
     height: 300,
     x: 500,
     y: 400,
     rotation: 0,
-    type: Type.Primitives.CIRCLE,
-    color: '#00000E',
+    figure: Type.Primitives.CIRCLE,
+    color: [BlackColor],
     borderSize: 0,
-    borderColor: '#00000E',
+    borderColor: BlackColor,
     borderType: "",
 }
 
 const backgroundImage: Type.BackgroundImage = {
+    typeValue: Type.ImageSource.PATH,
     value: "file:///",
     scale: 100,
 }
 
 const background: Type.Background = {
-    color: '#000000',
-    image: backgroundImage,
+    color: [WhiteColor],
 }
 
 const slide1: Type.Slide = {
