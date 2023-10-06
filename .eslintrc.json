@@ -31,15 +31,18 @@
             "error",
             "windows"
         ],
-        "comma-dangle": ["error", {
+        "no-self-compare": "error",
+        "no-use-before-define": "error",
+        "prettier/prettier": "error",
+        "@typescript-eslint/comma-dangle": ["error", {
             "arrays": "never",
             "objects": "always",
             "imports": "always",
             "exports": "always",
-            "functions": "never"
-        }],
-        "no-self-compare": "error",
-        "no-use-before-define": "error",
-        "prettier/prettier": "error"
+            "functions": "never",
+            "enums": "always",
+            "generics": "always",
+            "tuples": "always"
+        }]
     }
 }
