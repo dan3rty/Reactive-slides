@@ -1,11 +1,10 @@
 type ObjectBlock = {
-    id: number,
     width: number,
     height: number,
     x: number,
     y: number,
     rotation: number,
-};
+}
 
 enum BlockType {
     IMAGE = 'image',
@@ -13,15 +12,29 @@ enum BlockType {
     PRIMITIVE = 'primitive',
 }
 
+type ObjectState = {
+    keyPercent: number, // keyframes
+    state: ObjectBlock,
+}
+
+type ObjectStateList = {
+    stateList?: Array<ObjectState>,
+    baseState: ObjectBlock,
+    duration: number,
+}
 enum FontFamily {
     ARIAL = 'Arial',
     TIMES_NEW_ROMAN = 'Times New Roman',
 }
 
 type Color = {
-    value: string,
-    opacity?: number,
-};
+    hex: string,
+    opacity: number,
+}
+
+type GradientColor = {
+    colors: Array<Color>,
+}
 
 type Char = {
     value: string,
@@ -32,19 +45,20 @@ type Char = {
     underline: boolean,
     strokethrough: boolean,
     color: Color,
-};
+}
 
-type TextBlock = ObjectBlock & {
-    type: BlockType.TEXT,
+type TextBlock = ObjectStateList & {
+    id: string,
+    blockType: BlockType.TEXT,
     value: Array<Char>,
-};
+}
 
 type Crop = {
     x: number,
     y: number,
     width: number,
     height: number,
-};
+}
 
 enum ImageSource {
     BINARY = 'binary',
@@ -54,13 +68,14 @@ enum ImageSource {
 type BaseImage = {
     typeValue: ImageSource,
     value: string,
-};
+}
 
-type ImageBlock = BaseImage & ObjectBlock & {
-    type: BlockType.IMAGE,
+type ImageBlock = BaseImage & ObjectStateList & {
+    id: string,
+    blockType: BlockType.IMAGE,
     opacity: number,
     crop?: Crop,
-};
+}
 
 enum Primitives {
     CIRCLE = 'Circle',
@@ -68,52 +83,59 @@ enum Primitives {
     TRIANGLE = 'Triangle',
 }
 
-type PrimitiveBlock = ObjectBlock & {
-    type: BlockType.PRIMITIVE,
-    figure: Primitives,
-    color: Array<Color>,
+enum BorderTypes {
+    SOLID = 'Solid',
+    DASHED = 'Dashed',
+    DOTTED = 'Dotted',
+}
+
+type PrimitiveBlock = ObjectStateList & {
+    id: string,
+    blockType: BlockType.PRIMITIVE,
+    primitiveType: Primitives,
+    color: GradientColor,
     borderSize: number,
     borderColor: Color,
-    borderType: string,
-};
+    borderType: BorderTypes,
+}
 
 type BackgroundImage = BaseImage & {
     scale: number,
-};
+}
 
 type Background = {
-    color: Array<Color>,
+    color: GradientColor,
     image?: BackgroundImage,
-};
+}
 
 type Slide = {
-    id: number,
+    id: string,
     background: Background,
     objects: Array<TextBlock | PrimitiveBlock | ImageBlock>,
-};
+}
 
 type Presentation = {
     title: string,
     slides: Array<Slide>,
-};
+}
 
 type Selection = {
-    slideId: number,
-    objectId?: number,
-};
+    slideId: string,
+    objectsId?: Array<string>,
+}
 
-type Operation = {};
+type Operation = {}
 
 type OperationHistory = {
     operations: Array<Operation>,
     curIndex?: number,
-};
+}
 
 type Presenter = {
     presentation: Presentation,
     selection: Selection,
     operationHistory: OperationHistory,
-};
+}
 
 export {
     Presenter,
@@ -123,6 +145,7 @@ export {
     Presentation,
     Slide,
     ObjectBlock,
+    ObjectStateList,
     PrimitiveBlock,
     TextBlock,
     Char,
@@ -135,4 +158,6 @@ export {
     BlockType,
     Color,
     ImageSource,
-};
+    GradientColor,
+    BorderTypes,
+}
