@@ -45,28 +45,30 @@ const letterE: Type.Char = {
 const text: Type.TextBlock = {
 	blockType: Type.BlockType.TEXT,
 	id: 'D5DAS67F5A',
-	stateList: [
-		{
-			keyPercent: 0,
-			state: {
-				width: 100,
-				height: 150,
-				x: 200,
-				y: 200,
-				rotation: 0,
+	animation: {
+		stateList: [
+			{
+				keyPercent: 50,
+				state: {
+					width: 100,
+					height: 150,
+					x: 200,
+					y: 200,
+					rotation: 0,
+				}
 			},
-		},
-		{
-			keyPercent: 100,
-			state: {
-				width: 300,
-				height: 100,
-				x: 400,
-				y: 150,
-				rotation: 0,
-			},
-		},
-	],
+			{
+				keyPercent: 100,
+				state: {
+					width: 300,
+					height: 100,
+					x: 400,
+					y: 150,
+					rotation: 0,
+				}
+			},],
+		duration: 10,
+	},
 	baseState: {
 		width: 100,
 		height: 150,
@@ -74,7 +76,6 @@ const text: Type.TextBlock = {
 		y: 200,
 		rotation: 0,
 	},
-	duration: 100,
 	value: [letterH, letterE],
 }
 
@@ -82,18 +83,30 @@ const image: Type.ImageBlock = {
 	typeValue: Type.ImageSource.PATH,
 	blockType: Type.BlockType.IMAGE,
 	id: 'DSAG54D6S7S',
-	stateList: [
-		{
-			keyPercent: 0,
-			state: {
-				width: 100,
-				height: 200,
-				x: 0,
-				y: 0,
-				rotation: 0,
+	animation: {
+		stateList: [
+			{
+				keyPercent: 50,
+				state: {
+					width: 100,
+					height: 150,
+					x: 200,
+					y: 200,
+					rotation: 0,
+				}
 			},
-		},
-	],
+			{
+				keyPercent: 100,
+				state: {
+					width: 300,
+					height: 100,
+					x: 400,
+					y: 150,
+					rotation: 0,
+				}
+			},],
+		duration: 10,
+	},
 	baseState: {
 		width: 100,
 		height: 200,
@@ -101,7 +114,6 @@ const image: Type.ImageBlock = {
 		y: 0,
 		rotation: 0,
 	},
-	duration: 10,
 	value: 'file:///',
 	opacity: 50,
 }
@@ -109,18 +121,30 @@ const image: Type.ImageBlock = {
 const circle: Type.PrimitiveBlock = {
 	blockType: Type.BlockType.PRIMITIVE,
 	id: 'DASD79DAS',
-	stateList: [
-		{
-			keyPercent: 0,
-			state: {
-				width: 300,
-				height: 300,
-				x: 500,
-				y: 400,
-				rotation: 0,
+	animation: {
+		stateList: [
+			{
+				keyPercent: 50,
+				state: {
+					width: 100,
+					height: 150,
+					x: 200,
+					y: 200,
+					rotation: 0,
+				}
 			},
-		},
-	],
+			{
+				keyPercent: 100,
+				state: {
+					width: 300,
+					height: 100,
+					x: 400,
+					y: 150,
+					rotation: 0,
+				}
+			},],
+		duration: 10,
+	},
 	baseState: {
 		width: 300,
 		height: 300,
@@ -128,7 +152,6 @@ const circle: Type.PrimitiveBlock = {
 		y: 400,
 		rotation: 0,
 	},
-	duration: 55,
 	primitiveType: Type.Primitives.CIRCLE,
 	color: {
 		colors: [BlackColor],
@@ -141,18 +164,30 @@ const circle: Type.PrimitiveBlock = {
 const triangle: Type.PrimitiveBlock = {
 	blockType: Type.BlockType.PRIMITIVE,
 	id: 'DASD79DAS',
-	stateList: [
-		{
-			keyPercent: 0,
-			state: {
-				width: 300,
-				height: 300,
-				x: 500,
-				y: 400,
-				rotation: 0,
+	animation: {
+		stateList: [
+			{
+				keyPercent: 50,
+				state: {
+					width: 100,
+					height: 150,
+					x: 200,
+					y: 200,
+					rotation: 0,
+				}
 			},
-		},
-	],
+			{
+				keyPercent: 100,
+				state: {
+					width: 300,
+					height: 100,
+					x: 400,
+					y: 150,
+					rotation: 0,
+				}
+			},],
+		duration: 10,
+	},
 	baseState: {
 		width: 300,
 		height: 300,
@@ -160,7 +195,6 @@ const triangle: Type.PrimitiveBlock = {
 		y: 400,
 		rotation: 0,
 	},
-	duration: 55,
 	primitiveType: Type.Primitives.TRIANGLE,
 	color: {
 		colors: [BlackColor],

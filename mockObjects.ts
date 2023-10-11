@@ -24,9 +24,10 @@ const letterH: Type.Char = {
 const text: Type.TextBlock = {
     blockType: Type.BlockType.TEXT,
     id: "D5DAS67F5A",
-    stateList: [
+    animation: {
+        stateList: [
         {
-            keyPercent: 0,
+            keyPercent: 50,
             state: {
                 width: 100,
                 height: 150,
@@ -44,8 +45,9 @@ const text: Type.TextBlock = {
                 y: 150,
                 rotation: 0,
             }
-        },
-    ],
+        },],
+        duration: 10,
+    },
     baseState: {
         width: 100,
         height: 150,
@@ -53,7 +55,6 @@ const text: Type.TextBlock = {
         y: 200,
         rotation: 0,
     },
-    duration: 100,
     value: [letterH],
 }
 
@@ -61,18 +62,6 @@ const image: Type.ImageBlock = {
     typeValue: Type.ImageSource.PATH,
     blockType: Type.BlockType.IMAGE,
     id: "DSAG54D6S7S",
-    stateList: [
-        {
-            keyPercent: 0,
-            state: {
-                width: 100,
-                height: 200,
-                x: 0,
-                y: 0,
-                rotation: 0,
-            }
-        }
-    ],
     baseState: {
         width: 100,
         height: 200,
@@ -80,7 +69,6 @@ const image: Type.ImageBlock = {
         y: 0,
         rotation: 0,
     },
-    duration: 10,
     value: "file:///",
     opacity: 50,
 }
