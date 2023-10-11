@@ -6,6 +6,12 @@ type ObjectBlock = {
     rotation: number,
 }
 
+type CommonObjectProperties = {
+    id: string,
+    baseState: ObjectBlock,
+    animation: ObjectStateList,
+}
+
 enum BlockType {
     IMAGE = 'image',
     TEXT = 'text',
@@ -19,7 +25,6 @@ type ObjectState = {
 
 type ObjectStateList = {
     stateList?: Array<ObjectState>,
-    baseState: ObjectBlock,
     duration: number,
 }
 enum FontFamily {
@@ -47,8 +52,7 @@ type Char = {
     color: Color,
 }
 
-type TextBlock = ObjectStateList & {
-    id: string,
+type TextBlock = CommonObjectProperties & {
     blockType: BlockType.TEXT,
     value: Array<Char>,
 }
@@ -70,8 +74,7 @@ type BaseImage = {
     value: string,
 }
 
-type ImageBlock = BaseImage & ObjectStateList & {
-    id: string,
+type ImageBlock = BaseImage & CommonObjectProperties & {
     blockType: BlockType.IMAGE,
     opacity: number,
     crop?: Crop,
@@ -89,8 +92,7 @@ enum BorderTypes {
     DOTTED = 'Dotted',
 }
 
-type PrimitiveBlock = ObjectStateList & {
-    id: string,
+type PrimitiveBlock = CommonObjectProperties & {
     blockType: BlockType.PRIMITIVE,
     primitiveType: Primitives,
     color: GradientColor,

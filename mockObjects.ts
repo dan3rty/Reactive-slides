@@ -98,9 +98,15 @@ const background1: Type.Background = {
     image: backgroundImage
 }
 
+const background2: Type.Background = {
+    color: {
+        colors: [BlackColor],
+    },
+}
+
 const slide1: Type.Slide = {
     id: "DHASDH7585dASD",
-    background: background1,
+    background: background2,
     objects: [text],
 }
 
