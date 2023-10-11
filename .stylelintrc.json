@@ -17,7 +17,7 @@
     ],
     "color-hex-case": "upper",
     "color-hex-length": "long",
-    "color-no-invalid-hex": true
-  },
-  "prettier/prettier": true
+    "color-no-invalid-hex": true,
+    "prettier/prettier": true
+  }
 }

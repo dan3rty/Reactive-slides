@@ -23,6 +23,7 @@
         "prettier"
     ],
     "rules": {
+        "sort-imports": "error",
         "no-self-compare": "error",
         "no-use-before-define": "error",
         "prettier/prettier": "error"
