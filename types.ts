@@ -9,7 +9,7 @@ type ObjectBlock = {
 type CommonObjectProperties = {
     id: string,
     baseState: ObjectBlock,
-    animation: ObjectStateList,
+    animation?: ObjectStateList,
 }
 
 enum BlockType {
@@ -24,7 +24,7 @@ type ObjectState = {
 }
 
 type ObjectStateList = {
-    stateList?: Array<ObjectState>,
+    stateList: Array<ObjectState>,
     duration: number,
 }
 enum FontFamily {
