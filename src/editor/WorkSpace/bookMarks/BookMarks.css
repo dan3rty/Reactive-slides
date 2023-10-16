@@ -1,0 +1,7 @@
+.BookMarks {
+	width: 460px;
+	height: 43px;
+	margin-left: 31px;
+	display: flex;
+	justify-content: space-between;
+}

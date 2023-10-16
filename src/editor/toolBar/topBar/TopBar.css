@@ -2,4 +2,11 @@
 	width: 100vw;
 	height: 59px;
 	background-color: #a3e1ec;
+	display: flex;
+	justify-content: space-between;
+	padding-left: 31px;
+	padding-right: 31px;
+	padding-bottom: 5px;
+	box-sizing: border-box;
+	align-items: end;
 }

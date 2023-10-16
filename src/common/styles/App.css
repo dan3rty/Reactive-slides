@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
 .App {
 	width: 100vw;
 	height: 100vh;
@@ -6,4 +8,10 @@
 	background-size: 100px;
 	display: flex;
 	flex-direction: column;
+	color: #006a82;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	font-size: 20px;
+	font-family: Montserrat;
 }
