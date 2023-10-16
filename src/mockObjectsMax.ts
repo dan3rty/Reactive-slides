@@ -55,7 +55,7 @@ const text: Type.TextBlock = {
 					x: 200,
 					y: 200,
 					rotation: 0,
-				}
+				},
 			},
 			{
 				keyPercent: 100,
@@ -65,8 +65,9 @@ const text: Type.TextBlock = {
 					x: 400,
 					y: 150,
 					rotation: 0,
-				}
-			},],
+				},
+			},
+		],
 		duration: 10,
 	},
 	baseState: {
@@ -93,7 +94,7 @@ const image: Type.ImageBlock = {
 					x: 200,
 					y: 200,
 					rotation: 0,
-				}
+				},
 			},
 			{
 				keyPercent: 100,
@@ -103,8 +104,9 @@ const image: Type.ImageBlock = {
 					x: 400,
 					y: 150,
 					rotation: 0,
-				}
-			},],
+				},
+			},
+		],
 		duration: 10,
 	},
 	baseState: {
@@ -131,7 +133,7 @@ const circle: Type.PrimitiveBlock = {
 					x: 200,
 					y: 200,
 					rotation: 0,
-				}
+				},
 			},
 			{
 				keyPercent: 100,
@@ -141,8 +143,9 @@ const circle: Type.PrimitiveBlock = {
 					x: 400,
 					y: 150,
 					rotation: 0,
-				}
-			},],
+				},
+			},
+		],
 		duration: 10,
 	},
 	baseState: {
@@ -174,7 +177,7 @@ const triangle: Type.PrimitiveBlock = {
 					x: 200,
 					y: 200,
 					rotation: 0,
-				}
+				},
 			},
 			{
 				keyPercent: 100,
@@ -184,8 +187,9 @@ const triangle: Type.PrimitiveBlock = {
 					x: 400,
 					y: 150,
 					rotation: 0,
-				}
-			},],
+				},
+			},
+		],
 		duration: 10,
 	},
 	baseState: {
