@@ -161,10 +161,4 @@ export type {
 	GradientColor,
 }
 
-export {
-	Primitives,
-	FontFamily,
-	BlockType,
-	ImageSource,
-	BorderTypes,
-}
+export { Primitives, FontFamily, BlockType, ImageSource, BorderTypes }
