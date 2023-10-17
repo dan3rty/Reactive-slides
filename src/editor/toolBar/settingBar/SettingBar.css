@@ -4,5 +4,10 @@
 	border-bottom: #a3e1ec;
 	border-bottom-width: 5px;
 	border-bottom-style: solid;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 31px;
+	padding-right: 31px;
 	box-sizing: border-box;
 }

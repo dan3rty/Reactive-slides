@@ -82,7 +82,6 @@ const BulletListIcon = (
 			stroke-linecap="round"
 			stroke-linejoin="round"
 		/>
-		<rect width="24" height="24" stroke="black" />
 	</svg>
 )
 
