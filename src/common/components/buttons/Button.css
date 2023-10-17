@@ -1,0 +1,24 @@
+.light {
+	background-color: #ededed;
+}
+
+.dark {
+	background-color: #a3e1ec;
+}
+
+.medium {
+	width: 200px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	border-radius: 3px;
+}
+
+.small {
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 3px;
+}

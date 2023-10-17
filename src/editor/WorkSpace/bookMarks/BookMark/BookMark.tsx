@@ -1,14 +1,14 @@
-import React, { FC } from 'react'
 import './BookMark.css'
+import { ReactNode } from 'react'
 
 type BookMarkProps = {
 	text: string
-	icon: FC
+	icon: ReactNode
 }
 function BookMark(props: BookMarkProps) {
 	return (
 		<div className="BookMark">
-			<props.icon></props.icon>
+			{props.icon}
 			<span> {props.text} </span>
 		</div>
 	)
