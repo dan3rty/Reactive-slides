@@ -9,8 +9,8 @@
 .medium {
 	width: 200px;
 	height: 25px;
-	display: flex;
-	align-items: center;
+	display: grid;
+	grid-template-columns: 30px 150px;
 	border-radius: 3px;
 	padding-left: 5px;
 	box-sizing: border-box;

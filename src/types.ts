@@ -28,6 +28,11 @@ enum BlockType {
 	PRIMITIVE = 'primitive',
 }
 
+enum Tabs {
+	CREATE = 'create',
+	EDIT = 'edit',
+	ANIMATION = 'animation',
+}
 enum FontFamily {
 	ARIAL = 'Arial',
 	TIMES_NEW_ROMAN = 'Times New Roman',
@@ -124,6 +129,7 @@ type Presentation = {
 }
 
 type Selection = {
+	selectedTab: Tabs
 	slideId: string
 	objectsId?: Array<string>
 }
@@ -161,4 +167,4 @@ export type {
 	GradientColor,
 }
 
-export { Primitives, FontFamily, BlockType, ImageSource, BorderTypes }
+export { Primitives, FontFamily, BlockType, ImageSource, BorderTypes, Tabs }

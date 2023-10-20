@@ -9,3 +9,14 @@
 	gap: 5px;
 	cursor: pointer;
 }
+.BookMarkChosen {
+	width: 148px;
+	height: 39px;
+	border-radius: 0 0 3px 3px;
+	background-color: #a3e1ec;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+}

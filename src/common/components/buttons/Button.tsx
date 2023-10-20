@@ -20,6 +20,7 @@ function Button(props: ButtonProps) {
 			</div>
 		)
 	}
+
 	if (props.size === 'small') {
 		return <div className={'small' + ' ' + props.style}>{props.icon}</div>
 	}

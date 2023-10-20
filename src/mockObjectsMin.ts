@@ -23,6 +23,7 @@ const presentation: Type.Presentation = {
 }
 
 const selection: Type.Selection = {
+	selectedTab: Type.Tabs.CREATE,
 	slideId: 'DHASDH7585dASD',
 }
 

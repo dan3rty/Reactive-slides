@@ -1,6 +1,6 @@
 import React from 'react'
 const ArrowIcon = (
-	<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 		<path
 			d="M15.4479 17.5693C16.0337 18.1551 16.9835 18.1551 17.5693 17.5693C18.1551 16.9835 18.1551 16.0337 17.5693 15.4479L15.4479 17.5693ZM1.99999 0.499989C1.17156 0.499989 0.499989 1.17156 0.499989 1.99999L0.499988 15.5C0.499988 16.3284 1.17156 17 1.99999 17C2.82842 17 3.49999 16.3284 3.49999 15.5V3.49999H15.5C16.3284 3.49999 17 2.82842 17 1.99999C17 1.17156 16.3284 0.499988 15.5 0.499988L1.99999 0.499989ZM17.5693 15.4479L3.06065 0.939328L0.939328 3.06065L15.4479 17.5693L17.5693 15.4479Z"
 			fill="#006A82"
@@ -62,7 +62,7 @@ const MoveIcon = (
 )
 
 const TextIcon = (
-	<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 		<path
 			d="M11 2V20M7.14286 20H14.8571M20 5V2H2V5"
 			stroke="#006A82"
