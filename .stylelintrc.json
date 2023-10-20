@@ -15,6 +15,7 @@
     "color-no-invalid-hex": true,
     "prettier/prettier": true,
     "selector-class-pattern": null,
-    "keyframes-name-pattern": null
+    "keyframes-name-pattern": null,
+    "block-no-empty": null
   }
 }
