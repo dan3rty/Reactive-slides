@@ -4,9 +4,9 @@ import { LeftBlock } from './LeftBlock/LeftBlock'
 import { RightBlock } from './RightBlock/RightBlock'
 function TopBar() {
 	return (
-		<div className="TopBar">
+		<div className='TopBar'>
 			<LeftBlock></LeftBlock>
-			<RightBlock presentationName="sample presentation name"></RightBlock>
+			<RightBlock presentationName='sample presentation name'></RightBlock>
 		</div>
 	)
 }
