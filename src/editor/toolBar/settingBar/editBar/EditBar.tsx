@@ -1,6 +1,8 @@
 import React from 'react'
 import './EditBar.css'
+import { Button } from '../../../../common/components/buttons/Button'
 import { InputField } from '../../../../common/components/inputFields/InputField'
+import { BoldIcon } from '../../../../common/icons/icons'
 
 function EditBar() {
 	return (
@@ -52,6 +54,9 @@ function EditBar() {
 					initialValue={35}
 					suffix={'px'}
 				></InputField>
+			</div>
+			<div>
+				<Button style={'light'} size={'small'} icon={BoldIcon} />
 			</div>
 		</div>
 	)
