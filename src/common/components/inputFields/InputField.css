@@ -1,10 +1,60 @@
-.large {
-	width: 200px;
+.input-field {
+	display: flex;
+	justify-content: center;
+}
+
+.input-field_large {
+	width: 180px;
 	height: 37px;
 }
 
 .label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 100%;
+
+	background: #ededed;
 }
 
 .label_large {
+	width: 25%;
+}
+
+.value-field {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+
+	width: 150px;
+
+	background: #a3e1ec;
+}
+
+.input {
+	box-sizing: border-box;
+	height: 100%;
+	width: 70%;
+	border: none;
+	outline: none;
+	background: none;
+	text-align: end;
+	padding: 0;
+	color: #006a82;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	font-size: 20px;
+	font-family: Montserrat, sans-serif;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 0;
 }
