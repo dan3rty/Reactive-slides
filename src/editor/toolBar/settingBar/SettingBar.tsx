@@ -3,11 +3,14 @@ import './SettingBar.css'
 import { EditBar } from './editBar/EditBar'
 import { FileSettings } from './fileSettings/FileSettings'
 import { AddBar } from './addBar/AddBar'
-import {Tabs} from "../../../types";
+import { Tabs } from '../../../types'
 
-function SettingBar() {
-	const tab = Tabs.EDIT
-	if (tab == Tabs.CREATE) {
+type SettingBarProps = {
+	chosenTab: Tabs
+}
+
+function SettingBar(props: SettingBarProps) {
+	if (props.chosenTab == Tabs.CREATE) {
 		return (
 			<div className="SettingBar">
 				<AddBar></AddBar>
@@ -15,13 +18,18 @@ function SettingBar() {
 			</div>
 		)
 	}
-	if (tab == Tabs.EDIT) {
+	if (props.chosenTab == Tabs.EDIT) {
 		return (
 			<div className="SettingBar">
 				<EditBar></EditBar>
 				<FileSettings></FileSettings>
 			</div>
 		)
+	}
+	if (props.chosenTab == Tabs.ANIMATION) {
+		return <div></div>
+	} else {
+		return <div></div>
 	}
 }
 
