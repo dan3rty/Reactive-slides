@@ -10,14 +10,14 @@ function BookMark(props: BookMarkProps) {
 	const curChosen = useContext(chosenTab)
 	if (curChosen == props.text) {
 		return (
-			<div className="BookMarkChosen">
+			<div className='BookMarkChosen'>
 				{props.icon}
 				<span> {props.text} </span>
 			</div>
 		)
 	} else {
 		return (
-			<div className="BookMark">
+			<div className='BookMark'>
 				{props.icon}
 				<span> {props.text} </span>
 			</div>

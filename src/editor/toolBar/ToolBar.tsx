@@ -5,7 +5,7 @@ import { SettingBar } from './settingBar/SettingBar'
 
 function ToolBar() {
 	return (
-		<div className="ToolBar">
+		<div className='ToolBar'>
 			<TopBar></TopBar>
 			<SettingBar></SettingBar>
 		</div>

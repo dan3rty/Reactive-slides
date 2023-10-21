@@ -1,10 +1,17 @@
 import React from 'react'
 import './EditBar.css'
+import { Button } from '../../../../common/components/buttons/Button'
 import { InputField } from '../../../../common/components/inputFields/InputField'
+import {
+	BoldIcon,
+	ItalicIcon,
+	StrokethroughButton,
+	UnderstrokeIcon,
+} from '../../../../common/icons/icons'
 
 function EditBar() {
 	return (
-		<div className="edit-bar">
+		<div className='edit-bar'>
 			<div className={'big-container'}>
 				<InputField
 					label={'X:'}
@@ -52,6 +59,12 @@ function EditBar() {
 					initialValue={35}
 					suffix={'px'}
 				></InputField>
+			</div>
+			<div className={'button-vertical-container'}>
+				<Button style={'light'} size={'small'} icon={BoldIcon} />
+				<Button style={'light'} size={'small'} icon={ItalicIcon} />
+				<Button style={'light'} size={'small'} icon={UnderstrokeIcon} />
+				<Button style={'light'} size={'small'} icon={StrokethroughButton} />
 			</div>
 		</div>
 	)

@@ -11,10 +11,11 @@ type ButtonProps = {
 	size: sizes
 	icon: ReactNode
 }
+
 function Button(props: ButtonProps) {
 	if (props.size === 'medium' && props.text) {
 		return (
-			<div className={'medium' + ' ' + props.style}>
+			<div className={`button button_medium ${props.style}`}>
 				{props.icon}
 				<span>{props.text}</span>
 			</div>
@@ -22,9 +23,9 @@ function Button(props: ButtonProps) {
 	}
 
 	if (props.size === 'small') {
-		return <div className={'small' + ' ' + props.style}>{props.icon}</div>
+		return <div className={`button button_small ${props.style}`}>{props.icon}</div>
 	}
-	return <div className={'medium'}></div>
+	return <div className={'button button_medium'}></div>
 }
 
 export { Button }
