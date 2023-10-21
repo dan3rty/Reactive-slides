@@ -1,16 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './SettingBar.css'
 import { EditBar } from './editBar/EditBar'
 import { FileSettings } from './fileSettings/FileSettings'
 import { AddBar } from './addBar/AddBar'
 import { Tabs } from '../../../types'
+import { chosenTab } from '../../Editor'
 
-type SettingBarProps = {
-	chosenTab: Tabs
-}
-
-function SettingBar(props: SettingBarProps) {
-	if (props.chosenTab == Tabs.CREATE) {
+function SettingBar() {
+	const curChosen = useContext(chosenTab)
+	if (curChosen == Tabs.CREATE) {
 		return (
 			<div className="SettingBar">
 				<AddBar></AddBar>
@@ -18,7 +16,7 @@ function SettingBar(props: SettingBarProps) {
 			</div>
 		)
 	}
-	if (props.chosenTab == Tabs.EDIT) {
+	if (curChosen == Tabs.EDIT) {
 		return (
 			<div className="SettingBar">
 				<EditBar></EditBar>
@@ -26,10 +24,10 @@ function SettingBar(props: SettingBarProps) {
 			</div>
 		)
 	}
-	if (props.chosenTab == Tabs.ANIMATION) {
-		return <div></div>
+	if (curChosen == Tabs.ANIMATION) {
+		return <div className="SettingBar"></div>
 	} else {
-		return <div></div>
+		return <div className="SettingBar"></div>
 	}
 }
 

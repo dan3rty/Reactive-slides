@@ -1,15 +1,11 @@
 import React from 'react'
 import './WorkSpace.css'
 import { BookMarks } from './bookMarks/BookMarks'
-import { Tabs } from '../../types'
 
-type WorkSpaceProps = {
-	chosenTab: Tabs
-}
-function WorkSpace(props: WorkSpaceProps) {
+function WorkSpace() {
 	return (
 		<div className="WorkSpace">
-			<BookMarks chosenTab={props.chosenTab}></BookMarks>
+			<BookMarks></BookMarks>
 		</div>
 	)
 }

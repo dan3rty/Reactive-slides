@@ -12,9 +12,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	height: 100%;
-
 	background: #ededed;
 }
 
@@ -28,16 +26,14 @@
 	justify-content: center;
 	align-items: center;
 	gap: 5px;
-
 	width: 150px;
-
 	background: #a3e1ec;
 }
 
 .input {
-	box-sizing: border-box;
-	height: 100%;
 	width: 70%;
+	height: 100%;
+	box-sizing: border-box;
 	border: none;
 	outline: none;
 	background: none;
@@ -53,8 +49,6 @@
 
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	-moz-appearance: none;
 	appearance: none;
 	margin: 0;
 }

@@ -1,13 +1,14 @@
 import './BookMark.css'
-import { ReactNode } from 'react'
+import { ReactNode, useContext } from 'react'
+import { chosenTab } from '../../../Editor'
 
 type BookMarkProps = {
 	text: string
 	icon: ReactNode
-	curChosen: string
 }
 function BookMark(props: BookMarkProps) {
-	if (props.curChosen == props.text) {
+	const curChosen = useContext(chosenTab)
+	if (curChosen == props.text) {
 		return (
 			<div className="BookMarkChosen">
 				{props.icon}
