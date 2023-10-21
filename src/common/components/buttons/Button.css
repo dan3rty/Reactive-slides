@@ -7,24 +7,24 @@
 }
 
 .medium {
-	width: 200px;
-	height: 25px;
-	display: grid;
-	grid-template-columns: 30px 150px;
-	border-radius: 3px;
-	padding-left: 5px;
 	box-sizing: border-box;
 	cursor: pointer;
+	display: grid;
+	grid-template-columns: 30px 150px;
+	height: 25px;
+	width: 200px;
+	padding-left: 5px;
+	border-radius: 3px;
 }
 
 .small {
-	width: 25px;
-	height: 25px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 3px;
-	padding-left: 5px;
 	box-sizing: border-box;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 25px;
+	width: 25px;
+	padding-left: 5px;
+	border-radius: 3px;
 }

@@ -1,12 +1,12 @@
 .TopBar {
-	width: 100vw;
-	height: 45px;
-	background-color: #a3e1ec;
+	box-sizing: border-box;
 	display: flex;
 	justify-content: space-between;
-	padding-left: 31px;
+	align-items: end;
+	height: 45px;
+	width: 100vw;
 	padding-right: 31px;
 	padding-bottom: 0;
-	box-sizing: border-box;
-	align-items: end;
+	padding-left: 31px;
+	background-color: #a3e1ec;
 }
