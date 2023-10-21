@@ -1,6 +1,13 @@
 import { Editor } from './editor/Editor'
-function App() {
-	return <Editor></Editor>
-}
+import React from 'react'
+import { presenter } from './mockObjects'
 
+const presentation = React.createContext(presenter)
+function App() {
+	return (
+		<presentation.Provider value={presenter}>
+			<Editor></Editor>
+		</presentation.Provider>
+	)
+}
 export default App
