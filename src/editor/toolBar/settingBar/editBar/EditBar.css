@@ -1,5 +1,16 @@
-.add-bar {
-	display: grid;
-	grid-template-columns: 210px 210px 210px;
-	grid-template-rows: 30px 30px;
+.edit-bar {
+    display: flex;
+    gap: 18px;
+}
+
+.big-container {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.medium-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }

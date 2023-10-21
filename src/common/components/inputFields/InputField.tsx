@@ -16,7 +16,7 @@ function InputField(props: InputProps) {
 	return (
 		<div className={`input-field input-field_${props.size}`}>
 			<div className={`label label_${props.size}`}>{props.label}</div>
-			<div className={`value-field value-field_${props.size}`}>
+			<div className={`value-field`}>
 				<input value={props.initialValue} className={'input'} type={props.type}></input>
 				<span>{props.suffix}</span>
 			</div>
