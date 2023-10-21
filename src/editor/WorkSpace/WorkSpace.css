@@ -1,5 +1,15 @@
 .WorkSpace {
+	display: flex;
+	justify-content: space-between;
 	height: 100%;
 	width: 100vw;
 	background-color: #ededed;
+}
+
+.slide-editor-wrapper {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: -43px;
 }
