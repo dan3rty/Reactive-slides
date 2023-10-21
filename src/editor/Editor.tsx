@@ -7,7 +7,7 @@ import { Tabs } from '../types'
 const chosenTab = React.createContext(Tabs.CREATE)
 function Editor() {
 	return (
-		<chosenTab.Provider value={Tabs.CREATE}>
+		<chosenTab.Provider value={Tabs.EDIT}>
 			<div className="App">
 				<ToolBar></ToolBar>
 				<WorkSpace></WorkSpace>
