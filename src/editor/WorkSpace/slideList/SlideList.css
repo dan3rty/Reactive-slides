@@ -3,3 +3,9 @@
 	width: 300px;
 	background-color: white;
 }
+
+. small-slide {
+	width: 274px;
+	height: 154px;
+	background-color: rgb(128, 128, 128);
+}
