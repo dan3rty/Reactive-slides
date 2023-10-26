@@ -21,3 +21,9 @@
 	flex-direction: column;
 	gap: 2px;
 }
+
+.selection-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
