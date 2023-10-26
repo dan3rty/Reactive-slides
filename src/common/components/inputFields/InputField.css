@@ -1,19 +1,18 @@
 .input-field {
 	display: flex;
-	justify-content: center;
 }
 
 .input-field_large {
 	height: 37px;
-	width: 180px;
+	width: 148px;
 }
 
 .input-field_medium {
 	height: 25px;
-	width: 262px;
+	width: 304px;
 }
 
-.label {
+.input-field__label {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -22,26 +21,33 @@
 	border-radius: 3px 0 0 3px;
 }
 
-.label_large {
+.input-field__label_large {
 	width: 25%;
 }
 
-.label_medium {
+.input-field__label_medium {
 	justify-content: flex-end;
-	width: 40%;
+	width: 45%;
 	padding-right: 8px;
 }
 
-.value-field {
+.input-field__value-field {
 	box-sizing: border-box;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	gap: 5px;
-	width: 150px;
 	padding: 0 15px 0 0;
 	background: #a3e1ec;
 	border-radius: 0 3px 3px 0;
+}
+
+.input-field__value-field_medium {
+	width: 55%;
+}
+
+.input-field__value-field_large {
+	width: 75%;
 }
 
 .input {

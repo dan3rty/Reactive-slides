@@ -1,8 +1,8 @@
 import React from 'react'
-import './EditBar.css'
 import { Button } from '../../../../common/components/buttons/Button'
 import { InputField } from '../../../../common/components/inputFields/InputField'
-import { Selection } from '../../../../common/components/selection/Selection'
+import { FontFamilySelection } from '../../../../common/components/selection/FontFamilySelection'
+import { SelectionBar } from '../../../../common/components/selection/SelectionBar'
 import {
 	AlignBottomIcon,
 	AlignCenterIcon,
@@ -15,6 +15,8 @@ import {
 	UnderstrokeIcon,
 	VerticalAlignCenterIcon,
 } from '../../../../common/icons/icons'
+import { FontFamily } from '../../../../types'
+import './EditBar.css'
 
 function EditBar() {
 	return (
@@ -66,6 +68,7 @@ function EditBar() {
 					initialValue={35}
 					suffix={'px'}
 				></InputField>
+				<FontFamilySelection value={FontFamily.ARIAL}></FontFamilySelection>
 			</div>
 			<div className={'button-vertical-container'}>
 				<Button style={'light'} size={'small'} icon={BoldIcon} />
@@ -77,12 +80,12 @@ function EditBar() {
 				<div>
 					<Button text={'clear'} style={'light'} size={'medium'} icon={BoldIcon} />
 				</div>
-				<Selection
+				<SelectionBar
 					firstIcon={AlignRightIcon}
 					secondIcon={AlignCenterIcon}
 					thirdIcon={AlignLeftIcon}
 				/>
-				<Selection
+				<SelectionBar
 					firstIcon={AlignTopIcon}
 					secondIcon={VerticalAlignCenterIcon}
 					thirdIcon={AlignBottomIcon}

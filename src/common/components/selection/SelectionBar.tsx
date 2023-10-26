@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import './Selection.css'
+import './SelectionBar.css'
 import { SelectionButton } from '../buttons/SelectionButton'
 
 type SelectionProps = {
@@ -8,7 +8,7 @@ type SelectionProps = {
 	thirdIcon: ReactNode
 }
 
-function Selection(props: SelectionProps) {
+function SelectionBar(props: SelectionProps) {
 	return (
 		<div className={'selection'}>
 			<SelectionButton style={'light'} icon={props.firstIcon} />
@@ -20,4 +20,4 @@ function Selection(props: SelectionProps) {
 	)
 }
 
-export { Selection }
+export { SelectionBar }
