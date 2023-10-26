@@ -12,11 +12,20 @@
 	height: 25px;
 }
 
-.button_medium {
+.button_big {
 	display: grid;
 	grid-template-columns: 30px 150px;
 	width: 200px;
 	padding-left: 5px;
+	border-radius: 3px;
+}
+
+.button_medium {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 141px;
+	height: 31px;
 	border-radius: 3px;
 }
 

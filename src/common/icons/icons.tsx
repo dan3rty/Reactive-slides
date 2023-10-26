@@ -218,13 +218,85 @@ const UnderstrokeIcon = (
 	</svg>
 )
 
-const StrokethroughButton = (
+const StrokethroughIcon = (
 	<svg width='13' height='16' viewBox='0 0 13 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
 		<path
 			d='M6.43094 15.2C5.35094 15.2 4.30427 15.0467 3.29094 14.74C2.29094 14.4333 1.4976 14.0267 0.910938 13.52L1.81094 11.5C2.38427 11.9533 3.08427 12.3267 3.91094 12.62C4.75094 12.9 5.59094 13.04 6.43094 13.04C7.47094 13.04 8.24427 12.8733 8.75094 12.54C9.27094 12.2067 9.53094 11.7667 9.53094 11.22C9.53094 10.82 9.38427 10.4933 9.09094 10.24C8.81094 9.97333 8.45094 9.76667 8.01094 9.62C7.57094 9.47333 6.97094 9.30667 6.21094 9.12C5.14427 8.86667 4.2776 8.61333 3.61094 8.36C2.9576 8.10667 2.39094 7.71333 1.91094 7.18C1.44427 6.63333 1.21094 5.9 1.21094 4.98C1.21094 4.20667 1.4176 3.50667 1.83094 2.88C2.2576 2.24 2.89094 1.73333 3.73094 1.36C4.58427 0.986666 5.62427 0.799999 6.85094 0.799999C7.70427 0.799999 8.54427 0.906666 9.37094 1.12C10.1976 1.33333 10.9109 1.64 11.5109 2.04L10.6909 4.06C10.0776 3.7 9.4376 3.42667 8.77094 3.24C8.10427 3.05333 7.4576 2.96 6.83094 2.96C5.80427 2.96 5.0376 3.13333 4.53094 3.48C4.0376 3.82667 3.79094 4.28667 3.79094 4.86C3.79094 5.26 3.93094 5.58667 4.21094 5.84C4.50427 6.09333 4.87094 6.29333 5.31094 6.44C5.75094 6.58667 6.35094 6.75333 7.11094 6.94C8.15094 7.18 9.00427 7.43333 9.67094 7.7C10.3376 7.95333 10.9043 8.34667 11.3709 8.88C11.8509 9.41333 12.0909 10.1333 12.0909 11.04C12.0909 11.8133 11.8776 12.5133 11.4509 13.14C11.0376 13.7667 10.4043 14.2667 9.55094 14.64C8.6976 15.0133 7.6576 15.2 6.43094 15.2Z'
 			fill='#006A82'
 		/>
 		<path d='M0.210938 8.6H12.7909V9.6H0.210938V8.6Z' fill='#006A82' />
+	</svg>
+)
+
+const AlignRightIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='27' height='24' viewBox='0 0 27 24' fill='none'>
+		<path
+			d='M25 2H2M25 8.66667H8.57143M25 15.3333H2M25 22H15.1429'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+	</svg>
+)
+
+const AlignCenterIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='26' height='24' viewBox='0 0 26 24' fill='none'>
+		<path
+			d='M2 2H24M5.14286 8.66667H20.8571M2 15.3333H24M8.28571 22H17.7143'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+	</svg>
+)
+
+const AlignLeftIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='27' height='24' viewBox='0 0 27 24' fill='none'>
+		<path
+			d='M2 2H25M2 8.66667H18.4286M2 15.3333H25M2 22H11.8571'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+	</svg>
+)
+
+const AlignTopIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='36' height='30' viewBox='0 0 36 30' fill='none'>
+		<path
+			d='M34 2H2M18 28V8.5M18 8.5L11.1429 13.375M18 8.5L24.8571 13.375'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+	</svg>
+)
+
+const VerticalAlignCenterIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='33' height='32' viewBox='0 0 33 32' fill='none'>
+		<path
+			d='M31 16H2M16.5 30V21.25M16.5 21.25L20.6429 24.75M16.5 21.25L12.3571 24.75M16.5 2V10.75M16.5 10.75L12.3571 7.25M16.5 10.75L20.6429 7.25'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+	</svg>
+)
+
+const AlignBottomIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='33' height='32' viewBox='0 0 33 32' fill='none'>
+		<path
+			d='M31 16H2M16.5 30V21.25M16.5 21.25L20.6429 24.75M16.5 21.25L12.3571 24.75M16.5 2V10.75M16.5 10.75L12.3571 7.25M16.5 10.75L20.6429 7.25'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
 	</svg>
 )
 
@@ -246,5 +318,11 @@ export {
 	BoldIcon,
 	ItalicIcon,
 	UnderstrokeIcon,
-	StrokethroughButton,
+	StrokethroughIcon,
+	AlignBottomIcon,
+	AlignLeftIcon,
+	AlignCenterIcon,
+	AlignRightIcon,
+	AlignTopIcon,
+	VerticalAlignCenterIcon,
 }
