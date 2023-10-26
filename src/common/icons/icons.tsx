@@ -289,9 +289,9 @@ const VerticalAlignCenterIcon = (
 )
 
 const AlignBottomIcon = (
-	<svg xmlns='http://www.w3.org/2000/svg' width='33' height='32' viewBox='0 0 33 32' fill='none'>
+	<svg xmlns='http://www.w3.org/2000/svg' width='36' height='30' viewBox='0 0 36 30' fill='none'>
 		<path
-			d='M31 16H2M16.5 30V21.25M16.5 21.25L20.6429 24.75M16.5 21.25L12.3571 24.75M16.5 2V10.75M16.5 10.75L12.3571 7.25M16.5 10.75L20.6429 7.25'
+			d='M34 28H2M18 2V21.5M18 21.5L11.1429 16.625M18 21.5L24.8571 16.625'
 			stroke='#006A82'
 			stroke-width='3'
 			stroke-linecap='round'
