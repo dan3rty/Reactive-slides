@@ -13,7 +13,7 @@ type ButtonProps = {
 }
 
 function Button(props: ButtonProps) {
-	if (props.size === 'big' && props.text) {
+	if (props.size === 'big') {
 		return (
 			<div className={`button button_big ${props.style}`}>
 				{props.icon}

@@ -13,10 +13,12 @@
 }
 
 .button_big {
-	display: grid;
-	grid-template-columns: 30px 150px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 5px;
 	width: 200px;
-	padding-left: 5px;
+	padding-left: 7px;
 	border-radius: 3px;
 }
 
@@ -24,8 +26,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 148px;
 	height: 31px;
-	width: 139px;
 	border-radius: 3px;
 }
 

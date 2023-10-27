@@ -1,16 +1,16 @@
 .selection-button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 35px;
-	width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 35px;
 }
 
 .selection-button_light {
-	background-color: #ededed;
+    background-color: #EDEDED;
 }
 
 .selection-button_dark {
-	background-color: #000000;
-	opacity: 0.25;
+    background-color: #000000;
+    opacity: 25%;
 }
