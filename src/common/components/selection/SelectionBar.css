@@ -1,12 +1,12 @@
 .selection {
-    display: flex;
-    flex-direction: row;
-    border-radius: 3px;
-    overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	border-radius: 3px;
+	overflow: hidden;
 }
 
 .selection__border {
-    width: 2px;
-    background-color: #000000;
-    opacity: 25%;
+	width: 2px;
+	background-color: #000000;
+	opacity: 0.25;
 }

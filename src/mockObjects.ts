@@ -10,9 +10,36 @@ const WhiteColor: Type.Color = {
 	opacity: 0,
 }
 
+const GrayColor: Type.Color = {
+	hex: '#969992',
+	opacity: 0,
+}
+
 const letterH: Type.Char = {
 	value: 'H',
 	fontSize: 12,
+	fontFamily: Type.FontFamily.ARIAL,
+	bold: false,
+	italic: true,
+	underline: false,
+	strokethrough: false,
+	color: BlackColor,
+}
+
+const letterE: Type.Char = {
+	value: 'E',
+	fontSize: 24,
+	fontFamily: Type.FontFamily.ARIAL,
+	bold: false,
+	italic: true,
+	underline: false,
+	strokethrough: false,
+	color: GrayColor,
+}
+
+const letterL: Type.Char = {
+	value: 'L',
+	fontSize: 36,
 	fontFamily: Type.FontFamily.ARIAL,
 	bold: false,
 	italic: true,
@@ -56,7 +83,7 @@ const text: Type.TextBlock = {
 		y: 200,
 		rotation: 0,
 	},
-	value: [letterH],
+	value: [letterH, letterE, letterL],
 }
 
 const image: Type.ImageBlock = {
@@ -138,4 +165,5 @@ export {
 	backgroundImage,
 	image,
 	letterH,
+	text,
 }

@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from 'react'
+import React from 'react'
 import './OvalComponent.css'
 import { GradientColor, PrimitiveBlock } from '../../types'
 
