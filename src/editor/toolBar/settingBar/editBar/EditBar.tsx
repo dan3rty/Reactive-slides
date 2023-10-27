@@ -69,6 +69,10 @@ function EditBar() {
 					suffix={'px'}
 				></InputField>
 				<FontFamilySelection value={FontFamily.ARIAL}></FontFamilySelection>
+				<div className={'button-horizontal-container'}>
+					<Button text={'Text color'} style={'light'} size={'medium'} />
+					<Button text={'Background'} style={'light'} size={'medium'} />
+				</div>
 			</div>
 			<div className={'button-vertical-container'}>
 				<Button style={'light'} size={'small'} icon={BoldIcon} />
@@ -77,9 +81,7 @@ function EditBar() {
 				<Button style={'light'} size={'small'} icon={StrokethroughIcon} />
 			</div>
 			<div className={'selection-wrapper'}>
-				<div>
-					<Button text={'clear'} style={'light'} size={'medium'} icon={BoldIcon} />
-				</div>
+				<Button text={'clear'} style={'light'} size={'medium'} icon={BoldIcon} />
 				<SelectionBar
 					firstIcon={AlignRightIcon}
 					secondIcon={AlignCenterIcon}
