@@ -8,7 +8,7 @@
 }
 
 .input-field_medium {
-	height: 25px;
+	height: 31px;
 	width: 304px;
 }
 
@@ -27,7 +27,7 @@
 
 .input-field__label_medium {
 	justify-content: flex-end;
-	width: 45%;
+	width: 47.5%;
 	padding-right: 8px;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .input-field__value-field_medium {
-	width: 55%;
+	width: 50%;
 }
 
 .input-field__value-field_large {

@@ -13,13 +13,19 @@
 .medium-container {
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 6px;
 }
 
 .button-vertical-container {
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
+}
+
+.button-horizontal-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .selection-wrapper {

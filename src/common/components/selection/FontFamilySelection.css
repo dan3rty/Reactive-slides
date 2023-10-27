@@ -1,6 +1,6 @@
 .selection-field {
     display: flex;
-    height: 25px;
+    height: 31px;
     width: 304px;
 }
 
@@ -11,7 +11,7 @@
     background: #ededed;
     border-radius: 3px 0 0 3px;
     justify-content: flex-end;
-    width: 45%;
+    width: 47.5%;
     padding-right: 8px;
 }
 
@@ -24,5 +24,5 @@
     padding: 0 15px 0 0;
     background: #a3e1ec;
     border-radius: 0 3px 3px 0;
-    width: 55%;
+    width: 50%;
 }
