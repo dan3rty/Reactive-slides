@@ -11,5 +11,6 @@
 	justify-content: center;
 	height: 100%;
 	margin-top: -43px;
+	margin-left: 32px;
 	flex-direction: column;
 }

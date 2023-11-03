@@ -15,9 +15,19 @@ const GrayColor: Type.Color = {
 	opacity: 0,
 }
 
+const RedColor: Type.Color = {
+	hex: '#e52222',
+	opacity: 0,
+}
+
+const GreenColor: Type.Color = {
+	hex: '#a6ff32',
+	opacity: 0,
+}
+
 const letterH: Type.Char = {
 	value: 'H',
-	fontSize: 12,
+	fontSize: 40,
 	fontFamily: Type.FontFamily.ARIAL,
 	bold: false,
 	italic: true,
@@ -28,7 +38,7 @@ const letterH: Type.Char = {
 
 const letterE: Type.Char = {
 	value: 'E',
-	fontSize: 24,
+	fontSize: 80,
 	fontFamily: Type.FontFamily.ARIAL,
 	bold: false,
 	italic: true,
@@ -39,7 +49,7 @@ const letterE: Type.Char = {
 
 const letterL: Type.Char = {
 	value: 'L',
-	fontSize: 36,
+	fontSize: 160,
 	fontFamily: Type.FontFamily.ARIAL,
 	bold: false,
 	italic: true,
@@ -70,7 +80,7 @@ const text: Type.TextBlock = {
 					height: 100,
 					x: 400,
 					y: 150,
-					rotation: 0,
+					rotation: -15,
 				},
 			},
 		],
@@ -81,7 +91,7 @@ const text: Type.TextBlock = {
 		height: 150,
 		x: 200,
 		y: 200,
-		rotation: 0,
+		rotation: -15,
 	},
 	value: [letterH, letterE, letterL],
 }
@@ -91,13 +101,43 @@ const image: Type.ImageBlock = {
 	blockType: Type.BlockType.IMAGE,
 	id: 'DSAG54D6S7S',
 	baseState: {
-		width: 100,
-		height: 200,
-		x: 0,
-		y: 0,
-		rotation: 0,
+		width: 400,
+		height: 800,
+		x: 700,
+		y: 200,
+		rotation: 45,
 	},
-	value: 'file:///',
+	value: 'https://www.jandewitenzonen.com/img/products/tulip/Katinka.jpg.webp',
+	opacity: 50,
+}
+
+const image2: Type.ImageBlock = {
+	typeValue: Type.ImageSource.PATH,
+	blockType: Type.BlockType.IMAGE,
+	id: 'DSAG54D6S7S',
+	baseState: {
+		width: 200,
+		height: 400,
+		x: 300,
+		y: 300,
+		rotation: -20,
+	},
+	value: 'https://www.jandewitenzonen.com/img/products/tulip/Katinka.jpg.webp',
+	opacity: 50,
+}
+
+const image3: Type.ImageBlock = {
+	typeValue: Type.ImageSource.PATH,
+	blockType: Type.BlockType.IMAGE,
+	id: 'DSAG54D6S7S',
+	baseState: {
+		width: 400,
+		height: 800,
+		x: 700,
+		y: 200,
+		rotation: 15,
+	},
+	value: 'https://www.jandewitenzonen.com/img/products/tulip/Katinka.jpg.webp',
 	opacity: 50,
 }
 
@@ -120,26 +160,62 @@ const background2: Type.Background = {
 	},
 }
 
+const background3: Type.Background = {
+	color: {
+		colors: [RedColor],
+	},
+}
+
+const background4: Type.Background = {
+	color: {
+		colors: [GreenColor],
+	},
+}
+
 const slide1: Type.Slide = {
 	id: 'DHASDH7585dASD',
 	background: background2,
-	objects: [text],
+	objects: [text, image],
 }
 
 const slide2: Type.Slide = {
 	id: 'djahDHSADGKUAGUSDAD',
+	background: background3,
+	objects: [image3, image2],
+}
+
+const slide3: Type.Slide = {
+	id: 'djahDHSADGsdaKUAGUSDAD',
 	background: background1,
-	objects: [image],
+	objects: [image3, image2],
+}
+
+const slide4: Type.Slide = {
+	id: 'djasdfgfdgADGKUAGUSDAD',
+	background: background4,
+	objects: [image3, image2],
+}
+
+const slide5: Type.Slide = {
+	id: 'djjgfkUSDAD',
+	background: background1,
+	objects: [image3, image2],
+}
+
+const slide6: Type.Slide = {
+	id: 'djahDHSsfdUSDAD',
+	background: background1,
+	objects: [image3, image2],
 }
 
 const presentation: Type.Presentation = {
 	title: 'Max presentation',
-	slides: [slide1, slide2],
+	slides: [slide1, slide2, slide3, slide4, slide5, slide6],
 }
 
 const selection: Type.Selection = {
-	selectedTab: Type.Tabs.ANIMATION,
-	slideId: 'DHASDH7585dASD',
+	selectedTab: Type.Tabs.EDIT,
+	slideId: 'djahDHSADGKUAGUSDAD',
 	objectsId: ['D5DAS67F5A'],
 }
 
@@ -164,6 +240,7 @@ export {
 	background1,
 	backgroundImage,
 	image,
+	image2,
 	letterH,
 	text,
 }

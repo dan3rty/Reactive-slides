@@ -1,29 +1,29 @@
 .animation-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }
 
 .big-container {
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
+	display: flex;
+	flex-direction: column;
+	gap: 11px;
 }
 
 .medium-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
 }
 
 .button-vertical-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
 }
 
 .selection-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
 }

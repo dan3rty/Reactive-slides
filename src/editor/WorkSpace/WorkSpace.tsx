@@ -10,7 +10,7 @@ function WorkSpace() {
 			<div>
 				<BookMarks></BookMarks>
 				<div className='slide-editor-wrapper'>
-					<SlideEditor></SlideEditor>
+					<SlideEditor scale={2.5}></SlideEditor>
 				</div>
 			</div>
 			<SlideList></SlideList>

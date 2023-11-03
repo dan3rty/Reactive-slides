@@ -1,0 +1,25 @@
+.slideList {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	gap: 25px;
+	height: 70vh;
+	width: 300px;
+	padding-top: 54px;
+	flex-direction: column;
+	overflow-y: scroll;
+}
+
+.smallSlide {
+	box-shadow: 2px 2px 5px rgb(0 0 0 / 19%);
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+.smallSlideChosen {
+	cursor: pointer;
+	border-radius: 10px;
+	border-color: #a3e1ec;
+	border-style: solid;
+	box-shadow: 5px 5px 5px rgb(0 0 0 / 19%);
+}

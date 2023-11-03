@@ -4,22 +4,24 @@ import { TextBlock } from '../../types'
 
 type TextProps = {
 	text: TextBlock
+	scale: number
 }
 
 function TextComponent(props: TextProps) {
 	const textStyle: React.CSSProperties = {
 		display: 'flex',
 		position: 'absolute',
-		width: props.text.baseState.width + 'px',
-		height: props.text.baseState.height + 'px',
-		top: props.text.baseState.y + 'px',
-		left: props.text.baseState.x + 'px',
+		width: props.text.baseState.width / props.scale + 'px',
+		height: props.text.baseState.height / props.scale + 'px',
+		top: props.text.baseState.y / props.scale + 'px',
+		left: props.text.baseState.x / props.scale + 'px',
+		rotate: props.text.baseState.rotation + 'deg',
 	}
 	const textToRender = props.text.value.map((char) => (
 		<div
 			style={{
 				color: char.color.hex,
-				fontSize: char.fontSize + 'px',
+				fontSize: char.fontSize / props.scale + 'px',
 				height: Math.max(),
 			}}
 		>
