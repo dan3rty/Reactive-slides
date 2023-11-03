@@ -1,6 +1,8 @@
 import React from 'react'
 import { InputField } from '../../../../common/components/inputFields/InputField'
 import './AnimationBar.css'
+import { Button } from '../../../../common/components/buttons/Button'
+import { Timeline } from '../../../../common/components/timeline/Timeline'
 
 function AnimationBar() {
 	return (
@@ -45,13 +47,18 @@ function AnimationBar() {
 				></InputField>
 			</div>
 			<div className={'medium-container'}>
-				<InputField
-					label={'Duration:'}
-					type={'number'}
-					initialValue={13.5}
-					size={'small'}
-					suffix={'sec'}
-				></InputField>
+				<div className={'horizontal-container'}>
+					<InputField
+						label={'Duration:'}
+						type={'number'}
+						initialValue={13.5}
+						size={'small'}
+						suffix={'sec'}
+					></InputField>
+					<Button text={'add keyframe'} style={'dark'} size={'large'} />
+					<Button text={'delete keyframe'} style={'dark'} size={'large'} />
+				</div>
+				<Timeline />
 			</div>
 		</div>
 	)

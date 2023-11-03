@@ -16,6 +16,11 @@
 	gap: 5px;
 }
 
+.horizontal-container {
+	display: flex;
+	gap: 5px;
+}
+
 .button-vertical-container {
 	display: flex;
 	flex-direction: column;

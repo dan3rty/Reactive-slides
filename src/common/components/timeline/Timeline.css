@@ -1,0 +1,7 @@
+.timeline-container {
+	display: flex;
+	height: 67px;
+	width: 630px;
+	background: #ededed;
+    border-radius: 3px;
+}

@@ -300,6 +300,64 @@ const AlignBottomIcon = (
 	</svg>
 )
 
+const ArrowLeftIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='17' height='27' viewBox='0 0 17 27' fill='none'>
+		<path
+			d='M15.0814 25L2.69388 15.5328C1.23094 14.4148 1.23094 12.5852 2.69388 11.4672L15.0814 2'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-miterlimit='10'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+		<path
+			d='M15.0814 25L2.69388 15.5328C1.23094 14.4148 1.23094 12.5852 2.69388 11.4672L15.0814 2'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-miterlimit='10'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+		<path
+			d='M15.0814 25L2.69388 15.5328C1.23094 14.4148 1.23094 12.5852 2.69388 11.4672L15.0814 2'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-miterlimit='10'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+	</svg>
+)
+
+const ArrowRightIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='17' height='27' viewBox='0 0 17 27' fill='none'>
+		<path
+			d='M1.88147 25L14.269 15.5328C15.7319 14.4148 15.7319 12.5852 14.269 11.4672L1.88147 2'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-miterlimit='10'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+		<path
+			d='M1.88147 25L14.269 15.5328C15.7319 14.4148 15.7319 12.5852 14.269 11.4672L1.88147 2'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-miterlimit='10'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+		<path
+			d='M1.88147 25L14.269 15.5328C15.7319 14.4148 15.7319 12.5852 14.269 11.4672L1.88147 2'
+			stroke='#006A82'
+			stroke-width='3'
+			stroke-miterlimit='10'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+	</svg>
+)
+
 export {
 	ArrowIcon,
 	SelectIcon,
@@ -325,4 +383,6 @@ export {
 	AlignRightIcon,
 	AlignTopIcon,
 	VerticalAlignCenterIcon,
+	ArrowLeftIcon,
+	ArrowRightIcon,
 }

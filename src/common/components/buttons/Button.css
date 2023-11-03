@@ -12,6 +12,15 @@
 	height: 25px;
 }
 
+.button_large {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 31px;
+	width: 200px;
+	border-radius: 3px;
+}
+
 .button_big {
 	display: flex;
 	justify-content: flex-start;

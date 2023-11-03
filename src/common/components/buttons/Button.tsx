@@ -2,7 +2,7 @@ import React from 'react'
 import './Button.css'
 import { ReactNode } from 'react'
 
-type sizes = 'small' | 'medium' | 'big'
+type sizes = 'small' | 'medium' | 'big' | 'large'
 type styles = 'light' | 'dark'
 
 type ButtonProps = {
@@ -13,6 +13,14 @@ type ButtonProps = {
 }
 
 function Button(props: ButtonProps) {
+	if (props.size === 'large') {
+		return (
+			<div className={`button button_large ${props.style}`}>
+				<span>{props.text}</span>
+			</div>
+		)
+	}
+
 	if (props.size === 'big') {
 		return (
 			<div className={`button button_big ${props.style}`}>
