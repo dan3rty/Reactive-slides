@@ -3,6 +3,7 @@ import './SettingBar.css'
 import { EditBar } from './editBar/EditBar'
 import { FileSettings } from './fileSettings/FileSettings'
 import { AddBar } from './addBar/AddBar'
+import { AnimationBar } from './animationBar/AnimationBar'
 import { Tabs } from '../../../types'
 import { chosenTab } from '../../Editor'
 
@@ -25,7 +26,12 @@ function SettingBar() {
 		)
 	}
 	if (curChosen == Tabs.ANIMATION) {
-		return <div className='SettingBar'></div>
+		return (
+			<div className='SettingBar'>
+				<AnimationBar></AnimationBar>
+				<FileSettings></FileSettings>
+			</div>
+		)
 	} else {
 		return <div className='SettingBar'></div>
 	}
