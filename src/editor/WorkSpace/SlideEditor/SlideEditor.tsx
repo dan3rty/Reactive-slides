@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styles from './SlideEditor.module.css'
 import { presentation } from '../../../App'
 import { TextComponent } from '../../../common/slideObjects/TextComponent'
-import { BlockType, Slide } from '../../../types'
+import { BlockType, ImageSource, Slide } from '../../../types'
 import { ImageComponent } from '../../../common/slideObjects/ImageComponent'
 import { returnGradientString } from '../../../common/tools/returnGradientString'
 
@@ -12,16 +12,27 @@ type SlideEditorProps = {
 }
 function SlideEditor(props: SlideEditorProps) {
 	const chosen = useContext(presentation).selection.slideId
-	let curSlide: Slide | undefined
+	let curSlide: Slide
 	if (props.slide) {
 		curSlide = props.slide
 	} else {
 		curSlide = useContext(presentation).presentation.slides.find((slide) => slide.id === chosen)
 	}
-	const slideStyle: React.CSSProperties = {
+	let slideStyle: React.CSSProperties = {
 		width: 1920 / props.scale + 'px',
 		height: 1080 / props.scale + 'px',
 		background: returnGradientString(curSlide.background.color),
+	}
+	if (curSlide.background.image) {
+		if (curSlide.background.image.typeValue === ImageSource.PATH) {
+			slideStyle = {
+				width: 1920 / props.scale + 'px',
+				height: 1080 / props.scale + 'px',
+				background: 'url(' + curSlide.background.image.value + ')',
+				backgroundSize: 'cover',
+				backgroundRepeat: 'no-repeat',
+			}
+		}
 	}
 	console.log(returnGradientString(curSlide.background.color))
 	if (curSlide) {

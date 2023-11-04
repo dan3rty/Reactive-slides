@@ -5,15 +5,17 @@ import { SlideEditor } from './SlideEditor/SlideEditor'
 import { SlideList } from './slideList/SlideList'
 
 function WorkSpace() {
+	const size = window.innerHeight
+	const scale = (1080 / (size - 205)) * 1.2
 	return (
 		<div className='WorkSpace'>
 			<div>
 				<BookMarks></BookMarks>
 				<div className='slide-editor-wrapper'>
-					<SlideEditor scale={2.5}></SlideEditor>
+					<SlideEditor scale={scale}></SlideEditor>
 				</div>
 			</div>
-			<SlideList></SlideList>
+			<SlideList scale={scale}></SlideList>
 		</div>
 	)
 }

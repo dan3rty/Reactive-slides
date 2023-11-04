@@ -143,7 +143,7 @@ const image3: Type.ImageBlock = {
 
 const backgroundImage: Type.BackgroundImage = {
 	typeValue: Type.ImageSource.PATH,
-	value: 'file:///',
+	value: 'https://w.forfun.com/fetch/e2/e2092a2bba26bc1aad412fadc70188ea.jpeg',
 	scale: 100,
 }
 
@@ -151,7 +151,6 @@ const background1: Type.Background = {
 	color: {
 		colors: [WhiteColor, RedColor, GreenColor],
 	},
-	image: backgroundImage,
 }
 
 const background2: Type.Background = {
@@ -160,10 +159,11 @@ const background2: Type.Background = {
 	},
 }
 
-const background3: Type.Background = {
+const background5: Type.Background = {
 	color: {
 		colors: [RedColor, GreenColor],
 	},
+	image: backgroundImage,
 }
 
 const background4: Type.Background = {
@@ -180,7 +180,7 @@ const slide1: Type.Slide = {
 
 const slide2: Type.Slide = {
 	id: 'djahDHSADGKUAGUSDAD',
-	background: background3,
+	background: background5,
 	objects: [image3, image2],
 }
 
