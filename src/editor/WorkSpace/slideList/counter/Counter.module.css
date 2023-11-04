@@ -1,0 +1,15 @@
+.Counter {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 25px;
+	background-color: #a3e1ec;
+	border-radius: 999px;
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	min-width: 25px;
+	box-shadow: 2px 2px 5px rgb(0 0 0 / 19%);
+	padding-inline: 5px;
+}

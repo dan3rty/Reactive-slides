@@ -214,9 +214,9 @@ const presentation: Type.Presentation = {
 }
 
 const selection: Type.Selection = {
-	selectedTab: Type.Tabs.ANIMATION,
+	selectedTab: Type.Tabs.EDIT,
 	slideId: 'djahDHSADGKUAGUSDAD',
-	objectsId: ['D5DAS67F5A'],
+	objectsId: ['DSAG54D6S7S'],
 }
 
 const operationHistory: Type.OperationHistory = {
