@@ -116,13 +116,13 @@ const image2: Type.ImageBlock = {
 	blockType: Type.BlockType.IMAGE,
 	id: 'DSAG54D6S7S',
 	baseState: {
-		width: 200,
+		width: 400,
 		height: 400,
 		x: 300,
 		y: 300,
 		rotation: -20,
 	},
-	value: 'https://www.jandewitenzonen.com/img/products/tulip/Katinka.jpg.webp',
+	value: 'https://greetcard.ru/uploads/posts/2022-07/1657870668_kartinka-privet-7.jpg',
 	opacity: 50,
 }
 
@@ -149,26 +149,26 @@ const backgroundImage: Type.BackgroundImage = {
 
 const background1: Type.Background = {
 	color: {
-		colors: [WhiteColor],
+		colors: [WhiteColor, RedColor, GreenColor],
 	},
 	image: backgroundImage,
 }
 
 const background2: Type.Background = {
 	color: {
-		colors: [BlackColor],
+		colors: [BlackColor, WhiteColor],
 	},
 }
 
 const background3: Type.Background = {
 	color: {
-		colors: [RedColor],
+		colors: [RedColor, GreenColor],
 	},
 }
 
 const background4: Type.Background = {
 	color: {
-		colors: [GreenColor],
+		colors: [GreenColor, GrayColor],
 	},
 }
 
@@ -214,7 +214,7 @@ const presentation: Type.Presentation = {
 }
 
 const selection: Type.Selection = {
-	selectedTab: Type.Tabs.EDIT,
+	selectedTab: Type.Tabs.ANIMATION,
 	slideId: 'djahDHSADGKUAGUSDAD',
 	objectsId: ['D5DAS67F5A'],
 }

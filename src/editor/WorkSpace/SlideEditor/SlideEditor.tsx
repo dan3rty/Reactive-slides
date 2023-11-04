@@ -4,6 +4,7 @@ import { presentation } from '../../../App'
 import { TextComponent } from '../../../common/slideObjects/TextComponent'
 import { BlockType, Slide } from '../../../types'
 import { ImageComponent } from '../../../common/slideObjects/ImageComponent'
+import { returnGradientString } from '../../../common/tools/returnGradientString'
 
 type SlideEditorProps = {
 	scale: number
@@ -20,9 +21,9 @@ function SlideEditor(props: SlideEditorProps) {
 	const slideStyle: React.CSSProperties = {
 		width: 1920 / props.scale + 'px',
 		height: 1080 / props.scale + 'px',
-		backgroundColor: curSlide.background.color.colors[0].hex,
+		background: returnGradientString(curSlide.background.color),
 	}
-	console.log(slideStyle)
+	console.log(returnGradientString(curSlide.background.color))
 	if (curSlide) {
 		const slideObjects = curSlide.objects
 		const objectsToRender = slideObjects.map((object) => {
