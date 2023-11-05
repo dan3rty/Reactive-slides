@@ -1,5 +1,5 @@
 import React from 'react'
-import './TextComponent.css'
+import styles from './TextComponent.module.css'
 import { TextBlock } from '../../types'
 
 type TextProps = {
@@ -10,7 +10,9 @@ type TextProps = {
 function TextComponent(props: TextProps) {
 	const textStyle: React.CSSProperties = {
 		display: 'flex',
+		alignItems: 'baseline',
 		position: 'absolute',
+		flexWrap: 'wrap',
 		width: props.text.baseState.width / props.scale + 'px',
 		height: props.text.baseState.height / props.scale + 'px',
 		top: props.text.baseState.y / props.scale + 'px',
@@ -19,6 +21,7 @@ function TextComponent(props: TextProps) {
 	}
 	const textToRender = props.text.value.map((char) => (
 		<div
+			className={styles.char}
 			style={{
 				color: char.color.hex,
 				fontSize: char.fontSize / props.scale + 'px',

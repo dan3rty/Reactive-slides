@@ -44,7 +44,7 @@ const letterE: Type.Char = {
 	italic: true,
 	underline: false,
 	strokethrough: false,
-	color: GrayColor,
+	color: GreenColor,
 }
 
 const letterL: Type.Char = {
@@ -56,6 +56,17 @@ const letterL: Type.Char = {
 	underline: false,
 	strokethrough: false,
 	color: BlackColor,
+}
+
+const letterO: Type.Char = {
+	value: 'O',
+	fontSize: 160,
+	fontFamily: Type.FontFamily.ARIAL,
+	bold: true,
+	italic: true,
+	underline: false,
+	strokethrough: true,
+	color: RedColor,
 }
 
 const text: Type.TextBlock = {
@@ -94,6 +105,44 @@ const text: Type.TextBlock = {
 		rotation: -15,
 	},
 	value: [letterH, letterE, letterL],
+}
+
+const text2: Type.TextBlock = {
+	blockType: Type.BlockType.TEXT,
+	id: 'D5DAS67F5A',
+	animation: {
+		stateList: [
+			{
+				keyPercent: 50,
+				state: {
+					width: 100,
+					height: 150,
+					x: 200,
+					y: 200,
+					rotation: 0,
+				},
+			},
+			{
+				keyPercent: 100,
+				state: {
+					width: 300,
+					height: 100,
+					x: 400,
+					y: 150,
+					rotation: -15,
+				},
+			},
+		],
+		duration: 10,
+	},
+	baseState: {
+		width: 500,
+		height: 150,
+		x: 1200,
+		y: 200,
+		rotation: -15,
+	},
+	value: [letterH, letterE, letterL, letterL, letterO],
 }
 
 const image: Type.ImageBlock = {
@@ -149,7 +198,7 @@ const backgroundImage: Type.BackgroundImage = {
 
 const background1: Type.Background = {
 	color: {
-		colors: [WhiteColor, RedColor, GreenColor],
+		colors: [WhiteColor, RedColor, GreenColor, RedColor, WhiteColor, GreenColor, RedColor],
 	},
 }
 
@@ -181,7 +230,7 @@ const slide1: Type.Slide = {
 const slide2: Type.Slide = {
 	id: 'djahDHSADGKUAGUSDAD',
 	background: background5,
-	objects: [image3, image2],
+	objects: [image3, image2, text2],
 }
 
 const slide3: Type.Slide = {
