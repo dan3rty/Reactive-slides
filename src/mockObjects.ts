@@ -42,7 +42,7 @@ const letterE: Type.Char = {
 	fontFamily: Type.FontFamily.ARIAL,
 	bold: false,
 	italic: true,
-	underline: false,
+	underline: true,
 	strokethrough: false,
 	color: GreenColor,
 }
@@ -52,7 +52,7 @@ const letterL: Type.Char = {
 	fontSize: 160,
 	fontFamily: Type.FontFamily.ARIAL,
 	bold: false,
-	italic: true,
+	italic: false,
 	underline: false,
 	strokethrough: false,
 	color: BlackColor,
@@ -64,7 +64,7 @@ const letterO: Type.Char = {
 	fontFamily: Type.FontFamily.ARIAL,
 	bold: true,
 	italic: true,
-	underline: false,
+	underline: true,
 	strokethrough: true,
 	color: RedColor,
 }

@@ -25,6 +25,15 @@ function TextComponent(props: TextProps) {
 			style={{
 				color: char.color.hex,
 				fontSize: char.fontSize / props.scale + 'px',
+				fontWeight: char.bold ? 'bold' : 'normal',
+				textDecoration: char.strokethrough ? 'line-through' : 'none',
+				borderBottom: char.underline ? char.fontSize / props.scale / 10 + 'px' : '0',
+				borderLeft: '0',
+				borderTop: '0',
+				borderRight: '0',
+				borderStyle: char.underline ? 'solid' : 'none',
+				borderColor: char.underline ? char.color.hex : '#FFFFFF',
+				fontStyle: char.italic ? 'italic' : 'none',
 				height: Math.max(),
 			}}
 		>
