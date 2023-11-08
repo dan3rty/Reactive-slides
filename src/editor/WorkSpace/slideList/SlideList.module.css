@@ -1,8 +1,7 @@
 .slideList {
 	box-sizing: border-box;
 	display: flex;
-	align-items: center;
-	gap: 25px;
+	align-items: end;
 	height: calc(100vh - 205px);
 	padding-right: 20px;
 	margin-top: 20px;
@@ -10,6 +9,14 @@
 	border-radius: 10px;
 	flex-direction: column;
 	overflow-y: scroll;
+	overflow: auto;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.slideList::-webkit-scrollbar {
+	width: 0;
+	height: 0;
 }
 
 .smallSlide {
@@ -17,9 +24,11 @@
 	position: relative;
 	border-radius: 10px;
 	box-shadow: 2px 2px 5px rgb(0 0 0 / 30%);
+	margin-block: 10px;
 }
 
 .smallSlideChosen {
+	margin-block: 20px;
 	cursor: pointer;
 	position: relative;
 	border-radius: 15px;

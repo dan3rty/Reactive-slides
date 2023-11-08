@@ -142,7 +142,23 @@ const text2: Type.TextBlock = {
 		y: 200,
 		rotation: -15,
 	},
-	value: [letterH, letterE, letterL, letterL, letterO],
+	value: [
+		letterH,
+		letterE,
+		letterL,
+		letterL,
+		letterO,
+		letterH,
+		letterE,
+		letterL,
+		letterL,
+		letterO,
+		letterH,
+		letterE,
+		letterL,
+		letterL,
+		letterO,
+	],
 }
 
 const image: Type.ImageBlock = {
@@ -263,7 +279,7 @@ const presentation: Type.Presentation = {
 }
 
 const selection: Type.Selection = {
-	selectedTab: Type.Tabs.EDIT,
+	selectedTab: Type.Tabs.ANIMATION,
 	slideId: 'djahDHSADGKUAGUSDAD',
 	objectsId: ['DSAG54D6S7S'],
 }

@@ -14,7 +14,7 @@ function SlideList(props: SlideListProps) {
 		if (slide.id == chosen) {
 			return (
 				<div className={styles.smallSlideChosen}>
-					<SlideEditor scale={props.scale * 4} slide={slide}></SlideEditor>
+					<SlideEditor scale={props.scale * 3.5} slide={slide}></SlideEditor>
 					<Counter index={index + 1}></Counter>
 				</div>
 			)
