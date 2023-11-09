@@ -1,11 +1,3 @@
-.light {
-	background-color: #ededed;
-}
-
-.dark {
-	background-color: #a3e1ec;
-}
-
 .button {
 	box-sizing: border-box;
 	cursor: pointer;
@@ -19,6 +11,22 @@
 	height: 31px;
 	width: 200px;
 	border-radius: 3px;
+}
+
+.button_light {
+	background-color: #EDEDED;
+}
+
+.button_light:hover {
+	background-color: #E3E3E3;
+}
+
+.button_light {
+	background-color: #EDEDED;
+}
+
+.button_dark {
+	background-color: #A3E1EC;
 }
 
 .button_big {

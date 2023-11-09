@@ -23,7 +23,7 @@ function Button(props: ButtonProps) {
 
 	if (props.size === 'big') {
 		return (
-			<div className={`button button_big ${props.style}`}>
+			<div className={`button button_big button_${props.style}`}>
 				{props.icon}
 				<span>{props.text}</span>
 			</div>
@@ -32,14 +32,14 @@ function Button(props: ButtonProps) {
 
 	if (props.size === 'medium') {
 		return (
-			<div className={`button button_medium ${props.style}`}>
+			<div className={`button button_medium button_${props.style}`}>
 				<span>{props.text}</span>
 			</div>
 		)
 	}
 
 	if (props.size === 'small') {
-		return <div className={`button button_small ${props.style}`}>{props.icon}</div>
+		return <div className={`button button_small button_${props.style}`}>{props.icon}</div>
 	}
 	return <div className={'button button_big'}></div>
 }

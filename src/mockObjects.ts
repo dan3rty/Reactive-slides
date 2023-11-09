@@ -237,6 +237,138 @@ const background4: Type.Background = {
 	},
 }
 
+const circle: Type.PrimitiveBlock = {
+	blockType: Type.BlockType.PRIMITIVE,
+	id: 'DASD79DAS',
+	animation: {
+		stateList: [
+			{
+				keyPercent: 50,
+				state: {
+					width: 100,
+					height: 150,
+					x: 200,
+					y: 200,
+					rotation: 0,
+				},
+			},
+			{
+				keyPercent: 100,
+				state: {
+					width: 300,
+					height: 100,
+					x: 400,
+					y: 150,
+					rotation: 0,
+				},
+			},
+		],
+		duration: 10,
+	},
+	baseState: {
+		width: 300,
+		height: 300,
+		x: 500,
+		y: 400,
+		rotation: 0,
+	},
+	primitiveType: Type.Primitives.CIRCLE,
+	color: {
+		colors: [BlackColor],
+	},
+	borderSize: 20,
+	borderColor: BlackColor,
+	borderType: Type.BorderTypes.DOTTED,
+}
+
+const triangle: Type.PrimitiveBlock = {
+	blockType: Type.BlockType.PRIMITIVE,
+	id: 'DASD79DAS',
+	animation: {
+		stateList: [
+			{
+				keyPercent: 50,
+				state: {
+					width: 100,
+					height: 150,
+					x: 200,
+					y: 200,
+					rotation: 0,
+				},
+			},
+			{
+				keyPercent: 100,
+				state: {
+					width: 300,
+					height: 100,
+					x: 400,
+					y: 150,
+					rotation: 0,
+				},
+			},
+		],
+		duration: 10,
+	},
+	baseState: {
+		width: 300,
+		height: 300,
+		x: 500,
+		y: 400,
+		rotation: 0,
+	},
+	primitiveType: Type.Primitives.TRIANGLE,
+	color: {
+		colors: [BlackColor],
+	},
+	borderSize: 5,
+	borderColor: WhiteColor,
+	borderType: Type.BorderTypes.SOLID,
+}
+
+const square: Type.PrimitiveBlock = {
+	blockType: Type.BlockType.PRIMITIVE,
+	id: 'PFASD79DAS',
+	animation: {
+		stateList: [
+			{
+				keyPercent: 50,
+				state: {
+					width: 100,
+					height: 150,
+					x: 200,
+					y: 200,
+					rotation: 0,
+				},
+			},
+			{
+				keyPercent: 100,
+				state: {
+					width: 300,
+					height: 100,
+					x: 400,
+					y: 150,
+					rotation: 0,
+				},
+			},
+		],
+		duration: 10,
+	},
+	baseState: {
+		width: 300,
+		height: 300,
+		x: 500,
+		y: 400,
+		rotation: 0,
+	},
+	primitiveType: Type.Primitives.RECT,
+	color: {
+		colors: [BlackColor],
+	},
+	borderSize: 5,
+	borderColor: WhiteColor,
+	borderType: Type.BorderTypes.SOLID,
+}
+
 const slide1: Type.Slide = {
 	id: 'DHASDH7585dASD',
 	background: background2,
@@ -246,7 +378,7 @@ const slide1: Type.Slide = {
 const slide2: Type.Slide = {
 	id: 'djahDHSADGKUAGUSDAD',
 	background: background5,
-	objects: [image3, image2, text2],
+	objects: [image3, image2, text2, square, circle, triangle],
 }
 
 const slide3: Type.Slide = {

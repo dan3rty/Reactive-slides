@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
-import styles from './SlideEditor.module.css'
 import { presentation } from '../../../App'
-import { TextComponent } from '../../../common/slideObjects/TextComponent'
-import { BlockType, ImageSource, Slide } from '../../../types'
 import { ImageComponent } from '../../../common/slideObjects/ImageComponent'
+import { OvalComponent } from '../../../common/slideObjects/OvalComponent'
+import { TextComponent } from '../../../common/slideObjects/TextComponent'
 import { returnGradientString } from '../../../common/tools/returnGradientString'
+import { BlockType, ImageSource, Slide } from '../../../types'
+import styles from './SlideEditor.module.css'
 
 type SlideEditorProps = {
 	scale: number
@@ -43,6 +44,9 @@ function SlideEditor(props: SlideEditorProps) {
 			}
 			if (object.blockType === BlockType.IMAGE) {
 				return <ImageComponent image={object} scale={props.scale}></ImageComponent>
+			}
+			if (object.blockType === BlockType.PRIMITIVE) {
+				return <OvalComponent oval={object} />
 			}
 			return <div></div>
 		})

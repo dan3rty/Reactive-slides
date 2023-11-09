@@ -19,6 +19,14 @@ import { FontFamily } from '../../../../types'
 import './EditBar.css'
 
 function EditBar() {
+	// const slides = useContext(presentation).presentation.slides
+	// const slideId = useContext(presentation).selection.slideId
+	// const slide = slides.filter((slide) => slide.id == slideId)[0]
+	// const objectsId = useContext(presentation).selection.objectsId
+	// let selectedObjects
+	// if (objectsId) {
+	// 	selectedObjects = slide.objects.filter((object) => objectsId.includes(object.id))
+	// }
 	return (
 		<div className='edit-bar'>
 			<div className={'big-container'}>
@@ -26,7 +34,7 @@ function EditBar() {
 					label={'X:'}
 					type={'number'}
 					size={'large'}
-					initialValue={544}
+					initialValue={0}
 					suffix={'px'}
 				></InputField>
 				<InputField
