@@ -5,6 +5,7 @@ import { ImageBlock, ImageSource } from '../../types'
 type ImageProps = {
 	image: ImageBlock
 	scale: number
+	selected: boolean
 }
 
 function ImageComponent(props: ImageProps) {
@@ -16,6 +17,9 @@ function ImageComponent(props: ImageProps) {
 		top: props.image.baseState.y / props.scale + 'px',
 		left: props.image.baseState.x / props.scale + 'px',
 		rotate: props.image.baseState.rotation + 'deg',
+		borderColor: '#000000',
+		borderStyle: 'dashed',
+		borderWidth: props.selected ? '3px' : '0',
 	}
 	if (props.image.typeValue === ImageSource.PATH) {
 		return <img style={imageStyle} src={props.image.value} alt='image'></img>

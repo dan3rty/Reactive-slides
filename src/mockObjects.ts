@@ -206,6 +206,21 @@ const image3: Type.ImageBlock = {
 	opacity: 50,
 }
 
+const image4: Type.ImageBlock = {
+	typeValue: Type.ImageSource.PATH,
+	blockType: Type.BlockType.IMAGE,
+	id: 'DSAG54D6fsdfdS7S',
+	baseState: {
+		width: 800,
+		height: 600,
+		x: 200,
+		y: 200,
+		rotation: 15,
+	},
+	value: 'https://shutniks.com/wp-content/uploads/2020/04/smeshnye_kartinki_basseyn_45_27154905.jpg',
+	opacity: 50,
+}
+
 const backgroundImage: Type.BackgroundImage = {
 	typeValue: Type.ImageSource.PATH,
 	value: 'https://w.forfun.com/fetch/e2/e2092a2bba26bc1aad412fadc70188ea.jpeg',
@@ -240,13 +255,13 @@ const background4: Type.Background = {
 const slide1: Type.Slide = {
 	id: 'DHASDH7585dASD',
 	background: background2,
-	objects: [text, image],
+	objects: [text],
 }
 
 const slide2: Type.Slide = {
 	id: 'djahDHSADGKUAGUSDAD',
 	background: background5,
-	objects: [image3, image2, text2],
+	objects: [text2, image4],
 }
 
 const slide3: Type.Slide = {
@@ -258,19 +273,19 @@ const slide3: Type.Slide = {
 const slide4: Type.Slide = {
 	id: 'djasdfgfdgADGKUAGUSDAD',
 	background: background4,
-	objects: [image3, image2],
+	objects: [],
 }
 
 const slide5: Type.Slide = {
 	id: 'djjgfkUSDAD',
 	background: background1,
-	objects: [image3, image2],
+	objects: [],
 }
 
 const slide6: Type.Slide = {
 	id: 'djahDHSsfdUSDAD',
 	background: background1,
-	objects: [image3, image2],
+	objects: [],
 }
 
 const presentation: Type.Presentation = {
@@ -279,9 +294,9 @@ const presentation: Type.Presentation = {
 }
 
 const selection: Type.Selection = {
-	selectedTab: Type.Tabs.ANIMATION,
+	selectedTab: Type.Tabs.EDIT,
 	slideId: 'djahDHSADGKUAGUSDAD',
-	objectsId: ['DSAG54D6S7S'],
+	objectsId: ['D5DAS67F5A', 'DSAG54D6fsdfdS7S'],
 }
 
 const operationHistory: Type.OperationHistory = {

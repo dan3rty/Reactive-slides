@@ -12,6 +12,7 @@ type SlideEditorProps = {
 }
 function SlideEditor(props: SlideEditorProps) {
 	const chosen = useContext(presentation).selection.slideId
+	const chosenObjects = useContext(presentation).selection.objectsId
 	let curSlide: Slide
 	if (props.slide) {
 		curSlide = props.slide
@@ -38,11 +39,25 @@ function SlideEditor(props: SlideEditorProps) {
 	if (curSlide) {
 		const slideObjects = curSlide.objects
 		const objectsToRender = slideObjects.map((object) => {
+			const selected = !!chosenObjects.find((id) => id === object.id)
+
 			if (object.blockType === BlockType.TEXT) {
-				return <TextComponent text={object} scale={props.scale}></TextComponent>
+				return (
+					<TextComponent
+						text={object}
+						scale={props.scale}
+						selected={selected}
+					></TextComponent>
+				)
 			}
 			if (object.blockType === BlockType.IMAGE) {
-				return <ImageComponent image={object} scale={props.scale}></ImageComponent>
+				return (
+					<ImageComponent
+						image={object}
+						scale={props.scale}
+						selected={selected}
+					></ImageComponent>
+				)
 			}
 			return <div></div>
 		})
