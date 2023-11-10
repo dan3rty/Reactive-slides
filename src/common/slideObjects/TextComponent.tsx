@@ -5,6 +5,7 @@ import { TextBlock } from '../../types'
 type TextProps = {
 	text: TextBlock
 	scale: number
+	selected: boolean
 }
 
 function TextComponent(props: TextProps) {
@@ -18,6 +19,9 @@ function TextComponent(props: TextProps) {
 		top: props.text.baseState.y / props.scale + 'px',
 		left: props.text.baseState.x / props.scale + 'px',
 		rotate: props.text.baseState.rotation + 'deg',
+		borderColor: '#000000',
+		borderStyle: 'dashed',
+		borderWidth: props.selected ? '2px' : '0',
 	}
 	const textToRender = props.text.value.map((char) => (
 		<div
