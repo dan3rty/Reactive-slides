@@ -2,8 +2,6 @@ import React from 'react'
 import './OvalComponent.css'
 import { GradientColor, PrimitiveBlock } from '../../types'
 
-
-
 type OvalProps = {
 	oval: PrimitiveBlock
 }

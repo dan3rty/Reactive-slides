@@ -14,19 +14,15 @@
 }
 
 .button_light {
-	background-color: #EDEDED;
+	background-color: #ededed;
 }
 
 .button_light:hover {
-	background-color: #E3E3E3;
-}
-
-.button_light {
-	background-color: #EDEDED;
+	background-color: #e3e3e3;
 }
 
 .button_dark {
-	background-color: #A3E1EC;
+	background-color: #a3e1ec;
 }
 
 .button_big {
