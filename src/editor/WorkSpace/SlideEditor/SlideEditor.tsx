@@ -5,6 +5,7 @@ import { TextComponent } from '../../../common/slideObjects/TextComponent'
 import { BlockType, ImageSource, Slide } from '../../../types'
 import { ImageComponent } from '../../../common/slideObjects/ImageComponent'
 import { returnGradientString } from '../../../common/tools/returnGradientString'
+import { OvalComponent } from '../../../common/slideObjects/OvalComponent'
 
 type SlideEditorProps = {
 	scale: number
@@ -58,6 +59,9 @@ function SlideEditor(props: SlideEditorProps) {
 						selected={selected}
 					></ImageComponent>
 				)
+			}
+			if (object.blockType === BlockType.PRIMITIVE) {
+				return <OvalComponent primitive={object} />
 			}
 			return <div></div>
 		})
