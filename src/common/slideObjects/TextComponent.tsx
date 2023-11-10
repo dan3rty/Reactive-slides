@@ -21,7 +21,7 @@ function TextComponent(props: TextProps) {
 		rotate: props.text.baseState.rotation + 'deg',
 		borderColor: '#000000',
 		borderStyle: 'dashed',
-		borderWidth: props.selected ? '2px' : '0',
+		borderWidth: props.selected ? '3px' : '0',
 	}
 	const textToRender = props.text.value.map((char) => (
 		<div
