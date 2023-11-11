@@ -292,8 +292,8 @@ const circle: Type.PrimitiveBlock = {
 	},
 	baseState: {
 		width: 100,
-		height: 50,
-		x: 50,
+		height: 100,
+		x: 200,
 		y: 100,
 		rotation: 0,
 	},
@@ -302,7 +302,7 @@ const circle: Type.PrimitiveBlock = {
 		colors: [BlackColor],
 	},
 	borderSize: 20,
-	borderColor: BlackColor,
+	borderColor: WhiteColor,
 	borderType: Type.BorderTypes.DOTTED,
 }
 
@@ -379,10 +379,10 @@ const square: Type.PrimitiveBlock = {
 		duration: 10,
 	},
 	baseState: {
-		width: 700,
-		height: 700,
-		x: -200,
-		y: 600,
+		width: 100,
+		height: 100,
+		x: 200,
+		y: 300,
 		rotation: 0,
 	},
 	primitiveType: Type.Primitives.RECT,
