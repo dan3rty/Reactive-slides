@@ -71,7 +71,7 @@ const letterO: Type.Char = {
 
 const text: Type.TextBlock = {
 	blockType: Type.BlockType.TEXT,
-	id: 'D5DAS67F5A',
+	id: 'D5DAS67авлтплвF5A',
 	animation: {
 		stateList: [
 			{

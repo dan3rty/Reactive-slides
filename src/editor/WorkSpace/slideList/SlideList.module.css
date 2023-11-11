@@ -6,18 +6,33 @@
 	padding-right: 20px;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	margin-right: 10px;
 	border-radius: 10px;
 	flex-direction: column;
 	overflow-y: scroll;
-	overflow: auto;
-	-ms-overflow-style: none;
-	scrollbar-width: none;
 }
 
-.slideList::-webkit-scrollbar {
-	height: 0;
-	width: 0;
+/* W3C standard
+   сейчас только для Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: blue orange;
 }
+
+/* для Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+	height: 12px;
+	width: 12px;
+}
+*::-webkit-scrollbar-track {
+	background: RGBA(0 ,0 ,0 ,0);
+}
+*::-webkit-scrollbar-thumb {
+	background-color: RGBA(0 ,0 ,0 ,0);
+	border-radius: 5px;
+	border: 3px solid rgba(121, 121, 121, 0.8);
+}
+
 
 .smallSlide {
 	cursor: pointer;
