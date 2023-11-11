@@ -5,7 +5,7 @@ import { TextComponent } from '../../../common/slideObjects/TextComponent'
 import { BlockType, ImageSource, Slide } from '../../../types'
 import { ImageComponent } from '../../../common/slideObjects/ImageComponent'
 import { returnGradientString } from '../../../common/tools/returnGradientString'
-import { PrimitiveComponent } from '../../../common/slideObjects/OvalComponent'
+import { PrimitiveComponent } from '../../../common/slideObjects/PrimitiveComponent'
 
 type SlideEditorProps = {
 	scale: number
