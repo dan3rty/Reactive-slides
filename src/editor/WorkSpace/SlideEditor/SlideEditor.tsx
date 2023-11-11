@@ -5,12 +5,13 @@ import { TextComponent } from '../../../common/slideObjects/TextComponent'
 import { BlockType, ImageSource, Slide } from '../../../types'
 import { ImageComponent } from '../../../common/slideObjects/ImageComponent'
 import { returnGradientString } from '../../../common/tools/returnGradientString'
-import { OvalComponent } from '../../../common/slideObjects/OvalComponent'
+import { PrimitiveComponent } from '../../../common/slideObjects/OvalComponent'
 
 type SlideEditorProps = {
 	scale: number
 	slide?: Slide
 }
+
 function SlideEditor(props: SlideEditorProps) {
 	const chosen = useContext(presentation).selection.slideId
 	const chosenObjects = useContext(presentation).selection.objectsId
@@ -61,7 +62,7 @@ function SlideEditor(props: SlideEditorProps) {
 				)
 			}
 			if (object.blockType === BlockType.PRIMITIVE) {
-				return <OvalComponent primitive={object} />
+				return <PrimitiveComponent primitive={object} scale={props.scale} />
 			}
 			return <div></div>
 		})

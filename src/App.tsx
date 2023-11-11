@@ -6,7 +6,7 @@ const presentation = React.createContext(presenter)
 function App() {
 	return (
 		<presentation.Provider value={presenter}>
-			<Editor></Editor>
+			<Editor />
 		</presentation.Provider>
 	)
 }

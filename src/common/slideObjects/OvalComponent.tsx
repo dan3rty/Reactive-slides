@@ -1,12 +1,12 @@
 import React from 'react'
-import './OvalComponent.css'
 import { PrimitiveBlock, Primitives } from '../../types'
 
 type OvalProps = {
 	primitive: PrimitiveBlock
+	scale: number
 }
 
-function OvalComponent(props: OvalProps) {
+function PrimitiveComponent(props: OvalProps) {
 	const { primitive } = props
 	console.log(primitive)
 	if (primitive.primitiveType === Primitives.CIRCLE) {
@@ -15,16 +15,16 @@ function OvalComponent(props: OvalProps) {
 				key={primitive.id}
 				style={{
 					position: 'absolute',
-					width: `${primitive.baseState.width}px`,
-					height: `${primitive.baseState.height}px`,
-					top: `${primitive.baseState.y}px`,
-					left: `${primitive.baseState.x}px`,
+					width: `${primitive.baseState.width / props.scale}px`,
+					height: `${primitive.baseState.height / props.scale}px`,
+					top: `${primitive.baseState.y / props.scale}px`,
+					left: `${primitive.baseState.x / props.scale}px`,
 					rotate: `${primitive.baseState.rotation}deg`,
 				}}
 			>
 				<ellipse
-					cx={`${primitive.baseState.width / 2}px`}
-					cy={`${primitive.baseState.height / 2}px`}
+					cx={`${primitive.baseState.width / 2 / props.scale}px`}
+					cy={`${primitive.baseState.height / 2 / props.scale}px`}
 					rx={`50%`}
 					ry={`50%`}
 					fill={primitive.color.colors[0].hex}
@@ -38,10 +38,10 @@ function OvalComponent(props: OvalProps) {
 				key={primitive.id}
 				style={{
 					position: 'absolute',
-					width: `${primitive.baseState.width}px`,
-					height: `${primitive.baseState.height}px`,
-					top: `${primitive.baseState.y}px`,
-					left: `${primitive.baseState.x}px`,
+					width: `${primitive.baseState.width / props.scale}px`,
+					height: `${primitive.baseState.height / props.scale}px`,
+					top: `${primitive.baseState.y / props.scale}px`,
+					left: `${primitive.baseState.x / props.scale}px`,
 					rotate: `${primitive.baseState.rotation}deg`,
 				}}
 			>
@@ -61,17 +61,19 @@ function OvalComponent(props: OvalProps) {
 				key={primitive.id}
 				style={{
 					position: 'absolute',
-					width: `${primitive.baseState.width}px`,
-					height: `${primitive.baseState.height}px`,
-					top: `${primitive.baseState.y}px`,
-					left: `${primitive.baseState.x}px`,
+					width: `${primitive.baseState.width / props.scale}px`,
+					height: `${primitive.baseState.height / props.scale}px`,
+					top: `${primitive.baseState.y / props.scale}px`,
+					left: `${primitive.baseState.x / props.scale}px`,
 					rotate: `${primitive.baseState.rotation}deg`,
 				}}
 			>
 				<polygon
-					points={`0 ${primitive.baseState.height}, ${primitive.baseState.width} ${
-						primitive.baseState.height
-					}, ${primitive.baseState.width / 2}
+					points={`0 ${primitive.baseState.height / props.scale}, ${
+						primitive.baseState.width / props.scale
+					} ${primitive.baseState.height / props.scale}, ${
+						primitive.baseState.width / 2 / props.scale
+					}
 					0`}
 				/>
 				{/*<rect*/}
@@ -86,4 +88,4 @@ function OvalComponent(props: OvalProps) {
 	}
 }
 
-export { OvalComponent }
+export { PrimitiveComponent }
