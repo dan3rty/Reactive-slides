@@ -38,7 +38,7 @@ function Timeline() {
 					<div className={'timeline-line'}>
 						<div className={'timeline-line-dot'} style={{ left: -20 + 'px' }}>
 							{dotIcon}
-							<span className={'timeline-line-dot-text'}>0</span>
+							<span className={'timeline-line-dot-text'}>0.0</span>
 						</div>
 						{objectsToRender}
 					</div>
