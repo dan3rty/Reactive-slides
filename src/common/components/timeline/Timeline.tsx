@@ -26,7 +26,9 @@ function Timeline() {
 						style={{ left: lineWidth * percent - offset + 'px' }}
 					>
 						{dotIcon}
-						<span className={'timeline-line-dot-text'}>{duration * percent}</span>
+						<span className={'timeline-line-dot-text'}>
+							{(duration * percent).toFixed(1)}
+						</span>
 					</div>
 				)
 			})

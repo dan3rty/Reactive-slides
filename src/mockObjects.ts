@@ -113,6 +113,16 @@ const text2: Type.TextBlock = {
 	animation: {
 		stateList: [
 			{
+				keyPercent: 33,
+				state: {
+					width: 10,
+					height: 150,
+					x: 200,
+					y: 200,
+					rotation: 0,
+				},
+			},
+			{
 				keyPercent: 50,
 				state: {
 					width: 100,
