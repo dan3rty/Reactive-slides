@@ -325,11 +325,11 @@ const triangle: Type.PrimitiveBlock = {
 		duration: 10,
 	},
 	baseState: {
-		width: 100,
-		height: 100,
-		x: 200,
+		width: 400,
+		height: 800,
+		x: 700,
 		y: 100,
-		rotation: 0,
+		rotation: 68,
 	},
 	primitiveType: Type.Primitives.TRIANGLE,
 	color: {
