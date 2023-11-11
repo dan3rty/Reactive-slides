@@ -16,12 +16,12 @@ function TextComponent(props: TextProps) {
 		flexWrap: 'wrap',
 		width: props.text.baseState.width / props.scale + 'px',
 		height: props.text.baseState.height / props.scale + 'px',
-		top: props.text.baseState.y / props.scale + 'px',
-		left: props.text.baseState.x / props.scale + 'px',
+		top: props.text.baseState.y / props.scale - 3 + 'px',
+		left: props.text.baseState.x / props.scale - 3 + 'px',
 		rotate: props.text.baseState.rotation + 'deg',
-		borderColor: '#000000',
+		borderColor: props.selected ? '#000000' : '#FFFFFF00',
 		borderStyle: 'dashed',
-		borderWidth: props.selected ? '3px' : '0',
+		borderWidth: '3px',
 	}
 	const textToRender = props.text.value.map((char) => (
 		<div

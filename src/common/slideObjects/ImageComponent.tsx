@@ -14,12 +14,12 @@ function ImageComponent(props: ImageProps) {
 		position: 'absolute',
 		width: props.image.baseState.width / props.scale + 'px',
 		height: props.image.baseState.height / props.scale + 'px',
-		top: props.image.baseState.y / props.scale + 'px',
-		left: props.image.baseState.x / props.scale + 'px',
+		top: props.image.baseState.y / props.scale - 3 + 'px',
+		left: props.image.baseState.x / props.scale - 3 + 'px',
 		rotate: props.image.baseState.rotation + 'deg',
-		borderColor: '#000000',
+		borderColor: props.selected ? '#000000' : '#FFFFFF00',
 		borderStyle: 'dashed',
-		borderWidth: props.selected ? '3px' : '0',
+		borderWidth: '3px',
 	}
 	if (props.image.typeValue === ImageSource.PATH) {
 		return <img style={imageStyle} src={props.image.value} alt='image'></img>
