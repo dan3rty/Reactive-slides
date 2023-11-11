@@ -25,14 +25,13 @@
 	width: 12px;
 }
 *::-webkit-scrollbar-track {
-	background: RGBA(0 ,0 ,0 ,0);
+	background: RGBA(0, 0, 0, 0);
 }
 *::-webkit-scrollbar-thumb {
-	background-color: RGBA(0 ,0 ,0 ,0);
+	background-color: RGBA(0, 0, 0, 0);
 	border-radius: 5px;
 	border: 3px solid rgba(121, 121, 121, 0.8);
 }
-
 
 .smallSlide {
 	cursor: pointer;
