@@ -32,7 +32,6 @@ function Timeline() {
 					</div>
 				)
 			})
-			console.log(objectsToRender)
 			return (
 				<div className={'timeline-container'}>
 					<div className={'timeline-line'}>
