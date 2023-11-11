@@ -75,14 +75,8 @@ function PrimitiveComponent(props: OvalProps) {
 						primitive.baseState.width / 2 / props.scale
 					}
 					0`}
+					fill={primitive.color.colors[0].hex}
 				/>
-				{/*<rect*/}
-				{/*	x={0}*/}
-				{/*	y={0}*/}
-				{/*	width={`100%`}*/}
-				{/*	height={`100%`}*/}
-				{/*	fill={primitive.color.colors[0].hex}*/}
-				{/*/>*/}
 			</svg>
 		)
 	}
