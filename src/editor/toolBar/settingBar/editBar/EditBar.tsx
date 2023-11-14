@@ -25,14 +25,14 @@ function EditBar() {
 				<InputField
 					label={'X:'}
 					type={'number'}
-					size={'large'}
+					size={'Large'}
 					initialValue={544}
 					suffix={'px'}
 				></InputField>
 				<InputField
 					label={'Y:'}
 					type={'number'}
-					size={'large'}
+					size={'Large'}
 					initialValue={397}
 					suffix={'px'}
 				></InputField>
@@ -41,21 +41,21 @@ function EditBar() {
 				<InputField
 					label={'Rotation:'}
 					type={'number'}
-					size={'medium'}
+					size={'Medium'}
 					initialValue={0}
 					suffix={'deg'}
 				></InputField>
 				<InputField
 					label={'Width:'}
 					type={'number'}
-					size={'medium'}
+					size={'Medium'}
 					initialValue={300}
 					suffix={'px'}
 				></InputField>
 				<InputField
 					label={'Height:'}
 					type={'number'}
-					size={'medium'}
+					size={'Medium'}
 					initialValue={100}
 					suffix={'px'}
 				></InputField>
@@ -64,7 +64,7 @@ function EditBar() {
 				<InputField
 					label={'Font size:'}
 					type={'number'}
-					size={'medium'}
+					size={'Medium'}
 					initialValue={35}
 					suffix={'px'}
 				></InputField>
