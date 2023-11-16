@@ -12,24 +12,24 @@ function SettingBar() {
 	if (curChosen == Tabs.CREATE) {
 		return (
 			<div className='SettingBar'>
-				<AddBar></AddBar>
-				<FileSettings></FileSettings>
+				<AddBar />
+				<FileSettings />
 			</div>
 		)
 	}
 	if (curChosen == Tabs.EDIT) {
 		return (
 			<div className='SettingBar'>
-				<EditBar></EditBar>
-				<FileSettings></FileSettings>
+				<EditBar />
+				<FileSettings />
 			</div>
 		)
 	}
 	if (curChosen == Tabs.ANIMATION) {
 		return (
 			<div className='SettingBar'>
-				<AnimationBar></AnimationBar>
-				<FileSettings></FileSettings>
+				<AnimationBar />
+				<FileSettings />
 			</div>
 		)
 	} else {
