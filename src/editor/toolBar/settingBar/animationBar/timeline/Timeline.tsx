@@ -3,6 +3,7 @@ import styles from './Timeline.module.css'
 import { presentation } from '../../../../../App'
 
 function Timeline() {
+	//TODO: сделать константу с useContext(presentation).selection, ВСЕ ВЫТАЩИТЬ В ANIMATIONBAR
 	const chosenSlide = useContext(presentation).selection.slideId
 	const chosenObject = useContext(presentation).selection.objectsId
 	const chosenState = useContext(presentation).selection.keyFrameId
@@ -26,6 +27,7 @@ function Timeline() {
 					) : (
 						<div className={styles.timelineLineDotCircle}></div>
 					)
+				//TODO ВЫНЕСТИ В CONST lineWidth * percent - offset + 'px'
 				return (
 					<div
 						className={styles.timelineLineDot}
