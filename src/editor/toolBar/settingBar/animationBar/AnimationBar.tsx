@@ -10,9 +10,7 @@ function AnimationBar() {
 	const chosenSlide = context.selection.slideId
 	const chosenObjectId = context.selection.objectsId
 	const chosenState = context.selection.keyFrameId
-	const curSlide = context.presentation.slides.find(
-		(slide) => slide.id === chosenSlide,
-	)
+	const curSlide = context.presentation.slides.find((slide) => slide.id === chosenSlide)
 	const slideObjects = curSlide?.objects
 	const chosenObject = slideObjects?.find((object) => object.id === chosenObjectId[0])
 	const animation = chosenObject?.animation
