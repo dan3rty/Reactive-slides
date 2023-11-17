@@ -358,12 +358,6 @@ const ArrowRightIcon = (
 	</svg>
 )
 
-const dotIcon = (
-	<svg xmlns='http://www.w3.org/2000/svg' width='16' height='15' viewBox='0 0 16 15' fill='none'>
-		<ellipse cx='8.05066' cy='7.5' rx='7.77966' ry='7.5' fill='#006A82' />
-	</svg>
-)
-
 export {
 	ArrowIcon,
 	SelectIcon,
@@ -391,5 +385,4 @@ export {
 	VerticalAlignCenterIcon,
 	ArrowLeftIcon,
 	ArrowRightIcon,
-	dotIcon,
 }
