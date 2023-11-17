@@ -1,5 +1,5 @@
 import React from 'react'
-import './AddBar.css'
+import styles from './AddBar.module.css'
 import { Button } from '../../../../common/components/buttons/Button'
 import {
 	ArrowIcon,
@@ -15,7 +15,7 @@ import {
 
 function AddBar() {
 	return (
-		<div className='add-bar'>
+		<div className={styles.addBar}>
 			<Button style='light' size='big' icon={TextIcon} text='text'></Button>
 			<Button style='light' size='big' icon={TableIcon} text='table'></Button>
 			<Button style='light' size='big' icon={TriangleIcon} text='triangle'></Button>

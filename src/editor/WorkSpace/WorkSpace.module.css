@@ -1,4 +1,4 @@
-.WorkSpace {
+.workSpace {
 	display: flex;
 	justify-content: space-between;
 	height: 100%;
@@ -6,7 +6,7 @@
 	background-color: #ededed;
 }
 
-.slide-editor-wrapper {
+.slideEditorWrapper {
 	display: flex;
 	justify-content: center;
 	height: 100%;
