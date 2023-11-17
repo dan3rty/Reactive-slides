@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './WorkSpace.module.css'
 import { BookMarks } from './bookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './slideList/SlideList'
+import { presentation } from '../../App'
 
 function WorkSpace() {
 	const size = window.innerHeight
@@ -12,7 +13,11 @@ function WorkSpace() {
 			<div>
 				<BookMarks></BookMarks>
 				<div className={styles.slideEditorWrapper}>
-					<SlideRenderer scale={scale} isEditor={true}></SlideRenderer>
+					<SlideRenderer
+						scale={scale}
+						isEditor={true}
+						keyframe={useContext(presentation).selection.keyFrameId}
+					></SlideRenderer>
 				</div>
 			</div>
 			<SlideList scale={scale}></SlideList>

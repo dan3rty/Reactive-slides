@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styles from './SlideRenderer.module.css'
 import { presentation } from '../../App'
 import { TextComponent } from '../slideObjects/TextComponent'
-import { BlockType, ImageSource, Slide } from '../../types'
+import { BlockType, ImageSource, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../slideObjects/ImageComponent'
 import { returnGradientString } from '../tools/returnGradientString'
 import { PrimitiveComponent } from '../slideObjects/PrimitiveComponent'
@@ -11,6 +11,7 @@ type SlideRenderer = {
 	scale: number
 	slide?: Slide
 	isEditor?: boolean
+	keyframe?: string
 }
 
 function SlideRenderer(props: SlideRenderer) {
@@ -46,9 +47,25 @@ function SlideRenderer(props: SlideRenderer) {
 		}
 		const slideObjects = curSlide.objects
 		const objectsToRender = slideObjects.map((object) => {
+			let index = 0
 			const selected =
 				!!chosenObjects.find((id) => id === object.id) && props.isEditor ? true : false
 
+			if (
+				object.animation &&
+				props.keyframe &&
+				selected &&
+				useContext(presentation).selection.selectedTab == Tabs.ANIMATION
+			) {
+				while (object.animation.stateList[index].id !== props.keyframe) {
+					index++
+				}
+				object.baseState.width = object.animation.stateList[index].state.width
+				object.baseState.height = object.animation.stateList[index].state.height
+				object.baseState.rotation = object.animation.stateList[index].state.rotation
+				object.baseState.x = object.animation.stateList[index].state.x
+				object.baseState.y = object.animation.stateList[index].state.y
+			}
 			if (object.blockType === BlockType.TEXT) {
 				return <TextComponent text={object} scale={props.scale} selected={selected} />
 			}
