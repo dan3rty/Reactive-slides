@@ -1,7 +1,7 @@
 import React from 'react'
-import './InputField.css'
+import styles from './InputField.module.css'
 
-type sizes = 'small' | 'medium' | 'large'
+type sizes = 'Small' | 'Medium' | 'Large'
 type inputType = 'number' | 'text'
 
 type InputProps = {
@@ -13,13 +13,18 @@ type InputProps = {
 }
 
 function InputField(props: InputProps) {
+	const { size } = props
 	return (
-		<div className={`input-field input-field_${props.size}`}>
-			<div className={`input-field__label input-field__label_${props.size}`}>
+		<div className={`${styles.inputField} ${styles['inputField' + size]}`}>
+			<div className={`${styles.inputLabel} ${styles['inputLabel' + size]}`}>
 				{props.label}
 			</div>
-			<div className={`input-field__value-field input-field__value-field_${props.size}`}>
-				<input value={props.initialValue} className={'input'} type={props.type}></input>
+			<div className={`${styles.inputValue} ${styles['inputValue' + size]}`}>
+				<input
+					value={props.initialValue}
+					className={styles.input}
+					type={props.type}
+				></input>
 				<span>{props.suffix}</span>
 			</div>
 		</div>

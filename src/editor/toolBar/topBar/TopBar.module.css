@@ -1,4 +1,4 @@
-.TopBar {
+.topBar {
 	box-sizing: border-box;
 	display: flex;
 	justify-content: space-between;
@@ -9,4 +9,14 @@
 	padding-bottom: 0;
 	padding-left: 31px;
 	background-color: #a3e1ec;
+}
+
+.logo {
+	font-size: 40px;
+}
+
+.presentationName {
+	width: 50%;
+	font-size: 30px;
+	text-align: end;
 }

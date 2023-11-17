@@ -15,30 +15,34 @@ type SlideEditorProps = {
 function SlideEditor(props: SlideEditorProps) {
 	const chosen = useContext(presentation).selection.slideId
 	const chosenObjects = useContext(presentation).selection.objectsId
-	let curSlide: Slide
+	let curSlide = props.slide
 	if (props.slide) {
 		curSlide = props.slide
 	} else {
-		curSlide = useContext(presentation).presentation.slides.find((slide) => slide.id === chosen)
-	}
-	let slideStyle: React.CSSProperties = {
-		width: 1920 / props.scale + 'px',
-		height: 1080 / props.scale + 'px',
-		background: returnGradientString(curSlide.background.color),
-	}
-	if (curSlide.background.image) {
-		if (curSlide.background.image.typeValue === ImageSource.PATH) {
-			slideStyle = {
-				width: 1920 / props.scale + 'px',
-				height: 1080 / props.scale + 'px',
-				background: 'url(' + curSlide.background.image.value + ')',
-				backgroundSize: 'cover',
-				backgroundRepeat: 'no-repeat',
-			}
+		const slide = useContext(presentation).presentation.slides.find(
+			(slide) => slide.id === chosen,
+		)
+		if (slide) {
+			curSlide = slide
 		}
 	}
-	console.log(returnGradientString(curSlide.background.color))
-	if (curSlide) {
+	if (curSlide && chosenObjects) {
+		let slideStyle: React.CSSProperties = {
+			width: 1920 / props.scale + 'px',
+			height: 1080 / props.scale + 'px',
+			background: returnGradientString(curSlide.background.color),
+		}
+		if (curSlide.background.image) {
+			if (curSlide.background.image.typeValue === ImageSource.PATH) {
+				slideStyle = {
+					width: 1920 / props.scale + 'px',
+					height: 1080 / props.scale + 'px',
+					background: 'url(' + curSlide.background.image.value + ')',
+					backgroundSize: 'cover',
+					backgroundRepeat: 'no-repeat',
+				}
+			}
+		}
 		const slideObjects = curSlide.objects
 		const objectsToRender = slideObjects.map((object) => {
 			const selected = !!chosenObjects.find((id) => id === object.id)

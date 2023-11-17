@@ -1,13 +1,13 @@
 import React from 'react'
-import './ToolBar.css'
+import styles from './ToolBar.module.css'
 import { TopBar } from './topBar/TopBar'
 import { SettingBar } from './settingBar/SettingBar'
 
 function ToolBar() {
 	return (
-		<div className='ToolBar'>
-			<TopBar></TopBar>
-			<SettingBar></SettingBar>
+		<div className={styles.toolBar}>
+			<TopBar />
+			<SettingBar />
 		</div>
 	)
 }
