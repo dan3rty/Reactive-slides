@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import './Timeline.css'
-import { dotIcon } from '../../icons/icons'
-import { presentation } from '../../../App'
+import { presentation } from '../../../../../App'
 
 function Timeline() {
 	const chosenSlide = useContext(presentation).selection.slideId
@@ -25,7 +24,7 @@ function Timeline() {
 						className={'timeline-line-dot'}
 						style={{ left: lineWidth * percent - offset + 'px' }}
 					>
-						{dotIcon}
+						<div className={'timeline-line-dot-circle'}></div>
 						<span className={'timeline-line-dot-text'}>
 							{(duration * percent).toFixed(1)}
 						</span>
@@ -36,7 +35,7 @@ function Timeline() {
 				<div className={'timeline-container'}>
 					<div className={'timeline-line'}>
 						<div className={'timeline-line-dot'} style={{ left: -20 + 'px' }}>
-							{dotIcon}
+							<div className={'timeline-line-dot-circle'}></div>
 							<span className={'timeline-line-dot-text'}>0.0</span>
 						</div>
 						{objectsToRender}

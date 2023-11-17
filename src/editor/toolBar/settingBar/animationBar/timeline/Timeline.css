@@ -33,3 +33,11 @@
 	line-height: normal;
 	text-align: center;
 }
+
+.timeline-line-dot-circle {
+	background-color: #006a82;
+	cursor: pointer;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+}
