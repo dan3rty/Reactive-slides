@@ -6,10 +6,11 @@ import { Timeline } from './timeline/Timeline'
 import { presentation } from '../../../../App'
 
 function AnimationBar() {
-	const chosenSlide = useContext(presentation).selection.slideId
-	const chosenObjectId = useContext(presentation).selection.objectsId
-	const chosenState = useContext(presentation).selection.keyFrameId
-	const curSlide = useContext(presentation).presentation.slides.find(
+	const context = useContext(presentation)
+	const chosenSlide = context.selection.slideId
+	const chosenObjectId = context.selection.objectsId
+	const chosenState = context.selection.keyFrameId
+	const curSlide = context.presentation.slides.find(
 		(slide) => slide.id === chosenSlide,
 	)
 	const slideObjects = curSlide?.objects
