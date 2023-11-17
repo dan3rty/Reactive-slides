@@ -129,11 +129,11 @@ const text2: Type.TextBlock = {
 				id: 'polka',
 				keyPercent: 50,
 				state: {
-					width: 100,
+					width: 200,
 					height: 150,
-					x: 200,
+					x: 400,
 					y: 200,
-					rotation: 0,
+					rotation: -20,
 				},
 			},
 			{
