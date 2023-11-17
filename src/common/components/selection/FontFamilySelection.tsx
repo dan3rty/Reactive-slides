@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontFamily } from '../../../types'
-import './FontFamilySelection.css'
+import styles from './FontFamilySelection.module.css'
 
 type FontFamilySelectionProps = {
 	value: FontFamily
@@ -8,11 +8,11 @@ type FontFamilySelectionProps = {
 
 function FontFamilySelection(props: FontFamilySelectionProps) {
 	return (
-		<div className={'selection-field'}>
-			<div className={'selection-field__label'}>
+		<div className={styles.selectionField}>
+			<div className={styles.selectionFieldLabel}>
 				<span>Font family:</span>
 			</div>
-			<div className={'selection-field__value-field'}>
+			<div className={styles.selectionFieldValue}>
 				<span>{props.value}</span>
 			</div>
 		</div>
