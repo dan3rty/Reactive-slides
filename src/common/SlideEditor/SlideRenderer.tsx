@@ -73,7 +73,13 @@ function SlideRenderer(props: SlideRenderer) {
 				return <ImageComponent image={object} scale={props.scale} selected={selected} />
 			}
 			if (object.blockType === BlockType.PRIMITIVE) {
-				return <PrimitiveComponent primitive={object} scale={props.scale} />
+				return (
+					<PrimitiveComponent
+						primitive={object}
+						scale={props.scale}
+						selected={selected}
+					/>
+				)
 			}
 			return <div></div>
 		})

@@ -315,7 +315,7 @@ const circle: Type.PrimitiveBlock = {
 
 const triangle: Type.PrimitiveBlock = {
 	blockType: Type.BlockType.PRIMITIVE,
-	id: 'DASD79DAS',
+	id: 'DASD79DAS1',
 	animation: {
 		stateList: [
 			{
@@ -449,7 +449,7 @@ const presentation: Type.Presentation = {
 const selection: Type.Selection = {
 	selectedTab: Type.Tabs.EDIT,
 	slideId: 'djahDHSADGKUAGUSDAD',
-	objectsId: ['D5DAS67F5A'],
+	objectsId: ['D5DAS67F5A', 'DASD79DAS', 'PFASD79DAS', 'DASD79DAS1'],
 	keyFrameId: 'polka',
 }
 
