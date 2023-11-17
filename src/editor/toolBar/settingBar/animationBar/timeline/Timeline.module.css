@@ -41,3 +41,11 @@
 	background-color: #006a82;
 	border-radius: 50%;
 }
+
+.timelineLineDotCircleChosen {
+	cursor: pointer;
+	height: 22px;
+	width: 22px;
+	background-color: #006a82;
+	border-radius: 50%;
+}
