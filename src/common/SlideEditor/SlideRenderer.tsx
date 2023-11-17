@@ -1,18 +1,19 @@
 import React, { useContext } from 'react'
-import styles from './SlideEditor.module.css'
-import { presentation } from '../../../App'
-import { TextComponent } from '../../../common/slideObjects/TextComponent'
-import { BlockType, ImageSource, Slide } from '../../../types'
-import { ImageComponent } from '../../../common/slideObjects/ImageComponent'
-import { returnGradientString } from '../../../common/tools/returnGradientString'
-import { PrimitiveComponent } from '../../../common/slideObjects/PrimitiveComponent'
+import styles from './SlideRenderer.module.css'
+import { presentation } from '../../App'
+import { TextComponent } from '../slideObjects/TextComponent'
+import { BlockType, ImageSource, Slide } from '../../types'
+import { ImageComponent } from '../slideObjects/ImageComponent'
+import { returnGradientString } from '../tools/returnGradientString'
+import { PrimitiveComponent } from '../slideObjects/PrimitiveComponent'
 
-type SlideEditorProps = {
+type SlideRenderer = {
 	scale: number
 	slide?: Slide
+	isEditor?: boolean
 }
 
-function SlideEditor(props: SlideEditorProps) {
+function SlideRenderer(props: SlideRenderer) {
 	const chosen = useContext(presentation).selection.slideId
 	const chosenObjects = useContext(presentation).selection.objectsId
 	let curSlide = props.slide
@@ -45,25 +46,14 @@ function SlideEditor(props: SlideEditorProps) {
 		}
 		const slideObjects = curSlide.objects
 		const objectsToRender = slideObjects.map((object) => {
-			const selected = !!chosenObjects.find((id) => id === object.id)
+			const selected =
+				!!chosenObjects.find((id) => id === object.id) && props.isEditor ? true : false
 
 			if (object.blockType === BlockType.TEXT) {
-				return (
-					<TextComponent
-						text={object}
-						scale={props.scale}
-						selected={selected}
-					></TextComponent>
-				)
+				return <TextComponent text={object} scale={props.scale} selected={selected} />
 			}
 			if (object.blockType === BlockType.IMAGE) {
-				return (
-					<ImageComponent
-						image={object}
-						scale={props.scale}
-						selected={selected}
-					></ImageComponent>
-				)
+				return <ImageComponent image={object} scale={props.scale} selected={selected} />
 			}
 			if (object.blockType === BlockType.PRIMITIVE) {
 				return <PrimitiveComponent primitive={object} scale={props.scale} />
@@ -79,4 +69,4 @@ function SlideEditor(props: SlideEditorProps) {
 	return <div></div>
 }
 
-export { SlideEditor }
+export { SlideRenderer }
