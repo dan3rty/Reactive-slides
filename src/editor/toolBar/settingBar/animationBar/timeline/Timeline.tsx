@@ -20,57 +20,41 @@ function Timeline() {
 				objectsCounter++
 				const percent = state.keyPercent / 100
 				const offset = objectsCounter * 40 + 20
-				if (state.id === chosenState) {
-					return (
-						<div
-							className={styles.timelineLineDot}
-							style={{ left: lineWidth * percent - offset + 'px' }}
-						>
-							<div className={styles.timelineLineDotCircleChosen}></div>
-							<span className={styles.timelineLineDotText}>
-								{(duration * percent).toFixed(1)}
-							</span>
-						</div>
+				const circle =
+					state.id === chosenState ? (
+						<div className={styles.timelineLineDotCircleChosen}></div>
+					) : (
+						<div className={styles.timelineLineDotCircle}></div>
 					)
-				} else {
-					return (
-						<div
-							className={styles.timelineLineDot}
-							style={{ left: lineWidth * percent - offset + 'px' }}
-						>
-							<div className={styles.timelineLineDotCircle}></div>
-							<span className={styles.timelineLineDotText}>
-								{(duration * percent).toFixed(1)}
-							</span>
-						</div>
-					)
-				}
+				return (
+					<div
+						className={styles.timelineLineDot}
+						style={{ left: lineWidth * percent - offset + 'px' }}
+					>
+						{circle}
+						<span className={styles.timelineLineDotText}>
+							{(duration * percent).toFixed(1)}
+						</span>
+					</div>
+				)
 			})
-			if (chosenState === '') {
-				return (
-					<div className={styles.timelineContainer}>
-						<div className={styles.timelineLine}>
-							<div className={styles.timelineLineDot} style={{ left: -20 + 'px' }}>
-								<div className={styles.timelineLineDotCircleChosen}></div>
-								<span className={styles.timelineLineDotText}>0.0</span>
-							</div>
-							{objectsToRender}
-						</div>
-					</div>
+			const circle =
+				chosenState === '' ? (
+					<div className={styles.timelineLineDotCircleChosen}></div>
+				) : (
+					<div className={styles.timelineLineDotCircle}></div>
 				)
-			} else {
-				return (
-					<div className={styles.timelineContainer}>
-						<div className={styles.timelineLine}>
-							<div className={styles.timelineLineDot} style={{ left: -20 + 'px' }}>
-								<div className={styles.timelineLineDotCircle}></div>
-								<span className={styles.timelineLineDotText}>0.0</span>
-							</div>
-							{objectsToRender}
+			return (
+				<div className={styles.timelineContainer}>
+					<div className={styles.timelineLine}>
+						<div className={styles.timelineLineDot} style={{ left: -20 + 'px' }}>
+							{circle}
+							<span className={styles.timelineLineDotText}>0.0</span>
 						</div>
+						{objectsToRender}
 					</div>
-				)
-			}
+				</div>
+			)
 		}
 		return <div></div>
 	}
