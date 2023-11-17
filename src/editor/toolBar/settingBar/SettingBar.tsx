@@ -9,6 +9,7 @@ import { presentation } from '../../../App'
 
 function SettingBar() {
 	const curChosen = useContext(presentation).selection.selectedTab
+	//TODO: СДЕЛАТЬ СВИЧ
 	return (
 		<div className={styles.SettingBar}>
 			{curChosen == Tabs.CREATE ? (

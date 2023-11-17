@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Button.module.css'
 import { ReactNode } from 'react'
-
+//TODO: с БОЛЬШОЙ буквы
 type sizes = 'small' | 'medium' | 'big' | 'large'
 type buttonStyles = 'light' | 'dark'
 
@@ -12,6 +12,7 @@ type ButtonProps = {
 	icon?: ReactNode
 }
 
+//TODO: ДОБАВИТЬ ONCLICK
 function Button(props: ButtonProps) {
 	if (props.size === 'large') {
 		return (

@@ -7,7 +7,7 @@ type SelectionProps = {
 	secondIcon: ReactNode
 	thirdIcon: ReactNode
 }
-
+//TODO: ПРОКИДЫВАТЬ МАССИВ
 function SelectionBar(props: SelectionProps) {
 	return (
 		<div className={styles.selection}>
