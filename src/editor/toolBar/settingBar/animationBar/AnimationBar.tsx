@@ -2,7 +2,7 @@ import React from 'react'
 import { InputField } from '../../../../common/components/inputFields/InputField'
 import './AnimationBar.css'
 import { Button } from '../../../../common/components/buttons/Button'
-import { Timeline } from '../../../../common/components/timeline/Timeline'
+import { Timeline } from './timeline/Timeline'
 
 function AnimationBar() {
 	return (
