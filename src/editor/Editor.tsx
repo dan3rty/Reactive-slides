@@ -6,8 +6,8 @@ import { WorkSpace } from './WorkSpace/WorkSpace'
 function Editor() {
 	return (
 		<div className={styles.App}>
-			<ToolBar></ToolBar>
-			<WorkSpace></WorkSpace>
+			<ToolBar />
+			<WorkSpace />
 		</div>
 	)
 }

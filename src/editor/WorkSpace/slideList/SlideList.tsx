@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styles from './SlideList.module.css'
 import { presentation } from '../../../App'
-import { SlideEditor } from '../SlideEditor/SlideEditor'
+import { SlideRenderer } from '../../../common/SlideEditor/SlideRenderer'
 import { Counter } from './counter/Counter'
 
 type SlideListProps = {
@@ -14,14 +14,14 @@ function SlideList(props: SlideListProps) {
 		if (slide.id == chosen) {
 			return (
 				<div className={styles.smallSlideChosen}>
-					<SlideEditor scale={props.scale * 3.5} slide={slide}></SlideEditor>
+					<SlideRenderer scale={props.scale * 3.5} slide={slide}></SlideRenderer>
 					<Counter index={index + 1}></Counter>
 				</div>
 			)
 		} else {
 			return (
 				<div className={styles.smallSlide}>
-					<SlideEditor scale={props.scale * 4} slide={slide}></SlideEditor>
+					<SlideRenderer scale={props.scale * 4} slide={slide}></SlideRenderer>
 					<Counter index={index + 1}></Counter>
 				</div>
 			)

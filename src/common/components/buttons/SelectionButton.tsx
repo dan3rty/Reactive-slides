@@ -1,5 +1,5 @@
 import React from 'react'
-import './SelectionButton.css'
+import buttonStyle from './SelectionButton.module.css'
 import { ReactNode } from 'react'
 
 type styles = 'light' | 'dark'
@@ -10,7 +10,11 @@ type ButtonProps = {
 }
 
 function SelectionButton(props: ButtonProps) {
-	return <div className={`selection-button selection-button_${props.style}`}>{props.icon}</div>
+	return (
+		<div className={`${buttonStyle.selectionButton} ${buttonStyle[props.style]}`}>
+			{props.icon}
+		</div>
+	)
 }
 
 export { SelectionButton }

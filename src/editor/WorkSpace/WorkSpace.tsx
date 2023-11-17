@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './WorkSpace.module.css'
 import { BookMarks } from './bookMarks/BookMarks'
-import { SlideEditor } from './SlideEditor/SlideEditor'
+import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './slideList/SlideList'
 
 function WorkSpace() {
@@ -12,7 +12,7 @@ function WorkSpace() {
 			<div>
 				<BookMarks></BookMarks>
 				<div className={styles.slideEditorWrapper}>
-					<SlideEditor scale={scale}></SlideEditor>
+					<SlideRenderer scale={scale} isEditor={true}></SlideRenderer>
 				</div>
 			</div>
 			<SlideList scale={scale}></SlideList>

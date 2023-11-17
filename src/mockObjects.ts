@@ -414,7 +414,7 @@ const slide1: Type.Slide = {
 const slide2: Type.Slide = {
 	id: 'djahDHSADGKUAGUSDAD',
 	background: background5,
-	objects: [text2, image4, circle, triangle, square],
+	objects: [image4, circle, triangle, square, text2],
 }
 
 const slide3: Type.Slide = {
