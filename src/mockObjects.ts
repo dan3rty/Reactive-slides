@@ -447,7 +447,7 @@ const presentation: Type.Presentation = {
 }
 
 const selection: Type.Selection = {
-	selectedTab: Type.Tabs.ANIMATION,
+	selectedTab: Type.Tabs.EDIT,
 	slideId: 'djahDHSADGKUAGUSDAD',
 	objectsId: ['D5DAS67F5A'],
 	keyFrameId: 'polka',
