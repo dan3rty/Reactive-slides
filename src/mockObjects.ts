@@ -450,7 +450,6 @@ const selection: Type.Selection = {
 	selectedTab: Type.Tabs.ANIMATION,
 	slideId: 'djahDHSADGKUAGUSDAD',
 	objectsId: ['D5DAS67F5A', 'DASD79DAS', 'PFASD79DAS', 'DASD79DAS1'],
-	keyFrameId: 'polka',
 }
 
 const operationHistory: Type.OperationHistory = {
