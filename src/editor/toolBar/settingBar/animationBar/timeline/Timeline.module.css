@@ -49,3 +49,9 @@
 	background-color: #006a82;
 	border-radius: 50%;
 }
+
+.timelineTitle {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
