@@ -1,13 +1,13 @@
 import React from 'react'
 import { InputField } from '../../../../common/components/inputFields/InputField'
-import './AnimationBar.css'
+import styles from './AnimationBar.module.css'
 import { Button } from '../../../../common/components/buttons/Button'
 import { Timeline } from './timeline/Timeline'
 
 function AnimationBar() {
 	return (
-		<div className={'animation-bar'}>
-			<div className={'big-container'}>
+		<div className={styles.animationBar}>
+			<div className={styles.bigContainer}>
 				<InputField
 					label={'X:'}
 					type={'number'}
@@ -23,7 +23,7 @@ function AnimationBar() {
 					suffix={'px'}
 				/>
 			</div>
-			<div className={'medium-container'}>
+			<div className={styles.mediumContainer}>
 				<InputField
 					label={'Rotation:'}
 					type={'number'}
@@ -46,8 +46,8 @@ function AnimationBar() {
 					suffix={'px'}
 				/>
 			</div>
-			<div className={'medium-container'}>
-				<div className={'horizontal-container'}>
+			<div className={styles.mediumContainer}>
+				<div className={styles.horizontalContainer}>
 					<InputField
 						label={'Duration:'}
 						type={'number'}
