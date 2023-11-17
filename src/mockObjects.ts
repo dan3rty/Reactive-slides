@@ -75,6 +75,7 @@ const text: Type.TextBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'pororo',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -85,6 +86,7 @@ const text: Type.TextBlock = {
 				},
 			},
 			{
+				id: 'yomayo',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -113,6 +115,7 @@ const text2: Type.TextBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'quq',
 				keyPercent: 33,
 				state: {
 					width: 10,
@@ -123,6 +126,7 @@ const text2: Type.TextBlock = {
 				},
 			},
 			{
+				id: 'polka',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -133,6 +137,7 @@ const text2: Type.TextBlock = {
 				},
 			},
 			{
+				id: 'jfasn',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -268,6 +273,7 @@ const circle: Type.PrimitiveBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'jnkz',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -278,6 +284,7 @@ const circle: Type.PrimitiveBlock = {
 				},
 			},
 			{
+				id: 'mameq',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -312,6 +319,7 @@ const triangle: Type.PrimitiveBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'lomnao',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -322,6 +330,7 @@ const triangle: Type.PrimitiveBlock = {
 				},
 			},
 			{
+				id: 'ldka1',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -356,6 +365,7 @@ const square: Type.PrimitiveBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'eqrreq',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -366,6 +376,7 @@ const square: Type.PrimitiveBlock = {
 				},
 			},
 			{
+				id: 'lpldqlp',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -439,6 +450,7 @@ const selection: Type.Selection = {
 	selectedTab: Type.Tabs.ANIMATION,
 	slideId: 'djahDHSADGKUAGUSDAD',
 	objectsId: ['D5DAS67F5A'],
+	keyFrameId: 'polka',
 }
 
 const operationHistory: Type.OperationHistory = {

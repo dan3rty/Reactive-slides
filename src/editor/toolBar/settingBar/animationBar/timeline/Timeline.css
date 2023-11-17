@@ -35,9 +35,9 @@
 }
 
 .timeline-line-dot-circle {
-	background-color: #006a82;
 	cursor: pointer;
 	height: 16px;
 	width: 16px;
+	background-color: #006a82;
 	border-radius: 50%;
 }

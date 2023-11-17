@@ -7,6 +7,7 @@ type ObjectBlock = {
 }
 
 type ObjectState = {
+	id: string
 	keyPercent: number // keyframes
 	state: ObjectBlock
 }
@@ -132,6 +133,7 @@ type Selection = {
 	selectedTab: Tabs
 	slideId: string
 	objectsId?: Array<string>
+	keyFrameId?: string
 }
 
 type Operation = object

@@ -48,6 +48,7 @@ const text: Type.TextBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'tetrer',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -58,6 +59,7 @@ const text: Type.TextBlock = {
 				},
 			},
 			{
+				id: 'okro',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -87,6 +89,7 @@ const image2: Type.ImageBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'lksad',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -97,6 +100,7 @@ const image2: Type.ImageBlock = {
 				},
 			},
 			{
+				id: 'daskdnakda',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -126,6 +130,7 @@ const image: Type.ImageBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'kepka',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -136,6 +141,7 @@ const image: Type.ImageBlock = {
 				},
 			},
 			{
+				id: 'jija',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -165,6 +171,7 @@ const circle: Type.PrimitiveBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'memmememem',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -175,6 +182,7 @@ const circle: Type.PrimitiveBlock = {
 				},
 			},
 			{
+				id: 'jldas',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -209,6 +217,7 @@ const triangle: Type.PrimitiveBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'dasda',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -219,6 +228,7 @@ const triangle: Type.PrimitiveBlock = {
 				},
 			},
 			{
+				id: 'dasqwe',
 				keyPercent: 100,
 				state: {
 					width: 300,
@@ -253,6 +263,7 @@ const square: Type.PrimitiveBlock = {
 	animation: {
 		stateList: [
 			{
+				id: 'ponqro',
 				keyPercent: 50,
 				state: {
 					width: 100,
@@ -263,6 +274,7 @@ const square: Type.PrimitiveBlock = {
 				},
 			},
 			{
+				id: 'jnokqel',
 				keyPercent: 100,
 				state: {
 					width: 300,
