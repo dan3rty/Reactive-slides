@@ -3,7 +3,7 @@ import styles from './WorkSpace.module.css'
 import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
-import { presentation } from '../../App'
+import { PresenterContext } from '../../App'
 
 function WorkSpace() {
 	const size = window.innerHeight
@@ -16,7 +16,7 @@ function WorkSpace() {
 					<SlideRenderer
 						scale={scale}
 						isEditor={true}
-						keyframe={useContext(presentation).selection.keyFrameId}
+						keyframe={useContext(PresenterContext).presenter.selection.keyFrameId}
 					></SlideRenderer>
 				</div>
 			</div>

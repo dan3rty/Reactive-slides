@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styles from './SlideList.module.css'
-import { presentation } from '../../../App'
+import { PresenterContext } from '../../../App'
 import { SlideRenderer } from '../../../common/SlideEditor/SlideRenderer'
 import { Counter } from './Counter/Counter'
 
@@ -8,8 +8,8 @@ type SlideListProps = {
 	scale: number
 }
 function SlideList(props: SlideListProps) {
-	const slides = useContext(presentation).presentation.slides
-	const chosen = useContext(presentation).selection.slideId
+	const slides = useContext(PresenterContext).presenter.presentation.slides
+	const chosen = useContext(PresenterContext).presenter.selection.slideId
 	const slidesToRender = slides.map((slide, index) => {
 		if (slide.id == chosen) {
 			return (

@@ -1,23 +1,19 @@
-import {Presentation} from '../../../../types'
+import { Presentation } from '../../../../types'
 
-function savePresentationToFile(presentation: Presentation) {
-	const saveObj = { presentation }
+function savePresentationToFile(presentation: Presentation): void {
+	const content = JSON.stringify(presentation)
+	const name = `${presentation.title}.json`
+	const type = 'text/plain'
 
-	const content = JSON.stringify(saveObj);
-	const name = `${presentation.title}.json`;
-	const type = "text/plain";
-
-	const a = document.createElement("a");
-	const file = new Blob([text], { type: type });
-	a.href = URL.createObjectURL(file);
-	a.download = name;
-	document.body.appendChild(a);
-	a.click();
-	a.remove();
+	const a = document.createElement('a')
+	const file = new Blob([content], { type: type })
+	a.href = URL.createObjectURL(file)
+	a.download = name
+	document.body.appendChild(a)
+	a.click()
+	a.remove()
 }
 
-function loadPresentationFromFile(): Presentation {
+// function loadPresentationFromFile(): Presentation {}
 
-}
-
-export {savePresentationToFile}
+export { savePresentationToFile }

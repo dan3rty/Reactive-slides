@@ -3,13 +3,13 @@ import { InputField } from '../../../../common/Components/InputFields/InputField
 import styles from './AnimationBar.module.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { Timeline } from './Timeline/Timeline'
-import { presentation } from '../../../../App'
+import { PresenterContext } from '../../../../App'
 
 function AnimationBar() {
 	const log = () => {
-		console.log("pop");
+		console.log('pop')
 	}
-	const context = useContext(presentation)
+	const context = useContext(PresenterContext).presenter
 	const chosenSlide = context.selection.slideId
 	const chosenObjectId = context.selection.objectsId
 	const chosenState = context.selection.keyFrameId

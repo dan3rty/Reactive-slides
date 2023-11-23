@@ -20,7 +20,7 @@ import style from './EditBar.module.css'
 
 function EditBar() {
 	const log = () => {
-		console.log("pop");
+		console.log('pop')
 	}
 	return (
 		<div className={style.editBar}>
@@ -84,7 +84,13 @@ function EditBar() {
 				<Button style={'light'} size={'small'} icon={StrokethroughIcon} onClick={log} />
 			</div>
 			<div className={style.selectionWrapper}>
-				<Button text={'clear'} style={'light'} size={'medium'} icon={BoldIcon} onClick={log} />
+				<Button
+					text={'clear'}
+					style={'light'}
+					size={'medium'}
+					icon={BoldIcon}
+					onClick={log}
+				/>
 				<SelectionBar
 					firstIcon={AlignRightIcon}
 					secondIcon={AlignCenterIcon}

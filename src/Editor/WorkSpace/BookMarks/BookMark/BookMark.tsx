@@ -1,13 +1,13 @@
 import styles from './BookMark.module.css'
 import { ReactNode, useContext } from 'react'
-import { presentation } from '../../../../App'
+import { PresenterContext } from '../../../../App'
 
 type BookMarkProps = {
 	text: string
 	icon: ReactNode
 }
 function BookMark(props: BookMarkProps) {
-	const curChosen = useContext(presentation).selection.selectedTab
+	const curChosen = useContext(PresenterContext).presenter.selection.selectedTab
 	if (curChosen == props.text) {
 		return (
 			<div className={styles.BookMarkChosen}>

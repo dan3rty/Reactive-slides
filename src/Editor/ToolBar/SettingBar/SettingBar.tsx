@@ -5,10 +5,10 @@ import { FileSettings } from './FileSettings/FileSettings'
 import { AddBar } from './AddBar/AddBar'
 import { AnimationBar } from './AnimationBar/AnimationBar'
 import { Tabs } from '../../../types'
-import { presentation } from '../../../App'
+import { PresenterContext } from '../../../App'
 
 function SettingBar() {
-	const curChosen = useContext(presentation).selection.selectedTab
+	const curChosen = useContext(PresenterContext).presenter.selection.selectedTab
 	//TODO: СДЕЛАТЬ СВИЧ
 	return (
 		<div className={styles.SettingBar}>

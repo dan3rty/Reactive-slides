@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styles from './SlideRenderer.module.css'
-import { presentation } from '../../App'
+import { PresenterContext } from '../../App'
 import { TextComponent } from '../SlideObjects/TextComponent'
 import { BlockType, ImageSource, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../SlideObjects/ImageComponent'
@@ -15,13 +15,13 @@ type SlideRenderer = {
 }
 
 function SlideRenderer(props: SlideRenderer) {
-	const chosen = useContext(presentation).selection.slideId
-	const chosenObjects = useContext(presentation).selection.objectsId
+	const chosen = useContext(PresenterContext).presenter.selection.slideId
+	const chosenObjects = useContext(PresenterContext).presenter.selection.objectsId
 	let curSlide = props.slide
 	if (props.slide) {
 		curSlide = props.slide
 	} else {
-		const slide = useContext(presentation).presentation.slides.find(
+		const slide = useContext(PresenterContext).presenter.presentation.slides.find(
 			(slide) => slide.id === chosen,
 		)
 		if (slide) {
@@ -48,14 +48,13 @@ function SlideRenderer(props: SlideRenderer) {
 		const slideObjects = curSlide.objects
 		const objectsToRender = slideObjects.map((object) => {
 			let index = 0
-			const selected =
-				!!chosenObjects.find((id) => id === object.id) && props.isEditor
+			const selected = !!chosenObjects.find((id) => id === object.id) && props.isEditor
 
 			if (
 				object.animation &&
 				props.keyframe &&
 				selected &&
-				useContext(presentation).selection.selectedTab == Tabs.ANIMATION
+				useContext(PresenterContext).presenter.selection.selectedTab == Tabs.ANIMATION
 			) {
 				while (object.animation.stateList[index].id !== props.keyframe) {
 					index++
