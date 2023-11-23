@@ -12,7 +12,7 @@ type ButtonProps = {
 
 function SelectionButton(props: ButtonProps) {
 	const log = () => {
-		console.log("pop");
+		console.log('pop')
 	}
 	return (
 		<div onClick={log} className={`${buttonStyle.selectionButton} ${buttonStyle[props.style]}`}>
