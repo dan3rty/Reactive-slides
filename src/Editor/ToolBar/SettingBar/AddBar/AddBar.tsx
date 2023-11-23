@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AddBar.module.css'
-import { Button } from '../../../../common/components/buttons/Button'
+import { Button } from '../../../../common/Components/Buttons/Button'
 import {
 	ArrowIcon,
 	BulletListIcon,
@@ -11,7 +11,7 @@ import {
 	TableIcon,
 	TextIcon,
 	TriangleIcon,
-} from '../../../../common/icons/icons'
+} from '../../../../common/Icons/icons'
 
 function AddBar() {
 	return (

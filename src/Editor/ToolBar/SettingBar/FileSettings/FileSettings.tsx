@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './FileSettings.module.css'
-import { Button } from '../../../../common/components/buttons/Button'
-import { CreateIcon, OpenIcon, SaveIcon } from '../../../../common/icons/icons'
+import { Button } from '../../../../common/Components/Buttons/Button'
+import { CreateIcon, OpenIcon, SaveIcon } from '../../../../common/Icons/icons'
 function FileSettings() {
 	return (
 		<div className={styles.fileSettings}>

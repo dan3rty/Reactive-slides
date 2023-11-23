@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import { InputField } from '../../../../common/components/inputFields/InputField'
+import { InputField } from '../../../../common/Components/InputFields/InputField'
 import styles from './AnimationBar.module.css'
-import { Button } from '../../../../common/components/buttons/Button'
-import { Timeline } from './timeline/Timeline'
+import { Button } from '../../../../common/Components/Buttons/Button'
+import { Timeline } from './Timeline/Timeline'
 import { presentation } from '../../../../App'
 
 function AnimationBar() {

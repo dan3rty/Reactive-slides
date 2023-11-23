@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button } from '../../../../common/components/buttons/Button'
-import { InputField } from '../../../../common/components/inputFields/InputField'
-import { FontFamilySelection } from '../../../../common/components/selection/FontFamilySelection'
-import { SelectionBar } from '../../../../common/components/selection/SelectionBar'
+import { Button } from '../../../../common/Components/Buttons/Button'
+import { InputField } from '../../../../common/Components/InputFields/InputField'
+import { FontFamilySelection } from '../../../../common/Components/Selection/FontFamilySelection'
+import { SelectionBar } from '../../../../common/Components/Selection/SelectionBar'
 import {
 	AlignBottomIcon,
 	AlignCenterIcon,
@@ -14,7 +14,7 @@ import {
 	StrokethroughIcon,
 	UnderstrokeIcon,
 	VerticalAlignCenterIcon,
-} from '../../../../common/icons/icons'
+} from '../../../../common/Icons/icons'
 import { FontFamily } from '../../../../types'
 import style from './EditBar.module.css'
 

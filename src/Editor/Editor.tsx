@@ -1,6 +1,6 @@
 import React from 'react'
-import styles from '../common/styles/App.module.css'
-import { ToolBar } from './toolBar/ToolBar'
+import styles from '../common/Styles/App.module.css'
+import { ToolBar } from './ToolBar/ToolBar'
 import { WorkSpace } from './WorkSpace/WorkSpace'
 
 function Editor() {

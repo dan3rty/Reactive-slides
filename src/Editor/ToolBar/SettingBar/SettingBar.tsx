@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import styles from './SettingBar.module.css'
-import { EditBar } from './editBar/EditBar'
-import { FileSettings } from './fileSettings/FileSettings'
-import { AddBar } from './addBar/AddBar'
-import { AnimationBar } from './animationBar/AnimationBar'
+import { EditBar } from './EditBar/EditBar'
+import { FileSettings } from './FileSettings/FileSettings'
+import { AddBar } from './AddBar/AddBar'
+import { AnimationBar } from './AnimationBar/AnimationBar'
 import { Tabs } from '../../../types'
 import { presentation } from '../../../App'
 

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styles from './SlideList.module.css'
 import { presentation } from '../../../App'
 import { SlideRenderer } from '../../../common/SlideEditor/SlideRenderer'
-import { Counter } from './counter/Counter'
+import { Counter } from './Counter/Counter'
 
 type SlideListProps = {
 	scale: number

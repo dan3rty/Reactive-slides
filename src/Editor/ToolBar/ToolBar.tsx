@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './ToolBar.module.css'
-import { TopBar } from './topBar/TopBar'
-import { SettingBar } from './settingBar/SettingBar'
+import { TopBar } from './TopBar/TopBar'
+import { SettingBar } from './SettingBar/SettingBar'
 
 function ToolBar() {
 	return (

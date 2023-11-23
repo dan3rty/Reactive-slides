@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './BookMarks.module.css'
 import { BookMark } from './BookMark/BookMark'
 
-import { ArrowIcon, SelectIcon, MoveIcon } from '../../../common/icons/icons'
+import { ArrowIcon, SelectIcon, MoveIcon } from '../../../common/Icons/icons'
 
 function BookMarks() {
 	return (

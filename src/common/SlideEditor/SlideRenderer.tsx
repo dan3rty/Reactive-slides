@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import styles from './SlideRenderer.module.css'
 import { presentation } from '../../App'
-import { TextComponent } from '../slideObjects/TextComponent'
+import { TextComponent } from '../SlideObjects/TextComponent'
 import { BlockType, ImageSource, Slide, Tabs } from '../../types'
-import { ImageComponent } from '../slideObjects/ImageComponent'
-import { returnGradientString } from '../tools/returnGradientString'
-import { PrimitiveComponent } from '../slideObjects/PrimitiveComponent'
+import { ImageComponent } from '../SlideObjects/ImageComponent'
+import { returnGradientString } from '../Tools/returnGradientString'
+import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
 
 type SlideRenderer = {
 	scale: number
@@ -49,7 +49,7 @@ function SlideRenderer(props: SlideRenderer) {
 		const objectsToRender = slideObjects.map((object) => {
 			let index = 0
 			const selected =
-				!!chosenObjects.find((id) => id === object.id) && props.isEditor ? true : false
+				!!chosenObjects.find((id) => id === object.id) && props.isEditor
 
 			if (
 				object.animation &&

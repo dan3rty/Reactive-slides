@@ -1,8 +1,7 @@
 import React from 'react'
 import { ObjectStateList } from '../../../../../types'
-import { Dot } from './dot/Dot'
+import { Dot } from './Dot/Dot'
 import styles from './Timeline.module.css'
-import './dot/Dot'
 
 type Timeline = {
 	animation: ObjectStateList

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import styles from './WorkSpace.module.css'
-import { BookMarks } from './bookMarks/BookMarks'
+import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
-import { SlideList } from './slideList/SlideList'
+import { SlideList } from './SlideList/SlideList'
 import { presentation } from '../../App'
 
 function WorkSpace() {

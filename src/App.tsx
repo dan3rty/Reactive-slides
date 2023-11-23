@@ -1,4 +1,4 @@
-import { Editor } from './editor/Editor'
+import { Editor } from './Editor/Editor'
 import React from 'react'
 import { presenter } from './mockObjects'
 

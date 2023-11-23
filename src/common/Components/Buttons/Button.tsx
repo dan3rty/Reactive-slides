@@ -14,9 +14,12 @@ type ButtonProps = {
 
 //TODO: ДОБАВИТЬ ONCLICK
 function Button(props: ButtonProps) {
+	const log = () => {
+		console.log("pop");
+	}
 	if (props.size === 'large') {
 		return (
-			<div className={`${styles.buttonLarge} ${styles[props.style]}`}>
+			<div onClick={log} className={`${styles.buttonLarge} ${styles[props.style]}`}>
 				<span>{props.text}</span>
 			</div>
 		)
@@ -24,7 +27,7 @@ function Button(props: ButtonProps) {
 
 	if (props.size === 'big') {
 		return (
-			<div className={`${styles.buttonBig} ${styles[props.style]}`}>
+			<div onClick={log} className={`${styles.buttonBig} ${styles[props.style]}`}>
 				{props.icon}
 				<span>{props.text}</span>
 			</div>
@@ -33,14 +36,14 @@ function Button(props: ButtonProps) {
 
 	if (props.size === 'medium') {
 		return (
-			<div className={`${styles.buttonMedium} ${styles[props.style]}`}>
+			<div onClick={log} className={`${styles.buttonMedium} ${styles[props.style]}`}>
 				<span>{props.text}</span>
 			</div>
 		)
 	}
 
 	if (props.size === 'small') {
-		return <div className={`${styles.buttonSmall} ${styles[props.style]}`}>{props.icon}</div>
+		return <div onClick={log} className={`${styles.buttonSmall} ${styles[props.style]}`}>{props.icon}</div>
 	}
 	return <div></div>
 }
