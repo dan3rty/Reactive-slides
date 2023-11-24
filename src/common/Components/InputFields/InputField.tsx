@@ -21,7 +21,7 @@ function InputField(props: InputProps) {
 			</div>
 			<div className={joinCssClasses(styles.inputValue, styles['inputValue' + size])}>
 				<input
-					value={props.initialValue}
+					defaultValue={props.initialValue}
 					className={styles.input}
 					type={props.type}
 				></input>

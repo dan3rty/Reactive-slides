@@ -9,7 +9,7 @@ const ArrowIcon = (
 
 const SelectIcon = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='23' height='23' viewBox='0 0 23 23' fill='none'>
-		<g clip-path='url(#clip0_105_509)'>
+		<g clipPath='url(#clip0_105_509)'>
 			<path
 				d='M22.0417 14.375C21.4667 14.375 21.0833 13.9917 21.0833 13.4167V8.62502C21.0833 8.05002 21.4667 7.66669 22.0417 7.66669C22.6167 7.66669 23 8.05002 23 8.62502V13.4167C23 13.9917 22.6167 14.375 22.0417 14.375Z'
 				fill='#006A82'
@@ -65,9 +65,9 @@ const TextIcon = (
 		<path
 			d='M11 2V20M7.14286 20H14.8571M20 5V2H2V5'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -77,9 +77,9 @@ const BulletListIcon = (
 		<path
 			d='M8 6L21 6.00078M8 12L21 12.0008M8 18L21 18.0007M3 6.5H4V5.5H3V6.5ZM3 12.5H4V11.5H3V12.5ZM3 18.5H4V17.5H3V18.5Z'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -89,9 +89,9 @@ const NumberedListIcon = (
 		<path
 			d='M10 6L21 6.00066M10 12L21 12.0007M10 18L21 18.0007M3 5L5 4V10M5 10H3M5 10H7M7 20H3L6.41274 17.0139C6.78593 16.6873 7 16.2156 7 15.7197C7 14.7699 6.23008 14 5.28033 14H5C4.06808 14 3.28503 14.6374 3.06301 15.5'
 			stroke='#006A82'
-			stroke-width='2'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -101,7 +101,7 @@ const TableIcon = (
 		<path
 			d='M3 9.5H21M3 14.5H21M8 4.5V19.5M6.2 19.5H17.8C18.9201 19.5 19.4802 19.5 19.908 19.282C20.2843 19.0903 20.5903 18.7843 20.782 18.408C21 17.9802 21 17.4201 21 16.3V7.7C21 6.5799 21 6.01984 20.782 5.59202C20.5903 5.21569 20.2843 4.90973 19.908 4.71799C19.4802 4.5 18.9201 4.5 17.8 4.5H6.2C5.0799 4.5 4.51984 4.5 4.09202 4.71799C3.71569 4.90973 3.40973 5.21569 3.21799 5.59202C3 6.01984 3 6.57989 3 7.7V16.3C3 17.4201 3 17.9802 3.21799 18.408C3.40973 18.7843 3.71569 19.0903 4.09202 19.282C4.51984 19.5 5.07989 19.5 6.2 19.5Z'
 			stroke='#006A82'
-			stroke-width='2'
+			strokeWidth='2'
 		/>
 	</svg>
 )
@@ -111,9 +111,9 @@ const ImageIcon = (
 		<path
 			d='M14.2639 15.9375L12.5958 14.2834C11.7909 13.4851 11.3884 13.086 10.9266 12.9401C10.5204 12.8118 10.0838 12.8165 9.68048 12.9536C9.22188 13.1095 8.82814 13.5172 8.04068 14.3326L4.04409 18.2801M14.2639 15.9375L14.6053 15.599C15.4112 14.7998 15.8141 14.4002 16.2765 14.2543C16.6831 14.126 17.12 14.1311 17.5236 14.2687C17.9824 14.4251 18.3761 14.8339 19.1634 15.6514L20 16.4934M14.2639 15.9375L18.275 19.9565M4.04409 18.2801C4.07512 18.5321 4.12796 18.7313 4.21799 18.908C4.40973 19.2843 4.71569 19.5903 5.09202 19.782C5.51984 20 6.07989 20 7.2 20H16.8C17.4543 20 17.9176 20 18.275 19.9565M4.04409 18.2801C4 17.9221 4 17.4575 4 16.8V7.2C4 6.0799 4 5.51984 4.21799 5.09202C4.40973 4.71569 4.71569 4.40973 5.09202 4.21799C5.51984 4 6.07989 4 7.2 4H16.8C17.9201 4 18.4802 4 18.908 4.21799C19.2843 4.40973 19.5903 4.71569 19.782 5.09202C20 5.51984 20 6.0799 20 7.2V16.4934M20 16.4934V16.8C20 17.9201 20 18.4802 19.782 18.908C19.5903 19.2843 19.2843 19.5903 18.908 19.782C18.7301 19.8727 18.5293 19.9256 18.275 19.9565M17 8.99989C17 10.1045 16.1046 10.9999 15 10.9999C13.8954 10.9999 13 10.1045 13 8.99989C13 7.89532 13.8954 6.99989 15 6.99989C16.1046 6.99989 17 7.89532 17 8.99989Z'
 			stroke='#006A82'
-			stroke-width='2'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -123,9 +123,9 @@ const TriangleIcon = (
 		<path
 			d='M4.37891 15.1999C3.46947 16.775 3.01489 17.5634 3.08281 18.2097C3.14206 18.7734 3.43792 19.2851 3.89648 19.6182C4.42204 20.0001 5.3309 20.0001 7.14853 20.0001H16.8515C18.6691 20.0001 19.5778 20.0001 20.1034 19.6182C20.5619 19.2851 20.8579 18.7734 20.9172 18.2097C20.9851 17.5634 20.5307 16.775 19.6212 15.1999L14.7715 6.79986C13.8621 5.22468 13.4071 4.43722 12.8135 4.17291C12.2957 3.94236 11.704 3.94236 11.1862 4.17291C10.5928 4.43711 10.1381 5.22458 9.22946 6.79845L4.37891 15.1999Z'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -135,9 +135,9 @@ const SquareIcon = (
 		<path
 			d='M18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4Z'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -147,16 +147,16 @@ const OvalIcon = (
 		<path
 			d='M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
 
 const CreateIcon = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='19' height='22' viewBox='0 0 19 22' fill='none'>
-		<g clip-path='url(#clip0_105_437)'>
+		<g clipPath='url(#clip0_105_437)'>
 			<path
 				d='M1.73475 21.9884H17.3208C17.6161 21.9884 17.8992 21.8726 18.108 21.6665C18.3168 21.4604 18.4341 21.1808 18.4341 20.8894V4.85907C18.434 4.56761 18.3167 4.28812 18.1079 4.08206L14.3071 0.330008C14.0984 0.123888 13.8153 0.00805785 13.52 0.00799561H1.73475C1.43949 0.00799561 1.15632 0.123785 0.947535 0.329891C0.738753 0.535997 0.62146 0.815537 0.62146 1.10701V20.8894C0.62146 21.1808 0.738753 21.4604 0.947535 21.6665C1.15632 21.8726 1.43949 21.9884 1.73475 21.9884ZM6.1879 9.89917H8.41448V7.70113C8.41448 7.40965 8.53177 7.13011 8.74056 6.924C8.94934 6.7179 9.23251 6.60211 9.52777 6.60211C9.82303 6.60211 10.1062 6.7179 10.315 6.924C10.5238 7.13011 10.6411 7.40965 10.6411 7.70113V9.89917H12.8676C13.1629 9.89917 13.4461 10.015 13.6549 10.2211C13.8636 10.4272 13.9809 10.7067 13.9809 10.9982C13.9809 11.2897 13.8636 11.5692 13.6549 11.7753C13.4461 11.9814 13.1629 12.0972 12.8676 12.0972H10.6411V14.2952C10.6411 14.5867 10.5238 14.8663 10.315 15.0724C10.1062 15.2785 9.82303 15.3943 9.52777 15.3943C9.23251 15.3943 8.94934 15.2785 8.74056 15.0724C8.53177 14.8663 8.41448 14.5867 8.41448 14.2952V12.0972H6.1879C5.89264 12.0972 5.60947 11.9814 5.40069 11.7753C5.19191 11.5692 5.07462 11.2897 5.07462 10.9982C5.07462 10.7067 5.19191 10.4272 5.40069 10.2211C5.60947 10.015 5.89264 9.89917 6.1879 9.89917Z'
 				fill='#006A82'
@@ -231,9 +231,9 @@ const AlignRightIcon = (
 		<path
 			d='M25 2H2M25 8.66667H8.57143M25 15.3333H2M25 22H15.1429'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -243,9 +243,9 @@ const AlignCenterIcon = (
 		<path
 			d='M2 2H24M5.14286 8.66667H20.8571M2 15.3333H24M8.28571 22H17.7143'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -255,9 +255,9 @@ const AlignLeftIcon = (
 		<path
 			d='M2 2H25M2 8.66667H18.4286M2 15.3333H25M2 22H11.8571'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -267,9 +267,9 @@ const AlignTopIcon = (
 		<path
 			d='M34 2H2M18 28V8.5M18 8.5L11.1429 13.375M18 8.5L24.8571 13.375'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -279,9 +279,9 @@ const VerticalAlignCenterIcon = (
 		<path
 			d='M31 16H2M16.5 30V21.25M16.5 21.25L20.6429 24.75M16.5 21.25L12.3571 24.75M16.5 2V10.75M16.5 10.75L12.3571 7.25M16.5 10.75L20.6429 7.25'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -291,9 +291,9 @@ const AlignBottomIcon = (
 		<path
 			d='M34 28H2M18 2V21.5M18 21.5L11.1429 16.625M18 21.5L24.8571 16.625'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -303,26 +303,26 @@ const ArrowLeftIcon = (
 		<path
 			d='M15.0814 25L2.69388 15.5328C1.23094 14.4148 1.23094 12.5852 2.69388 11.4672L15.0814 2'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-miterlimit='10'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeMiterlimit='10'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 		<path
 			d='M15.0814 25L2.69388 15.5328C1.23094 14.4148 1.23094 12.5852 2.69388 11.4672L15.0814 2'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-miterlimit='10'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeMiterlimit='10'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 		<path
 			d='M15.0814 25L2.69388 15.5328C1.23094 14.4148 1.23094 12.5852 2.69388 11.4672L15.0814 2'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-miterlimit='10'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeMiterlimit='10'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
@@ -332,26 +332,26 @@ const ArrowRightIcon = (
 		<path
 			d='M1.88147 25L14.269 15.5328C15.7319 14.4148 15.7319 12.5852 14.269 11.4672L1.88147 2'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-miterlimit='10'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeMiterlimit='10'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 		<path
 			d='M1.88147 25L14.269 15.5328C15.7319 14.4148 15.7319 12.5852 14.269 11.4672L1.88147 2'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-miterlimit='10'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeMiterlimit='10'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 		<path
 			d='M1.88147 25L14.269 15.5328C15.7319 14.4148 15.7319 12.5852 14.269 11.4672L1.88147 2'
 			stroke='#006A82'
-			stroke-width='3'
-			stroke-miterlimit='10'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='3'
+			strokeMiterlimit='10'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )

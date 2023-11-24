@@ -10,8 +10,8 @@ type SelectionProps = {
 function SelectionBar(props: SelectionProps) {
 	return (
 		<div className={styles.selection}>
-			{props.icons.map((icon) => (
-				<SelectionButton style={'light'} icon={icon} />
+			{props.icons.map((icon, index) => (
+				<SelectionButton key={index} style={'light'} icon={icon} />
 			))}
 		</div>
 	)
