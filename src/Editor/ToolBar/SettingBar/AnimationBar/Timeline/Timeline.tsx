@@ -1,6 +1,6 @@
 import { ObjectStateList } from '../../../../../types'
 import { Dot } from './Dot/Dot'
-import styles from './Timeline.module.css'
+import styles from './Timeline.css'
 
 type TimelineProps = {
 	animation?: ObjectStateList
@@ -22,9 +22,9 @@ function Timeline(props: TimelineProps) {
 		<div className={styles.timelineContainer}>
 			<div className={styles.timelineLine}>
 				<Dot text={0} offset={'-3%'} isChosen={!!isFirstChosen}></Dot>
-				{objectsToRender?.map((circle) => {
+				{objectsToRender?.map((circle, index) => {
 					const { text, offset, isChosen } = circle
-					return <Dot text={text} offset={offset} isChosen={isChosen}></Dot>
+					return <Dot key={index} text={text} offset={offset} isChosen={isChosen}></Dot>
 				})}
 			</div>
 		</div>

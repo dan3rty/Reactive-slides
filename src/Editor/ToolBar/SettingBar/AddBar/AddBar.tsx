@@ -1,4 +1,4 @@
-import styles from './AddBar.module.css'
+import styles from './AddBar.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import {
 	ArrowIcon,

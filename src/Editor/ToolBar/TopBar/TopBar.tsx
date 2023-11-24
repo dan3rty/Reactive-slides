@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import styles from './TopBar.module.css'
+import styles from './TopBar.css'
 import { PresenterContext } from '../../../App'
 function TopBar() {
 	return (

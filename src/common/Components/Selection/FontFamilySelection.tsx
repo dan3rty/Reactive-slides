@@ -1,5 +1,5 @@
 import { FontFamily } from '../../../types'
-import styles from './FontFamilySelection.module.css'
+import styles from './FontFamilySelection.css'
 
 type FontFamilySelectionProps = {
 	value: FontFamily

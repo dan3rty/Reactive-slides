@@ -1,4 +1,4 @@
-.topBar {
+.top-bar {
 	box-sizing: border-box;
 	display: flex;
 	justify-content: space-between;
@@ -15,7 +15,7 @@
 	font-size: 40px;
 }
 
-.presentationName {
+.presentation-name {
 	width: 50%;
 	font-size: 30px;
 	text-align: end;

@@ -1,23 +1,23 @@
-.inputField {
+.input-field {
 	display: flex;
 }
 
-.inputFieldLarge {
+.input-field-large {
 	height: 37px;
 	width: 148px;
 }
 
-.inputFieldMedium {
+.input-field-medium {
 	height: 31px;
 	width: 304px;
 }
 
-.inputFieldSmall {
+.input-field-small {
 	height: 31px;
 	width: 220px;
 }
 
-.inputLabel {
+.input-label {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -26,23 +26,23 @@
 	border-radius: 3px 0 0 3px;
 }
 
-.inputLabelLarge {
+.input-label-large {
 	width: 25%;
 }
 
-.inputLabelMedium {
+.input-label-medium {
 	justify-content: flex-end;
 	width: 47.5%;
 	padding-right: 8px;
 }
 
-.inputLabelSmall {
+.input-label-small {
 	justify-content: flex-end;
 	width: 45%;
 	padding-right: 8px;
 }
 
-.inputValue {
+.input-value {
 	box-sizing: border-box;
 	display: flex;
 	justify-content: flex-end;
@@ -53,15 +53,15 @@
 	border-radius: 0 3px 3px 0;
 }
 
-.inputValueSmall {
+.input-value-small {
 	width: 55%;
 }
 
-.inputValueMedium {
+.input-value-medium {
 	width: 50%;
 }
 
-.inputValueLarge {
+.input-value-large {
 	width: 75%;
 }
 

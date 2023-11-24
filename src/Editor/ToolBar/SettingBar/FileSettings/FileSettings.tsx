@@ -1,4 +1,4 @@
-import styles from './FileSettings.module.css'
+import styles from './FileSettings.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { CreateIcon, OpenIcon, SaveIcon } from '../../../../common/Icons/icons'
 import { useSavePresentationToFile, useLoadPresentation } from '../../../../hooks/useFileIO'

@@ -1,4 +1,4 @@
-import buttonStyle from './SelectionButton.module.css'
+import buttonStyle from './SelectionButton.css'
 import { ReactNode } from 'react'
 
 type styles = 'light' | 'dark'

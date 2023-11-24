@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './ImageComponent.module.css'
+import styles from './ImageComponent.css'
 import { ImageBlock, ImageSource } from '../../types'
 
 type ImageProps = {

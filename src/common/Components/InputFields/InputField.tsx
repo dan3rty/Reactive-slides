@@ -1,4 +1,4 @@
-import styles from './InputField.module.css'
+import styles from './InputField.css'
 
 type sizes = 'Small' | 'Medium' | 'Large'
 type inputType = 'number' | 'text'

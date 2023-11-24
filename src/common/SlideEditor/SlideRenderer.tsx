@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import styles from './SlideRenderer.module.css'
+import styles from './SlideRenderer.css'
 import { PresenterContext } from '../../App'
 import { TextComponent } from '../SlideObjects/TextComponent'
 import { BlockType, Selection, Slide, Tabs } from '../../types'
@@ -36,7 +36,7 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 			}}
 			className={styles.slideEditor}
 		>
-			{slide.objects.map((obj) => {
+			{slide.objects.map((obj, index) => {
 				const newObj = structuredClone(obj)
 				if (selection) {
 					const selected = !!selection?.objectsId?.includes(obj.id)
@@ -62,6 +62,7 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 					case BlockType.IMAGE:
 						return (
 							<ImageComponent
+								key={index}
 								image={newObj}
 								scale={scale}
 								selected={!!selection?.objectsId?.includes(obj.id)}
@@ -70,6 +71,7 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 					case BlockType.PRIMITIVE:
 						return (
 							<PrimitiveComponent
+								key={index}
 								primitive={newObj}
 								scale={scale}
 								selected={!!selection?.objectsId?.includes(obj.id)}
@@ -78,6 +80,7 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 					case BlockType.TEXT:
 						return (
 							<TextComponent
+								key={index}
 								text={newObj}
 								scale={scale}
 								selected={!!selection?.objectsId?.includes(obj.id)}

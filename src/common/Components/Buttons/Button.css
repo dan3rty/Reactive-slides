@@ -12,7 +12,7 @@
 	height: 25px;
 }
 
-.buttonLarge {
+.button-large {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -21,7 +21,7 @@
 	border-radius: 3px;
 }
 
-.buttonBig {
+.button-big {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -32,7 +32,7 @@
 	border-radius: 3px;
 }
 
-.buttonMedium {
+.button-medium {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -41,7 +41,7 @@
 	border-radius: 3px;
 }
 
-.buttonSmall {
+.button-small {
 	display: flex;
 	justify-content: center;
 	align-items: center;

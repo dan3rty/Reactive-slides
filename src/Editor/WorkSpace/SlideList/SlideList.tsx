@@ -13,14 +13,14 @@ function SlideList(props: SlideListProps) {
 	const slidesToRender = slides.map((slide, index) => {
 		if (slide.id == chosen) {
 			return (
-				<div className={styles.smallSlideChosen}>
+				<div key={index} className={styles.smallSlideChosen}>
 					<SlideRenderer scale={props.scale * 3.5} slide={slide}></SlideRenderer>
 					<Counter index={index + 1}></Counter>
 				</div>
 			)
 		} else {
 			return (
-				<div className={styles.smallSlide}>
+				<div key={index} className={styles.smallSlide}>
 					<SlideRenderer scale={props.scale * 4} slide={slide}></SlideRenderer>
 					<Counter index={index + 1}></Counter>
 				</div>

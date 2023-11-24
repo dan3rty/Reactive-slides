@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './TextComponent.module.css'
+import styles from './TextComponent.css'
 import { TextBlock } from '../../types'
 
 type TextProps = {
@@ -17,8 +17,9 @@ function TextComponent(props: TextProps) {
 		rotate: props.text.baseState.rotation + 'deg',
 		borderColor: props.selected ? '#000000' : '#FFFFFF00',
 	}
-	const textToRender = props.text.value.map((char) => (
+	const textToRender = props.text.value.map((char, index) => (
 		<div
+			key={index}
 			className={styles.char}
 			style={{
 				color: char.color.hex,

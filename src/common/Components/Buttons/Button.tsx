@@ -1,4 +1,4 @@
-import styles from './Button.module.css'
+import styles from './Button.css'
 import { ReactNode } from 'react'
 
 type Sizes = 'small' | 'medium' | 'big' | 'large'

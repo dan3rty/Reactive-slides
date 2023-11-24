@@ -1,34 +1,33 @@
-.editBar {
+.animation-bar {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 }
 
-.bigContainer {
+.big-container {
 	display: flex;
 	flex-direction: column;
 	gap: 11px;
 }
 
-.mediumContainer {
+.medium-container {
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
+	gap: 5px;
 }
 
-.buttonVerticalContainer {
+.horizontal-container {
+	display: flex;
+	gap: 5px;
+}
+
+.button-vertical-container {
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
 }
 
-.buttonHorizontalContainer {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-.selectionWrapper {
+.selection-wrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 3px;

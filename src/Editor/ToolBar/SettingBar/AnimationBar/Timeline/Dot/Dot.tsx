@@ -1,4 +1,4 @@
-import styles from './Dot.module.css'
+import styles from './Dot.css'
 
 type Dot = {
 	text: number
@@ -8,9 +8,9 @@ type Dot = {
 
 function Dot(props: Dot) {
 	const { text, offset, isChosen } = props
-	const circleStyle = isChosen ? styles.DotCircleChosen : styles.DotCircle
+	const circleStyle = isChosen ? styles.dotCircleChosen : styles.dotCircle
 	return (
-		<div className={styles.Dot} style={{ left: offset }}>
+		<div className={styles.dot} style={{ left: offset }}>
 			<div className={circleStyle}></div>
 			<span className={styles.timelineLineDotText}>{text.toFixed(1)}</span>
 		</div>

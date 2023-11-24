@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import styles from './SelectionBar.module.css'
+import styles from './SelectionBar.css'
 import { SelectionButton } from '../Buttons/SelectionButton'
 
 type SelectionProps = {

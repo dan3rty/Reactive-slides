@@ -1,6 +1,6 @@
 import { InputField } from '../../../../common/Components/InputFields/InputField'
 import { Slide } from '../../../../types'
-import styles from './AnimationBar.module.css'
+import styles from './AnimationBar.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { Timeline } from './Timeline/Timeline'
 

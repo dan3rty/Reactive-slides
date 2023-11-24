@@ -1,4 +1,4 @@
-.Dot {
+.dot {
 	display: flex;
 	align-items: center;
 	width: 40px;
@@ -7,7 +7,7 @@
 	position: relative;
 }
 
-.DotCircle {
+.dot-circle {
 	cursor: pointer;
 	height: 10px;
 	width: 10px;
@@ -15,7 +15,7 @@
 	border-radius: 50%;
 }
 
-.DotCircleChosen {
+.dot-circle-chosen {
 	cursor: pointer;
 	height: 13px;
 	width: 13px;

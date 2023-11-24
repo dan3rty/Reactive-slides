@@ -1,4 +1,4 @@
-.timelineContainer {
+.timeline-container {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -8,7 +8,7 @@
 	border-radius: 3px;
 }
 
-.timelineLine {
+.timeline-line {
 	display: flex;
 	align-items: center;
 	height: 3px;
@@ -16,7 +16,7 @@
 	background: #006a82;
 }
 
-.timelineLineDotText {
+.timeline-line-dot-text {
 	color: #006a82;
 	font-style: normal;
 	font-weight: 500;
@@ -25,7 +25,7 @@
 	text-align: center;
 }
 
-.timelineTitle {
+.timeline-title {
 	position: absolute;
 	left: 0;
 	top: 0;

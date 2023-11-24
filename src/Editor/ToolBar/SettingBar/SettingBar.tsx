@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import styles from './SettingBar.module.css'
+import styles from './SettingBar.css'
 import { EditBar } from './EditBar/EditBar'
 import { FileSettings } from './FileSettings/FileSettings'
 import { AddBar } from './AddBar/AddBar'
@@ -34,7 +34,7 @@ function SettingBar() {
 		}
 	}
 	return (
-		<div className={styles.SettingBar}>
+		<div className={styles.settingBar}>
 			{bar}
 			<FileSettings />
 		</div>

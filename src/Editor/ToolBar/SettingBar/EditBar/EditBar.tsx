@@ -15,7 +15,7 @@ import {
 	VerticalAlignCenterIcon,
 } from '../../../../common/Icons/icons'
 import { FontFamily } from '../../../../types'
-import style from './EditBar.module.css'
+import style from './EditBar.css'
 
 function EditBar() {
 	return (

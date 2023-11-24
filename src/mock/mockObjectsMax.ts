@@ -1,4 +1,4 @@
-import * as Type from './types'
+import * as Type from '../types'
 
 const BlackColor: Type.Color = {
 	hex: '#000000',
