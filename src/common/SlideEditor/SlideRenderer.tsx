@@ -16,17 +16,23 @@ type SlideRendererProps = {
 function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 	const width = 1920 / scale
 	const height = 1080 / scale
+
+	const selectedTab = useContext(PresenterContext).presenter.selection.selectedTab
+
+	const backgroundStyle = slide.background.image
+		? {
+				backgroundImage: `url("${slide.background.image.value}")`,
+		  }
+		: {
+				background: returnGradientString(slide.background.color),
+		  }
+
 	return (
 		<div
 			style={{
+				...backgroundStyle,
 				width: `${width}px`,
 				height: `${height}px`,
-				background: slide.background.image
-					? `url("${slide.background.image.value}") cover no-repeat`
-					: returnGradientString(slide.background.color),
-				backgroundImage: slide.background.image
-					? `url("${slide.background.image.value}")`
-					: returnGradientString(slide.background.color),
 			}}
 			className={styles.slideEditor}
 		>
@@ -39,8 +45,7 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 						obj.animation &&
 						selection.keyFrameId &&
 						selected &&
-						useContext(PresenterContext).presenter.selection.selectedTab ==
-							Tabs.ANIMATION
+						selectedTab == Tabs.ANIMATION
 					) {
 						const index = obj.animation.stateList.findIndex(
 							(state) => state.id === selection.keyFrameId,
