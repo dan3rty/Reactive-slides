@@ -4,8 +4,8 @@ import { Dot } from './Dot/Dot'
 import styles from './Timeline.module.css'
 
 type Timeline = {
-	animation: ObjectStateList
-	chosenState: string
+	animation?: ObjectStateList
+	chosenState?: string
 }
 
 function Timeline(props: Timeline) {
