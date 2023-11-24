@@ -1,5 +1,6 @@
 import buttonStyle from './SelectionButton.css'
 import { ReactNode } from 'react'
+import { joinCssClasses } from '../../../classes/joinCssClasses'
 
 type styles = 'light' | 'dark'
 
@@ -16,7 +17,7 @@ function SelectionButton(props: ButtonProps) {
 	return (
 		<div
 			onClick={props.onClick ?? click}
-			className={`${buttonStyle.selectionButton} ${buttonStyle[props.style]}`}
+			className={joinCssClasses(buttonStyle.selectionButton, buttonStyle[props.style])}
 		>
 			{props.icon}
 		</div>

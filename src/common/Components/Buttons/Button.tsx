@@ -1,5 +1,6 @@
 import styles from './Button.css'
 import { ReactNode } from 'react'
+import { joinCssClasses } from '../../../classes/joinCssClasses'
 
 type Sizes = 'small' | 'medium' | 'big' | 'large'
 type ButtonStyles = 'light' | 'dark'
@@ -20,7 +21,7 @@ function Button(props: ButtonProps) {
 		return (
 			<div
 				onClick={props.onClick ?? click}
-				className={`${styles.button} ${styles.buttonLarge} ${styles[props.style]}`}
+				className={joinCssClasses(styles.button, styles.buttonLarge, styles[props.style])}
 			>
 				<span>{props.text}</span>
 			</div>
@@ -31,7 +32,7 @@ function Button(props: ButtonProps) {
 		return (
 			<div
 				onClick={props.onClick}
-				className={`${styles.button} ${styles.buttonBig} ${styles[props.style]}`}
+				className={joinCssClasses(styles.button, styles.buttonBig, styles[props.style])}
 			>
 				{props.icon}
 				<span>{props.text}</span>
@@ -43,7 +44,7 @@ function Button(props: ButtonProps) {
 		return (
 			<div
 				onClick={props.onClick}
-				className={`${styles.button} ${styles.buttonMedium} ${styles[props.style]}`}
+				className={joinCssClasses(styles.button, styles.buttonMedium, styles[props.style])}
 			>
 				<span>{props.text}</span>
 			</div>
@@ -54,7 +55,7 @@ function Button(props: ButtonProps) {
 		return (
 			<div
 				onClick={props.onClick}
-				className={`${styles.button} ${styles.buttonSmall} ${styles[props.style]}`}
+				className={joinCssClasses(styles.button, styles.buttonSmall, styles[props.style])}
 			>
 				{props.icon}
 			</div>
