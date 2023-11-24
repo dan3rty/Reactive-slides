@@ -14,16 +14,22 @@ function FileInput() {
 		const file = event.target.files[0]
 		reader.readAsText(file)
 		reader.onload = () => {
-			const presentation: Presentation = JSON.parse(reader.result)
-			console.log(presentation)
-			const selection: Selection = {
-				selectedTab: Tabs.CREATE,
-				slideId: presentation.slides[1].id,
+			try {
+				if (file.name.split('.').pop() != 'json') {
+					throw Error('Неправильное расширение у файла')
+				}
+				const presentation: Presentation = JSON.parse(reader.result)
+				const selection: Selection = {
+					selectedTab: Tabs.CREATE,
+					slideId: presentation.slides[1].id,
+				}
+				const OperationHistory: OperationHistory = {
+					operations: [],
+				}
+				setPresentation({ presentation, selection, OperationHistory })
+			} catch (e) {
+				alert('Ошибка валидации')
 			}
-			const OperationHistory: OperationHistory = {
-				operations: [],
-			}
-			setPresentation({ presentation, selection, OperationHistory })
 		}
 	}
 
@@ -31,6 +37,7 @@ function FileInput() {
 		<input
 			style={{ visibility: 'hidden', position: 'absolute' }}
 			type={'file'}
+			accept={'.json'}
 			onChange={onChange}
 		/>
 	)
@@ -45,12 +52,7 @@ function FileSettings() {
 
 	return (
 		<div className={styles.fileSettings}>
-			<Button
-				style='dark'
-				size='big'
-				icon={CreateIcon}
-				text='create new file'
-			/>
+			<Button style='dark' size='big' icon={CreateIcon} text='create new file' />
 			<label>
 				<Button style='dark' size='big' icon={OpenIcon} text='open file' />
 				<FileInput />
