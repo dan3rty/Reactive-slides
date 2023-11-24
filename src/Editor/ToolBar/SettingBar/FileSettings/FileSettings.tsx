@@ -1,54 +1,23 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styles from './FileSettings.module.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { CreateIcon, OpenIcon, SaveIcon } from '../../../../common/Icons/icons'
-import { savePresentationToFile } from './FileManage'
-import { PresenterContext } from '../../../../App'
-import { OperationHistory, Presentation, Selection, Tabs } from '../../../../types'
+import { useSavePresentationToFile, useLoadPresentation } from '../../../../hooks/useFileIO'
 
 function FileInput() {
-	const setPresentation = useContext(PresenterContext).setPresenter
-
-	function onChange(event) {
-		const reader = new FileReader()
-		const file = event.target.files[0]
-		reader.readAsText(file)
-		reader.onload = () => {
-			try {
-				if (file.name.split('.').pop() != 'json') {
-					throw Error('Неправильное расширение у файла')
-				}
-				const presentation: Presentation = JSON.parse(reader.result)
-				const selection: Selection = {
-					selectedTab: Tabs.CREATE,
-					slideId: presentation.slides[1].id,
-				}
-				const OperationHistory: OperationHistory = {
-					operations: [],
-				}
-				setPresentation({ presentation, selection, OperationHistory })
-			} catch (e) {
-				alert('Ошибка валидации')
-			}
-		}
-	}
-
+	const load = useLoadPresentation()
 	return (
 		<input
 			style={{ visibility: 'hidden', position: 'absolute' }}
 			type={'file'}
 			accept={'.json'}
-			onChange={onChange}
+			onChange={load}
 		/>
 	)
 }
 
 function FileSettings() {
-	const presentation = useContext(PresenterContext).presenter.presentation
-
-	function onClick(): void {
-		savePresentationToFile(presentation)
-	}
+	const save = useSavePresentationToFile()
 
 	return (
 		<div className={styles.fileSettings}>
@@ -57,7 +26,7 @@ function FileSettings() {
 				<Button style='dark' size='big' icon={OpenIcon} text='open file' />
 				<FileInput />
 			</label>
-			<Button style='dark' size='big' icon={SaveIcon} text='save file' onClick={onClick} />
+			<Button style='dark' size='big' icon={SaveIcon} text='save file' onClick={save} />
 		</div>
 	)
 }
