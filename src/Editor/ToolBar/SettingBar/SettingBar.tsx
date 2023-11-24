@@ -12,7 +12,6 @@ function SettingBar() {
 	const { selection, presentation } = useContext(PresenterContext).presenter
 	const chosenSlide = selection.slideId
 	const chosenObjectId = selection.objectsId
-	const chosenState = selection.keyFrameId
 	const curSlide = presentation.slides.find((slide) => slide.id === chosenSlide)
 	let bar = <AddBar />
 	switch (curChosen) {
@@ -23,6 +22,7 @@ function SettingBar() {
 			bar = <EditBar />
 			break
 		case Tabs.ANIMATION:
+			const chosenState = selection.keyFrameId
 			bar = <AnimationBar curSlide={curSlide} chosenObjectId={chosenObjectId} chosenState={chosenState} />
 			break
 	}
