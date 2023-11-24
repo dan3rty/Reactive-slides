@@ -1,14 +1,26 @@
-import { Editor } from './editor/Editor'
-import React from 'react'
+import { Editor } from './Editor/Editor'
+import React, { useState } from 'react'
 import { presenter } from './mockObjects'
+import { Presenter } from './types'
 
-const presentation = React.createContext(presenter)
+const PresenterContext = React.createContext({
+	presenter: presenter,
+	setPresenter: React.Dispatch<React.SetStateAction<Presenter>>,
+})
+
 function App() {
+	const [presenterObj, setPresenter] = useState(presenter)
+
 	return (
-		<presentation.Provider value={presenter}>
+		<PresenterContext.Provider
+			value={{
+				presenter: presenterObj,
+				setPresenter,
+			}}
+		>
 			<Editor />
-		</presentation.Provider>
+		</PresenterContext.Provider>
 	)
 }
 export default App
-export { presentation }
+export { PresenterContext }

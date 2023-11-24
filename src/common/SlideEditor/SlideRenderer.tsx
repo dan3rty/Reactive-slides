@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import styles from './SlideRenderer.module.css'
-import { presentation } from '../../App'
-import { TextComponent } from '../slideObjects/TextComponent'
+import { PresenterContext } from '../../App'
+import { TextComponent } from '../SlideObjects/TextComponent'
 import { BlockType, Selection, Slide, Tabs } from '../../types'
-import { ImageComponent } from '../slideObjects/ImageComponent'
-import { returnGradientString } from '../tools/returnGradientString'
-import { PrimitiveComponent } from '../slideObjects/PrimitiveComponent'
+import { ImageComponent } from '../SlideObjects/ImageComponent'
+import { returnGradientString } from '../Tools/returnGradientString'
+import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
 
 type SlideRendererProps = {
 	scale: number
@@ -39,7 +39,8 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 						obj.animation &&
 						selection.keyFrameId &&
 						selected &&
-						useContext(presentation).selection.selectedTab == Tabs.ANIMATION
+						useContext(PresenterContext).presenter.selection.selectedTab ==
+							Tabs.ANIMATION
 					) {
 						const index = obj.animation.stateList.findIndex(
 							(state) => state.id === selection.keyFrameId,
