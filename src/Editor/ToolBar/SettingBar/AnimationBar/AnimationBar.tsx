@@ -1,18 +1,19 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { InputField } from '../../../../common/Components/InputFields/InputField'
+import { Slide } from '../../../../types'
 import styles from './AnimationBar.module.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { Timeline } from './Timeline/Timeline'
-import { PresenterContext } from '../../../../App'
 
-function AnimationBar() {
-	const { selection, presentation } = useContext(PresenterContext).presenter
-	const chosenSlide = selection.slideId
-	const chosenObjectId = selection.objectsId
-	const chosenState = selection.keyFrameId
-	const curSlide = presentation.slides.find((slide) => slide.id === chosenSlide)
-	const slideObjects = curSlide?.objects
-	const chosenObject = slideObjects?.find((object) => object.id === chosenObjectId?.[0])
+type AnimationBarProps = {
+	curSlide?: Slide
+	chosenObjectId?: Array<string>
+	chosenState?: string
+}
+
+function AnimationBar(props: AnimationBarProps) {
+	const slideObjects = props.curSlide?.objects
+	const chosenObject = slideObjects?.find((object) => object.id === props.chosenObjectId?.[0])
 	const animation = chosenObject?.animation
 	return (
 		<div className={styles.animationBar}>
@@ -67,7 +68,7 @@ function AnimationBar() {
 					<Button text={'add keyframe'} style={'dark'} size={'large'} />
 					<Button text={'delete keyframe'} style={'dark'} size={'large'} />
 				</div>
-				<Timeline animation={animation} chosenState={chosenState}></Timeline>
+				<Timeline animation={animation} chosenState={props.chosenState}></Timeline>
 			</div>
 		</div>
 	)
