@@ -14,6 +14,4 @@ function savePresentationToFile(presentation: Presentation): void {
 	a.remove()
 }
 
-// function loadPresentationFromFile(): Presentation {}
-
 export { savePresentationToFile }
