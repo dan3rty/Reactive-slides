@@ -4,8 +4,12 @@ import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
 import { PresenterContext } from '../../App'
+import { Slide } from '../../types'
 
-function WorkSpace() {
+type WorkSpaceProps = {
+	selectedSlide: Slide
+}
+function WorkSpace(props: WorkSpaceProps) {
 	const context = useContext(PresenterContext).presenter
 	const size = window.innerHeight
 	const scale = (1080 / (size - 205)) * 1.2
@@ -16,9 +20,7 @@ function WorkSpace() {
 				<div className={styles.slideEditorWrapper}>
 					<SlideRenderer
 						scale={scale}
-						slide={context.presentation.slides.find(
-							(slide) => slide.id === context.selection.slideId,
-						)}
+						slide={props.selectedSlide}
 						selection={context.selection}
 					></SlideRenderer>
 				</div>

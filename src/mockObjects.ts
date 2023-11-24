@@ -148,7 +148,7 @@ const text2: Type.TextBlock = {
 				},
 			},
 		],
-		duration: 40,
+		duration: 60,
 	},
 	baseState: {
 		width: 500,
@@ -447,7 +447,7 @@ const presentation: Type.Presentation = {
 }
 
 const selection: Type.Selection = {
-	selectedTab: Type.Tabs.EDIT,
+	selectedTab: Type.Tabs.ANIMATION,
 	slideId: 'djahDHSADGKUAGUSDAD',
 	objectsId: ['D5DAS67F5A', 'DASD79DAS', 'PFASD79DAS', 'DASD79DAS1'],
 }
