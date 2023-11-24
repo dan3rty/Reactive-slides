@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import styles from './SlideRenderer.module.css'
 import { PresenterContext } from '../../App'
 import { TextComponent } from '../SlideObjects/TextComponent'

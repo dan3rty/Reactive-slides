@@ -1,4 +1,3 @@
-import React from 'react'
 import { InputField } from '../../../../common/Components/InputFields/InputField'
 import { Slide } from '../../../../types'
 import styles from './AnimationBar.module.css'

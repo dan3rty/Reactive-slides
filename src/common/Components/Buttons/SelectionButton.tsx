@@ -1,4 +1,3 @@
-import React from 'react'
 import buttonStyle from './SelectionButton.module.css'
 import { ReactNode } from 'react'
 

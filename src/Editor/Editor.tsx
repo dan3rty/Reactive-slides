@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import styles from '../common/Styles/App.module.css'
 import { ToolBar } from './ToolBar/ToolBar'
 import { WorkSpace } from './WorkSpace/WorkSpace'

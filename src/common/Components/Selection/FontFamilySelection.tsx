@@ -1,4 +1,3 @@
-import React from 'react'
 import { FontFamily } from '../../../types'
 import styles from './FontFamilySelection.module.css'
 

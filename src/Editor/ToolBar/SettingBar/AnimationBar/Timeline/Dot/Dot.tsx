@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './Dot.module.css'
 
 type Dot = {

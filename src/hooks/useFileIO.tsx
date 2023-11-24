@@ -1,5 +1,5 @@
 import { OperationHistory, Presentation, Selection, Tabs } from '../types'
-import { useCallback, useContext } from 'react'
+import { ChangeEvent, useCallback, useContext } from 'react'
 import { PresenterContext } from '../App'
 
 function useSavePresentationToFile(): () => void {
@@ -19,19 +19,20 @@ function useSavePresentationToFile(): () => void {
 	}, [presentation])
 }
 
-function useLoadPresentation(): (event: Event) => void {
+function useLoadPresentation(): (event: ChangeEvent<HTMLInputElement>) => void {
 	const { setPresenter } = useContext(PresenterContext)
 	return useCallback(
-		(event: Event) => {
+		(event: ChangeEvent<HTMLInputElement>) => {
 			const reader = new FileReader()
-			const file = event.target.files[0]
+			const file = (event.target as HTMLInputElement).files[0]
 			reader.readAsText(file)
 			reader.onload = () => {
 				try {
 					if (file.name.split('.').pop() != 'json') {
 						throw Error('Неправильное расширение у файла')
 					}
-					const presentation: Presentation = JSON.parse(reader.result)
+					const text = reader.result as string
+					const presentation: Presentation = JSON.parse(text)
 					const selection: Selection = {
 						selectedTab: Tabs.CREATE,
 						slideId: presentation.slides[1].id,

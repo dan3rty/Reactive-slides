@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import styles from './SettingBar.module.css'
 import { EditBar } from './EditBar/EditBar'
 import { FileSettings } from './FileSettings/FileSettings'

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { InputField } from '../../../../common/Components/InputFields/InputField'
 import { FontFamilySelection } from '../../../../common/Components/Selection/FontFamilySelection'

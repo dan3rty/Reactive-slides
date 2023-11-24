@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './FileSettings.module.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { CreateIcon, OpenIcon, SaveIcon } from '../../../../common/Icons/icons'
@@ -11,7 +10,7 @@ function FileInput() {
 			style={{ visibility: 'hidden', position: 'absolute' }}
 			type={'file'}
 			accept={'.json'}
-			onChange={load}
+			onChange={(event) => load(event)}
 		/>
 	)
 }

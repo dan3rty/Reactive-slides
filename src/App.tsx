@@ -1,12 +1,8 @@
 import { Editor } from './Editor/Editor'
 import React, { useState } from 'react'
 import { presenter } from './mockObjects'
-import { Presenter } from './types'
 
-const PresenterContext = React.createContext({
-	presenter: presenter,
-	setPresenter: React.Dispatch<React.SetStateAction<Presenter>>,
-})
+const PresenterContext = React.createContext(null)
 
 function App() {
 	const [presenterObj, setPresenter] = useState(presenter)
