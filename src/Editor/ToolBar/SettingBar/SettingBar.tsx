@@ -21,10 +21,17 @@ function SettingBar() {
 		case Tabs.EDIT:
 			bar = <EditBar />
 			break
-		case Tabs.ANIMATION:
+		case Tabs.ANIMATION: {
 			const chosenState = selection.keyFrameId
-			bar = <AnimationBar curSlide={curSlide} chosenObjectId={chosenObjectId} chosenState={chosenState} />
+			bar = (
+				<AnimationBar
+					curSlide={curSlide}
+					chosenObjectId={chosenObjectId}
+					chosenState={chosenState}
+				/>
+			)
 			break
+		}
 	}
 	return (
 		<div className={styles.SettingBar}>
