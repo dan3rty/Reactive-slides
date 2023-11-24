@@ -12,7 +12,7 @@ function Timeline(props: Timeline) {
 	const { animation, chosenState } = props
 	const lineWidth = 500
 	let objectsCounter = 0
-	const objectsToRender = animation.stateList.map((state) => {
+	const objectsToRender = animation?.stateList.map((state) => {
 		const percent = state.keyPercent / 100
 		const duration = animation.duration * percent
 		objectsCounter++
@@ -26,7 +26,7 @@ function Timeline(props: Timeline) {
 		<div className={styles.timelineContainer}>
 			<div className={styles.timelineLine}>
 				<Dot duration={0} offset={'-20px'} isChosen={isFirstChosen}></Dot>
-				{objectsToRender.map((circle) => {
+				{objectsToRender?.map((circle) => {
 					const { duration, offset, isChosen } = circle
 					return <Dot duration={duration} offset={offset} isChosen={isChosen}></Dot>
 				})}
