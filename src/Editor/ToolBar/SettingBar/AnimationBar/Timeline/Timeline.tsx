@@ -3,16 +3,16 @@ import { ObjectStateList } from '../../../../../types'
 import { Dot } from './Dot/Dot'
 import styles from './Timeline.module.css'
 
-type Timeline = {
+type TimelineProps = {
 	animation?: ObjectStateList
 	chosenState?: string
 }
 
-function Timeline(props: Timeline) {
+function Timeline(props: TimelineProps) {
 	const { animation, chosenState } = props
-	const lineWidth = 500
+	const lineWidth = 500 // hardcode?
 	let objectsCounter = 0
-	const objectsToRender = animation?.stateList.map((state) => {
+	const objectsToRender = animation?.stateList.map((state, index) => {
 		const percent = state.keyPercent / 100
 		const duration = animation.duration * percent
 		objectsCounter++

@@ -6,13 +6,13 @@ import { Timeline } from './Timeline/Timeline'
 import { PresenterContext } from '../../../../App'
 
 function AnimationBar() {
-	const context = useContext(PresenterContext).presenter
-	const chosenSlide = context.selection.slideId
-	const chosenObjectId = context.selection.objectsId
-	const chosenState = context.selection.keyFrameId
-	const curSlide = context.presentation.slides.find((slide) => slide.id === chosenSlide)
+	const { selection, presentation } = useContext(PresenterContext).presenter
+	const chosenSlide = selection.slideId
+	const chosenObjectId = selection.objectsId
+	const chosenState = selection.keyFrameId
+	const curSlide = presentation.slides.find((slide) => slide.id === chosenSlide)
 	const slideObjects = curSlide?.objects
-	const chosenObject = slideObjects?.find((object) => object.id === chosenObjectId[0])
+	const chosenObject = slideObjects?.find((object) => object.id === chosenObjectId?.[0])
 	const animation = chosenObject?.animation
 	return (
 		<div className={styles.animationBar}>

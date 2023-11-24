@@ -1,10 +1,10 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import styles from './WorkSpace.module.css'
 import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
 import { PresenterContext } from '../../App'
-import {Slide} from "../../types";
+import { Slide } from '../../types'
 
 type WorkSpaceProps = {
 	selectedSlide: Slide
