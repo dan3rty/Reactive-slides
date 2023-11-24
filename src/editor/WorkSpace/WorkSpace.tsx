@@ -6,6 +6,7 @@ import { SlideList } from './slideList/SlideList'
 import { presentation } from '../../App'
 
 function WorkSpace() {
+	const context = useContext(presentation)
 	const size = window.innerHeight
 	const scale = (1080 / (size - 205)) * 1.2
 	return (
@@ -15,8 +16,10 @@ function WorkSpace() {
 				<div className={styles.slideEditorWrapper}>
 					<SlideRenderer
 						scale={scale}
-						isEditor={true}
-						keyframe={useContext(presentation).selection.keyFrameId}
+						slide={context.presentation.slides.find(
+							(slide) => slide.id === context.selection.slideId,
+						)}
+						selection={context.selection}
 					></SlideRenderer>
 				</div>
 			</div>

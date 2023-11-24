@@ -2,94 +2,85 @@ import React, { useContext } from 'react'
 import styles from './SlideRenderer.module.css'
 import { presentation } from '../../App'
 import { TextComponent } from '../slideObjects/TextComponent'
-import { BlockType, ImageSource, Slide, Tabs } from '../../types'
+import { BlockType, Selection, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../slideObjects/ImageComponent'
 import { returnGradientString } from '../tools/returnGradientString'
 import { PrimitiveComponent } from '../slideObjects/PrimitiveComponent'
 
-type SlideRenderer = {
+type SlideRendererProps = {
 	scale: number
-	slide?: Slide
-	isEditor?: boolean
-	keyframe?: string
+	slide: Slide
+	selection?: Selection
 }
 
-function SlideRenderer(props: SlideRenderer) {
-	const chosen = useContext(presentation).selection.slideId
-	const chosenObjects = useContext(presentation).selection.objectsId
-	let curSlide = props.slide
-	if (props.slide) {
-		curSlide = props.slide
-	} else {
-		const slide = useContext(presentation).presentation.slides.find(
-			(slide) => slide.id === chosen,
-		)
-		if (slide) {
-			curSlide = slide
-		}
-	}
-	if (curSlide && chosenObjects) {
-		let slideStyle: React.CSSProperties = {
-			width: 1920 / props.scale + 'px',
-			height: 1080 / props.scale + 'px',
-			background: returnGradientString(curSlide.background.color),
-		}
-		if (curSlide.background.image) {
-			if (curSlide.background.image.typeValue === ImageSource.PATH) {
-				slideStyle = {
-					width: 1920 / props.scale + 'px',
-					height: 1080 / props.scale + 'px',
-					background: 'url(' + curSlide.background.image.value + ')',
-					backgroundSize: 'cover',
-					backgroundRepeat: 'no-repeat',
-				}
-			}
-		}
-		const slideObjects = curSlide.objects
-		const objectsToRender = slideObjects.map((object) => {
-			let index = 0
-			const selected =
-				!!chosenObjects.find((id) => id === object.id) && props.isEditor ? true : false
+function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
+	const width = 1920 / scale
+	const height = 1080 / scale
+	return (
+		<div
+			style={{
+				width: `${width}px`,
+				height: `${height}px`,
+				background: slide.background.image
+					? `url("${slide.background.image.value}") cover no-repeat`
+					: returnGradientString(slide.background.color),
+				backgroundImage: slide.background.image
+					? `url("${slide.background.image.value}")`
+					: returnGradientString(slide.background.color),
+			}}
+			className={styles.slideEditor}
+		>
+			{slide.objects.map((obj) => {
+				const newObj = structuredClone(obj)
+				if (selection) {
+					const selected = !!selection?.objectsId?.includes(obj.id)
 
-			if (
-				object.animation &&
-				props.keyframe &&
-				selected &&
-				useContext(presentation).selection.selectedTab == Tabs.ANIMATION
-			) {
-				while (object.animation.stateList[index].id !== props.keyframe) {
-					index++
+					if (
+						obj.animation &&
+						selection.keyFrameId &&
+						selected &&
+						useContext(presentation).selection.selectedTab == Tabs.ANIMATION
+					) {
+						const index = obj.animation.stateList.findIndex(
+							(state) => state.id === selection.keyFrameId,
+						)
+
+						newObj.baseState.width = obj.animation.stateList[index].state.width
+						newObj.baseState.height = obj.animation.stateList[index].state.height
+						newObj.baseState.rotation = obj.animation.stateList[index].state.rotation
+						newObj.baseState.x = obj.animation.stateList[index].state.x
+						newObj.baseState.y = obj.animation.stateList[index].state.y
+					}
 				}
-				object.baseState.width = object.animation.stateList[index].state.width
-				object.baseState.height = object.animation.stateList[index].state.height
-				object.baseState.rotation = object.animation.stateList[index].state.rotation
-				object.baseState.x = object.animation.stateList[index].state.x
-				object.baseState.y = object.animation.stateList[index].state.y
-			}
-			if (object.blockType === BlockType.TEXT) {
-				return <TextComponent text={object} scale={props.scale} selected={selected} />
-			}
-			if (object.blockType === BlockType.IMAGE) {
-				return <ImageComponent image={object} scale={props.scale} selected={selected} />
-			}
-			if (object.blockType === BlockType.PRIMITIVE) {
-				return (
-					<PrimitiveComponent
-						primitive={object}
-						scale={props.scale}
-						selected={selected}
-					/>
-				)
-			}
-			return <div></div>
-		})
-		return (
-			<div style={slideStyle} className={styles.slideEditor}>
-				{objectsToRender}
-			</div>
-		)
-	}
-	return <div></div>
+				switch (newObj.blockType) {
+					case BlockType.IMAGE:
+						return (
+							<ImageComponent
+								image={newObj}
+								scale={scale}
+								selected={!!selection?.objectsId?.includes(obj.id)}
+							/>
+						)
+					case BlockType.PRIMITIVE:
+						return (
+							<PrimitiveComponent
+								primitive={newObj}
+								scale={scale}
+								selected={!!selection?.objectsId?.includes(obj.id)}
+							/>
+						)
+					case BlockType.TEXT:
+						return (
+							<TextComponent
+								text={newObj}
+								scale={scale}
+								selected={!!selection?.objectsId?.includes(obj.id)}
+							/>
+						)
+				}
+			})}
+		</div>
+	)
 }
 
 export { SlideRenderer }

@@ -1,14 +1,14 @@
 import React from 'react'
 import styles from './Button.module.css'
 import { ReactNode } from 'react'
-//TODO: с БОЛЬШОЙ буквы
-type sizes = 'small' | 'medium' | 'big' | 'large'
-type buttonStyles = 'light' | 'dark'
+
+type Sizes = 'small' | 'medium' | 'big' | 'large'
+type ButtonStyles = 'light' | 'dark'
 
 type ButtonProps = {
 	text?: string
-	style: buttonStyles
-	size: sizes
+	style: ButtonStyles
+	size: Sizes
 	icon?: ReactNode
 }
 
