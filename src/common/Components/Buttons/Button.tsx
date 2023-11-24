@@ -15,7 +15,7 @@ type ButtonProps = {
 
 function Button(props: ButtonProps) {
 	const click = () => {
-		console.log("click")
+		console.log('click')
 	}
 	if (props.size === 'large') {
 		return (

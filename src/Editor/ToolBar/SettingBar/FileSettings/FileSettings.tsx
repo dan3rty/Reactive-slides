@@ -45,12 +45,7 @@ function FileSettings() {
 
 	return (
 		<div className={styles.fileSettings}>
-			<Button
-				style='dark'
-				size='big'
-				icon={CreateIcon}
-				text='create new file'
-			/>
+			<Button style='dark' size='big' icon={CreateIcon} text='create new file' />
 			<label>
 				<Button style='dark' size='big' icon={OpenIcon} text='open file' />
 				<FileInput />

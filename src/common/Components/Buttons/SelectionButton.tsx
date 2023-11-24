@@ -12,10 +12,13 @@ type ButtonProps = {
 
 function SelectionButton(props: ButtonProps) {
 	const click = () => {
-		console.log("click")
+		console.log('click')
 	}
 	return (
-		<div onClick={props.onClick ?? click} className={`${buttonStyle.selectionButton} ${buttonStyle[props.style]}`}>
+		<div
+			onClick={props.onClick ?? click}
+			className={`${buttonStyle.selectionButton} ${buttonStyle[props.style]}`}
+		>
 			{props.icon}
 		</div>
 	)

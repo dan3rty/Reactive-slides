@@ -81,13 +81,7 @@ function EditBar() {
 				<Button style={'light'} size={'small'} icon={StrokethroughIcon} />
 			</div>
 			<div className={style.selectionWrapper}>
-				<Button
-					text={'clear'}
-					style={'light'}
-					size={'medium'}
-					icon={BoldIcon}
-
-				/>
+				<Button text={'clear'} style={'light'} size={'medium'} icon={BoldIcon} />
 				<SelectionBar icons={[AlignRightIcon, AlignCenterIcon, AlignLeftIcon]} />
 				<SelectionBar icons={[AlignTopIcon, VerticalAlignCenterIcon, AlignBottomIcon]} />
 			</div>
