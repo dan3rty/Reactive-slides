@@ -9,7 +9,6 @@ import { PresenterContext } from '../../../App'
 
 function SettingBar() {
 	const curChosen = useContext(PresenterContext).presenter.selection.selectedTab
-	//TODO: СДЕЛАТЬ СВИЧ
 	let bar = <AddBar />
 	switch (curChosen) {
 		case Tabs.CREATE:

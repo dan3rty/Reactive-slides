@@ -13,7 +13,6 @@ type ButtonProps = {
 	onClick?: () => void
 }
 
-//TODO: ДОБАВИТЬ ONCLICK
 function Button(props: ButtonProps) {
 	if (props.size === 'large') {
 		return (
