@@ -91,16 +91,8 @@ function EditBar() {
 					icon={BoldIcon}
 					onClick={log}
 				/>
-				<SelectionBar
-					firstIcon={AlignRightIcon}
-					secondIcon={AlignCenterIcon}
-					thirdIcon={AlignLeftIcon}
-				/>
-				<SelectionBar
-					firstIcon={AlignTopIcon}
-					secondIcon={VerticalAlignCenterIcon}
-					thirdIcon={AlignBottomIcon}
-				/>
+				<SelectionBar icons={[AlignRightIcon, AlignCenterIcon, AlignLeftIcon]} />
+				<SelectionBar icons={[AlignTopIcon, VerticalAlignCenterIcon, AlignBottomIcon]} />
 			</div>
 		</div>
 	)
