@@ -37,10 +37,6 @@ function FileInput() {
 }
 
 function FileSettings() {
-	const log = () => {
-		console.log('pop')
-	}
-
 	const presentation = useContext(PresenterContext).presenter.presentation
 
 	function onClick(): void {
@@ -54,10 +50,9 @@ function FileSettings() {
 				size='big'
 				icon={CreateIcon}
 				text='create new file'
-				onClick={log}
 			/>
 			<label>
-				<Button style='dark' size='big' icon={OpenIcon} text='open file' onClick={log} />
+				<Button style='dark' size='big' icon={OpenIcon} text='open file' />
 				<FileInput />
 			</label>
 			<Button style='dark' size='big' icon={SaveIcon} text='save file' onClick={onClick} />

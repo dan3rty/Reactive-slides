@@ -6,9 +6,6 @@ import { Timeline } from './Timeline/Timeline'
 import { PresenterContext } from '../../../../App'
 
 function AnimationBar() {
-	const log = () => {
-		console.log('pop')
-	}
 	const context = useContext(PresenterContext).presenter
 	const chosenSlide = context.selection.slideId
 	const chosenObjectId = context.selection.objectsId
@@ -67,8 +64,8 @@ function AnimationBar() {
 						size={'Small'}
 						suffix={'sec'}
 					/>
-					<Button text={'add keyframe'} style={'dark'} size={'large'} onClick={log} />
-					<Button text={'delete keyframe'} style={'dark'} size={'large'} onClick={log} />
+					<Button text={'add keyframe'} style={'dark'} size={'large'} />
+					<Button text={'delete keyframe'} style={'dark'} size={'large'} />
 				</div>
 				<Timeline animation={animation} chosenState={chosenState}></Timeline>
 			</div>

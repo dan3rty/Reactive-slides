@@ -14,10 +14,13 @@ type ButtonProps = {
 }
 
 function Button(props: ButtonProps) {
+	const click = () => {
+		console.log("click")
+	}
 	if (props.size === 'large') {
 		return (
 			<div
-				onClick={props.onClick}
+				onClick={props.onClick ?? click}
 				className={`${styles.button} ${styles.buttonLarge} ${styles[props.style]}`}
 			>
 				<span>{props.text}</span>

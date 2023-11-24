@@ -11,11 +11,11 @@ type ButtonProps = {
 }
 
 function SelectionButton(props: ButtonProps) {
-	const log = () => {
-		console.log('pop')
+	const click = () => {
+		console.log("click")
 	}
 	return (
-		<div onClick={log} className={`${buttonStyle.selectionButton} ${buttonStyle[props.style]}`}>
+		<div onClick={props.onClick ?? click} className={`${buttonStyle.selectionButton} ${buttonStyle[props.style]}`}>
 			{props.icon}
 		</div>
 	)

@@ -19,9 +19,6 @@ import { FontFamily } from '../../../../types'
 import style from './EditBar.module.css'
 
 function EditBar() {
-	const log = () => {
-		console.log('pop')
-	}
 	return (
 		<div className={style.editBar}>
 			<div className={style.bigContainer}>
@@ -73,15 +70,15 @@ function EditBar() {
 				></InputField>
 				<FontFamilySelection value={FontFamily.ARIAL} />
 				<div className={style.buttonHorizontalContainer}>
-					<Button text={'Text color'} style={'light'} size={'medium'} onClick={log} />
-					<Button text={'Background'} style={'light'} size={'medium'} onClick={log} />
+					<Button text={'Text color'} style={'light'} size={'medium'} />
+					<Button text={'Background'} style={'light'} size={'medium'} />
 				</div>
 			</div>
 			<div className={style.buttonVerticalContainer}>
-				<Button style={'light'} size={'small'} icon={BoldIcon} onClick={log} />
-				<Button style={'light'} size={'small'} icon={ItalicIcon} onClick={log} />
-				<Button style={'light'} size={'small'} icon={UnderstrokeIcon} onClick={log} />
-				<Button style={'light'} size={'small'} icon={StrokethroughIcon} onClick={log} />
+				<Button style={'light'} size={'small'} icon={BoldIcon} />
+				<Button style={'light'} size={'small'} icon={ItalicIcon} />
+				<Button style={'light'} size={'small'} icon={UnderstrokeIcon} />
+				<Button style={'light'} size={'small'} icon={StrokethroughIcon} />
 			</div>
 			<div className={style.selectionWrapper}>
 				<Button
@@ -89,7 +86,7 @@ function EditBar() {
 					style={'light'}
 					size={'medium'}
 					icon={BoldIcon}
-					onClick={log}
+
 				/>
 				<SelectionBar icons={[AlignRightIcon, AlignCenterIcon, AlignLeftIcon]} />
 				<SelectionBar icons={[AlignTopIcon, VerticalAlignCenterIcon, AlignBottomIcon]} />
