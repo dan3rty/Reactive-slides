@@ -22,6 +22,11 @@
 	gap: 2px;
 }
 
+.color-picker {
+	position: absolute !important;
+	z-index: 1;
+}
+
 .button-horizontal-container {
 	display: flex;
 	flex-direction: row;

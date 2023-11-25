@@ -15,12 +15,41 @@ import {
 	VerticalAlignCenterIcon,
 } from '../../../../common/Icons/icons'
 import { FontFamily } from '../../../../types'
-import style from './EditBar.css'
+import styles from './EditBar.css'
+import { HexAlphaColorPicker } from 'react-colorful'
+import { useEffect, useRef, useState } from 'react'
 
 function EditBar() {
+	const [isTextColorPicker, setStateTextColorPicker] = useState(false)
+	const [isBackgroundColorPicker, setStateBackgroundColorPicker] = useState(false)
+
+	const toggleTextColorPickerState = () => setStateTextColorPicker((state) => !state)
+	const toggleBackgroundColorPickerState = () => setStateBackgroundColorPicker((state) => !state)
+
+	const textColorPickerRef = useRef(null)
+	const backgroundColorPickerRef = useRef(null)
+
+	const buttonContainerEl = useRef<HTMLDivElement>(null)
+
+	const handleWindowClick = (event: MouseEvent) => {
+		if (textColorPickerRef.current && !textColorPickerRef.current.contains(event.target)) {
+			setStateTextColorPicker(false)
+		}
+		if (
+			backgroundColorPickerRef.current &&
+			!backgroundColorPickerRef.current.contains(event.target)
+		) {
+			setStateBackgroundColorPicker(false)
+		}
+	}
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleWindowClick)
+		return () => document.removeEventListener('mousedown', handleWindowClick)
+	}, [])
 	return (
-		<div className={style.editBar}>
-			<div className={style.bigContainer}>
+		<div className={styles.editBar}>
+			<div className={styles.bigContainer}>
 				<InputField
 					label={'X:'}
 					type={'number'}
@@ -36,7 +65,7 @@ function EditBar() {
 					suffix={'px'}
 				/>
 			</div>
-			<div className={style.mediumContainer}>
+			<div className={styles.mediumContainer}>
 				<InputField
 					label={'Rotation:'}
 					type={'number'}
@@ -59,7 +88,7 @@ function EditBar() {
 					suffix={'px'}
 				/>
 			</div>
-			<div className={style.mediumContainer}>
+			<div className={styles.mediumContainer}>
 				<InputField
 					label={'Font size:'}
 					type={'number'}
@@ -68,18 +97,61 @@ function EditBar() {
 					suffix={'px'}
 				></InputField>
 				<FontFamilySelection value={FontFamily.ARIAL} />
-				<div className={style.buttonHorizontalContainer}>
-					<Button text={'Text color'} style={'light'} size={'medium'} />
-					<Button text={'Background'} style={'light'} size={'medium'} />
+				<div className={styles.buttonHorizontalContainer} ref={buttonContainerEl}>
+					<Button
+						text={'Text color'}
+						style={'light'}
+						size={'medium'}
+						onClick={toggleTextColorPickerState}
+					/>
+					{isTextColorPicker && (
+						<div
+							ref={textColorPickerRef}
+							className={styles.colorPicker}
+							style={{
+								top:
+									buttonContainerEl.current.offsetHeight +
+									buttonContainerEl.current.offsetTop +
+									10,
+								left: buttonContainerEl.current.offsetLeft,
+							}}
+						>
+							<HexAlphaColorPicker />
+						</div>
+					)}
+					<Button
+						text={'Background'}
+						style={'light'}
+						size={'medium'}
+						onClick={toggleBackgroundColorPickerState}
+					/>
+					{isBackgroundColorPicker && (
+						<div
+							ref={backgroundColorPickerRef}
+							className={styles.colorPicker}
+							style={{
+								top:
+									buttonContainerEl.current.offsetHeight +
+									buttonContainerEl.current.offsetTop +
+									10,
+								right:
+									window.innerWidth -
+									buttonContainerEl.current.offsetWidth -
+									buttonContainerEl.current.offsetLeft,
+							}}
+						>
+							<HexAlphaColorPicker />
+						</div>
+					)}
 				</div>
 			</div>
-			<div className={style.buttonVerticalContainer}>
+			<div className={styles.buttonVerticalContainer}>
 				<Button style={'light'} size={'small'} icon={BoldIcon} />
 				<Button style={'light'} size={'small'} icon={ItalicIcon} />
 				<Button style={'light'} size={'small'} icon={UnderstrokeIcon} />
 				<Button style={'light'} size={'small'} icon={StrokethroughIcon} />
 			</div>
-			<div className={style.selectionWrapper}>
+			<div className={styles.selectionWrapper}>
 				<Button text={'clear'} style={'light'} size={'medium'} icon={BoldIcon} />
 				<SelectionBar icons={[AlignRightIcon, AlignCenterIcon, AlignLeftIcon]} />
 				<SelectionBar icons={[AlignTopIcon, VerticalAlignCenterIcon, AlignBottomIcon]} />

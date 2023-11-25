@@ -1,5 +1,5 @@
 import styles from './Button.css'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { joinCssClasses } from '../../../classes/joinCssClasses'
 
 type Sizes = 'small' | 'medium' | 'big' | 'large'
@@ -10,17 +10,18 @@ type ButtonProps = {
 	style: ButtonStyles
 	size: Sizes
 	icon?: ReactNode
-	onClick?: () => void
+	onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
 }
 
 function Button(props: ButtonProps) {
-	const click = () => {
-		console.log('click')
+	const click = (event: React.MouseEvent<HTMLDivElement>) => {
+		console.log(event)
 	}
+	const onClick = props.onClick ?? click
 	if (props.size === 'large') {
 		return (
 			<div
-				onClick={props.onClick ?? click}
+				onClick={(event) => onClick(event)}
 				className={joinCssClasses(styles.button, styles.buttonLarge, styles[props.style])}
 			>
 				<span>{props.text}</span>
