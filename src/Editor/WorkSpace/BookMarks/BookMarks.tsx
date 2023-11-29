@@ -6,10 +6,14 @@ import { useContext, useState } from 'react'
 import { Selection, Tabs } from '../../../types'
 import { PresenterContext } from '../../../presenterContext/PresenterContext'
 
-function BookMarks() {
+type BookMarksProps = {
+	selection: Selection
+}
+
+function BookMarks({ selection }: BookMarksProps) {
 	const [chosen, setChosen] = useState(Tabs.EDIT)
 	const { presenter, setPresenter } = useContext(PresenterContext)
-	const { presentation, selection, operationHistory } = presenter
+	const { presentation, operationHistory } = presenter
 	const isAvailable = selection.objectsId.length == 1
 
 	if (!isAvailable && chosen != Tabs.CREATE) {

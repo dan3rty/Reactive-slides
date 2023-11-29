@@ -6,31 +6,33 @@ type TextProps = {
 	text: TextBlock
 	scale: number
 	selected: boolean
+	onClick: () => void
 }
 
-function TextComponent(props: TextProps) {
+function TextComponent({ text, scale, selected, onClick }: TextProps) {
 	const textStyle: React.CSSProperties = {
-		width: props.text.baseState.width / props.scale + 'px',
-		height: props.text.baseState.height / props.scale + 'px',
-		top: props.text.baseState.y / props.scale - 3 + 'px',
-		left: props.text.baseState.x / props.scale - 3 + 'px',
-		rotate: props.text.baseState.rotation + 'deg',
-		borderColor: props.selected ? '#000000' : '#FFFFFF00',
+		width: text.baseState.width / scale + 'px',
+		height: text.baseState.height / scale + 'px',
+		top: text.baseState.y / scale - 3 + 'px',
+		left: text.baseState.x / scale - 3 + 'px',
+		rotate: text.baseState.rotation + 'deg',
+		borderColor: selected ? '#000000' : '#FFFFFF00',
 	}
-	const textToRender = props.text.value.map((char, index) => (
+	const textToRender = text.value.map((char, index) => (
 		<div
 			key={index}
 			className={styles.char}
 			style={{
 				color: char.color.hex,
-				fontSize: char.fontSize / props.scale + 'px',
+				fontSize: char.fontSize / scale + 'px',
 				fontWeight: char.bold ? 'bold' : 'normal',
 				textDecoration: char.strokethrough ? 'line-through' : 'none',
-				borderBottom: char.underline ? char.fontSize / props.scale / 10 + 'px' : '0',
+				borderBottomWidth: char.underline ? char.fontSize / scale / 10 + 'px' : '0',
 				borderStyle: char.underline ? 'solid' : 'none',
 				borderColor: char.underline ? char.color.hex : '#FFFFFF',
 				fontStyle: char.italic ? 'italic' : 'none',
 			}}
+			onClick={onClick}
 		>
 			{char.value}
 		</div>

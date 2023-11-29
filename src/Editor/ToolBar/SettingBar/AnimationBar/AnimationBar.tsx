@@ -1,19 +1,16 @@
 import { InputField } from '../../../../common/Components/InputFields/InputField'
-import { Slide } from '../../../../types'
+import { ImageBlock, PrimitiveBlock, TextBlock } from '../../../../types'
 import styles from './AnimationBar.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { Timeline } from './Timeline/Timeline'
 
 type AnimationBarProps = {
-	curSlide?: Slide
-	chosenObjectId?: Array<string>
+	selectedObject: TextBlock | ImageBlock | PrimitiveBlock
 	chosenState?: string
 }
 
-function AnimationBar({curSlide, chosenObjectId, chosenState}: AnimationBarProps) {
-	const slideObjects = curSlide?.objects
-	const chosenObject = slideObjects?.find((object) => object.id === chosenObjectId?.[0])
-	const animation = chosenObject?.animation
+function AnimationBar({ selectedObject, chosenState }: AnimationBarProps) {
+	const animation = selectedObject?.animation
 	return (
 		<div className={styles.animationBar}>
 			<div className={styles.bigContainer}>
@@ -21,14 +18,14 @@ function AnimationBar({curSlide, chosenObjectId, chosenState}: AnimationBarProps
 					label={'X:'}
 					type={'number'}
 					size={'Large'}
-					initialValue={576}
+					initialValue={selectedObject?.baseState.x}
 					suffix={'px'}
 				/>
 				<InputField
 					label={'Y:'}
 					type={'number'}
 					size={'Large'}
-					initialValue={397}
+					initialValue={selectedObject?.baseState.y}
 					suffix={'px'}
 				/>
 			</div>
@@ -37,21 +34,21 @@ function AnimationBar({curSlide, chosenObjectId, chosenState}: AnimationBarProps
 					label={'Rotation:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={0}
+					initialValue={selectedObject?.baseState.rotation}
 					suffix={'deg'}
 				/>
 				<InputField
 					label={'Width:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={300}
+					initialValue={selectedObject?.baseState.width}
 					suffix={'px'}
 				/>
 				<InputField
 					label={'Height:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={100}
+					initialValue={selectedObject?.baseState.height}
 					suffix={'px'}
 				/>
 			</div>

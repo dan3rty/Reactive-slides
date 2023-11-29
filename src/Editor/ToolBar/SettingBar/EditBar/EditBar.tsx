@@ -14,12 +14,16 @@ import {
 	UnderstrokeIcon,
 	VerticalAlignCenterIcon,
 } from '../../../../common/Icons/icons'
-import { FontFamily } from '../../../../types'
+import { FontFamily, ImageBlock, PrimitiveBlock, TextBlock } from '../../../../types'
 import styles from './EditBar.css'
 import { HexAlphaColorPicker } from 'react-colorful'
 import { useEffect, useRef, useState } from 'react'
 
-function EditBar() {
+type EditBarProps = {
+	selectedObject: TextBlock | PrimitiveBlock | ImageBlock
+}
+
+function EditBar({ selectedObject }: EditBarProps) {
 	const [isTextColorPicker, setStateTextColorPicker] = useState(false)
 	const [isBackgroundColorPicker, setStateBackgroundColorPicker] = useState(false)
 
@@ -54,14 +58,14 @@ function EditBar() {
 					label={'X:'}
 					type={'number'}
 					size={'Large'}
-					initialValue={544}
+					initialValue={selectedObject.baseState.x}
 					suffix={'px'}
 				/>
 				<InputField
 					label={'Y:'}
 					type={'number'}
 					size={'Large'}
-					initialValue={397}
+					initialValue={selectedObject.baseState.y}
 					suffix={'px'}
 				/>
 			</div>
@@ -70,21 +74,21 @@ function EditBar() {
 					label={'Rotation:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={0}
+					initialValue={selectedObject.baseState.rotation}
 					suffix={'deg'}
 				/>
 				<InputField
 					label={'Width:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={300}
+					initialValue={selectedObject.baseState.width}
 					suffix={'px'}
 				/>
 				<InputField
 					label={'Height:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={100}
+					initialValue={selectedObject.baseState.height}
 					suffix={'px'}
 				/>
 			</div>
@@ -93,7 +97,7 @@ function EditBar() {
 					label={'Font size:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={35}
+					initialValue={0}
 					suffix={'px'}
 				></InputField>
 				<FontFamilySelection value={FontFamily.ARIAL} />

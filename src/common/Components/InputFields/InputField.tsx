@@ -12,20 +12,15 @@ type InputProps = {
 	size: sizes
 }
 
-function InputField(props: InputProps) {
-	const { size } = props
+function InputField({ label, size, type, initialValue, suffix }: InputProps) {
 	return (
 		<div className={joinCssClasses(styles.inputField, styles['inputField' + size])}>
 			<div className={joinCssClasses(styles.inputLabel, styles['inputLabel' + size])}>
-				{props.label}
+				{label}
 			</div>
 			<div className={joinCssClasses(styles.inputValue, styles['inputValue' + size])}>
-				<input
-					defaultValue={props.initialValue}
-					className={styles.input}
-					type={props.type}
-				></input>
-				<span>{props.suffix}</span>
+				<input defaultValue={initialValue} className={styles.input} type={type}></input>
+				<span>{suffix}</span>
 			</div>
 		</div>
 	)

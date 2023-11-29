@@ -5,10 +5,9 @@ import { WorkSpace } from './WorkSpace/WorkSpace'
 import { PresenterContext } from '../App'
 
 function Editor() {
-	const context = useContext(PresenterContext).presenter
-	const selectedSlide = context.presentation.slides.find(
-		(slide) => slide.id === context.selection.slideId,
-	)
+	const { presentation, selection } = useContext(PresenterContext).presenter
+	const selectedSlide = presentation.slides.find((slide) => slide.id === selection.slideId)
+
 	return (
 		<div className={styles.app}>
 			<ToolBar />

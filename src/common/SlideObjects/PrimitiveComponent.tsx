@@ -4,10 +4,10 @@ type PrimitiveProps = {
 	primitive: PrimitiveBlock
 	scale: number
 	selected: boolean
+	onClick: () => void
 }
 
-function Ellipse(props: PrimitiveProps) {
-	const { primitive, scale, selected } = props
+function Ellipse({ primitive, selected, scale, onClick }: PrimitiveProps) {
 	const selectBorder = selected && (
 		<ellipse
 			strokeDasharray='6'
@@ -29,6 +29,7 @@ function Ellipse(props: PrimitiveProps) {
 				height: `${primitive.baseState.height / scale + 6}px`,
 				top: `${primitive.baseState.y / scale}px`,
 			}}
+			onClick={onClick}
 		>
 			<ellipse
 				cx={`${primitive.baseState.width / 2 / scale + 3}px`}
@@ -44,8 +45,7 @@ function Ellipse(props: PrimitiveProps) {
 	)
 }
 
-function Rectangle(props: PrimitiveProps) {
-	const { primitive, scale, selected } = props
+function Rectangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
 	const selectBorder = selected && (
 		<rect
 			strokeDasharray='6'
@@ -69,6 +69,7 @@ function Rectangle(props: PrimitiveProps) {
 				left: `${primitive.baseState.x / scale}px`,
 				rotate: `${primitive.baseState.rotation}deg`,
 			}}
+			onClick={onClick}
 		>
 			<rect
 				x={6}
@@ -84,8 +85,7 @@ function Rectangle(props: PrimitiveProps) {
 	)
 }
 
-function Triangle(props: PrimitiveProps) {
-	const { primitive, scale, selected } = props
+function Triangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
 	const selectBorder = selected && (
 		<polygon
 			strokeDasharray='6'
@@ -113,6 +113,7 @@ function Triangle(props: PrimitiveProps) {
 				left: `${primitive.baseState.x / scale}px`,
 				rotate: `${primitive.baseState.rotation}deg`,
 			}}
+			onClick={onClick}
 		>
 			<polygon
 				points={`${primitive.borderSize / scale + 3} ${
@@ -130,15 +131,35 @@ function Triangle(props: PrimitiveProps) {
 	)
 }
 
-function PrimitiveComponent(props: PrimitiveProps) {
-	const { primitive, scale, selected } = props
+function PrimitiveComponent({ primitive, scale, selected, onClick }: PrimitiveProps) {
 	switch (primitive.primitiveType) {
 		case Primitives.CIRCLE:
-			return <Ellipse primitive={primitive} scale={scale} selected={selected} />
+			return (
+				<Ellipse
+					primitive={primitive}
+					scale={scale}
+					selected={selected}
+					onClick={onClick}
+				/>
+			)
 		case Primitives.RECT:
-			return <Rectangle primitive={primitive} scale={scale} selected={selected} />
+			return (
+				<Rectangle
+					primitive={primitive}
+					scale={scale}
+					selected={selected}
+					onClick={onClick}
+				/>
+			)
 		case Primitives.TRIANGLE:
-			return <Triangle primitive={primitive} scale={scale} selected={selected} />
+			return (
+				<Triangle
+					primitive={primitive}
+					scale={scale}
+					selected={selected}
+					onClick={onClick}
+				/>
+			)
 	}
 }
 

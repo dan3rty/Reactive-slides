@@ -1,6 +1,4 @@
-import { useContext } from 'react'
 import styles from './SlideRenderer.css'
-import { PresenterContext } from '../../App'
 import { TextComponent } from '../SlideObjects/TextComponent'
 import { BlockType, Selection, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../SlideObjects/ImageComponent'
@@ -10,22 +8,26 @@ import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
 type SlideRendererProps = {
 	scale: number
 	slide: Slide
-	selection?: Selection
+	isWorkspace: boolean
+	selection: Selection
+	createOnClick: (objectId: string) => () => void
 }
 
-function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
+function SlideRenderer({
+	scale,
+	slide,
+	isWorkspace,
+	selection,
+	createOnClick,
+}: SlideRendererProps) {
 	const width = 1920 / scale
 	const height = 1080 / scale
 
-	const selectedTab = useContext(PresenterContext).presenter.selection.selectedTab
+	const selectedTab = selection.selectedTab
 
 	const backgroundStyle = slide.background.image
-		? {
-				backgroundImage: `url("${slide.background.image.value}")`,
-		  }
-		: {
-				background: returnGradientString(slide.background.color),
-		  }
+		? { backgroundImage: `url("${slide.background.image.value}")` }
+		: { background: returnGradientString(slide.background.color) }
 
 	return (
 		<div
@@ -38,9 +40,8 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 		>
 			{slide.objects.map((obj, index) => {
 				const newObj = structuredClone(obj)
+				const selected = selection.objectsId.includes(obj.id) && isWorkspace
 				if (selection) {
-					const selected = !!selection?.objectsId?.includes(obj.id)
-
 					if (
 						obj.animation &&
 						selection.keyFrameId &&
@@ -65,7 +66,8 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 								key={index}
 								image={newObj}
 								scale={scale}
-								selected={!!selection?.objectsId?.includes(obj.id)}
+								selected={selected}
+								onClick={createOnClick(obj.id)}
 							/>
 						)
 					case BlockType.PRIMITIVE:
@@ -74,7 +76,8 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 								key={index}
 								primitive={newObj}
 								scale={scale}
-								selected={!!selection?.objectsId?.includes(obj.id)}
+								selected={selected}
+								onClick={createOnClick(obj.id)}
 							/>
 						)
 					case BlockType.TEXT:
@@ -83,7 +86,8 @@ function SlideRenderer({ scale, slide, selection }: SlideRendererProps) {
 								key={index}
 								text={newObj}
 								scale={scale}
-								selected={!!selection?.objectsId?.includes(obj.id)}
+								selected={selected}
+								onClick={createOnClick(obj.id)}
 							/>
 						)
 				}

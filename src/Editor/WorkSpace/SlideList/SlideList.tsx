@@ -1,13 +1,14 @@
 import { useContext, useState } from 'react'
 import styles from './SlideList.module.css'
-import { PresenterContext } from '../../../App'
 import { SlideRenderer } from '../../../common/SlideEditor/SlideRenderer'
 import { Counter } from './Counter/Counter'
 import { joinCssClasses } from '../../../classes/joinCssClasses'
 import { Selection, Slide } from '../../../types'
+import { PresenterContext } from '../../../App'
 
 type SlideListProps = {
 	scale: number
+	createOnClick: (objectId: string) => () => void
 }
 function SlideList({ scale }: SlideListProps) {
 	const { presenter, setPresenter } = useContext(PresenterContext)
@@ -19,7 +20,8 @@ function SlideList({ scale }: SlideListProps) {
 		return () => {
 			setChosen(slideId)
 			const newSelection: Selection = {
-				...selection,
+				selectedTab: selection.selectedTab,
+				objectsId: [],
 				slideId,
 			}
 			setPresenter({ presentation, selection: newSelection, operationHistory })
@@ -39,7 +41,13 @@ function SlideList({ scale }: SlideListProps) {
 				)}
 				onClick={createOnClick(slide.id)}
 			>
-				<SlideRenderer scale={slideScale} slide={slide}></SlideRenderer>
+				<SlideRenderer
+					scale={slideScale}
+					slide={slide}
+					isWorkspace={false}
+					createOnClick={createOnClick}
+					selection={selection}
+				/>
 				<Counter index={index + 1}></Counter>
 			</div>
 		)
