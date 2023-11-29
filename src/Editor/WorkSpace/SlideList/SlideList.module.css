@@ -35,7 +35,7 @@
 	border-radius: 5px;
 }
 
-.smallSlide {
+.small-slide {
 	cursor: pointer;
 	position: relative;
 	border-radius: 10px;
@@ -43,10 +43,8 @@
 	margin-block: 10px;
 }
 
-.smallSlideChosen {
+.small-slide_chosen {
 	margin-block: 20px;
-	cursor: pointer;
-	position: relative;
 	border-radius: 15px;
 	border-width: 5px;
 	border-color: #a3e1ec;

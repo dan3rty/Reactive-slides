@@ -8,8 +8,8 @@ import { PresenterContext } from '../../../presenterContext/PresenterContext'
 
 function BookMarks() {
 	const [chosen, setChosen] = useState(Tabs.CREATE)
-	const { presentation, selection, operationHistory } = useContext(PresenterContext).presenter
-	const { setPresenter } = useContext(PresenterContext)
+	const { presenter, setPresenter } = useContext(PresenterContext)
+	const { presentation, selection, operationHistory } = presenter
 
 	const createOnClick = (tab: Tabs) => {
 		return () => {
@@ -18,7 +18,6 @@ function BookMarks() {
 				...selection,
 				selectedTab: tab,
 			}
-			console.log({ presentation, newSelection, operationHistory })
 			setPresenter({ presentation, selection: newSelection, operationHistory })
 		}
 	}
