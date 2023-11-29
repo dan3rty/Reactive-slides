@@ -11,13 +11,6 @@
 }
 
 .BookMarkChosen {
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 5px;
 	height: 39px;
-	width: 148px;
 	background-color: #a3e1ec;
-	border-radius: 0 0 3px 3px;
 }
