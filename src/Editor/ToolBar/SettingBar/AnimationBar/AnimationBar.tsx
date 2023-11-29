@@ -10,9 +10,9 @@ type AnimationBarProps = {
 	chosenState?: string
 }
 
-function AnimationBar(props: AnimationBarProps) {
-	const slideObjects = props.curSlide?.objects
-	const chosenObject = slideObjects?.find((object) => object.id === props.chosenObjectId?.[0])
+function AnimationBar({curSlide, chosenObjectId, chosenState}: AnimationBarProps) {
+	const slideObjects = curSlide?.objects
+	const chosenObject = slideObjects?.find((object) => object.id === chosenObjectId?.[0])
 	const animation = chosenObject?.animation
 	return (
 		<div className={styles.animationBar}>
@@ -67,7 +67,7 @@ function AnimationBar(props: AnimationBarProps) {
 					<Button text={'add keyframe'} style={'dark'} size={'large'} />
 					<Button text={'delete keyframe'} style={'dark'} size={'large'} />
 				</div>
-				<Timeline animation={animation} chosenState={props.chosenState}></Timeline>
+				<Timeline animation={animation} chosenState={chosenState}></Timeline>
 			</div>
 		</div>
 	)

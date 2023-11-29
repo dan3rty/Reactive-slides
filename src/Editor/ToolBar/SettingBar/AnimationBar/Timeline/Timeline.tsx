@@ -9,11 +9,13 @@ type TimelineProps = {
 
 function Timeline(props: TimelineProps) {
 	const { animation, chosenState } = props
-	const objectsToRender = animation?.stateList.map((state, index) => {
-		const percent = state.keyPercent / 100
+	const objectsToRender = animation?.stateList.map(({keyPercent, id}, index) => {
+		const percent = keyPercent / 100
 		const text = animation.duration * percent
-		const offset = `calc(` + state.keyPercent + '% - ' + (40 * (index + 1) + 20) + `px)`
-		const isChosen = state.id === chosenState
+		const dotBlockWidth = 40
+		const pxOffset = (dotBlockWidth * (index + 1) + dotBlockWidth / 2)
+		const offset = `calc(${keyPercent}% - ${pxOffset}px)`
+		const isChosen = id === chosenState
 		return { text, offset, isChosen }
 	})
 	const isFirstChosen =
