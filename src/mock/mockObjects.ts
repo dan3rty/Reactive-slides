@@ -126,8 +126,30 @@ const text2: Type.TextBlock = {
 				},
 			},
 			{
-				id: 'polka',
+				id: 'polkaq',
 				keyPercent: 50,
+				state: {
+					width: 200,
+					height: 150,
+					x: 400,
+					y: 200,
+					rotation: -20,
+				},
+			},
+			{
+				id: 'polkaew',
+				keyPercent: 60,
+				state: {
+					width: 200,
+					height: 150,
+					x: 400,
+					y: 200,
+					rotation: -20,
+				},
+			},
+			{
+				id: 'polkawe',
+				keyPercent: 70,
 				state: {
 					width: 200,
 					height: 150,
@@ -447,7 +469,7 @@ const presentation: Type.Presentation = {
 }
 
 const selection: Type.Selection = {
-	selectedTab: Type.Tabs.EDIT,
+	selectedTab: Type.Tabs.ANIMATION,
 	slideId: 'djahDHSADGKUAGUSDAD',
 	objectsId: ['D5DAS67F5A', 'DASD79DAS', 'PFASD79DAS', 'DASD79DAS1'],
 }
