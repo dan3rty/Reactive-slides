@@ -7,11 +7,16 @@ type BookMarkProps = {
 	icon: ReactNode
 	isChosen: boolean
 	onClick: () => void
+	isAvailable: boolean
 }
-function BookMark({ text, icon, isChosen, onClick }: BookMarkProps) {
+function BookMark({ text, icon, isChosen, onClick, isAvailable }: BookMarkProps) {
 	return (
 		<div
-			className={joinCssClasses(styles.BookMark, isChosen ? styles.BookMarkChosen : false)}
+			className={joinCssClasses(
+				styles.bookmark,
+				isChosen ? styles.bookmark_chosen : null,
+				!isAvailable ? styles.bookmark_unavailable : null,
+			)}
 			onClick={onClick}
 		>
 			{icon}
