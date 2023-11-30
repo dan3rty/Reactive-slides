@@ -5,7 +5,6 @@ import { SlideList } from './SlideList/SlideList'
 import { Slide } from '../../types'
 import { useContext } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
-import { ObjectSelection } from './ObjectSelection/ObjectSelection'
 
 type WorkSpaceProps = {
 	selectedSlide: Slide
@@ -17,9 +16,7 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 	const { presenter, setPresenter } = useContext(PresenterContext)
 	const { selection, presentation, operationHistory } = presenter
 
-	const selectedObjects = selectedSlide.objects.filter((object) => {
-		selection.objectsId.includes(object.id)
-	})
+	console.log(selectedSlide.objects, selection.objectsId)
 
 	const createOnClick = (objectId: string) => {
 		return () => {
@@ -47,7 +44,6 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 						selection={selection}
 						createOnClick={createOnClick}
 					/>
-					<ObjectSelection selectedObjects={selectedObjects} scale={scale} />
 				</div>
 			</div>
 			<SlideList scale={scale} createOnClick={createOnClick} />

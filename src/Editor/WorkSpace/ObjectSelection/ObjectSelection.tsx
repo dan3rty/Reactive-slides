@@ -4,18 +4,22 @@ import styles from './ObjectSelection.css'
 type SelectionBorderProps = {
 	width: number
 	height: number
-	scale: number
 	x: number
 	y: number
 	rotation: number
 }
 
-function SelectionBorder({ width, height, scale, x, y, rotation }: SelectionBorderProps) {
-	console.log(scale)
+function SelectionBorder({ width, height, x, y, rotation }: SelectionBorderProps) {
 	return (
 		<div
 			className={styles.selectionBorder}
-			style={{ width: width, height: height, top: x, left: y, rotate: `${rotation}deg` }}
+			style={{
+				width: width,
+				height: height,
+				top: y + 'px',
+				left: x + 'px',
+				rotate: `${rotation}deg`,
+			}}
 		></div>
 	)
 }
@@ -26,19 +30,42 @@ type ObjectSelectionProps = {
 }
 
 function ObjectSelection({ selectedObjects, scale }: ObjectSelectionProps) {
-	console.log(selectedObjects)
 	const selections = selectedObjects.map((object) => {
 		const { width, height, x, y, rotation } = object.baseState
-		console.log(height)
+		const borderSize = 3
 		return (
 			<>
 				<SelectionBorder
-					width={width}
-					height={1}
-					scale={scale}
-					x={x}
-					y={y - 1}
+					width={width / scale}
+					height={borderSize}
+					x={x / scale}
+					y={y / scale - borderSize}
 					rotation={rotation}
+					key={object.id + 'top'}
+				/>
+				<SelectionBorder
+					width={width / scale}
+					height={borderSize}
+					x={x / scale}
+					y={(y + height) / scale}
+					rotation={rotation}
+					key={object.id + 'bottom'}
+				/>
+				<SelectionBorder
+					width={borderSize}
+					height={height / scale}
+					x={x / scale - borderSize}
+					y={y / scale}
+					rotation={rotation}
+					key={object.id + 'left'}
+				/>
+				<SelectionBorder
+					width={borderSize}
+					height={height / scale}
+					x={(x + width) / scale}
+					y={y / scale}
+					rotation={rotation}
+					key={object.id + 'right'}
 				/>
 			</>
 		)

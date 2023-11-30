@@ -3,23 +3,10 @@ import { PrimitiveBlock, Primitives } from '../../types'
 type PrimitiveProps = {
 	primitive: PrimitiveBlock
 	scale: number
-	selected: boolean
 	onClick: () => void
 }
 
-function Ellipse({ primitive, selected, scale, onClick }: PrimitiveProps) {
-	const selectBorder = selected && (
-		<ellipse
-			strokeDasharray='6'
-			fillOpacity={0}
-			cx={`${primitive.baseState.width / 2 / scale + 3}px`}
-			cy={`${primitive.baseState.height / 2 / scale + 3}px`}
-			rx={`${(primitive.baseState.width - primitive.borderSize) / scale / 2 + 6}px`}
-			ry={`${(primitive.baseState.height - primitive.borderSize) / scale / 2 + 6}px`}
-			strokeWidth={'3px'}
-			stroke={'#000000'}
-		/>
-	)
+function Ellipse({ primitive, scale, onClick }: PrimitiveProps) {
 	return (
 		<svg
 			key={primitive.id}
@@ -40,31 +27,18 @@ function Ellipse({ primitive, selected, scale, onClick }: PrimitiveProps) {
 				strokeWidth={primitive.borderSize / scale}
 				stroke={primitive.borderColor.hex}
 			/>
-			{selectBorder}
 		</svg>
 	)
 }
 
-function Rectangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
-	const selectBorder = selected && (
-		<rect
-			strokeDasharray='6'
-			fillOpacity={0}
-			x={3}
-			y={3}
-			width={`${primitive.baseState.width / scale + 6}px`}
-			height={`${primitive.baseState.height / scale + 6}px`}
-			strokeWidth={'3px'}
-			stroke={'#000000'}
-		/>
-	)
+function Rectangle({ primitive, scale, onClick }: PrimitiveProps) {
 	return (
 		<svg
 			key={primitive.id}
 			style={{
 				position: 'absolute',
-				width: `${primitive.baseState.width / scale + 12}px`,
-				height: `${primitive.baseState.height / scale + 12}px`,
+				width: `${primitive.baseState.width / scale}px`,
+				height: `${primitive.baseState.height / scale}px`,
 				top: `${primitive.baseState.y / scale}px`,
 				left: `${primitive.baseState.x / scale}px`,
 				rotate: `${primitive.baseState.rotation}deg`,
@@ -72,34 +46,21 @@ function Rectangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
 			onClick={onClick}
 		>
 			<rect
-				x={6}
-				y={6}
+				x={0}
+				y={0}
 				width={`${primitive.baseState.width / scale}px`}
 				height={`${primitive.baseState.height / scale}px`}
 				fill={primitive.color.colors[0].hex}
 				strokeWidth={primitive.borderSize / scale}
 				stroke={primitive.borderColor.hex}
 			/>
-			{selectBorder}
 		</svg>
 	)
 }
 
-function Triangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
-	const selectBorder = selected && (
-		<polygon
-			strokeDasharray='6'
-			points={`${primitive.borderSize / scale} ${
-				(primitive.baseState.height - primitive.borderSize) / scale + 3
-			}, ${(primitive.baseState.width - primitive.borderSize + 16) / scale} ${
-				(primitive.baseState.height - primitive.borderSize) / scale + 3
-			}, ${primitive.baseState.width / 2 / scale}
-					${primitive.borderSize / scale - 12}`}
-			fillOpacity={0}
-			strokeWidth={3}
-			stroke={'#000000'}
-		/>
-	)
+function Triangle({ primitive, scale, onClick }: PrimitiveProps) {
+	console.log('xP ', primitive.baseState.x / scale)
+	console.log('yP ', primitive.baseState.y / scale)
 	return (
 		<svg
 			key={primitive.id}
@@ -107,8 +68,8 @@ function Triangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
 				strokeLinejoin: 'miter',
 				strokeMiterlimit: '8',
 				position: 'absolute',
-				width: `${primitive.baseState.width / scale + 12}px`,
-				height: `${primitive.baseState.height / scale + 12}px`,
+				width: `${primitive.baseState.width / scale}px`,
+				height: `${primitive.baseState.height / scale}px`,
 				top: `${primitive.baseState.y / scale}px`,
 				left: `${primitive.baseState.x / scale}px`,
 				rotate: `${primitive.baseState.rotation}deg`,
@@ -126,40 +87,18 @@ function Triangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
 				strokeWidth={primitive.borderSize / scale}
 				stroke={primitive.borderColor.hex}
 			/>
-			{selectBorder}
 		</svg>
 	)
 }
 
-function PrimitiveComponent({ primitive, scale, selected, onClick }: PrimitiveProps) {
+function PrimitiveComponent({ primitive, scale, onClick }: PrimitiveProps) {
 	switch (primitive.primitiveType) {
 		case Primitives.CIRCLE:
-			return (
-				<Ellipse
-					primitive={primitive}
-					scale={scale}
-					selected={selected}
-					onClick={onClick}
-				/>
-			)
+			return <Ellipse primitive={primitive} scale={scale} onClick={onClick} />
 		case Primitives.RECT:
-			return (
-				<Rectangle
-					primitive={primitive}
-					scale={scale}
-					selected={selected}
-					onClick={onClick}
-				/>
-			)
+			return <Rectangle primitive={primitive} scale={scale} onClick={onClick} />
 		case Primitives.TRIANGLE:
-			return (
-				<Triangle
-					primitive={primitive}
-					scale={scale}
-					selected={selected}
-					onClick={onClick}
-				/>
-			)
+			return <Triangle primitive={primitive} scale={scale} onClick={onClick} />
 	}
 }
 

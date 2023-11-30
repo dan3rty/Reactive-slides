@@ -4,6 +4,7 @@ import { BlockType, Selection, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../SlideObjects/ImageComponent'
 import { returnGradientString } from '../Tools/returnGradientString'
 import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
+import { ObjectSelection } from '../../Editor/WorkSpace/ObjectSelection/ObjectSelection'
 
 type SlideRendererProps = {
 	scale: number
@@ -23,6 +24,9 @@ function SlideRenderer({
 	const width = 1920 / scale
 	const height = 1080 / scale
 
+	const selectedObjects = slide.objects.filter((object) => {
+		return selection.objectsId.includes(object.id)
+	})
 	const selectedTab = selection.selectedTab
 
 	const backgroundStyle = slide.background.image
@@ -76,7 +80,6 @@ function SlideRenderer({
 								key={index}
 								primitive={newObj}
 								scale={scale}
-								selected={selected}
 								onClick={createOnClick(obj.id)}
 							/>
 						)
@@ -92,6 +95,7 @@ function SlideRenderer({
 						)
 				}
 			})}
+			<ObjectSelection selectedObjects={selectedObjects} scale={scale} />
 		</div>
 	)
 }
