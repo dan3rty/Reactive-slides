@@ -356,6 +356,24 @@ const ArrowRightIcon = (
 	</svg>
 )
 
+const AddSlideButtonIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50' fill='none'>
+		<g clip-path='url(#clip0_105_1013)'>
+			<path
+				fill-rule='evenodd'
+				clip-rule='evenodd'
+				d='M35 25C35 26.3143 33.88 27.381 32.5 27.381H27.5V32.1429C27.5 33.4571 26.38 34.5238 25 34.5238C23.62 34.5238 22.5 33.4571 22.5 32.1429V27.381H17.5C16.12 27.381 15 26.3143 15 25C15 23.6857 16.12 22.619 17.5 22.619H22.5V17.8571C22.5 16.5429 23.62 15.4762 25 15.4762C26.38 15.4762 27.5 16.5429 27.5 17.8571V22.619H32.5C33.88 22.619 35 23.6857 35 25ZM25 44.0476C13.9725 44.0476 5 35.5024 5 25C5 14.4976 13.9725 5.95238 25 5.95238C36.0275 5.95238 45 14.4976 45 25C45 35.5024 36.0275 44.0476 25 44.0476ZM25 1.19048C11.1925 1.19048 0 11.85 0 25C0 38.15 11.1925 48.8095 25 48.8095C38.8075 48.8095 50 38.15 50 25C50 11.85 38.8075 1.19048 25 1.19048Z'
+				fill='#006A82'
+			/>
+		</g>
+		<defs>
+			<clipPath id='clip0_105_1013'>
+				<rect width='50' height='50' fill='white' />
+			</clipPath>
+		</defs>
+	</svg>
+)
+
 export {
 	ArrowIcon,
 	SelectIcon,
@@ -383,4 +401,5 @@ export {
 	VerticalAlignCenterIcon,
 	ArrowLeftIcon,
 	ArrowRightIcon,
+	AddSlideButtonIcon,
 }

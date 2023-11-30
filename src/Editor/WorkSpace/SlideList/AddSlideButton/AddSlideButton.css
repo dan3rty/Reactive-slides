@@ -1,0 +1,10 @@
+.add-slide {
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #90c9d3;
+	border-radius: 10px;
+	padding-block: 10px;
+	margin-block: 10px;
+}

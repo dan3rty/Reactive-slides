@@ -5,6 +5,7 @@ import { Counter } from './Counter/Counter'
 import { joinCssClasses } from '../../../classes/joinCssClasses'
 import { Selection, Slide, Tabs } from '../../../types'
 import { PresenterContext } from '../../../App'
+import { AddSlideButton } from './AddSlideButton/AddSlideButton'
 
 type SlideListProps = {
 	scale: number
@@ -53,7 +54,12 @@ function SlideList({ scale }: SlideListProps) {
 		)
 	})
 
-	return <div className={styles.slideList}>{slidesToRender}</div>
+	return (
+		<div className={styles.slideList}>
+			{slidesToRender}
+			<AddSlideButton scale={scale * 4} />
+		</div>
+	)
 }
 
 export { SlideList }
