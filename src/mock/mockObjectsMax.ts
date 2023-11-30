@@ -85,7 +85,7 @@ const text: Type.TextBlock = {
 const image2: Type.ImageBlock = {
 	typeValue: Type.ImageSource.BINARY,
 	blockType: Type.BlockType.IMAGE,
-	id: 'DSAG54D6S7S',
+	id: 'DSAG54D6Sfhdgf7S',
 	animation: {
 		stateList: [
 			{

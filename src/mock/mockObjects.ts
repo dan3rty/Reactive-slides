@@ -201,7 +201,7 @@ const text2: Type.TextBlock = {
 const image: Type.ImageBlock = {
 	typeValue: Type.ImageSource.PATH,
 	blockType: Type.BlockType.IMAGE,
-	id: 'DSAG54D6S7S',
+	id: 'DSAGsadfdssd54D6S7S',
 	baseState: {
 		width: 400,
 		height: 800,
@@ -216,7 +216,7 @@ const image: Type.ImageBlock = {
 const image2: Type.ImageBlock = {
 	typeValue: Type.ImageSource.PATH,
 	blockType: Type.BlockType.IMAGE,
-	id: 'DSAG54D6S7S',
+	id: 'DSAG54D6Ssdhdfdhf7S',
 	baseState: {
 		width: 400,
 		height: 400,
@@ -231,7 +231,7 @@ const image2: Type.ImageBlock = {
 const image3: Type.ImageBlock = {
 	typeValue: Type.ImageSource.PATH,
 	blockType: Type.BlockType.IMAGE,
-	id: 'DSAG54D6S7S',
+	id: 'DSAG54Dghfh5sdf6S7S',
 	baseState: {
 		width: 400,
 		height: 800,
