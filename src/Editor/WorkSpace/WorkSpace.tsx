@@ -1,4 +1,4 @@
-import styles from './WorkSpace.module.css'
+import styles from './WorkSpace.css'
 import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'

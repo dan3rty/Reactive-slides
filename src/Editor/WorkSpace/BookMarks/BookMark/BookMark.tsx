@@ -1,4 +1,4 @@
-import styles from './BookMark.module.css'
+import styles from './BookMark..css'
 import { ReactNode } from 'react'
 import { joinCssClasses } from '../../../../classes/joinCssClasses'
 
