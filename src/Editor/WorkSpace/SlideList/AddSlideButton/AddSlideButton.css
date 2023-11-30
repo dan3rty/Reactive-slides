@@ -3,8 +3,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #90c9d3;
+	gap: 5px;
+	background-color: #a3e1ec;
 	border-radius: 10px;
-	padding-block: 10px;
+	padding-block: 5px;
 	margin-block: 10px;
 }
