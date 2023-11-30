@@ -2,9 +2,10 @@ import styles from './WorkSpace.module.css'
 import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
-import { Selection, Slide } from '../../types'
+import { Slide } from '../../types'
 import { useContext } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
+import { ObjectSelection } from './ObjectSelection/ObjectSelection'
 
 type WorkSpaceProps = {
 	selectedSlide: Slide
@@ -15,6 +16,10 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 
 	const { presenter, setPresenter } = useContext(PresenterContext)
 	const { selection, presentation, operationHistory } = presenter
+
+	const selectedObjects = selectedSlide.objects.filter((object) => {
+		selection.objectsId.includes(object.id)
+	})
 
 	const createOnClick = (objectId: string) => {
 		return () => {
@@ -42,6 +47,7 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 						selection={selection}
 						createOnClick={createOnClick}
 					/>
+					<ObjectSelection selectedObjects={selectedObjects} scale={scale} />
 				</div>
 			</div>
 			<SlideList scale={scale} createOnClick={createOnClick} />
