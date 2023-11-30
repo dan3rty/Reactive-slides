@@ -12,15 +12,16 @@ function Ellipse({ primitive, scale, onClick }: PrimitiveProps) {
 			key={primitive.id}
 			style={{
 				position: 'absolute',
-				width: `${primitive.baseState.width / scale + 6}px`,
-				height: `${primitive.baseState.height / scale + 6}px`,
+				width: `${primitive.baseState.width / scale}px`,
+				height: `${primitive.baseState.height / scale}px`,
 				top: `${primitive.baseState.y / scale}px`,
+				left: `${primitive.baseState.x / scale}px`,
 			}}
 			onClick={onClick}
 		>
 			<ellipse
-				cx={`${primitive.baseState.width / 2 / scale + 3}px`}
-				cy={`${primitive.baseState.height / 2 / scale + 3}px`}
+				cx={`${primitive.baseState.width / 2 / scale}px`}
+				cy={`${primitive.baseState.height / 2 / scale}px`}
 				rx={`${(primitive.baseState.width - primitive.borderSize) / scale / 2}px`}
 				ry={`${(primitive.baseState.height - primitive.borderSize) / scale / 2}px`}
 				fill={primitive.color.colors[0].hex}
@@ -59,12 +60,11 @@ function Rectangle({ primitive, scale, onClick }: PrimitiveProps) {
 }
 
 function Triangle({ primitive, scale, onClick }: PrimitiveProps) {
-	console.log('xP ', primitive.baseState.x / scale)
-	console.log('yP ', primitive.baseState.y / scale)
 	return (
 		<svg
 			key={primitive.id}
 			style={{
+				transformOrigin: 'center',
 				strokeLinejoin: 'miter',
 				strokeMiterlimit: '8',
 				position: 'absolute',

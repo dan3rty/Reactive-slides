@@ -1,5 +1,11 @@
 import React from 'react'
+import { Presenter } from '../types'
 
-const PresenterContext = React.createContext(null)
+type PresenterContextType = {
+	presenter: Presenter
+	setPresenter: React.Dispatch<React.SetStateAction<Presenter>>
+}
+
+const PresenterContext = React.createContext<PresenterContextType>(null)
 
 export { PresenterContext }
