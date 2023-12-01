@@ -4,8 +4,9 @@ import { BlockType, Selection, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../SlideObjects/ImageComponent'
 import { returnGradientString } from '../Tools/returnGradientString'
 import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
-import {useContext} from "react";
+import {useContext, useRef} from "react";
 import {PresenterContext} from "../../presenterContext/PresenterContext";
+import {useDraggableObject} from "../../hooks/useDraggableObject";
 
 type SlideRendererProps = {
 	scale: number
@@ -64,36 +65,50 @@ function SlideRenderer({
 						newObj.baseState.y = obj.animation.stateList[index].state.y
 					}
 				}
+				const ref = useRef(null)
+				if (isWorkspace) {
+					useDraggableObject({
+						elementRef: ref,
+						elementId: obj.id,
+						slideId: slide.id
+					})
+				}
 				switch (newObj.blockType) {
 					case BlockType.IMAGE:
 						return (
-							<ImageComponent
-								key={index}
-								image={newObj}
-								scale={scale}
-								selected={selected}
-								onClick={createOnClick(obj.id)}
-							/>
+							<div ref={ref}>
+								<ImageComponent
+									key={index}
+									image={newObj}
+									scale={scale}
+									selected={selected}
+									onClick={createOnClick(obj.id)}
+								/>
+							</div>
 						)
 					case BlockType.PRIMITIVE:
 						return (
-							<PrimitiveComponent
-								key={index}
-								primitive={newObj}
-								scale={scale}
-								selected={selected}
-								onClick={createOnClick(obj.id)}
-							/>
+							<div ref={ref}>
+								<PrimitiveComponent
+									key={index}
+									primitive={newObj}
+									scale={scale}
+									selected={selected}
+									onClick={createOnClick(obj.id)}
+								/>
+							</div>
 						)
 					case BlockType.TEXT:
 						return (
-							<TextComponent
-								key={index}
-								text={newObj}
-								scale={scale}
-								selected={selected}
-								onClick={createOnClick(obj.id)}
-							/>
+							<div ref={ref}>
+								<TextComponent
+									key={index}
+									text={newObj}
+									scale={scale}
+									selected={selected}
+									onClick={createOnClick(obj.id)}
+								/>
+							</div>
 						)
 				}
 			})}
