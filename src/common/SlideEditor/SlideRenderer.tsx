@@ -4,6 +4,8 @@ import { BlockType, Selection, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../SlideObjects/ImageComponent'
 import { returnGradientString } from '../Tools/returnGradientString'
 import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
+import {useContext} from "react";
+import {PresenterContext} from "../../presenterContext/PresenterContext";
 
 type SlideRendererProps = {
 	scale: number
@@ -23,6 +25,8 @@ function SlideRenderer({
 	const width = 1920 / scale
 	const height = 1080 / scale
 
+	const {editedSlideRef} = useContext(PresenterContext)
+
 	const selectedTab = selection.selectedTab
 
 	const backgroundStyle = slide.background.image
@@ -37,6 +41,7 @@ function SlideRenderer({
 				height: `${height}px`,
 			}}
 			className={styles.slideEditor}
+			ref={isWorkspace ? editedSlideRef : null}
 		>
 			{slide.objects.map((obj, index) => {
 				const newObj = structuredClone(obj)

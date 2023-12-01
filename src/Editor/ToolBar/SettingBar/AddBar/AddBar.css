@@ -3,3 +3,12 @@
 	grid-template-columns: 210px 210px 210px;
 	grid-template-rows: 36px 36px;
 }
+
+.image-path-input {
+	height: 31px;
+	width: 200px;
+	padding-left: 7px;
+	background-color: #ededed;
+	border-radius: 3px;
+	box-sizing: border-box;
+}
