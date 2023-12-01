@@ -9,6 +9,7 @@ import { PresenterContext } from '../../presenterContext/PresenterContext'
 type WorkSpaceProps = {
 	selectedSlide: Slide
 }
+
 function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 	const size = window.innerHeight
 	const scale = (1080 / (size - 205)) * 1.2
