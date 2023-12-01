@@ -2,7 +2,7 @@ import styles from './Dot.css'
 
 type Dot = {
 	text: number
-	offset: string
+	offset?: string
 	isChosen: boolean
 }
 

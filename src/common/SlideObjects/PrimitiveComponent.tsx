@@ -1,13 +1,26 @@
 import { PrimitiveBlock, Primitives } from '../../types'
+import { useRef } from 'react'
+import { useDraggableObject } from '../../hooks/useDraggableObject'
 
 type PrimitiveProps = {
 	primitive: PrimitiveBlock
 	scale: number
 	selected: boolean
 	onClick: () => void
+	isWorkspace: boolean
+	id: string
+	slideId: string
 }
 
-function Ellipse({ primitive, selected, scale, onClick }: PrimitiveProps) {
+function Ellipse({
+	primitive,
+	selected,
+	scale,
+	onClick,
+	slideId,
+	id,
+	isWorkspace,
+}: PrimitiveProps) {
 	const selectBorder = selected && (
 		<ellipse
 			strokeDasharray='6'
@@ -20,8 +33,17 @@ function Ellipse({ primitive, selected, scale, onClick }: PrimitiveProps) {
 			stroke={'#000000'}
 		/>
 	)
+	const ref = useRef(null)
+	if (isWorkspace) {
+		useDraggableObject({
+			elementRef: ref,
+			elementId: id,
+			slideId: slideId,
+		})
+	}
 	return (
 		<svg
+			ref={ref}
 			key={primitive.id}
 			style={{
 				position: 'absolute',
@@ -45,7 +67,15 @@ function Ellipse({ primitive, selected, scale, onClick }: PrimitiveProps) {
 	)
 }
 
-function Rectangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
+function Rectangle({
+	primitive,
+	selected,
+	scale,
+	onClick,
+	slideId,
+	id,
+	isWorkspace,
+}: PrimitiveProps) {
 	const selectBorder = selected && (
 		<rect
 			strokeDasharray='6'
@@ -58,8 +88,17 @@ function Rectangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
 			stroke={'#000000'}
 		/>
 	)
+	const ref = useRef(null)
+	if (isWorkspace) {
+		useDraggableObject({
+			elementRef: ref,
+			elementId: id,
+			slideId: slideId,
+		})
+	}
 	return (
 		<svg
+			ref={ref}
 			key={primitive.id}
 			style={{
 				position: 'absolute',
@@ -85,7 +124,15 @@ function Rectangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
 	)
 }
 
-function Triangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
+function Triangle({
+	primitive,
+	selected,
+	scale,
+	onClick,
+	slideId,
+	id,
+	isWorkspace,
+}: PrimitiveProps) {
 	const selectBorder = selected && (
 		<polygon
 			strokeDasharray='6'
@@ -100,8 +147,17 @@ function Triangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
 			stroke={'#000000'}
 		/>
 	)
+	const ref = useRef(null)
+	if (isWorkspace) {
+		useDraggableObject({
+			elementRef: ref,
+			elementId: id,
+			slideId: slideId,
+		})
+	}
 	return (
 		<svg
+			ref={ref}
 			key={primitive.id}
 			style={{
 				strokeLinejoin: 'miter',
@@ -131,11 +187,22 @@ function Triangle({ primitive, selected, scale, onClick }: PrimitiveProps) {
 	)
 }
 
-function PrimitiveComponent({ primitive, scale, selected, onClick }: PrimitiveProps) {
+function PrimitiveComponent({
+	primitive,
+	scale,
+	selected,
+	onClick,
+	slideId,
+	id,
+	isWorkspace,
+}: PrimitiveProps) {
 	switch (primitive.primitiveType) {
 		case Primitives.CIRCLE:
 			return (
 				<Ellipse
+					slideId={slideId}
+					isWorkspace={isWorkspace}
+					id={id}
 					primitive={primitive}
 					scale={scale}
 					selected={selected}
@@ -145,6 +212,9 @@ function PrimitiveComponent({ primitive, scale, selected, onClick }: PrimitivePr
 		case Primitives.RECT:
 			return (
 				<Rectangle
+					slideId={slideId}
+					isWorkspace={isWorkspace}
+					id={id}
 					primitive={primitive}
 					scale={scale}
 					selected={selected}
@@ -154,6 +224,9 @@ function PrimitiveComponent({ primitive, scale, selected, onClick }: PrimitivePr
 		case Primitives.TRIANGLE:
 			return (
 				<Triangle
+					slideId={slideId}
+					isWorkspace={isWorkspace}
+					id={id}
 					primitive={primitive}
 					scale={scale}
 					selected={selected}

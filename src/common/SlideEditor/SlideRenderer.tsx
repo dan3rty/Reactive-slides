@@ -4,9 +4,8 @@ import { BlockType, Selection, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../SlideObjects/ImageComponent'
 import { returnGradientString } from '../Tools/returnGradientString'
 import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
-import {useContext, useRef} from "react";
-import {PresenterContext} from "../../presenterContext/PresenterContext";
-import {useDraggableObject} from "../../hooks/useDraggableObject";
+import { useContext } from 'react'
+import { PresenterContext } from '../../presenterContext/PresenterContext'
 
 type SlideRendererProps = {
 	scale: number
@@ -26,7 +25,7 @@ function SlideRenderer({
 	const width = 1920 / scale
 	const height = 1080 / scale
 
-	const {editedSlideRef} = useContext(PresenterContext)
+	const { editedSlideRef } = useContext(PresenterContext)
 
 	const selectedTab = selection.selectedTab
 
@@ -65,50 +64,45 @@ function SlideRenderer({
 						newObj.baseState.y = obj.animation.stateList[index].state.y
 					}
 				}
-				const ref = useRef(null)
-				if (isWorkspace) {
-					useDraggableObject({
-						elementRef: ref,
-						elementId: obj.id,
-						slideId: slide.id
-					})
-				}
 				switch (newObj.blockType) {
 					case BlockType.IMAGE:
 						return (
-							<div ref={ref}>
-								<ImageComponent
-									key={index}
-									image={newObj}
-									scale={scale}
-									selected={selected}
-									onClick={createOnClick(obj.id)}
-								/>
-							</div>
+							<ImageComponent
+								isWorkspace={isWorkspace}
+								id={obj.id}
+								slideId={slide.id}
+								key={index}
+								image={newObj}
+								scale={scale}
+								selected={selected}
+								onClick={createOnClick(obj.id)}
+							/>
 						)
 					case BlockType.PRIMITIVE:
 						return (
-							<div ref={ref}>
-								<PrimitiveComponent
-									key={index}
-									primitive={newObj}
-									scale={scale}
-									selected={selected}
-									onClick={createOnClick(obj.id)}
-								/>
-							</div>
+							<PrimitiveComponent
+								isWorkspace={isWorkspace}
+								id={obj.id}
+								slideId={slide.id}
+								key={index}
+								primitive={newObj}
+								scale={scale}
+								selected={selected}
+								onClick={createOnClick(obj.id)}
+							/>
 						)
 					case BlockType.TEXT:
 						return (
-							<div ref={ref}>
-								<TextComponent
-									key={index}
-									text={newObj}
-									scale={scale}
-									selected={selected}
-									onClick={createOnClick(obj.id)}
-								/>
-							</div>
+							<TextComponent
+								isWorkspace={isWorkspace}
+								id={obj.id}
+								slideId={slide.id}
+								key={index}
+								text={newObj}
+								scale={scale}
+								selected={selected}
+								onClick={createOnClick(obj.id)}
+							/>
 						)
 				}
 			})}

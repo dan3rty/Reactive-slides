@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styles from './ImageComponent.css'
 import { ImageBlock, ImageSource } from '../../types'
+import { useDraggableObject } from '../../hooks/useDraggableObject'
 
 type ImageProps = {
 	image: ImageBlock
 	scale: number
 	selected: boolean
 	onClick: () => void
+	isWorkspace?: boolean
+	id: string
+	slideId: string
 }
 
-function ImageComponent({ image, scale, selected, onClick }: ImageProps) {
+function ImageComponent({ image, scale, selected, onClick, isWorkspace, id, slideId }: ImageProps) {
 	const imageStyle: React.CSSProperties = {
 		width: image.baseState.width / scale + 'px',
 		height: image.baseState.height / scale + 'px',
@@ -18,9 +22,19 @@ function ImageComponent({ image, scale, selected, onClick }: ImageProps) {
 		rotate: image.baseState.rotation + 'deg',
 		borderColor: selected ? '#000000' : '#FFFFFF00',
 	}
+	const ref = useRef(null)
+	if (isWorkspace) {
+		useDraggableObject({
+			elementRef: ref,
+			elementId: id,
+			slideId: slideId,
+		})
+	}
 	if (image.typeValue === ImageSource.PATH) {
 		return (
 			<img
+				draggable='false'
+				ref={ref}
 				style={imageStyle}
 				className={styles.image}
 				src={image.value}
