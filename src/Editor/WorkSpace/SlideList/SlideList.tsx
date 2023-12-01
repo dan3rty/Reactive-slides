@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import styles from './SlideList.module.css'
+import styles from './SlideList.css'
 import { SlideRenderer } from '../../../common/SlideEditor/SlideRenderer'
 import { Counter } from './Counter/Counter'
 import { joinCssClasses } from '../../../classes/joinCssClasses'

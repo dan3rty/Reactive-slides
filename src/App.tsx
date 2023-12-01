@@ -1,5 +1,5 @@
 import { Editor } from './Editor/Editor'
-import { useState } from 'react'
+import {useRef, useState} from 'react'
 import { presenter } from './mock/mockObjects'
 import { PresenterContext } from './presenterContext/PresenterContext'
 
@@ -11,6 +11,7 @@ function App() {
 			value={{
 				presenter: presenterObj,
 				setPresenter,
+				editedSlideRef: useRef(null),
 			}}
 		>
 			<Editor />

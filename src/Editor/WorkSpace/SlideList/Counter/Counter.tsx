@@ -1,4 +1,4 @@
-import styles from './Counter.module.css'
+import styles from './Counter.css'
 
 type CounterProps = {
 	index: number

@@ -1,4 +1,4 @@
-import styles from './WorkSpace.module.css'
+import styles from './WorkSpace.css'
 import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
@@ -14,7 +14,7 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 	const size = window.innerHeight
 	const scale = (1080 / (size - 205)) * 1.2
 
-	const { presenter, setPresenter } = useContext(PresenterContext)
+	const { presenter, setPresenter} = useContext(PresenterContext)
 	const { selection, presentation, operationHistory } = presenter
 
 	const createOnClick = (objectId: string) => {

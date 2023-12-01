@@ -1,4 +1,4 @@
-import styles from './BookMarks.module.css'
+import styles from './BookMarks.css'
 import { BookMark } from './BookMark/BookMark'
 
 import { ArrowIcon, MoveIcon, SelectIcon } from '../../../common/Icons/icons'
