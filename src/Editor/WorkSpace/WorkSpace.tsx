@@ -4,6 +4,7 @@ import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
 import {Presenter, Selection, Slide} from '../../types'
 import { useContext } from 'react'
+import { Selection } from '../../types'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
 
 type WorkSpaceProps = {

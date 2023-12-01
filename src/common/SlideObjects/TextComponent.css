@@ -5,6 +5,7 @@
 }
 
 .text {
+	user-select: none;
 	display: flex;
 	align-items: baseline;
 	position: absolute;

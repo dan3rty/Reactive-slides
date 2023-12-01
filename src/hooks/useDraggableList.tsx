@@ -35,10 +35,7 @@ function useDraggableList({ onOrderChange }: UseDraggableListParams) {
 			}
 			itemsRef.current[index] = item
 
-			const onDragStart: OnDragStartFn = ({
-				onDrag,
-				onDrop,
-			}) => {
+			const onDragStart: OnDragStartFn = ({ onDrag, onDrop }) => {
 				item.startY = item.elementRef.current!.getBoundingClientRect().top
 
 				const onMouseUp = (event: MouseEvent) => {
@@ -49,8 +46,11 @@ function useDraggableList({ onOrderChange }: UseDraggableListParams) {
 							continue
 						}
 						const currItem = itemsRef.current[i].elementRef.current!
-						if (currItem.getBoundingClientRect().top < draggableItemTop && i > index
-							|| currItem.getBoundingClientRect().top > draggableItemTop && i < index) {
+						if (
+							(currItem.getBoundingClientRect().top < draggableItemTop &&
+								i > index) ||
+							(currItem.getBoundingClientRect().top > draggableItemTop && i < index)
+						) {
 							newIndex = i
 						}
 					}
