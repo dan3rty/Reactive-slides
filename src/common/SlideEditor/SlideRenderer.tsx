@@ -4,8 +4,8 @@ import { BlockType, Selection, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../SlideObjects/ImageComponent'
 import { returnGradientString } from '../Tools/returnGradientString'
 import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
-import {useContext} from "react";
-import {PresenterContext} from "../../presenterContext/PresenterContext";
+import { useContext } from 'react'
+import { PresenterContext } from '../../presenterContext/PresenterContext'
 import { ObjectSelection } from '../../Editor/WorkSpace/ObjectSelection/ObjectSelection'
 
 type SlideRendererProps = {
@@ -29,7 +29,7 @@ function SlideRenderer({
 	const selectedObjects = slide.objects.filter((object) => {
 		return selection.objectsId.includes(object.id)
 	})
-	const {editedSlideRef} = useContext(PresenterContext)
+	const { editedSlideRef } = useContext(PresenterContext)
 
 	const selectedTab = selection.selectedTab
 
