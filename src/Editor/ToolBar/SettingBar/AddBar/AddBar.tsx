@@ -13,7 +13,7 @@ import {
 } from '../../../../common/Icons/icons'
 import { useContext, useRef, useState } from 'react'
 import { PresenterContext } from '../../../../presenterContext/PresenterContext'
-import { Presenter, Slide } from '../../../../types'
+import { ImageBlock, Presenter, PrimitiveBlock, Slide, TextBlock } from '../../../../types'
 import * as Type from '../../../../types'
 
 function AddBar() {
@@ -37,7 +37,7 @@ function AddBar() {
 		y2 = event.clientY - rect.y
 		const objectToAdd =
 			currentBlock === 'rectangle' || currentBlock === 'triangle' || currentBlock === 'oval'
-				? {
+				? ({
 						blockType: Type.BlockType.PRIMITIVE,
 						id: Math.random().toString(16).slice(2),
 						primitiveType:
@@ -59,9 +59,9 @@ function AddBar() {
 						borderSize: 5,
 						borderColor: { hex: '#00000', opacity: 0 },
 						borderType: Type.BorderTypes.SOLID,
-				  }
+				  } as PrimitiveBlock)
 				: currentBlock === 'image'
-				? {
+				? ({
 						typeValue: Type.ImageSource.PATH,
 						blockType: Type.BlockType.IMAGE,
 						id: Math.random().toString(16).slice(2),
@@ -74,8 +74,8 @@ function AddBar() {
 						},
 						value: imagePathInput,
 						opacity: 0,
-				  }
-				: {
+				  } as ImageBlock)
+				: ({
 						blockType: Type.BlockType.TEXT,
 						id: Math.random().toString(16).slice(2),
 						baseState: {
@@ -86,13 +86,13 @@ function AddBar() {
 							rotation: 0,
 						},
 						value: [],
-				  }
+				  } as TextBlock)
 		const slideIndex = presenter.presentation.slides.findIndex(
 			(slide) => slide.id === presenter.selection.slideId,
 		)
 		const newSlide: Slide = {
 			...presenter.presentation.slides[slideIndex],
-			objects: [...presenter.presentation.slides[slideIndex].objects, objectToAdd],
+			objects: presenter.presentation.slides[slideIndex].objects.concat(objectToAdd),
 		}
 		const newSlides: Array<Slide> = presenter.presentation.slides
 		newSlides[slideIndex] = newSlide

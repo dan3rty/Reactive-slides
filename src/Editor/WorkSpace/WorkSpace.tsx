@@ -2,9 +2,8 @@ import styles from './WorkSpace.css'
 import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
-import {Presenter, Selection, Slide} from '../../types'
+import { Presenter, Selection, Slide } from '../../types'
 import { useContext } from 'react'
-import { Selection } from '../../types'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
 
 type WorkSpaceProps = {
@@ -15,7 +14,7 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 	const size = window.innerHeight
 	const scale = (1080 / (size - 205)) * 1.2
 
-	const { presenter, setPresenter} = useContext(PresenterContext)
+	const { presenter, setPresenter } = useContext(PresenterContext)
 	const { selection, presentation, operationHistory } = presenter
 
 	const createOnClick = (objectId: string) => {
@@ -34,10 +33,14 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 
 	document.addEventListener('keydown', (e) => {
 		if (e.code === 'Delete') {
-			const slideIndex = presenter.presentation.slides.findIndex(slide => slide.id === presenter.selection.slideId)
+			const slideIndex = presenter.presentation.slides.findIndex(
+				(slide) => slide.id === presenter.selection.slideId,
+			)
 			const newSlide: Slide = {
 				...presenter.presentation.slides[slideIndex],
-				objects: presenter.presentation.slides[slideIndex].objects.filter(obj => !presenter.selection.objectsId.includes(obj.id))
+				objects: presenter.presentation.slides[slideIndex].objects.filter(
+					(obj) => !presenter.selection.objectsId.includes(obj.id),
+				),
 			}
 			const newSlides: Array<Slide> = presenter.presentation.slides
 			newSlides[slideIndex] = newSlide
@@ -45,12 +48,12 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 				...presenter,
 				selection: {
 					...selection,
-					objectsId: []
+					objectsId: [],
 				},
 				presentation: {
 					...presentation,
 					slides: newSlides,
-				}
+				},
 			}
 			setPresenter(newPresenter)
 		}
