@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styles from './TextComponent.css'
 import { TextBlock } from '../../types'
+import { useDraggableObject } from '../../hooks/useDraggableObject'
 
 type TextProps = {
 	text: TextBlock
 	scale: number
 	selected: boolean
 	onClick: () => void
+	isWorkspace: boolean
+	id: string
+	slideId: string
 }
 
-function TextComponent({ text, scale, selected, onClick }: TextProps) {
+function TextComponent({ text, scale, selected, onClick, isWorkspace, slideId, id }: TextProps) {
 	const textStyle: React.CSSProperties = {
 		width: text.baseState.width / scale + 'px',
 		height: text.baseState.height / scale + 'px',
@@ -17,6 +21,14 @@ function TextComponent({ text, scale, selected, onClick }: TextProps) {
 		left: text.baseState.x / scale - 3 + 'px',
 		rotate: text.baseState.rotation + 'deg',
 		borderColor: selected ? '#000000' : '#FFFFFF00',
+	}
+	const ref = useRef(null)
+	if (isWorkspace) {
+		useDraggableObject({
+			elementRef: ref,
+			elementId: id,
+			slideId: slideId,
+		})
 	}
 	const textToRender = text.value.map((char, index) => (
 		<div
@@ -38,7 +50,7 @@ function TextComponent({ text, scale, selected, onClick }: TextProps) {
 		</div>
 	))
 	return (
-		<div style={textStyle} className={styles.text}>
+		<div style={textStyle} className={styles.text} ref={ref}>
 			{textToRender}
 		</div>
 	)

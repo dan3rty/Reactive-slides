@@ -4,8 +4,8 @@ import { BlockType, Selection, Slide, Tabs } from '../../types'
 import { ImageComponent } from '../SlideObjects/ImageComponent'
 import { returnGradientString } from '../Tools/returnGradientString'
 import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
-import {useContext} from "react";
-import {PresenterContext} from "../../presenterContext/PresenterContext";
+import { useContext } from 'react'
+import { PresenterContext } from '../../presenterContext/PresenterContext'
 
 type SlideRendererProps = {
 	scale: number
@@ -25,7 +25,7 @@ function SlideRenderer({
 	const width = 1920 / scale
 	const height = 1080 / scale
 
-	const {editedSlideRef} = useContext(PresenterContext)
+	const { editedSlideRef } = useContext(PresenterContext)
 
 	const selectedTab = selection.selectedTab
 
@@ -68,6 +68,9 @@ function SlideRenderer({
 					case BlockType.IMAGE:
 						return (
 							<ImageComponent
+								isWorkspace={isWorkspace}
+								id={obj.id}
+								slideId={slide.id}
 								key={index}
 								image={newObj}
 								scale={scale}
@@ -78,6 +81,9 @@ function SlideRenderer({
 					case BlockType.PRIMITIVE:
 						return (
 							<PrimitiveComponent
+								isWorkspace={isWorkspace}
+								id={obj.id}
+								slideId={slide.id}
 								key={index}
 								primitive={newObj}
 								scale={scale}
@@ -88,6 +94,9 @@ function SlideRenderer({
 					case BlockType.TEXT:
 						return (
 							<TextComponent
+								isWorkspace={isWorkspace}
+								id={obj.id}
+								slideId={slide.id}
 								key={index}
 								text={newObj}
 								scale={scale}

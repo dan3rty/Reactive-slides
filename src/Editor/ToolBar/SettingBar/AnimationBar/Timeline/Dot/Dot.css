@@ -1,10 +1,10 @@
 .dot {
 	display: flex;
 	align-items: center;
-	width: 40px;
+	transform: translateX(-50%);
 	margin-top: 25px;
 	flex-direction: column;
-	position: relative;
+	position: absolute;
 }
 
 .dot-circle {
