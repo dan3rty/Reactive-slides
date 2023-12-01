@@ -1,4 +1,94 @@
 import { ImageBlock, PrimitiveBlock, TextBlock } from '../../../types'
+import styles from './ObjectSelection.css'
+
+enum CursorType {
+	N = 'n-resize',
+	NE = 'ne-resize',
+	E = 'e-resize',
+	SE = 'se-resize',
+	S = 's-resize',
+	SW = 'sw-resize',
+	W = 'w-resize',
+	NW = 'nw-resize',
+}
+
+enum CursorIntType {
+	N = 0,
+	NE,
+	E,
+	SE,
+	S,
+	SW,
+	W,
+	NW,
+}
+
+function remapCursorIntType(cursorIntType: CursorIntType): CursorType {
+	switch (cursorIntType) {
+		case CursorIntType.E:
+			return CursorType.E
+		case CursorIntType.N:
+			return CursorType.N
+		case CursorIntType.NE:
+			return CursorType.NE
+		case CursorIntType.NW:
+			return CursorType.NW
+		case CursorIntType.S:
+			return CursorType.S
+		case CursorIntType.SE:
+			return CursorType.SE
+		case CursorIntType.SW:
+			return CursorType.SW
+		case CursorIntType.W:
+			return CursorType.W
+	}
+}
+
+function getCursorType(defaultCursor: CursorIntType, rotation: number): CursorType {
+	console.log(defaultCursor, rotation)
+	if (rotation <= 22.5 || rotation >= 360 - 22.5) {
+		return remapCursorIntType(defaultCursor)
+	}
+	if (rotation >= 45 - 22.5 && rotation <= 90 - 22.5) {
+		return remapCursorIntType(defaultCursor + 1 >= 8 ? defaultCursor - 7 : defaultCursor + 1)
+	}
+	if (rotation >= 90 - 22.5 && rotation <= 135 - 22.5) {
+		console.log(defaultCursor + 1)
+		return remapCursorIntType(defaultCursor + 2 >= 8 ? defaultCursor - 6 : defaultCursor + 2)
+	}
+	if (rotation >= 135 - 22.5 && rotation <= 180 - 22.5) {
+		return remapCursorIntType(defaultCursor + 3 >= 8 ? defaultCursor - 5 : defaultCursor + 3)
+	}
+	if (rotation >= 180 - 22.5 && rotation <= 225 - 22.5) {
+		return remapCursorIntType(defaultCursor + 4 >= 8 ? defaultCursor - 4 : defaultCursor + 4)
+	}
+	if (rotation >= 225 - 22.5 && rotation <= 270 - 22.5) {
+		return remapCursorIntType(defaultCursor + 5 >= 8 ? defaultCursor - 3 : defaultCursor + 5)
+	}
+	if (rotation >= 270 - 22.5 && rotation <= 315 - 22.5) {
+		return remapCursorIntType(defaultCursor + 6 >= 8 ? defaultCursor - 2 : defaultCursor + 6)
+	}
+	if (rotation >= 315 - 22.5 && rotation <= 360 - 22.5) {
+		return remapCursorIntType(defaultCursor + 7 >= 8 ? defaultCursor - 1 : defaultCursor + 7)
+	}
+}
+
+type CornerProps = {
+	x: number
+	y: number
+	cursor: CursorType
+}
+
+function Corner({ x, y, cursor }: CornerProps) {
+	console.log(cursor)
+	const size = 5
+	return (
+		<div
+			className={styles.corner}
+			style={{ position: 'absolute', top: y - size, left: x - size, cursor: cursor }}
+		></div>
+	)
+}
 
 type ObjectSelectionProps = {
 	selectedObjects: Array<TextBlock | ImageBlock | PrimitiveBlock>
@@ -11,16 +101,53 @@ function ObjectSelection({ selectedObjects, scale }: ObjectSelectionProps) {
 		const borderSize = 3
 		return (
 			<div
+				className={styles.selection}
 				style={{
-					position: 'absolute',
 					rotate: rotation + 'deg',
-					border: `#8ab4f89a solid ${borderSize}px`,
+					borderWidth: `${borderSize}px`,
 					top: y / scale - borderSize,
 					left: x / scale - borderSize,
 					width: width / scale,
 					height: height / scale,
 				}}
-			></div>
+			>
+				<Corner x={0} y={0} cursor={getCursorType(CursorIntType.NW, rotation)} />
+				<Corner
+					x={width / scale / 2}
+					y={0}
+					cursor={getCursorType(CursorIntType.N, rotation)}
+				/>
+				<Corner
+					x={width / scale}
+					y={0}
+					cursor={getCursorType(CursorIntType.NE, rotation)}
+				/>
+				<Corner
+					x={width / scale}
+					y={height / scale / 2}
+					cursor={getCursorType(CursorIntType.E, rotation)}
+				/>
+				<Corner
+					x={width / scale}
+					y={height / scale}
+					cursor={getCursorType(CursorIntType.SE, rotation)}
+				/>
+				<Corner
+					x={width / scale / 2}
+					y={height / scale}
+					cursor={getCursorType(CursorIntType.S, rotation)}
+				/>
+				<Corner
+					x={0}
+					y={height / scale}
+					cursor={getCursorType(CursorIntType.SW, rotation)}
+				/>
+				<Corner
+					x={0}
+					y={height / scale / 2}
+					cursor={getCursorType(CursorIntType.W, rotation)}
+				/>
+			</div>
 		)
 	})
 	return <>{selections}</>

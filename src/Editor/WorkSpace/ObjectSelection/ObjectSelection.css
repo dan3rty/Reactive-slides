@@ -1,4 +1,15 @@
-.selection-border {
+.selection {
 	position: absolute;
-	background: #8ab4f89a;
+	border: #8ab4f89a solid;
+}
+
+.corner {
+	height: 5px;
+	width: 5px;
+	background: #8ab4f8;
+	border: #ffffff solid 2px;
+}
+
+.cursor-n {
+	cursor: n-resize;
 }

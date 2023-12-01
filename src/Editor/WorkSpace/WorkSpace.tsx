@@ -17,8 +17,6 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 	const { presenter, setPresenter } = useContext(PresenterContext)
 	const { selection, presentation, operationHistory } = presenter
 
-	console.log(selectedSlide.objects, selection.objectsId)
-
 	const createOnClick = (objectId: string) => {
 		return () => {
 			if (selection.objectsId.includes(objectId)) {
