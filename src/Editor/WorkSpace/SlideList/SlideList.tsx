@@ -4,7 +4,15 @@ import styles from './SlideList.css'
 import { SlideRenderer } from '../../../common/SlideEditor/SlideRenderer'
 import { Counter } from './Counter/Counter'
 import { joinCssClasses } from '../../../classes/joinCssClasses'
-import { Background, Color, GradientColor, Presentation, Selection, Slide, Tabs } from '../../../types'
+import {
+	Background,
+	Color,
+	GradientColor,
+	Presentation,
+	Selection,
+	Slide,
+	Tabs,
+} from '../../../types'
 import { PresenterContext } from '../../../App'
 import { AddSlideButton } from './AddSlideButton/AddSlideButton'
 
@@ -41,21 +49,18 @@ function SlideList({ scale }: SlideListProps) {
 	const { presentation, selection, operationHistory } = presenter
 	const slides: Array<Slide> = presentation.slides
 	const [chosen, setChosen] = useState(selection.slideId)
-	const {
-		registerDndItem,
-	} = useDraggableList({
+	const { registerDndItem } = useDraggableList({
 		onOrderChange: (from, to) => {
 			const newSlides = [...slides]
 			const removed = newSlides.splice(from, 1)
 			newSlides.splice(to, 0, removed[0])
 			const newPresentation: Presentation = {
 				...presentation,
-				slides: newSlides
+				slides: newSlides,
 			}
-			setPresenter({presentation: newPresentation, selection, operationHistory})
-		}
+			setPresenter({ presentation: newPresentation, selection, operationHistory })
+		},
 	})
-
 
 	const createOnClick = (slideId: string) => {
 		return () => {
@@ -71,7 +76,7 @@ function SlideList({ scale }: SlideListProps) {
 
 	const createSlideOnClick = () => {
 		const newSlide = generateBlankSlide()
-		let oldSlides = presentation.slides
+		const oldSlides = presentation.slides
 		const newPresentation: Presentation = {
 			...presentation,
 			slides: oldSlides.concat(newSlide),
@@ -86,17 +91,15 @@ function SlideList({ scale }: SlideListProps) {
 
 		useEffect(() => {
 			if (!registerDndItem) {
-				return;
+				return
 			}
-			const {
-				onDragStart,
-			} = registerDndItem(index, {
+			const { onDragStart } = registerDndItem(index, {
 				elementRef: ref,
 			})
 
 			const onMouseDown = (mouseDownEvent: MouseEvent) => {
 				onDragStart({
-					onDrag: dragEvent => {
+					onDrag: (dragEvent) => {
 						ref.current!.style.position = 'relative'
 						ref.current!.style.zIndex = '1'
 						ref.current!.style.boxShadow = 'black 2px 2px 4px'

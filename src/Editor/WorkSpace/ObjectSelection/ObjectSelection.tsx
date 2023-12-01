@@ -1,5 +1,7 @@
 import { ImageBlock, PrimitiveBlock, TextBlock } from '../../../types'
 import styles from './ObjectSelection.css'
+import { useResizableObject } from '../../../hooks/useResizableObject'
+import { useEffect, useRef } from 'react'
 
 enum CursorType {
 	N = 'n-resize',
@@ -45,7 +47,6 @@ function remapCursorIntType(cursorIntType: CursorIntType): CursorType {
 }
 
 function getCursorType(defaultCursor: CursorIntType, rotation: number): CursorType {
-	console.log(defaultCursor, rotation)
 	if (rotation <= 22.5 || rotation >= 360 - 22.5) {
 		return remapCursorIntType(defaultCursor)
 	}
@@ -53,7 +54,6 @@ function getCursorType(defaultCursor: CursorIntType, rotation: number): CursorTy
 		return remapCursorIntType(defaultCursor + 1 >= 8 ? defaultCursor - 7 : defaultCursor + 1)
 	}
 	if (rotation >= 90 - 22.5 && rotation <= 135 - 22.5) {
-		console.log(defaultCursor + 1)
 		return remapCursorIntType(defaultCursor + 2 >= 8 ? defaultCursor - 6 : defaultCursor + 2)
 	}
 	if (rotation >= 135 - 22.5 && rotation <= 180 - 22.5) {
@@ -80,10 +80,36 @@ type CornerProps = {
 }
 
 function Corner({ x, y, cursor }: CornerProps) {
-	console.log(cursor)
+	const { registerResizableItem } = useResizableObject()
 	const size = 5
+	const cornerRef = useRef<HTMLDivElement>(null)
+	const objectRef = useRef(null)
+
+	useEffect(() => {
+		const { onDragStart } = registerResizableItem({ cornerRef, objectRef })
+
+		const onMouseDown = (mouseDownEvent: MouseEvent) => {
+			onDragStart({
+				onDrag: (dragEvent) => {
+					cornerRef.current!.style.position = 'absolute'
+					cornerRef.current!.style.top = `${
+						dragEvent.clientY - mouseDownEvent.clientY + y - size
+					}px`
+					cornerRef.current!.style.left = `${
+						dragEvent.clientX - mouseDownEvent.clientX + x - size
+					}px`
+				},
+			})
+		}
+
+		const control = cornerRef.current!
+		control.addEventListener('mousedown', onMouseDown)
+		return () => control.removeEventListener('mousedown', onMouseDown)
+	}, [registerResizableItem])
+
 	return (
 		<div
+			ref={cornerRef}
 			className={styles.corner}
 			style={{ position: 'absolute', top: y - size, left: x - size, cursor: cursor }}
 		></div>
