@@ -1,7 +1,6 @@
-import { ImageBlock, PrimitiveBlock, TextBlock } from '../../../types'
 import styles from './ObjectSelection.css'
 import { useResizableObject } from '../../../hooks/useResizableObject'
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 enum CursorType {
 	N = 'n-resize',
@@ -77,28 +76,34 @@ type CornerProps = {
 	x: number
 	y: number
 	cursor: CursorType
+	selectedObject: React.MutableRefObject<SVGSVGElement | HTMLDivElement>
+	setWidth?: React.Dispatch<React.SetStateAction<number>>
+	setHeight?: React.Dispatch<React.SetStateAction<number>>
 }
 
-function Corner({ x, y, cursor }: CornerProps) {
+function Corner({ x, y, cursor, selectedObject, setWidth, setHeight }: CornerProps) {
 	const { registerResizableItem } = useResizableObject()
 	const size = 5
 	const cornerRef = useRef<HTMLDivElement>(null)
-	const objectRef = useRef(null)
+	const objectRef = selectedObject
 
 	useEffect(() => {
 		const { onDragStart } = registerResizableItem({ cornerRef, objectRef })
 
 		const onMouseDown = (mouseDownEvent: MouseEvent) => {
+			const startWidth = parseFloat(objectRef.current.style.width)
+			const startHeight = parseFloat(objectRef.current.style.width)
 			onDragStart({
 				onDrag: (dragEvent) => {
-					cornerRef.current!.style.position = 'absolute'
-					cornerRef.current!.style.top = `${
-						dragEvent.clientY - mouseDownEvent.clientY + y - size
-					}px`
-					cornerRef.current!.style.left = `${
-						dragEvent.clientX - mouseDownEvent.clientX + x - size
-					}px`
+					const newWidth = startWidth + dragEvent.clientX - mouseDownEvent.clientX
+					objectRef.current.style.width = String(newWidth)
+					setWidth && setWidth(newWidth)
+
+					const newHeight = startHeight + dragEvent.clientY - mouseDownEvent.clientY
+					objectRef.current.style.height = String(newHeight)
+					setHeight && setHeight(newHeight)
 				},
+				onDrop: () => {},
 			})
 		}
 
@@ -117,66 +122,99 @@ function Corner({ x, y, cursor }: CornerProps) {
 }
 
 type ObjectSelectionProps = {
-	selectedObjects: Array<TextBlock | ImageBlock | PrimitiveBlock>
+	selectedObject: React.MutableRefObject<SVGSVGElement>
 	scale: number
 }
 
-function ObjectSelection({ selectedObjects, scale }: ObjectSelectionProps) {
-	const selections = selectedObjects.map((object) => {
-		const { width, height, x, y, rotation } = object.baseState
-		const borderSize = 3
-		return (
-			<div
-				className={styles.selection}
-				style={{
-					rotate: rotation + 'deg',
-					borderWidth: `${borderSize}px`,
-					top: y / scale - borderSize,
-					left: x / scale - borderSize,
-					width: width / scale,
-					height: height / scale,
-				}}
-			>
-				<Corner x={0} y={0} cursor={getCursorType(CursorIntType.NW, rotation)} />
-				<Corner
-					x={width / scale / 2}
-					y={0}
-					cursor={getCursorType(CursorIntType.N, rotation)}
-				/>
-				<Corner
-					x={width / scale}
-					y={0}
-					cursor={getCursorType(CursorIntType.NE, rotation)}
-				/>
-				<Corner
-					x={width / scale}
-					y={height / scale / 2}
-					cursor={getCursorType(CursorIntType.E, rotation)}
-				/>
-				<Corner
-					x={width / scale}
-					y={height / scale}
-					cursor={getCursorType(CursorIntType.SE, rotation)}
-				/>
-				<Corner
-					x={width / scale / 2}
-					y={height / scale}
-					cursor={getCursorType(CursorIntType.S, rotation)}
-				/>
-				<Corner
-					x={0}
-					y={height / scale}
-					cursor={getCursorType(CursorIntType.SW, rotation)}
-				/>
-				<Corner
-					x={0}
-					y={height / scale / 2}
-					cursor={getCursorType(CursorIntType.W, rotation)}
-				/>
-			</div>
-		)
-	})
-	return <>{selections}</>
+function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
+	const { clientWidth: width, clientHeight: height } = selectedObject.current
+	const { left, top } = selectedObject.current.style
+	const x = parseFloat(left)
+	const y = parseFloat(top)
+	const rotation = selectedObject.current.style.rotate
+		? parseFloat(selectedObject.current.style.rotate)
+		: 0
+	const borderSize = 3
+	const [widthState, setWidth] = useState(width)
+	const [heightState, setHeight] = useState(height)
+	return (
+		<div
+			className={styles.selection}
+			style={{
+				rotate: rotation + 'deg',
+				borderWidth: `${borderSize}px`,
+				top: y - borderSize,
+				left: x - borderSize,
+				width: widthState,
+				height: heightState,
+			}}
+		>
+			<Corner
+				x={0}
+				y={0}
+				cursor={getCursorType(CursorIntType.NW, rotation)}
+				selectedObject={selectedObject}
+				setWidth={setWidth}
+				setHeight={setHeight}
+			/>
+			<Corner
+				x={widthState / 2}
+				y={0}
+				cursor={getCursorType(CursorIntType.N, rotation)}
+				selectedObject={selectedObject}
+				setWidth={setWidth}
+				setHeight={setHeight}
+			/>
+			<Corner
+				x={widthState}
+				y={0}
+				cursor={getCursorType(CursorIntType.NE, rotation)}
+				selectedObject={selectedObject}
+				setWidth={setWidth}
+				setHeight={setHeight}
+			/>
+			<Corner
+				x={widthState}
+				y={heightState / 2}
+				cursor={getCursorType(CursorIntType.E, rotation)}
+				selectedObject={selectedObject}
+				setWidth={setWidth}
+				setHeight={setHeight}
+			/>
+			<Corner
+				x={widthState}
+				y={heightState}
+				cursor={getCursorType(CursorIntType.SE, rotation)}
+				selectedObject={selectedObject}
+				setWidth={setWidth}
+				setHeight={setHeight}
+			/>
+			<Corner
+				x={widthState / 2}
+				y={heightState}
+				cursor={getCursorType(CursorIntType.S, rotation)}
+				selectedObject={selectedObject}
+				setWidth={setWidth}
+				setHeight={setHeight}
+			/>
+			<Corner
+				x={0}
+				y={heightState}
+				cursor={getCursorType(CursorIntType.SW, rotation)}
+				selectedObject={selectedObject}
+				setWidth={setWidth}
+				setHeight={setHeight}
+			/>
+			<Corner
+				x={0}
+				y={heightState / 2}
+				cursor={getCursorType(CursorIntType.W, rotation)}
+				selectedObject={selectedObject}
+				setWidth={setWidth}
+				setHeight={setHeight}
+			/>
+		</div>
+	)
 }
 
 export { ObjectSelection }

@@ -1,8 +1,8 @@
-import { RefObject, useCallback } from 'react'
+import React, { useCallback } from 'react'
 
 type ResizeItemInfo = {
-	objectRef: RefObject<HTMLDivElement>
-	cornerRef: RefObject<HTMLDivElement>
+	objectRef: React.MutableRefObject<SVGSVGElement | HTMLDivElement>
+	cornerRef: React.MutableRefObject<HTMLDivElement>
 }
 
 type InternalResizeItemInfo = ResizeItemInfo & {
@@ -10,7 +10,7 @@ type InternalResizeItemInfo = ResizeItemInfo & {
 	startX: number
 }
 
-type OnResizeStartFn = (args: { onDrag: (event: MouseEvent) => void }) => void
+type OnResizeStartFn = (args: { onDrag: (event: MouseEvent) => void; onDrop: () => void }) => void
 
 function useResizableObject() {
 	const registerResizableItem = useCallback((resizeItemInfo: ResizeItemInfo) => {
@@ -20,11 +20,11 @@ function useResizableObject() {
 			startX: 0,
 		}
 
-		const onDragStart: OnResizeStartFn = ({ onDrag }) => {
+		const onDragStart: OnResizeStartFn = ({ onDrag, onDrop }) => {
 			item.startY = item.cornerRef.current!.getBoundingClientRect().top
 
 			const onMouseUp = () => {
-				// onDrop(event)
+				onDrop()
 
 				window.removeEventListener('mousemove', onDrag)
 				window.removeEventListener('mouseup', onMouseUp)

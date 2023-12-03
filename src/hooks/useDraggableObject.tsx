@@ -1,9 +1,9 @@
-import { RefObject, useContext, useEffect } from 'react'
+import { MutableRefObject, useContext, useEffect } from 'react'
 import { PresenterContext } from '../presenterContext/PresenterContext'
 import { Presenter, Slide } from '../types'
 
 type useDraggableObjectProps = {
-	elementRef: RefObject<HTMLElement>
+	elementRef: MutableRefObject<HTMLElement | SVGSVGElement>
 	elementId: string
 	slideId: string
 }

@@ -1,5 +1,6 @@
 import { PrimitiveBlock, Primitives } from '../../types'
-import { useRef } from 'react'
+import { ObjectSelection } from '../../Editor/WorkSpace/ObjectSelection/ObjectSelection'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDraggableObject } from '../../hooks/useDraggableObject'
 
 type PrimitiveProps = {
@@ -9,10 +10,20 @@ type PrimitiveProps = {
 	isWorkspace: boolean
 	id: string
 	slideId: string
+	selected: boolean
+	ref?: React.MutableRefObject<SVGSVGElement>
 }
 
-function Ellipse({ primitive, scale, onClick, slideId, id, isWorkspace }: PrimitiveProps) {
-	const ref = useRef(null)
+function Ellipse({
+	primitive,
+	scale,
+	onClick,
+	slideId,
+	id,
+	isWorkspace,
+	selected,
+}: PrimitiveProps) {
+	const ref = useRef<SVGSVGElement>(null)
 	if (isWorkspace) {
 		useDraggableObject({
 			elementRef: ref,
@@ -21,69 +32,66 @@ function Ellipse({ primitive, scale, onClick, slideId, id, isWorkspace }: Primit
 		})
 	}
 	return (
-		<svg
-			ref={ref}
-			key={primitive.id}
-			style={{
-				position: 'absolute',
-				width: `${primitive.baseState.width / scale}px`,
-				height: `${primitive.baseState.height / scale}px`,
-				top: `${primitive.baseState.y / scale}px`,
-				left: `${primitive.baseState.x / scale}px`,
-			}}
-			onClick={onClick}
-		>
-			<ellipse
-				cx={`${primitive.baseState.width / 2 / scale}px`}
-				cy={`${primitive.baseState.height / 2 / scale}px`}
-				rx={`${(primitive.baseState.width - primitive.borderSize) / scale / 2}px`}
-				ry={`${(primitive.baseState.height - primitive.borderSize) / scale / 2}px`}
-				fill={primitive.color.colors[0].hex}
-				strokeWidth={primitive.borderSize / scale}
-				stroke={primitive.borderColor.hex}
-			/>
-		</svg>
+		<>
+			<svg
+				ref={ref}
+				key={primitive.id}
+				style={{
+					position: 'absolute',
+					width: `${primitive.baseState.width / scale}px`,
+					height: `${primitive.baseState.height / scale}px`,
+					top: `${primitive.baseState.y / scale}px`,
+					left: `${primitive.baseState.x / scale}px`,
+				}}
+				onClick={onClick}
+			>
+				<ellipse
+					cx={`${primitive.baseState.width / 2 / scale}px`}
+					cy={`${primitive.baseState.height / 2 / scale}px`}
+					rx={`${(primitive.baseState.width - primitive.borderSize) / scale / 2}px`}
+					ry={`${(primitive.baseState.height - primitive.borderSize) / scale / 2}px`}
+					fill={primitive.color.colors[0].hex}
+					strokeWidth={primitive.borderSize / scale}
+					stroke={primitive.borderColor.hex}
+				/>
+			</svg>
+			{selected && <ObjectSelection selectedObject={ref} scale={scale} />}
+		</>
 	)
 }
 
-function Rectangle({ primitive, scale, onClick, slideId, id, isWorkspace }: PrimitiveProps) {
+function Rectangle({ primitive, scale }: PrimitiveProps) {
 	const ref = useRef(null)
-	if (isWorkspace) {
-		useDraggableObject({
-			elementRef: ref,
-			elementId: id,
-			slideId: slideId,
-		})
-	}
+	const [width, setWidth] = useState(primitive.baseState.width / scale)
+	const [height, setHeight] = useState(primitive.baseState.height / scale)
+	useEffect(() => {
+		setWidth(ref.current.parentNode.style.width)
+		setHeight(ref.current.parentNode.style.height)
+	}, [ref.current?.parentNode.style.width])
 	return (
-		<svg
+		<rect
 			ref={ref}
-			key={primitive.id}
-			style={{
-				position: 'absolute',
-				width: `${primitive.baseState.width / scale}px`,
-				height: `${primitive.baseState.height / scale}px`,
-				top: `${primitive.baseState.y / scale}px`,
-				left: `${primitive.baseState.x / scale}px`,
-				rotate: `${primitive.baseState.rotation}deg`,
-			}}
-			onClick={onClick}
-		>
-			<rect
-				x={0}
-				y={0}
-				width={`${primitive.baseState.width / scale}px`}
-				height={`${primitive.baseState.height / scale}px`}
-				fill={primitive.color.colors[0].hex}
-				strokeWidth={primitive.borderSize / scale}
-				stroke={primitive.borderColor.hex}
-			/>
-		</svg>
+			x={0}
+			y={0}
+			width={width}
+			height={height}
+			fill={primitive.color.colors[0].hex}
+			strokeWidth={primitive.borderSize / scale}
+			stroke={primitive.borderColor.hex}
+		/>
 	)
 }
 
-function Triangle({ primitive, scale, onClick, slideId, id, isWorkspace }: PrimitiveProps) {
-	const ref = useRef(null)
+function Triangle({
+	primitive,
+	scale,
+	onClick,
+	slideId,
+	id,
+	isWorkspace,
+	selected,
+}: PrimitiveProps) {
+	const ref = useRef<SVGSVGElement>(null)
 	if (isWorkspace) {
 		useDraggableObject({
 			elementRef: ref,
@@ -92,34 +100,37 @@ function Triangle({ primitive, scale, onClick, slideId, id, isWorkspace }: Primi
 		})
 	}
 	return (
-		<svg
-			ref={ref}
-			key={primitive.id}
-			style={{
-				transformOrigin: 'center',
-				strokeLinejoin: 'miter',
-				strokeMiterlimit: '8',
-				position: 'absolute',
-				width: `${primitive.baseState.width / scale}px`,
-				height: `${primitive.baseState.height / scale}px`,
-				top: `${primitive.baseState.y / scale}px`,
-				left: `${primitive.baseState.x / scale}px`,
-				rotate: `${primitive.baseState.rotation}deg`,
-			}}
-			onClick={onClick}
-		>
-			<polygon
-				points={`${primitive.borderSize / scale + 3} ${
-					(primitive.baseState.height - primitive.borderSize) / scale
-				}, ${(primitive.baseState.width - primitive.borderSize) / scale + 3} ${
-					(primitive.baseState.height - primitive.borderSize) / scale
-				}, ${primitive.baseState.width / 2 / scale}
+		<>
+			<svg
+				ref={ref}
+				key={primitive.id}
+				style={{
+					transformOrigin: 'center',
+					strokeLinejoin: 'miter',
+					strokeMiterlimit: '8',
+					position: 'absolute',
+					width: `${primitive.baseState.width / scale}px`,
+					height: `${primitive.baseState.height / scale}px`,
+					top: `${primitive.baseState.y / scale}px`,
+					left: `${primitive.baseState.x / scale}px`,
+					rotate: `${primitive.baseState.rotation}deg`,
+				}}
+				onClick={onClick}
+			>
+				<polygon
+					points={`${primitive.borderSize / scale + 3} ${
+						(primitive.baseState.height - primitive.borderSize) / scale
+					}, ${(primitive.baseState.width - primitive.borderSize) / scale + 3} ${
+						(primitive.baseState.height - primitive.borderSize) / scale
+					}, ${primitive.baseState.width / 2 / scale}
 					${primitive.borderSize / scale}`}
-				fill={primitive.color.colors[0].hex}
-				strokeWidth={primitive.borderSize / scale}
-				stroke={primitive.borderColor.hex}
-			/>
-		</svg>
+					fill={primitive.color.colors[0].hex}
+					strokeWidth={primitive.borderSize / scale}
+					stroke={primitive.borderColor.hex}
+				/>
+			</svg>
+			{selected && <ObjectSelection selectedObject={ref} scale={scale} />}
+		</>
 	)
 }
 
@@ -130,11 +141,14 @@ function PrimitiveComponent({
 	slideId,
 	id,
 	isWorkspace,
+	selected,
 }: PrimitiveProps) {
+	const ref = useRef(null)
 	switch (primitive.primitiveType) {
 		case Primitives.CIRCLE:
 			return (
 				<Ellipse
+					selected={selected}
 					slideId={slideId}
 					isWorkspace={isWorkspace}
 					id={id}
@@ -144,19 +158,22 @@ function PrimitiveComponent({
 				/>
 			)
 		case Primitives.RECT:
-			return (
-				<Rectangle
-					slideId={slideId}
-					isWorkspace={isWorkspace}
-					id={id}
-					primitive={primitive}
-					scale={scale}
-					onClick={onClick}
-				/>
-			)
+			// return (
+			// 	<Rectangle
+			// 		selected={selected}
+			// 		slideId={slideId}
+			// 		isWorkspace={isWorkspace}
+			// 		id={id}
+			// 		primitive={primitive}
+			// 		scale={scale}
+			// 		onClick={onClick}
+			// 	/>
+			// )
+			break
 		case Primitives.TRIANGLE:
 			return (
 				<Triangle
+					selected={selected}
 					slideId={slideId}
 					isWorkspace={isWorkspace}
 					id={id}
@@ -166,6 +183,44 @@ function PrimitiveComponent({
 				/>
 			)
 	}
+	if (isWorkspace) {
+		useDraggableObject({
+			elementRef: ref,
+			elementId: id,
+			slideId: slideId,
+		})
+	}
+
+	useEffect(() => {}, [ref.current?.style.width])
+	return (
+		<>
+			<svg
+				ref={ref}
+				key={primitive.id}
+				style={{
+					position: 'absolute',
+					width: `${primitive.baseState.width / scale}px`,
+					height: `${primitive.baseState.height / scale}px`,
+					top: `${primitive.baseState.y / scale}px`,
+					left: `${primitive.baseState.x / scale}px`,
+					rotate: `${primitive.baseState.rotation}deg`,
+					border: '1px solid #000000',
+				}}
+				onClick={onClick}
+			>
+				<Rectangle
+					primitive={primitive}
+					scale={scale}
+					onClick={onClick}
+					isWorkspace={isWorkspace}
+					id={id}
+					slideId={slideId}
+					selected={selected}
+				/>
+			</svg>
+			{selected && <ObjectSelection selectedObject={ref} scale={scale} />}
+		</>
+	)
 }
 
 export { PrimitiveComponent }
