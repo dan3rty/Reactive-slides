@@ -2,6 +2,7 @@ import styles from './ObjectSelection.css'
 import { useResizableObject } from '../../../hooks/useResizableObject'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { PresenterContext } from '../../../App'
+import {useDraggableObject} from "../../../hooks/useDraggableObject";
 
 enum CursorType {
 	N = 'n-resize',
@@ -152,9 +153,16 @@ type ObjectSelectionProps = {
 	selectedObject: React.MutableRefObject<SVGSVGElement>
 	id: string
 	scale: number
+	slideId: string
 }
 
-function ObjectSelection({ selectedObject, id }: ObjectSelectionProps) {
+function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) {
+	const ref = useRef(null)
+	useDraggableObject({
+		elementRef: ref,
+		elementId: id,
+		slideId: slideId,
+	})
 	const { clientWidth: width, clientHeight: height } = selectedObject.current
 	const { left, top } = selectedObject.current.style
 	const x = parseFloat(left)
@@ -167,6 +175,7 @@ function ObjectSelection({ selectedObject, id }: ObjectSelectionProps) {
 	const [heightState, setHeight] = useState(height)
 	return (
 		<div
+			ref={ref}
 			className={styles.selection}
 			style={{
 				rotate: rotation + 'deg',
