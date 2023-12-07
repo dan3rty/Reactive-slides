@@ -1,6 +1,7 @@
 import styles from './ObjectSelection.css'
 import { useResizableObject } from '../../../hooks/useResizableObject'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { PresenterContext } from '../../../App'
 
 enum CursorType {
 	N = 'n-resize',
@@ -79,9 +80,11 @@ type CornerProps = {
 	selectedObject: React.MutableRefObject<SVGSVGElement | HTMLDivElement>
 	setWidth?: React.Dispatch<React.SetStateAction<number>>
 	setHeight?: React.Dispatch<React.SetStateAction<number>>
+	id: string
 }
 
-function Corner({ x, y, cursor, selectedObject, setWidth, setHeight }: CornerProps) {
+function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id }: CornerProps) {
+	const { presenter, setPresenter } = useContext(PresenterContext)
 	const { registerResizableItem } = useResizableObject()
 	const size = 5
 	const cornerRef = useRef<HTMLDivElement>(null)
@@ -103,7 +106,24 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight }: CornerPro
 					objectRef.current.style.height = String(newHeight)
 					setHeight && setHeight(newHeight)
 				},
-				onDrop: () => {},
+				onDrop: () => {
+					const { presentation } = presenter
+					const { slides } = presentation
+					const slide = slides.find((slide) => slide.objects.some((obj) => obj.id == id))
+					const object = slide.objects.find((obj) => obj.id == id)
+					const { baseState } = object
+					console.log('1: ', object)
+					Object.assign(object, {
+						...object,
+						baseState: {
+							...baseState,
+							width: objectRef.current.style.width,
+							height: objectRef.current.style.height,
+						},
+					})
+					console.log('2: ', object)
+					setPresenter(presenter)
+				},
 			})
 		}
 
@@ -112,21 +132,29 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight }: CornerPro
 		return () => control.removeEventListener('mousedown', onMouseDown)
 	}, [registerResizableItem])
 
+	console.log(x)
+
 	return (
 		<div
 			ref={cornerRef}
 			className={styles.corner}
-			style={{ position: 'absolute', top: y - size, left: x - size, cursor: cursor }}
+			style={{
+				position: 'absolute',
+				top: y - size ?? 0,
+				left: x - size ?? 0,
+				cursor: cursor,
+			}}
 		></div>
 	)
 }
 
 type ObjectSelectionProps = {
 	selectedObject: React.MutableRefObject<SVGSVGElement>
+	id: string
 	scale: number
 }
 
-function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
+function ObjectSelection({ selectedObject, id }: ObjectSelectionProps) {
 	const { clientWidth: width, clientHeight: height } = selectedObject.current
 	const { left, top } = selectedObject.current.style
 	const x = parseFloat(left)
@@ -150,6 +178,7 @@ function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
 			}}
 		>
 			<Corner
+				id={id}
 				x={0}
 				y={0}
 				cursor={getCursorType(CursorIntType.NW, rotation)}
@@ -158,6 +187,7 @@ function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
 				setHeight={setHeight}
 			/>
 			<Corner
+				id={id}
 				x={widthState / 2}
 				y={0}
 				cursor={getCursorType(CursorIntType.N, rotation)}
@@ -166,6 +196,7 @@ function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
 				setHeight={setHeight}
 			/>
 			<Corner
+				id={id}
 				x={widthState}
 				y={0}
 				cursor={getCursorType(CursorIntType.NE, rotation)}
@@ -174,6 +205,7 @@ function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
 				setHeight={setHeight}
 			/>
 			<Corner
+				id={id}
 				x={widthState}
 				y={heightState / 2}
 				cursor={getCursorType(CursorIntType.E, rotation)}
@@ -182,6 +214,7 @@ function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
 				setHeight={setHeight}
 			/>
 			<Corner
+				id={id}
 				x={widthState}
 				y={heightState}
 				cursor={getCursorType(CursorIntType.SE, rotation)}
@@ -190,6 +223,7 @@ function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
 				setHeight={setHeight}
 			/>
 			<Corner
+				id={id}
 				x={widthState / 2}
 				y={heightState}
 				cursor={getCursorType(CursorIntType.S, rotation)}
@@ -198,6 +232,7 @@ function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
 				setHeight={setHeight}
 			/>
 			<Corner
+				id={id}
 				x={0}
 				y={heightState}
 				cursor={getCursorType(CursorIntType.SW, rotation)}
@@ -206,6 +241,7 @@ function ObjectSelection({ selectedObject }: ObjectSelectionProps) {
 				setHeight={setHeight}
 			/>
 			<Corner
+				id={id}
 				x={0}
 				y={heightState / 2}
 				cursor={getCursorType(CursorIntType.W, rotation)}

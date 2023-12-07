@@ -9,11 +9,10 @@ type ImageProps = {
 	selected: boolean
 	onClick: () => void
 	isWorkspace?: boolean
-	id: string
 	slideId: string
 }
 
-function ImageComponent({ image, scale, selected, onClick, isWorkspace, id, slideId }: ImageProps) {
+function ImageComponent({ image, scale, selected, onClick, isWorkspace, slideId }: ImageProps) {
 	const imageStyle: React.CSSProperties = {
 		width: image.baseState.width / scale + 'px',
 		height: image.baseState.height / scale + 'px',
@@ -26,7 +25,7 @@ function ImageComponent({ image, scale, selected, onClick, isWorkspace, id, slid
 	if (isWorkspace) {
 		useDraggableObject({
 			elementRef: ref,
-			elementId: id,
+			elementId: image.id,
 			slideId: slideId,
 		})
 	}

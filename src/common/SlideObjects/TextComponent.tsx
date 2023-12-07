@@ -9,11 +9,10 @@ type TextProps = {
 	selected: boolean
 	onClick: () => void
 	isWorkspace: boolean
-	id: string
 	slideId: string
 }
 
-function TextComponent({ text, scale, selected, onClick, isWorkspace, slideId, id }: TextProps) {
+function TextComponent({ text, scale, selected, onClick, isWorkspace, slideId }: TextProps) {
 	const textStyle: React.CSSProperties = {
 		width: text.baseState.width / scale + 'px',
 		height: text.baseState.height / scale + 'px',
@@ -26,11 +25,11 @@ function TextComponent({ text, scale, selected, onClick, isWorkspace, slideId, i
 	if (isWorkspace) {
 		useDraggableObject({
 			elementRef: ref,
-			elementId: id,
+			elementId: text.id,
 			slideId: slideId,
 		})
 	}
-	const textToRender = text.value.map((char, index) => (
+	const TextToRender = text.value.map((char, index) => (
 		<div
 			key={index}
 			className={styles.char}
@@ -51,7 +50,7 @@ function TextComponent({ text, scale, selected, onClick, isWorkspace, slideId, i
 	))
 	return (
 		<div style={textStyle} className={styles.text} ref={ref}>
-			{textToRender}
+			{TextToRender}
 		</div>
 	)
 }

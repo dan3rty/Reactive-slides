@@ -69,7 +69,6 @@ function SlideRenderer({
 						return (
 							<ImageComponent
 								isWorkspace={isWorkspace}
-								id={obj.id}
 								slideId={slide.id}
 								key={index}
 								image={newObj}
@@ -82,7 +81,6 @@ function SlideRenderer({
 						return (
 							<PrimitiveComponent
 								isWorkspace={isWorkspace}
-								id={obj.id}
 								slideId={slide.id}
 								selected={selected}
 								key={index}
@@ -95,7 +93,6 @@ function SlideRenderer({
 						return (
 							<TextComponent
 								isWorkspace={isWorkspace}
-								id={obj.id}
 								slideId={slide.id}
 								key={index}
 								text={newObj}
