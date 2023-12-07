@@ -34,20 +34,3 @@
 	border: 3px solid #006a82;
 	border-radius: 5px;
 }
-
-.small-slide {
-	cursor: pointer;
-	position: relative;
-	border-radius: 10px;
-	box-shadow: 2px 2px 5px rgb(0 0 0 / 30%);
-	margin-block: 10px;
-}
-
-.small-slide_chosen {
-	margin-block: 20px;
-	border-radius: 15px;
-	border-width: 5px;
-	border-color: #a3e1ec;
-	border-style: solid;
-	box-shadow: 5px 5px 5px rgb(0 0 0 / 19%);
-}
