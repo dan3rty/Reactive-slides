@@ -1,9 +1,6 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useDraggableList } from '../../../hooks/useDraggableList'
 import styles from './SlideList.css'
-import { SlideRenderer } from '../../../common/SlideEditor/SlideRenderer'
-import { Counter } from './Counter/Counter'
-import { joinCssClasses } from '../../../classes/joinCssClasses'
 import {
 	Background,
 	Color,
@@ -15,24 +12,21 @@ import {
 } from '../../../types'
 import { PresenterContext } from '../../../App'
 import { AddSlideButton } from './AddSlideButton/AddSlideButton'
+import { SlidePreview } from './SlidePreview/SlidePreview'
 
 function generateBlankSlide() {
 	const gradientColor: Color = {
-		hex: '#000000',
-		opacity: 0,
-	}
-	const gradientColor2: Color = {
-		hex: '#e52222',
+		hex: '#FFFFFF',
 		opacity: 0,
 	}
 	const backgroundGradient: GradientColor = {
-		colors: [gradientColor, gradientColor2],
+		colors: [gradientColor],
 	}
 	const background: Background = {
 		color: backgroundGradient,
 	}
 	const newSlide: Slide = {
-		id: 'pip75474sgf', //TODO: Нужен генератор ID и вообще прибраться в создании слайда
+		id: Math.random().toString(16).slice(2),
 		background: background,
 		objects: [],
 	}
@@ -85,59 +79,19 @@ function SlideList({ scale }: SlideListProps) {
 	}
 
 	const slidesToRender = slides.map((slide, index) => {
-		const ref = useRef<HTMLDivElement>(null)
 		const isChosen = slide.id == chosen
 		const slideScale = isChosen ? scale * 3.5 : scale * 4
 
-		useEffect(() => {
-			if (!registerDndItem) {
-				return
-			}
-			const { onDragStart } = registerDndItem(index, {
-				elementRef: ref,
-			})
-
-			const onMouseDown = (mouseDownEvent: MouseEvent) => {
-				onDragStart({
-					onDrag: (dragEvent) => {
-						ref.current!.style.position = 'relative'
-						ref.current!.style.zIndex = '1'
-						ref.current!.style.boxShadow = 'black 2px 2px 4px'
-						ref.current!.style.top = `${dragEvent.clientY - mouseDownEvent.clientY}px`
-					},
-					onDrop: () => {
-						ref.current!.style.position = ''
-						ref.current!.style.zIndex = ''
-						ref.current!.style.boxShadow = ''
-						ref.current!.style.top = ''
-					},
-				})
-			}
-
-			const control = ref.current!
-			control.addEventListener('mousedown', onMouseDown)
-			return () => control.removeEventListener('mousedown', onMouseDown)
-		}, [index, registerDndItem])
-
 		return (
-			<div
-				ref={ref}
+			<SlidePreview
+				registerDndItem={registerDndItem}
 				key={index}
-				className={joinCssClasses(
-					styles.smallSlide,
-					isChosen ? styles.smallSlideChosen : null,
-				)}
-				onClick={createOnClick(slide.id)}
-			>
-				<SlideRenderer
-					scale={slideScale}
-					slide={slide}
-					isWorkspace={false}
-					createOnClick={createOnClick}
-					selection={selection}
-				/>
-				<Counter index={index + 1}></Counter>
-			</div>
+				index={index}
+				scale={slideScale}
+				slide={slide}
+				selection={selection}
+				createOnClick={createOnClick}
+			></SlidePreview>
 		)
 	})
 
