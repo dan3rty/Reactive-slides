@@ -72,7 +72,7 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 					/>
 				</div>
 			</div>
-			<SlideList scale={scale} createOnClick={createOnClick} />
+			<SlideList presenter={presenter} scale={scale} createOnClick={createOnClick} />
 		</div>
 	)
 }
