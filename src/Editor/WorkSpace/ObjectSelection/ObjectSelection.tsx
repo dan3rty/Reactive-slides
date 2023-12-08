@@ -189,7 +189,6 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				ref={ref}
 				className={styles.draggableSpace}
 				style={{
-					rotate: rotation + 'deg',
 					width: widthState,
 					height: heightState,
 				}}
