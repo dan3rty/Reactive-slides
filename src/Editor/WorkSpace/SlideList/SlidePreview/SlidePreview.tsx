@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { joinCssClasses } from '../../../../classes/joinCssClasses'
 import { SlideRenderer } from '../../../../common/SlideEditor/SlideRenderer'
 import { RegisterDndItemFn } from '../../../../hooks/useDraggableList'
@@ -28,6 +28,13 @@ function SlidePreview({
 }: SlidePreviewProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const isChosen = slide.id == selection.slideId
+	const [isHovering, setIsHovering] = useState(false)
+	const handleMouseOver = () => {
+		setIsHovering(true)
+	}
+	const handleMouseOut = () => {
+		setIsHovering(false)
+	}
 	useEffect(() => {
 		if (!registerDndItem) {
 			return
@@ -57,11 +64,10 @@ function SlidePreview({
 		control.addEventListener('mousedown', onMouseDown)
 		return () => control.removeEventListener('mousedown', onMouseDown)
 	}, [index, registerDndItem])
-	const deleteButton = isChosen ? (
-		<DeleteButton deleteSlideOnClick={deleteOnClick}></DeleteButton>
-	) : null
 	return (
 		<div
+			onMouseOver={handleMouseOver}
+			onMouseOut={handleMouseOut}
 			ref={ref}
 			key={index}
 			className={joinCssClasses(styles.smallSlide, isChosen ? styles.smallSlideChosen : null)}
@@ -74,8 +80,9 @@ function SlidePreview({
 				createOnClick={createOnClick}
 				selection={selection}
 			/>
+			<div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}></div>
 			<Counter index={index + 1}></Counter>
-			{deleteButton}
+			{isHovering && <DeleteButton deleteSlideOnClick={deleteOnClick}></DeleteButton>}
 		</div>
 	)
 }
