@@ -79,12 +79,13 @@ type CornerProps = {
 	y: number
 	cursor: CursorType
 	selectedObject: React.MutableRefObject<SVGSVGElement | HTMLDivElement>
-	setWidth?: React.Dispatch<React.SetStateAction<number>>
-	setHeight?: React.Dispatch<React.SetStateAction<number>>
+	setWidth: React.Dispatch<React.SetStateAction<number>>
+	setHeight: React.Dispatch<React.SetStateAction<number>>
+	scale: number
 	id: string
 }
 
-function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id }: CornerProps) {
+function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id, scale }: CornerProps) {
 	const { presenter, setPresenter } = useContext(PresenterContext)
 	const { registerResizableItem } = useResizableObject()
 	const size = 5
@@ -100,30 +101,44 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id }: Corne
 			onDragStart({
 				onDrag: (dragEvent) => {
 					const newWidth = startWidth + dragEvent.clientX - mouseDownEvent.clientX
-					objectRef.current.style.width = String(newWidth)
-					setWidth && setWidth(newWidth)
+					setWidth(newWidth)
 
 					const newHeight = startHeight + dragEvent.clientY - mouseDownEvent.clientY
-					objectRef.current.style.height = String(newHeight)
-					setHeight && setHeight(newHeight)
+					setHeight(newHeight)
 				},
 				onDrop: () => {
-					const { presentation } = presenter
+					const { presentation } = structuredClone(presenter)
 					const { slides } = presentation
 					const slide = slides.find((slide) => slide.objects.some((obj) => obj.id == id))
-					const object = slide.objects.find((obj) => obj.id == id)
-					const { baseState } = object
-					console.log('1: ', object)
-					Object.assign(object, {
-						...object,
-						baseState: {
-							...baseState,
-							width: objectRef.current.style.width,
-							height: objectRef.current.style.height,
-						},
+					const objects = slide.objects.map((obj) => {
+						if (obj.id == id) {
+							obj.baseState = {
+								...obj.baseState,
+								width: parseFloat(objectRef.current.style.width) * scale,
+								height: parseFloat(objectRef.current.style.height) * scale,
+							}
+						}
+						return obj
 					})
-					console.log('2: ', object)
-					setPresenter(presenter)
+					console.log(
+						parseFloat(objectRef.current.style.width),
+						parseFloat(objectRef.current.style.height),
+					)
+					const newSlide = {
+						...slide,
+						objects,
+					}
+					const newSlides = slides.map((el) => {
+						if (el.id === slide.id) {
+							return newSlide
+						} else {
+							return el
+						}
+					})
+					setPresenter({
+						...presenter,
+						presentation: { slides: newSlides, title: presentation.title },
+					})
 				},
 			})
 		}
@@ -156,7 +171,7 @@ type ObjectSelectionProps = {
 	slideId: string
 }
 
-function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) {
+function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelectionProps) {
 	const ref = useRef(null)
 	useDraggableObject({
 		elementRef: ref,
@@ -173,6 +188,10 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 	const borderSize = 3
 	const [widthState, setWidth] = useState(width)
 	const [heightState, setHeight] = useState(height)
+	useEffect(() => {
+		selectedObject.current.style.width = String(widthState)
+		selectedObject.current.style.height = String(heightState)
+	}, [widthState, heightState])
 	return (
 		<div
 			className={styles.selection}
@@ -194,6 +213,7 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				scale={scale}
 			/>
 			<Corner
 				id={id}
@@ -203,6 +223,7 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				scale={scale}
 			/>
 			<Corner
 				id={id}
@@ -212,6 +233,7 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				scale={scale}
 			/>
 			<Corner
 				id={id}
@@ -221,6 +243,7 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				scale={scale}
 			/>
 			<Corner
 				id={id}
@@ -230,6 +253,7 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				scale={scale}
 			/>
 			<Corner
 				id={id}
@@ -239,6 +263,7 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				scale={scale}
 			/>
 			<Corner
 				id={id}
@@ -248,6 +273,7 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				scale={scale}
 			/>
 			<Corner
 				id={id}
@@ -257,6 +283,7 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				scale={scale}
 			/>
 		</div>
 	)
