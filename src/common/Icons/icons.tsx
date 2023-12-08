@@ -358,10 +358,10 @@ const ArrowRightIcon = (
 
 const AddSlideButtonIcon = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 35 35' fill='none'>
-		<g clip-path='url(#clip0_105_1013)'>
+		<g clipPath='url(#clip0_105_1013)'>
 			<path
-				fill-rule='evenodd'
-				clip-rule='evenodd'
+				fillRule='evenodd'
+				clipRule='evenodd'
 				d='M24.5 17.5C24.5 18.42 23.716 19.1667 22.75 19.1667H19.25V22.5C19.25 23.42 18.466 24.1667 17.5 24.1667C16.534 24.1667 15.75 23.42 15.75 22.5V19.1667H12.25C11.284 19.1667 10.5 18.42 10.5 17.5C10.5 16.58 11.284 15.8333 12.25 15.8333H15.75V12.5C15.75 11.58 16.534 10.8333 17.5 10.8333C18.466 10.8333 19.25 11.58 19.25 12.5V15.8333H22.75C23.716 15.8333 24.5 16.58 24.5 17.5ZM17.5 30.8333C9.78075 30.8333 3.5 24.8517 3.5 17.5C3.5 10.1483 9.78075 4.16666 17.5 4.16666C25.2192 4.16666 31.5 10.1483 31.5 17.5C31.5 24.8517 25.2192 30.8333 17.5 30.8333ZM17.5 0.833328C7.83475 0.833328 0 8.295 0 17.5C0 26.705 7.83475 34.1667 17.5 34.1667C27.1652 34.1667 35 26.705 35 17.5C35 8.295 27.1652 0.833328 17.5 0.833328Z'
 				fill='#006A82'
 			/>
@@ -371,6 +371,13 @@ const AddSlideButtonIcon = (
 				<rect width='35' height='35' fill='white' />
 			</clipPath>
 		</defs>
+	</svg>
+)
+
+const DeleteButtonIcon = (
+	<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<line x1="1.5" y1="-1.5" x2="30.5806" y2="-1.5" transform="matrix(0.697131 -0.716944 0.697131 0.716944 2.63565 25)" stroke="#FF0000" strokeWidth="3" strokeLinecap="round"/>
+		<line x1="1.5" y1="-1.5" x2="30.5806" y2="-1.5" transform="matrix(0.697131 0.716944 -0.697131 0.716944 0 2)" stroke="#FF0000" strokeWidth="3" strokeLinecap="round"/>
 	</svg>
 )
 
@@ -402,4 +409,5 @@ export {
 	ArrowLeftIcon,
 	ArrowRightIcon,
 	AddSlideButtonIcon,
+	DeleteButtonIcon,
 }

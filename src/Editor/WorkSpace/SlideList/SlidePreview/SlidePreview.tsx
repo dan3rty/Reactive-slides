@@ -1,17 +1,19 @@
-import { useEffect, useRef} from 'react'
+import { useEffect, useRef } from 'react'
 import { joinCssClasses } from '../../../../classes/joinCssClasses'
 import { SlideRenderer } from '../../../../common/SlideEditor/SlideRenderer'
 import { RegisterDndItemFn } from '../../../../hooks/useDraggableList'
 import { Selection, Slide } from '../../../../types'
-import { Counter } from '../Counter/Counter'
+import { Counter } from './Counter/Counter'
+import { DeleteButton } from './DeleteButton/DeleteButton'
 import styles from './SlidePreview.css'
 
 type SlidePreviewProps = {
-	index: number,
+	index: number
 	scale: number
 	slide: Slide
 	selection: Selection
 	createOnClick: (objectId: string) => () => void
+	deleteOnClick: () => void
 	registerDndItem: RegisterDndItemFn
 }
 
@@ -21,7 +23,8 @@ function SlidePreview({
 	slide,
 	selection,
 	createOnClick,
-	registerDndItem
+	registerDndItem,
+	deleteOnClick,
 }: SlidePreviewProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const isChosen = slide.id == selection.slideId
@@ -54,15 +57,14 @@ function SlidePreview({
 		control.addEventListener('mousedown', onMouseDown)
 		return () => control.removeEventListener('mousedown', onMouseDown)
 	}, [index, registerDndItem])
-	console.log(selection.slideId)
+	const deleteButton = isChosen ? (
+		<DeleteButton deleteSlideOnClick={deleteOnClick}></DeleteButton>
+	) : null
 	return (
 		<div
 			ref={ref}
 			key={index}
-			className={joinCssClasses(
-				styles.smallSlide,
-				isChosen ? styles.smallSlideChosen : null,
-			)}
+			className={joinCssClasses(styles.smallSlide, isChosen ? styles.smallSlideChosen : null)}
 			onClick={createOnClick(slide.id)}
 		>
 			<SlideRenderer
@@ -73,6 +75,7 @@ function SlidePreview({
 				selection={selection}
 			/>
 			<Counter index={index + 1}></Counter>
+			{deleteButton}
 		</div>
 	)
 }

@@ -6,6 +6,7 @@ import {
 	Color,
 	GradientColor,
 	Presentation,
+	Presenter,
 	Selection,
 	Slide,
 	Tabs,
@@ -36,10 +37,11 @@ function generateBlankSlide() {
 type SlideListProps = {
 	scale: number
 	createOnClick: (objectId: string) => () => void
+	presenter: Presenter
 }
-function SlideList({ scale }: SlideListProps) {
+function SlideList({ scale, presenter }: SlideListProps) {
 	const ref = useRef<HTMLDivElement>(null)
-	const { presenter, setPresenter } = useContext(PresenterContext)
+	const { setPresenter } = useContext(PresenterContext)
 	const { presentation, selection, operationHistory } = presenter
 	const slides: Array<Slide> = presentation.slides
 	const [chosen, setChosen] = useState(selection.slideId)
@@ -81,6 +83,16 @@ function SlideList({ scale }: SlideListProps) {
 	const slidesToRender = slides.map((slide, index) => {
 		const isChosen = slide.id == chosen
 		const slideScale = isChosen ? scale * 3.5 : scale * 4
+		const deleteSlideOnClick = () => {
+			const newSlides: Array<Slide> = presenter.presentation.slides.filter(
+				(newSlide) => newSlide.id != slide.id,
+			)
+			const newPresentation: Presentation = {
+				...presentation,
+				slides: newSlides,
+			}
+			setPresenter({ presentation: newPresentation, selection, operationHistory })
+		}
 
 		return (
 			<SlidePreview
@@ -91,6 +103,7 @@ function SlideList({ scale }: SlideListProps) {
 				slide={slide}
 				selection={selection}
 				createOnClick={createOnClick}
+				deleteOnClick={deleteSlideOnClick}
 			></SlidePreview>
 		)
 	})

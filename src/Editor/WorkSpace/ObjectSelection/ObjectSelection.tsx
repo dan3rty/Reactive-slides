@@ -189,6 +189,7 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				height: heightState,
 			}}
 		>
+			<div ref={ref} className={styles.draggableSpace}></div>
 			<Corner
 				id={id}
 				x={0}
