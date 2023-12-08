@@ -9,3 +9,9 @@
 	background: #8ab4f8;
 	border: #ffffff solid 2px;
 }
+
+.draggable-space {
+	position: absolute;
+	top: 0;
+	left: 0;
+}

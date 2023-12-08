@@ -2,7 +2,7 @@ import styles from './ObjectSelection.css'
 import { useResizableObject } from '../../../hooks/useResizableObject'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { PresenterContext } from '../../../App'
-import {useDraggableObject} from "../../../hooks/useDraggableObject";
+import { useDraggableObject } from '../../../hooks/useDraggableObject'
 
 enum CursorType {
 	N = 'n-resize',
@@ -175,7 +175,6 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 	const [heightState, setHeight] = useState(height)
 	return (
 		<div
-			ref={ref}
 			className={styles.selection}
 			style={{
 				rotate: rotation + 'deg',
@@ -186,6 +185,15 @@ function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) 
 				height: heightState,
 			}}
 		>
+			<div
+				ref={ref}
+				className={styles.draggableSpace}
+				style={{
+					rotate: rotation + 'deg',
+					width: widthState,
+					height: heightState,
+				}}
+			></div>
 			<Corner
 				id={id}
 				x={0}
