@@ -80,7 +80,6 @@ function SlidePreview({
 				createOnClick={createOnClick}
 				selection={selection}
 			/>
-			<div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}></div>
 			<Counter index={index + 1}></Counter>
 			{isHovering && <DeleteButton deleteSlideOnClick={deleteOnClick}></DeleteButton>}
 		</div>
