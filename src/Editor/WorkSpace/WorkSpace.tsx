@@ -2,7 +2,7 @@ import styles from './WorkSpace.css'
 import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
-import { Presenter, Selection, Slide } from '../../types'
+import { Presentation, Selection, Slide } from '../../types'
 import { useContext } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
 
@@ -44,18 +44,11 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 			}
 			const newSlides: Array<Slide> = presenter.presentation.slides
 			newSlides[slideIndex] = newSlide
-			const newPresenter: Presenter = {
-				...presenter,
-				selection: {
-					...selection,
-					objectsId: [],
-				},
-				presentation: {
-					...presentation,
-					slides: newSlides,
-				},
+			const newPresentation: Presentation = {
+				...presentation,
+				slides: newSlides,
 			}
-			setPresenter(newPresenter)
+			setPresenter({ presentation: newPresentation, selection, operationHistory })
 		}
 	})
 	return (
