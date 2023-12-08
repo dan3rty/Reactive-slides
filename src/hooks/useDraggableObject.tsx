@@ -7,6 +7,7 @@ type useDraggableObjectProps = {
 	elementId: string
 	slideId: string
 }
+
 function useDraggableObject(props: useDraggableObjectProps) {
 	const { presenter, setPresenter, editedSlideRef } = useContext(PresenterContext)
 	const size = window.innerHeight
@@ -16,9 +17,10 @@ function useDraggableObject(props: useDraggableObjectProps) {
 		.objects.find((object) => object.id === props.elementId)
 	let baseObjPosition = { x: 0, y: 0 }
 	let baseMousePosition = { x: 0, y: 0 }
+
 	function moving(e) {
-		const dx = (e.clientX - baseMousePosition.x)
-		const dy = (e.clientY - baseMousePosition.y )
+		const dx = e.clientX - baseMousePosition.x
+		const dy = e.clientY - baseMousePosition.y
 		obj = {
 			...obj,
 			baseState: {
@@ -51,18 +53,21 @@ function useDraggableObject(props: useDraggableObjectProps) {
 		}
 		setPresenter(newPresenter)
 	}
+
 	function stopMoving() {
 		editedSlideRef.current.removeEventListener('mousemove', moving)
 		editedSlideRef.current.removeEventListener('mouseup', stopMoving)
 		props.elementRef.current.addEventListener('mousedown', startMoving)
 	}
+
 	function startMoving(e) {
 		baseMousePosition = { x: e.clientX, y: e.clientY }
-		baseObjPosition = { x: obj.baseState.x, y: obj.baseState.y}
+		baseObjPosition = { x: obj.baseState.x, y: obj.baseState.y }
 		props.elementRef.current.removeEventListener('mousedown', startMoving)
 		editedSlideRef.current.addEventListener('mousemove', moving)
 		editedSlideRef.current.addEventListener('mouseup', stopMoving)
 	}
+
 	useEffect(() => {
 		if (props.elementRef.current) {
 			props.elementRef.current.addEventListener('mousedown', startMoving)

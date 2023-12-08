@@ -12,12 +12,12 @@ type PrimitiveProps = {
 	ref?: React.MutableRefObject<SVGSVGElement>
 }
 
-function Ellipse({ primitive, scale, onClick, slideId, isWorkspace, selected }: PrimitiveProps) {
+function Ellipse({ primitive, scale, onClick, slideId, selected }: PrimitiveProps) {
 	const ref = useRef<SVGSVGElement>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 	useEffect(() => {
 		setIsLoaded(true)
-	}, []);
+	}, [])
 	return (
 		<>
 			<svg
@@ -42,7 +42,14 @@ function Ellipse({ primitive, scale, onClick, slideId, isWorkspace, selected }: 
 					stroke={primitive.borderColor.hex}
 				/>
 			</svg>
-			{selected && isLoaded && <ObjectSelection id={primitive.id} selectedObject={ref} scale={scale} slideId={slideId}/>}
+			{selected && isLoaded && (
+				<ObjectSelection
+					id={primitive.id}
+					selectedObject={ref}
+					scale={scale}
+					slideId={slideId}
+				/>
+			)}
 		</>
 	)
 }
@@ -69,12 +76,12 @@ function Rectangle({ hex, borderSize, borderColor }: RectangleProps) {
 	)
 }
 
-function Triangle({ primitive, scale, onClick, slideId, isWorkspace, selected }: PrimitiveProps) {
+function Triangle({ primitive, scale, onClick, slideId, selected }: PrimitiveProps) {
 	const ref = useRef<SVGSVGElement>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 	useEffect(() => {
 		setIsLoaded(true)
-	}, []);
+	}, [])
 	return (
 		<>
 			<svg
@@ -105,7 +112,14 @@ function Triangle({ primitive, scale, onClick, slideId, isWorkspace, selected }:
 					stroke={primitive.borderColor.hex}
 				/>
 			</svg>
-			{selected && isLoaded && <ObjectSelection id={primitive.id} selectedObject={ref} scale={scale} slideId={slideId}/>}
+			{selected && isLoaded && (
+				<ObjectSelection
+					id={primitive.id}
+					selectedObject={ref}
+					scale={scale}
+					slideId={slideId}
+				/>
+			)}
 		</>
 	)
 }
@@ -175,7 +189,14 @@ function PrimitiveComponent({
 			>
 				{concretePrimitive}
 			</svg>
-			{selected && isLoaded && <ObjectSelection id={primitive.id} selectedObject={ref} scale={scale} slideId={slideId}/>}
+			{selected && isLoaded && (
+				<ObjectSelection
+					id={primitive.id}
+					selectedObject={ref}
+					scale={scale}
+					slideId={slideId}
+				/>
+			)}
 		</>
 	)
 }
