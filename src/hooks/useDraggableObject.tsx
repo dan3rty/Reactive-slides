@@ -16,9 +16,9 @@ function useDraggableObject(props: useDraggableObjectProps) {
 		.objects.find((object) => object.id === props.elementId)
 	let baseObjPosition = { x: 0, y: 0 }
 	let baseMousePosition = { x: 0, y: 0 }
-	function moving(e) {
-		const dx = (e.clientX - baseMousePosition.x)
-		const dy = (e.clientY - baseMousePosition.y )
+	function moving(e: MouseEvent) {
+		const dx = e.clientX - baseMousePosition.x
+		const dy = e.clientY - baseMousePosition.y
 		obj = {
 			...obj,
 			baseState: {
@@ -58,7 +58,7 @@ function useDraggableObject(props: useDraggableObjectProps) {
 	}
 	function startMoving(e) {
 		baseMousePosition = { x: e.clientX, y: e.clientY }
-		baseObjPosition = { x: obj.baseState.x, y: obj.baseState.y}
+		baseObjPosition = { x: obj.baseState.x, y: obj.baseState.y }
 		props.elementRef.current.removeEventListener('mousedown', startMoving)
 		editedSlideRef.current.addEventListener('mousemove', moving)
 		editedSlideRef.current.addEventListener('mouseup', stopMoving)

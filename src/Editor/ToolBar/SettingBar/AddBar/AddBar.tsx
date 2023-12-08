@@ -13,117 +13,16 @@ import {
 } from '../../../../common/Icons/icons'
 import { useContext, useRef, useState } from 'react'
 import { PresenterContext } from '../../../../presenterContext/PresenterContext'
-import { ImageBlock, Presenter, PrimitiveBlock, Slide, TextBlock } from '../../../../types'
-import * as Type from '../../../../types'
+import { useObjectCreation } from '../../../../hooks/useObjectCreation'
 
 function AddBar() {
 	const [imagePathInputOpened, setImagePathInputOpened] = useState(false)
-	const { presenter, setPresenter, editedSlideRef } = useContext(PresenterContext)
+	const { editedSlideRef } = useContext(PresenterContext)
 	const rect = editedSlideRef.current.getBoundingClientRect()
-	let x1: number
-	let y1: number
-	let x2: number
-	let y2: number
-	let currentBlock: string
-
-	const size = window.innerHeight
-	const scale = (1080 / (size - 205)) * 1.2
 
 	const imagePathInputRef = useRef(null)
-	let imagePathInput = ''
-	function useHandleAddUp(event: MouseEvent) {
-		document.removeEventListener('mouseup', useHandleAddUp)
-		x2 = event.clientX - rect.x
-		y2 = event.clientY - rect.y
-		const objectToAdd =
-			currentBlock === 'rectangle' || currentBlock === 'triangle' || currentBlock === 'oval'
-				? ({
-						blockType: Type.BlockType.PRIMITIVE,
-						id: Math.random().toString(16).slice(2),
-						primitiveType:
-							currentBlock === 'rectangle'
-								? Type.Primitives.RECT
-								: currentBlock === 'triangle'
-								? Type.Primitives.TRIANGLE
-								: Type.Primitives.CIRCLE,
-						color: {
-							colors: [{ hex: '#808080', opacity: 0 }],
-						},
-						baseState: {
-							width: (x1 > x2 ? x1 - x2 : x2 - x1) * scale,
-							height: (y1 > y2 ? y1 - y2 : y2 - y1) * scale,
-							x: (x1 < x2 ? x1 : x2) * scale,
-							y: (y1 < y2 ? y1 : y2) * scale,
-							rotation: 0,
-						},
-						borderSize: 5,
-						borderColor: { hex: '#00000', opacity: 0 },
-						borderType: Type.BorderTypes.SOLID,
-				  } as PrimitiveBlock)
-				: currentBlock === 'image'
-				? ({
-						typeValue: Type.ImageSource.PATH,
-						blockType: Type.BlockType.IMAGE,
-						id: Math.random().toString(16).slice(2),
-						baseState: {
-							width: (x1 > x2 ? x1 - x2 : x2 - x1) * scale,
-							height: (y1 > y2 ? y1 - y2 : y2 - y1) * scale,
-							x: (x1 < x2 ? x1 : x2) * scale,
-							y: (y1 < y2 ? y1 : y2) * scale,
-							rotation: 0,
-						},
-						value: imagePathInput,
-						opacity: 0,
-				  } as ImageBlock)
-				: ({
-						blockType: Type.BlockType.TEXT,
-						id: Math.random().toString(16).slice(2),
-						baseState: {
-							width: (x1 > x2 ? x1 - x2 : x2 - x1) * scale,
-							height: (y1 > y2 ? y1 - y2 : y2 - y1) * scale,
-							x: (x1 < x2 ? x1 : x2) * scale,
-							y: (y1 < y2 ? y1 : y2) * scale,
-							rotation: 0,
-						},
-						value: [],
-				  } as TextBlock)
-		const slideIndex = presenter.presentation.slides.findIndex(
-			(slide) => slide.id === presenter.selection.slideId,
-		)
-		const newSlide: Slide = {
-			...presenter.presentation.slides[slideIndex],
-			objects: presenter.presentation.slides[slideIndex].objects.concat(objectToAdd),
-		}
-		const newSlides: Array<Slide> = presenter.presentation.slides
-		newSlides[slideIndex] = newSlide
-		const newPresenter: Presenter = {
-			...presenter,
-			selection: {
-				...presenter.selection,
-				objectsId: [objectToAdd.id],
-			},
-			presentation: {
-				...presenter.presentation,
-				slides: newSlides,
-			},
-		}
-		setPresenter(newPresenter)
-	}
-	function handleAddDown(event: MouseEvent) {
-		event.preventDefault()
-		document.removeEventListener('mousedown', handleAddDown)
-		if (
-			rect.x > event.x ||
-			rect.x + rect.width < event.x ||
-			rect.y > event.y ||
-			rect.y + rect.height < event.y
-		) {
-			return
-		}
-		x1 = event.clientX - rect.x
-		y1 = event.clientY - rect.y
-		document.addEventListener('mouseup', useHandleAddUp)
-	}
+
+	const { handleAddDown, setBlockType, setImagePathInput } = useObjectCreation({ rect })
 
 	function handleDownInInput(event: MouseEvent) {
 		if (event.target !== imagePathInputRef.current) {
@@ -140,8 +39,8 @@ function AddBar() {
 				icon={TextIcon}
 				text='text'
 				onClick={() => {
+					setBlockType('text')
 					document.addEventListener('mousedown', handleAddDown)
-					currentBlock = 'text'
 				}}
 			/>
 			<Button style='light' size='big' icon={TableIcon} text='table' />
@@ -151,8 +50,8 @@ function AddBar() {
 				icon={TriangleIcon}
 				text='triangle'
 				onClick={() => {
+					setBlockType('triangle')
 					document.addEventListener('mousedown', handleAddDown)
-					currentBlock = 'triangle'
 				}}
 			/>
 			<Button style='light' size='big' icon={BulletListIcon} text='bullet list' />
@@ -175,8 +74,8 @@ function AddBar() {
 					placeholder={'URL to image'}
 					onChange={(e) => {
 						setImagePathInputOpened(false)
-						currentBlock = 'image'
-						imagePathInput = e.target.value
+						setBlockType('image')
+						setImagePathInput(e.target.value)
 						document.addEventListener('mousedown', handleAddDown)
 					}}
 				/>
@@ -187,8 +86,8 @@ function AddBar() {
 				icon={SquareIcon}
 				text='rectangle'
 				onClick={() => {
+					setBlockType('rectangle')
 					document.addEventListener('mousedown', handleAddDown)
-					currentBlock = 'rectangle'
 				}}
 			/>
 			<Button style='light' size='big' icon={NumberedListIcon} text='numbered list' />
@@ -199,8 +98,8 @@ function AddBar() {
 				icon={OvalIcon}
 				text='oval'
 				onClick={() => {
+					setBlockType('oval')
 					document.addEventListener('mousedown', handleAddDown)
-					currentBlock = 'oval'
 				}}
 			/>
 		</div>
