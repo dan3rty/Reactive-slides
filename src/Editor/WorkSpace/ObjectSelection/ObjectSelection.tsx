@@ -2,6 +2,7 @@ import styles from './ObjectSelection.css'
 import { useResizableObject } from '../../../hooks/useResizableObject'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { PresenterContext } from '../../../App'
+import { useDraggableObject } from '../../../hooks/useDraggableObject'
 
 enum CursorType {
 	N = 'n-resize',
@@ -78,8 +79,8 @@ type CornerProps = {
 	y: number
 	cursor: CursorType
 	selectedObject: React.MutableRefObject<SVGSVGElement | HTMLDivElement>
-	setWidth?: React.Dispatch<React.SetStateAction<number>>
-	setHeight?: React.Dispatch<React.SetStateAction<number>>
+	setWidth: React.Dispatch<React.SetStateAction<number>>
+	setHeight: React.Dispatch<React.SetStateAction<number>>
 	id: string
 }
 
@@ -99,29 +100,28 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id }: Corne
 			onDragStart({
 				onDrag: (dragEvent) => {
 					const newWidth = startWidth + dragEvent.clientX - mouseDownEvent.clientX
-					objectRef.current.style.width = String(newWidth)
-					setWidth && setWidth(newWidth)
+					setWidth(newWidth)
 
 					const newHeight = startHeight + dragEvent.clientY - mouseDownEvent.clientY
-					objectRef.current.style.height = String(newHeight)
-					setHeight && setHeight(newHeight)
+					setHeight(newHeight)
 				},
-				onDrop: () => {
-					const { presentation } = presenter
-					const { slides } = presentation
+				onDrop: (dragEvent) => {
+					const newWidth = startWidth + dragEvent.clientX - mouseDownEvent.clientX
+					const newHeight = startHeight + dragEvent.clientY - mouseDownEvent.clientY
+					const {
+						presentation: { slides },
+					} = presenter
 					const slide = slides.find((slide) => slide.objects.some((obj) => obj.id == id))
 					const object = slide.objects.find((obj) => obj.id == id)
 					const { baseState } = object
-					console.log('1: ', object)
 					Object.assign(object, {
 						...object,
 						baseState: {
 							...baseState,
-							width: objectRef.current.style.width,
-							height: objectRef.current.style.height,
+							width: newWidth,
+							height: newHeight,
 						},
 					})
-					console.log('2: ', object)
 					setPresenter(presenter)
 				},
 			})
@@ -152,9 +152,16 @@ type ObjectSelectionProps = {
 	selectedObject: React.MutableRefObject<SVGSVGElement>
 	id: string
 	scale: number
+	slideId: string
 }
 
-function ObjectSelection({ selectedObject, id }: ObjectSelectionProps) {
+function ObjectSelection({ selectedObject, id, slideId }: ObjectSelectionProps) {
+	const ref = useRef(null)
+	useDraggableObject({
+		elementRef: ref,
+		elementId: id,
+		slideId: slideId,
+	})
 	const { clientWidth: width, clientHeight: height } = selectedObject.current
 	const { left, top } = selectedObject.current.style
 	const x = parseFloat(left)
@@ -165,8 +172,13 @@ function ObjectSelection({ selectedObject, id }: ObjectSelectionProps) {
 	const borderSize = 3
 	const [widthState, setWidth] = useState(width)
 	const [heightState, setHeight] = useState(height)
+	useEffect(() => {
+		selectedObject.current.style.width = String(widthState)
+		selectedObject.current.style.height = String(heightState)
+	}, [widthState, heightState])
 	return (
 		<div
+			ref={ref}
 			className={styles.selection}
 			style={{
 				rotate: rotation + 'deg',

@@ -10,7 +10,10 @@ type InternalResizeItemInfo = ResizeItemInfo & {
 	startX: number
 }
 
-type OnResizeStartFn = (args: { onDrag: (event: MouseEvent) => void; onDrop: () => void }) => void
+type OnResizeStartFn = (args: {
+	onDrag: (event: MouseEvent) => void
+	onDrop: (event: MouseEvent) => void
+}) => void
 
 function useResizableObject() {
 	const registerResizableItem = useCallback((resizeItemInfo: ResizeItemInfo) => {
@@ -23,8 +26,8 @@ function useResizableObject() {
 		const onDragStart: OnResizeStartFn = ({ onDrag, onDrop }) => {
 			item.startY = item.cornerRef.current!.getBoundingClientRect().top
 
-			const onMouseUp = () => {
-				onDrop()
+			const onMouseUp = (event: MouseEvent) => {
+				onDrop(event)
 
 				window.removeEventListener('mousemove', onDrag)
 				window.removeEventListener('mouseup', onMouseUp)
