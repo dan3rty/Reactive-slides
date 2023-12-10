@@ -1,6 +1,6 @@
 import { Color, PrimitiveBlock, Primitives } from '../../types'
 import { ObjectSelection } from '../../Editor/WorkSpace/ObjectSelection/ObjectSelection'
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 type PrimitiveProps = {
 	primitive: PrimitiveBlock
@@ -12,13 +12,12 @@ type PrimitiveProps = {
 	ref?: React.MutableRefObject<SVGSVGElement>
 }
 
-function Ellipse({ primitive, scale, onClick, slideId, isWorkspace, selected }: PrimitiveProps) {
+function Ellipse({ primitive, scale, onClick, slideId, selected }: PrimitiveProps) {
 	const ref = useRef<SVGSVGElement>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 	useEffect(() => {
 		setIsLoaded(true)
-	}, []);
-	console.log(isWorkspace, ref)
+	}, [])
 	return (
 		<>
 			<svg
@@ -43,7 +42,14 @@ function Ellipse({ primitive, scale, onClick, slideId, isWorkspace, selected }: 
 					stroke={primitive.borderColor.hex}
 				/>
 			</svg>
-			{selected && isLoaded && <ObjectSelection id={primitive.id} selectedObject={ref} scale={scale} slideId={slideId}/>}
+			{selected && isLoaded && (
+				<ObjectSelection
+					id={primitive.id}
+					selectedObject={ref}
+					scale={scale}
+					slideId={slideId}
+				/>
+			)}
 		</>
 	)
 }
@@ -70,13 +76,12 @@ function Rectangle({ hex, borderSize, borderColor }: RectangleProps) {
 	)
 }
 
-function Triangle({ primitive, scale, onClick, slideId, isWorkspace, selected }: PrimitiveProps) {
+function Triangle({ primitive, scale, onClick, slideId, selected }: PrimitiveProps) {
 	const ref = useRef<SVGSVGElement>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 	useEffect(() => {
 		setIsLoaded(true)
-	}, []);
-	console.log(isWorkspace)
+	}, [])
 	return (
 		<>
 			<svg
@@ -107,7 +112,14 @@ function Triangle({ primitive, scale, onClick, slideId, isWorkspace, selected }:
 					stroke={primitive.borderColor.hex}
 				/>
 			</svg>
-			{selected && isLoaded && <ObjectSelection id={primitive.id} selectedObject={ref} scale={scale} slideId={slideId}/>}
+			{selected && isLoaded && (
+				<ObjectSelection
+					id={primitive.id}
+					selectedObject={ref}
+					scale={scale}
+					slideId={slideId}
+				/>
+			)}
 		</>
 	)
 }
@@ -124,7 +136,7 @@ function PrimitiveComponent({
 	const [isLoaded, setIsLoaded] = useState(false)
 	useEffect(() => {
 		setIsLoaded(true)
-	}, []);
+	}, [])
 	switch (primitive.primitiveType) {
 		case Primitives.CIRCLE:
 			return (
@@ -162,7 +174,6 @@ function PrimitiveComponent({
 				/>
 			)
 	}
-	console.log(isWorkspace)
 	return (
 		<>
 			<svg
@@ -184,7 +195,14 @@ function PrimitiveComponent({
 					borderColor={primitive.borderColor}
 				/>
 			</svg>
-			{selected && isLoaded && <ObjectSelection id={primitive.id} selectedObject={ref} scale={scale} slideId={slideId}/>}
+			{selected && isLoaded && (
+				<ObjectSelection
+					id={primitive.id}
+					selectedObject={ref}
+					scale={scale}
+					slideId={slideId}
+				/>
+			)}
 		</>
 	)
 }

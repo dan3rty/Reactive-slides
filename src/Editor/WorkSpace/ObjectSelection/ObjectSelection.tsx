@@ -113,7 +113,6 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id }: Corne
 					const slide = slides.find((slide) => slide.objects.some((obj) => obj.id == id))
 					const object = slide.objects.find((obj) => obj.id == id)
 					const { baseState } = object
-					console.log('1: ', object)
 					Object.assign(object, {
 						...object,
 						baseState: {
@@ -122,7 +121,6 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id }: Corne
 							height: objectRef.current.style.height,
 						},
 					})
-					console.log('2: ', object)
 					setPresenter(presenter)
 				},
 			})
@@ -132,8 +130,6 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id }: Corne
 		control.addEventListener('mousedown', onMouseDown)
 		return () => control.removeEventListener('mousedown', onMouseDown)
 	}, [registerResizableItem])
-
-	console.log(x)
 
 	return (
 		<div

@@ -5,14 +5,14 @@ type FontFamilySelectionProps = {
 	value: FontFamily
 }
 
-function FontFamilySelection(props: FontFamilySelectionProps) {
+function FontFamilySelection({ value }: FontFamilySelectionProps) {
 	return (
 		<div className={styles.selectionField}>
 			<div className={styles.selectionFieldLabel}>
 				<span>Font family:</span>
 			</div>
 			<div className={styles.selectionFieldValue}>
-				<span>{props.value}</span>
+				<span>{value}</span>
 			</div>
 		</div>
 	)

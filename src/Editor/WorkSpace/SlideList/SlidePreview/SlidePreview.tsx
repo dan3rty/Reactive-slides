@@ -12,7 +12,7 @@ type SlidePreviewProps = {
 	scale: number
 	slide: Slide
 	selection: Selection
-	createOnClick: (objectId: string) => () => void
+	createOnClick: (slideId: string) => () => void
 	deleteOnClick: () => void
 	registerDndItem: RegisterDndItemFn
 }
@@ -71,9 +71,9 @@ function SlidePreview({
 			ref={ref}
 			key={index}
 			className={joinCssClasses(styles.smallSlide, isChosen ? styles.smallSlideChosen : null)}
-			onClick={createOnClick(slide.id)}
 		>
 			<SlideRenderer
+				selectOnClick={createOnClick(slide.id)}
 				scale={scale}
 				slide={slide}
 				isWorkspace={false}

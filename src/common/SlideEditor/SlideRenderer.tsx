@@ -13,6 +13,7 @@ type SlideRendererProps = {
 	isWorkspace: boolean
 	selection: Selection
 	createOnClick: (objectId: string) => () => void
+	selectOnClick?: () => void
 }
 
 function SlideRenderer({
@@ -21,6 +22,7 @@ function SlideRenderer({
 	isWorkspace,
 	selection,
 	createOnClick,
+	selectOnClick,
 }: SlideRendererProps) {
 	const width = 1920 / scale
 	const height = 1080 / scale
@@ -35,6 +37,7 @@ function SlideRenderer({
 
 	return (
 		<div
+			onClick={selectOnClick}
 			style={{
 				...backgroundStyle,
 				width: `${width}px`,
