@@ -17,8 +17,7 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 		.objects.find((object) => object.id === elementId)
 	let baseObjPosition = { x: 0, y: 0 }
 	let baseMousePosition = { x: 0, y: 0 }
-
-	function moving(e) {
+	function moving(e: MouseEvent) {
 		const dx = e.clientX - baseMousePosition.x
 		const dy = e.clientY - baseMousePosition.y
 		obj = {
