@@ -1,6 +1,6 @@
 import * as Type from '../types'
 import { ImageBlock, Presenter, PrimitiveBlock, Slide, TextBlock } from '../types'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { PresenterContext } from '../presenterContext/PresenterContext'
 
 type useObjectCreationProps = {
@@ -29,8 +29,10 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 		secondPosition = position
 	}
 
-	const [imagePathInput, setImagePathInput] = useState('')
-
+	let imagePathInput = ''
+	function setImagePathInput(path: string) {
+		imagePathInput = path
+	}
 	function useHandleAddUp(event: MouseEvent) {
 		document.removeEventListener('mouseup', useHandleAddUp)
 		const size = window.innerHeight
