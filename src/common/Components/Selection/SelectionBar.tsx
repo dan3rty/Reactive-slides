@@ -7,10 +7,10 @@ type SelectionProps = {
 }
 
 //TODO: ПРОКИДЫВАТЬ МАССИВ
-function SelectionBar(props: SelectionProps) {
+function SelectionBar({ icons }: SelectionProps) {
 	return (
 		<div className={styles.selection}>
-			{props.icons.map((icon, index) => (
+			{icons.map((icon, index) => (
 				<SelectionButton key={index} style={'light'} icon={icon} />
 			))}
 		</div>

@@ -13,52 +13,52 @@ type ButtonProps = {
 	onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
 }
 
-function Button(props: ButtonProps) {
+function Button({ text, style, size, icon, onClick }: ButtonProps) {
 	const click = (event: React.MouseEvent<HTMLDivElement>) => {
 		console.log(event)
 	}
-	const onClick = props.onClick ?? click
-	if (props.size === 'large') {
+	const testOnClick = onClick ?? click
+	if (size === 'large') {
 		return (
 			<div
-				onClick={(event) => onClick(event)}
-				className={joinCssClasses(styles.button, styles.buttonLarge, styles[props.style])}
+				onClick={(event) => testOnClick(event)}
+				className={joinCssClasses(styles.button, styles.buttonLarge, styles[style])}
 			>
-				<span>{props.text}</span>
+				<span>{text}</span>
 			</div>
 		)
 	}
 
-	if (props.size === 'big') {
+	if (size === 'big') {
 		return (
 			<div
-				onClick={props.onClick}
-				className={joinCssClasses(styles.button, styles.buttonBig, styles[props.style])}
+				onClick={onClick}
+				className={joinCssClasses(styles.button, styles.buttonBig, styles[style])}
 			>
-				{props.icon}
-				<span>{props.text}</span>
+				{icon}
+				<span>{text}</span>
 			</div>
 		)
 	}
 
-	if (props.size === 'medium') {
+	if (size === 'medium') {
 		return (
 			<div
-				onClick={props.onClick}
-				className={joinCssClasses(styles.button, styles.buttonMedium, styles[props.style])}
+				onClick={onClick}
+				className={joinCssClasses(styles.button, styles.buttonMedium, styles[style])}
 			>
-				<span>{props.text}</span>
+				<span>{text}</span>
 			</div>
 		)
 	}
 
-	if (props.size === 'small') {
+	if (size === 'small') {
 		return (
 			<div
-				onClick={props.onClick}
-				className={joinCssClasses(styles.button, styles.buttonSmall, styles[props.style])}
+				onClick={onClick}
+				className={joinCssClasses(styles.button, styles.buttonSmall, styles[style])}
 			>
-				{props.icon}
+				{icon}
 			</div>
 		)
 	}

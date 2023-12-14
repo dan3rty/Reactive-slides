@@ -10,16 +10,14 @@ type ButtonProps = {
 	onClick?: () => void
 }
 
-function SelectionButton(props: ButtonProps) {
-	const click = () => {
-		console.log('click')
-	}
+function SelectionButton({ style, icon, onClick }: ButtonProps) {
+	const click = () => {}
 	return (
 		<div
-			onClick={props.onClick ?? click}
-			className={joinCssClasses(buttonStyle.selectionButton, buttonStyle[props.style])}
+			onClick={onClick ?? click}
+			className={joinCssClasses(buttonStyle.selectionButton, buttonStyle[style])}
 		>
-			{props.icon}
+			{icon}
 		</div>
 	)
 }
