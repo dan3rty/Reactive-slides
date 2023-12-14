@@ -40,9 +40,6 @@ function SlideElement({
 		case BlockType.PRIMITIVE:
 			element = (
 				<PrimitiveComponent
-					isWorkspace={isWorkspace}
-					slideId={slideId}
-					selected={selected}
 					primitive={object}
 					scale={scale}
 					onClick={onClick}
