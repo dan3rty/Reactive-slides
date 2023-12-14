@@ -24,6 +24,8 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 			...obj,
 			baseState: {
 				...obj.baseState,
+				width: elementRef.current.clientWidth * scale,
+				height: elementRef.current.clientHeight * scale,
 				x: baseObjPosition.x + dx * scale,
 				y: baseObjPosition.y + dy * scale,
 			},
@@ -52,7 +54,7 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 	}
 
 	function stopMoving() {
-		editedSlideRef.current.removeEventListener('mousemove', moving)
+		document.removeEventListener('mousemove', moving)
 		editedSlideRef.current.removeEventListener('mouseup', stopMoving)
 		elementRef.current.addEventListener('mousedown', startMoving)
 	}
@@ -61,7 +63,7 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 		baseMousePosition = { x: e.clientX, y: e.clientY }
 		baseObjPosition = { x: obj.baseState.x, y: obj.baseState.y }
 		elementRef.current.removeEventListener('mousedown', startMoving)
-		editedSlideRef.current.addEventListener('mousemove', moving)
+		document.addEventListener('mousemove', moving)
 		editedSlideRef.current.addEventListener('mouseup', stopMoving)
 	}
 

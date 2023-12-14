@@ -120,10 +120,6 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id, scale }
 						}
 						return obj
 					})
-					console.log(
-						parseFloat(objectRef.current.style.width),
-						parseFloat(objectRef.current.style.height),
-					)
 					const newSlide = {
 						...slide,
 						objects,
@@ -147,8 +143,6 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id, scale }
 		control.addEventListener('mousedown', onMouseDown)
 		return () => control.removeEventListener('mousedown', onMouseDown)
 	}, [registerResizableItem])
-
-	console.log(x)
 
 	return (
 		<div

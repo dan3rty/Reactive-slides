@@ -45,7 +45,7 @@ function Rectangle({ hex, borderSize, borderColor }: PrimitiveElementProps) {
 function Triangle({ hex, borderSize, borderColor }: PrimitiveElementProps) {
 	return (
 		<polygon
-			points={'0 100, 100 100, 50 0'}
+			points={`${borderSize} 100, ${100 - borderSize} 100, 50 ${borderSize}`}
 			fill={hex}
 			strokeWidth={borderSize}
 			stroke={borderColor.hex}
