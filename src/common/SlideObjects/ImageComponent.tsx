@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { MutableRefObject } from 'react'
 import styles from './ImageComponent.css'
 import { ImageBlock, ImageSource } from '../../types'
 import { useDraggableObject } from '../../hooks/useDraggableObject'
@@ -6,25 +6,25 @@ import { useDraggableObject } from '../../hooks/useDraggableObject'
 type ImageProps = {
 	image: ImageBlock
 	scale: number
-	selected: boolean
 	onClick: () => void
 	isWorkspace?: boolean
 	slideId: string
 }
 
-function ImageComponent({ image, scale, selected, onClick, isWorkspace, slideId }: ImageProps) {
+const ImageComponent = React.forwardRef(function (
+	{ image, scale, onClick, isWorkspace, slideId }: ImageProps,
+	ref: React.ForwardedRef<HTMLImageElement>,
+) {
 	const imageStyle: React.CSSProperties = {
 		width: image.baseState.width / scale + 'px',
 		height: image.baseState.height / scale + 'px',
 		top: image.baseState.y / scale - 3 + 'px',
 		left: image.baseState.x / scale - 3 + 'px',
 		rotate: image.baseState.rotation + 'deg',
-		borderColor: selected ? '#000000' : '#FFFFFF00',
 	}
-	const ref = useRef(null)
 	if (isWorkspace) {
 		useDraggableObject({
-			elementRef: ref,
+			elementRef: ref as MutableRefObject<HTMLElement | SVGSVGElement>,
 			elementId: image.id,
 			slideId: slideId,
 		})
@@ -32,8 +32,8 @@ function ImageComponent({ image, scale, selected, onClick, isWorkspace, slideId 
 	if (image.typeValue === ImageSource.PATH) {
 		return (
 			<img
-				draggable='false'
 				ref={ref}
+				draggable='false'
 				style={imageStyle}
 				className={styles.image}
 				src={image.value}
@@ -43,6 +43,6 @@ function ImageComponent({ image, scale, selected, onClick, isWorkspace, slideId 
 		)
 	}
 	return <div style={imageStyle}></div>
-}
+})
 
 export { ImageComponent }

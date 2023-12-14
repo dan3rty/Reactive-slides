@@ -165,13 +165,16 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id, scale }
 }
 
 type ObjectSelectionProps = {
-	selectedObject: React.MutableRefObject<SVGSVGElement>
+	selectedObject: React.MutableRefObject<SVGSVGElement | HTMLDivElement>
 	id: string
 	scale: number
 	slideId: string
 }
 
 function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelectionProps) {
+	if (!selectedObject.current) {
+		return null
+	}
 	const ref = useRef(null)
 	useDraggableObject({
 		elementRef: ref,

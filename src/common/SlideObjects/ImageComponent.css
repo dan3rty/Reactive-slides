@@ -1,6 +1,4 @@
 .image {
 	display: flex;
 	position: absolute;
-	border-style: dashed;
-	border-width: 3px;
 }

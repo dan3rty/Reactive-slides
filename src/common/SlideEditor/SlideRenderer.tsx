@@ -1,11 +1,9 @@
 import styles from './SlideRenderer.css'
-import { TextComponent } from '../SlideObjects/TextComponent'
-import { BlockType, Selection, Slide, Tabs } from '../../types'
-import { ImageComponent } from '../SlideObjects/ImageComponent'
+import { Selection, Slide, Tabs } from '../../types'
 import { returnGradientString } from '../Tools/returnGradientString'
-import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
 import { useContext } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
+import { SlideElement } from './SlideElement'
 
 type SlideRendererProps = {
 	scale: number
@@ -64,44 +62,17 @@ function SlideRenderer({
 						newObj.baseState.y = obj.animation.stateList[index].state.y
 					}
 				}
-				switch (newObj.blockType) {
-					case BlockType.IMAGE:
-						return (
-							<ImageComponent
-								isWorkspace={isWorkspace}
-								slideId={slide.id}
-								key={index}
-								image={newObj}
-								scale={scale}
-								selected={selected}
-								onClick={createOnClick(obj.id)}
-							/>
-						)
-					case BlockType.PRIMITIVE:
-						return (
-							<PrimitiveComponent
-								isWorkspace={isWorkspace}
-								slideId={slide.id}
-								selected={selected}
-								key={index}
-								primitive={newObj}
-								scale={scale}
-								onClick={createOnClick(obj.id)}
-							/>
-						)
-					case BlockType.TEXT:
-						return (
-							<TextComponent
-								isWorkspace={isWorkspace}
-								slideId={slide.id}
-								key={index}
-								text={newObj}
-								scale={scale}
-								selected={selected}
-								onClick={createOnClick(obj.id)}
-							/>
-						)
-				}
+				return (
+					<SlideElement
+						key={index}
+						object={newObj}
+						isWorkspace={isWorkspace}
+						slideId={slide.id}
+						scale={scale}
+						selected={selected}
+						onClick={createOnClick(newObj.id)}
+					/>
+				)
 			})}
 		</div>
 	)

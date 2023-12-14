@@ -10,6 +10,4 @@
 	align-items: baseline;
 	position: absolute;
 	flex-wrap: wrap;
-	border-style: dashed;
-	border-width: 3px;
 }
