@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import styles from './TextComponent.css'
 import { TextBlock } from '../../types'
 import { useDraggableObject } from '../../hooks/useDraggableObject'
@@ -6,25 +6,25 @@ import { useDraggableObject } from '../../hooks/useDraggableObject'
 type TextProps = {
 	text: TextBlock
 	scale: number
-	selected: boolean
 	onClick: () => void
 	isWorkspace: boolean
 	slideId: string
 }
 
-function TextComponent({ text, scale, selected, onClick, isWorkspace, slideId }: TextProps) {
+const TextComponent = React.forwardRef(function (
+	{ text, scale, onClick, isWorkspace, slideId }: TextProps,
+	ref: React.ForwardedRef<HTMLDivElement>,
+) {
 	const textStyle: React.CSSProperties = {
 		width: text.baseState.width / scale + 'px',
 		height: text.baseState.height / scale + 'px',
 		top: text.baseState.y / scale - 3 + 'px',
 		left: text.baseState.x / scale - 3 + 'px',
 		rotate: text.baseState.rotation + 'deg',
-		borderColor: selected ? '#000000' : '#FFFFFF00',
 	}
-	const ref = useRef(null)
 	if (isWorkspace) {
 		useDraggableObject({
-			elementRef: ref,
+			elementRef: ref as React.MutableRefObject<HTMLElement | SVGSVGElement>,
 			elementId: text.id,
 			slideId: slideId,
 		})
@@ -53,6 +53,6 @@ function TextComponent({ text, scale, selected, onClick, isWorkspace, slideId }:
 			{TextToRender}
 		</div>
 	)
-}
+})
 
 export { TextComponent }

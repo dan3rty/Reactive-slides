@@ -1,11 +1,9 @@
 import styles from './SlideRenderer.css'
-import { TextComponent } from '../SlideObjects/TextComponent'
-import { BlockType, Selection, Slide, Tabs } from '../../types'
-import { ImageComponent } from '../SlideObjects/ImageComponent'
+import { Selection, Slide, Tabs } from '../../types'
 import { returnGradientString } from '../Tools/returnGradientString'
-import { PrimitiveComponent } from '../SlideObjects/PrimitiveComponent'
 import { useContext } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
+import { SlideElement } from './SlideElement'
 
 type SlideRendererProps = {
 	scale: number
@@ -13,6 +11,7 @@ type SlideRendererProps = {
 	isWorkspace: boolean
 	selection: Selection
 	createOnClick: (objectId: string) => () => void
+	selectOnClick?: () => void
 }
 
 function SlideRenderer({
@@ -21,6 +20,7 @@ function SlideRenderer({
 	isWorkspace,
 	selection,
 	createOnClick,
+	selectOnClick,
 }: SlideRendererProps) {
 	const width = 1920 / scale
 	const height = 1080 / scale
@@ -35,6 +35,7 @@ function SlideRenderer({
 
 	return (
 		<div
+			onClick={selectOnClick}
 			style={{
 				...backgroundStyle,
 				width: `${width}px`,
@@ -64,44 +65,17 @@ function SlideRenderer({
 						newObj.baseState.y = obj.animation.stateList[index].state.y
 					}
 				}
-				switch (newObj.blockType) {
-					case BlockType.IMAGE:
-						return (
-							<ImageComponent
-								isWorkspace={isWorkspace}
-								slideId={slide.id}
-								key={index}
-								image={newObj}
-								scale={scale}
-								selected={selected}
-								onClick={createOnClick(obj.id)}
-							/>
-						)
-					case BlockType.PRIMITIVE:
-						return (
-							<PrimitiveComponent
-								isWorkspace={isWorkspace}
-								slideId={slide.id}
-								selected={selected}
-								key={index}
-								primitive={newObj}
-								scale={scale}
-								onClick={createOnClick(obj.id)}
-							/>
-						)
-					case BlockType.TEXT:
-						return (
-							<TextComponent
-								isWorkspace={isWorkspace}
-								slideId={slide.id}
-								key={index}
-								text={newObj}
-								scale={scale}
-								selected={selected}
-								onClick={createOnClick(obj.id)}
-							/>
-						)
-				}
+				return (
+					<SlideElement
+						key={index}
+						object={newObj}
+						isWorkspace={isWorkspace}
+						slideId={slide.id}
+						scale={scale}
+						selected={selected}
+						onClick={createOnClick(newObj.id)}
+					/>
+				)
 			})}
 		</div>
 	)

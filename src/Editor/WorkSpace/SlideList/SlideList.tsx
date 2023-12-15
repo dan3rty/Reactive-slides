@@ -80,19 +80,20 @@ function SlideList({ scale, presenter }: SlideListProps) {
 		setPresenter({ presentation: newPresentation, selection, operationHistory })
 	}
 
+	const deleteSlideOnClick = (slideId: string) => {
+		const newSlides: Array<Slide> = presenter.presentation.slides.filter(
+			(newSlide) => newSlide.id != slideId,
+		)
+		const newPresentation: Presentation = {
+			...presentation,
+			slides: newSlides,
+		}
+		setPresenter({ presentation: newPresentation, selection, operationHistory })
+	}
+
 	const slidesToRender = slides.map((slide, index) => {
 		const isChosen = slide.id == chosen
 		const slideScale = isChosen ? scale * 3.5 : scale * 4
-		const deleteSlideOnClick = () => {
-			const newSlides: Array<Slide> = presenter.presentation.slides.filter(
-				(newSlide) => newSlide.id != slide.id,
-			)
-			const newPresentation: Presentation = {
-				...presentation,
-				slides: newSlides,
-			}
-			setPresenter({ presentation: newPresentation, selection, operationHistory })
-		}
 
 		return (
 			<SlidePreview
@@ -103,7 +104,7 @@ function SlideList({ scale, presenter }: SlideListProps) {
 				slide={slide}
 				selection={selection}
 				createOnClick={createOnClick}
-				deleteOnClick={deleteSlideOnClick}
+				deleteOnClick={() => deleteSlideOnClick(slide.id)}
 			></SlidePreview>
 		)
 	})

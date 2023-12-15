@@ -3,8 +3,9 @@ import styles from './Counter.css'
 type CounterProps = {
 	index: number
 }
-function Counter(props: CounterProps) {
-	return <span className={styles.Counter}>{props.index}</span>
+
+function Counter({ index }: CounterProps) {
+	return <span className={styles.Counter}>{index}</span>
 }
 
 export { Counter }
