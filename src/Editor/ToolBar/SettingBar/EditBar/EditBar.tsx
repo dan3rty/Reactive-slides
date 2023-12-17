@@ -18,6 +18,7 @@ import { FontFamily, ImageBlock, PrimitiveBlock, TextBlock } from '../../../../t
 import styles from './EditBar.css'
 import { HexAlphaColorPicker } from 'react-colorful'
 import { useEffect, useRef, useState } from 'react'
+import {ChangeBackgroundPopup} from "../../../../common/changeBackgroundPopup/ChangeBackgroundPopup";
 
 type EditBarProps = {
 	selectedObject: TextBlock | PrimitiveBlock | ImageBlock
@@ -138,13 +139,10 @@ function EditBar({ selectedObject }: EditBarProps) {
 									buttonContainerEl.current.offsetHeight +
 									buttonContainerEl.current.offsetTop +
 									10,
-								right:
-									window.innerWidth -
-									buttonContainerEl.current.offsetWidth -
-									buttonContainerEl.current.offsetLeft,
+								left: 0,
 							}}
 						>
-							<HexAlphaColorPicker />
+							<ChangeBackgroundPopup />
 						</div>
 					)}
 				</div>

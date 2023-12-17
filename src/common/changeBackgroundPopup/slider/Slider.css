@@ -1,0 +1,17 @@
+.slider {
+    width: 100%;
+    height: 10px;
+    background-color: #c2c0c0;
+    border-radius: 9999px;
+    position: relative;
+}
+
+.slider-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #006a82;
+    border-radius: 9999px;
+    left: 0%;
+    margin-left: -5px;
+}
