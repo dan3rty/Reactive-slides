@@ -9,10 +9,17 @@ import { PresenterContext } from '../../../App'
 
 function SettingBar() {
 	const { selection, presentation } = useContext(PresenterContext).presenter
+	if (presentation.slides.length === 0) {
+		return (
+			<div className={styles.settingBar}>
+				<FileSettings />
+			</div>
+		)
+	}
 	const curChosen = selection.selectedTab
 	const chosenSlide = selection.slideId
 	const curSlide: Slide = presentation.slides.find((slide) => slide.id === chosenSlide)
-	const selectedObject = curSlide.objects.find((object) => object.id == selection.objectsId[0])
+	const selectedObject = curSlide?.objects.find((object) => object.id == selection.objectsId[0])
 	let bar = <AddBar />
 	switch (curChosen) {
 		case Tabs.CREATE:
@@ -26,6 +33,8 @@ function SettingBar() {
 			bar = <AnimationBar selectedObject={selectedObject} chosenState={chosenState} />
 			break
 		}
+		default:
+			bar = null
 	}
 	return (
 		<div className={styles.settingBar}>

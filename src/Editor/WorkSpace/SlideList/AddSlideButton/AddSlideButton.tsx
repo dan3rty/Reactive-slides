@@ -5,7 +5,7 @@ type AddSlideButtonProps = {
 	scale: number
 	createSlideOnClick: () => void
 }
-function AddSlideButton({scale, createSlideOnClick}: AddSlideButtonProps) {
+function AddSlideButton({ scale, createSlideOnClick }: AddSlideButtonProps) {
 	const width = 1920 / scale
 	return (
 		<div

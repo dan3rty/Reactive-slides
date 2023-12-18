@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
 
 type WorkSpaceProps = {
-	selectedSlide: Slide
+	selectedSlide?: Slide
 }
 
 function WorkSpace({ selectedSlide }: WorkSpaceProps) {
@@ -55,15 +55,17 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 		<div className={styles.workSpace}>
 			<div>
 				<BookMarks selection={selection} />
-				<div className={styles.slideEditorWrapper}>
-					<SlideRenderer
-						scale={scale}
-						slide={selectedSlide}
-						isWorkspace={true}
-						selection={selection}
-						createOnClick={createOnClick}
-					/>
-				</div>
+				{selectedSlide && (
+					<div className={styles.slideEditorWrapper}>
+						<SlideRenderer
+							scale={scale}
+							slide={selectedSlide}
+							isWorkspace={true}
+							selection={selection}
+							createOnClick={createOnClick}
+						/>
+					</div>
+				)}
 			</div>
 			<SlideList presenter={presenter} scale={scale} createOnClick={createOnClick} />
 		</div>

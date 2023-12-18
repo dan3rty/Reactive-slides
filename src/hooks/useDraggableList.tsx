@@ -20,6 +20,8 @@ type RegisterDndItemFn = (
 	onDragStart: OnDragStartFn
 }
 
+type UnregisterDndItemFn = (index: number) => void
+
 type UseDraggableListParams = {
 	onOrderChange: (fromIndex: number, toIndex: number) => void
 }
@@ -69,14 +71,19 @@ function useDraggableList({ onOrderChange }: UseDraggableListParams) {
 				onDragStart,
 			}
 		},
-		[onOrderChange],
+		[onOrderChange, itemsRef],
 	)
+
+	const unregisterDndItem = useCallback((index: number) => {
+		itemsRef.current.splice(index, 1)
+	}, [])
 
 	return {
 		registerDndItem,
+		unregisterDndItem,
 	}
 }
 
 export { useDraggableList }
 
-export type { DndItemInfo, RegisterDndItemFn }
+export type { DndItemInfo, RegisterDndItemFn, UnregisterDndItemFn }

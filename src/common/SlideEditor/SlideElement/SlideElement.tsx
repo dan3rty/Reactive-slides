@@ -61,7 +61,16 @@ function SlideElement({
 			break
 	}
 	return (
-		<div>
+		<div
+			style={{
+				position: 'absolute',
+				width: `${object.baseState.width / scale}px`,
+				height: `${object.baseState.height / scale}px`,
+				top: `${object.baseState.y / scale}px`,
+				left: `${object.baseState.x / scale}px`,
+				rotate: `${object.baseState.rotation}deg`,
+			}}
+		>
 			{element}
 			{selected && (
 				<ObjectSelection

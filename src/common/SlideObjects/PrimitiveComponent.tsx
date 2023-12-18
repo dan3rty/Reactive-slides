@@ -94,11 +94,8 @@ const PrimitiveComponent = React.forwardRef(function (
 				key={primitive.id}
 				style={{
 					position: 'absolute',
-					width: `${primitive.baseState.width / scale}px`,
-					height: `${primitive.baseState.height / scale}px`,
-					top: `${primitive.baseState.y / scale}px`,
-					left: `${primitive.baseState.x / scale}px`,
-					rotate: `${primitive.baseState.rotation}deg`,
+					width: '100%',
+					height: '100%',
 				}}
 				viewBox={primitive.primitiveType == Primitives.TRIANGLE ? '0 0 100 100' : ''}
 				preserveAspectRatio='none'
