@@ -114,11 +114,11 @@ function Corner({
 	const objectRef = selectedObject
 
 	useEffect(() => {
-		const { onDragStart } = registerResizableItem({ cornerRef, objectRef })
+		const { onDragStart } = registerResizableItem()
 
 		const onMouseDown = (mouseDownEvent: MouseEvent) => {
 			const startWidth = parseFloat(objectRef.current.style.width)
-			const startHeight = parseFloat(objectRef.current.style.width)
+			const startHeight = parseFloat(objectRef.current.style.height)
 			const startTop = parseFloat(objectRef.current.style.top)
 			const startLeft = parseFloat(objectRef.current.style.left)
 			onDragStart({
@@ -236,8 +236,8 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 			style={{
 				rotate: rotation + 'deg',
 				borderWidth: `${borderSize}px`,
-				top: topState - borderSize,
-				left: leftState - borderSize,
+				top: topState - borderSize - 3,
+				left: leftState - borderSize - 3,
 				width: widthState,
 				height: heightState,
 			}}

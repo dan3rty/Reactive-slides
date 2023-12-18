@@ -45,7 +45,7 @@ function SlideList({ scale, presenter }: SlideListProps) {
 	const { presentation, selection, operationHistory } = presenter
 	const slides: Array<Slide> = presentation.slides
 	const [chosen, setChosen] = useState(selection.slideId)
-	const { registerDndItem } = useDraggableList({
+	const { registerDndItem, unregisterDndItem } = useDraggableList({
 		onOrderChange: (from, to) => {
 			const newSlides = [...slides]
 			const removed = newSlides.splice(from, 1)
@@ -77,18 +77,30 @@ function SlideList({ scale, presenter }: SlideListProps) {
 			...presentation,
 			slides: oldSlides.concat(newSlide),
 		}
-		setPresenter({ presentation: newPresentation, selection, operationHistory })
+		const newSelection = { ...selection, slideId: newSlide.id }
+		setPresenter({ presentation: newPresentation, selection: newSelection, operationHistory })
 	}
 
 	const deleteSlideOnClick = (slideId: string) => {
 		const newSlides: Array<Slide> = presenter.presentation.slides.filter(
 			(newSlide) => newSlide.id != slideId,
 		)
+		const newSelection = { ...selection }
+		if (selection.slideId == slideId) {
+			const deletedSlide = slides.find((slide) => slide.id === selection.slideId)
+			if (slides[slides.indexOf(deletedSlide) + 1]) {
+				newSelection.slideId = slides[slides.indexOf(deletedSlide) + 1].id
+			} else if (slides[slides.indexOf(deletedSlide) - 1]) {
+				newSelection.slideId = slides[slides.indexOf(deletedSlide) - 1].id
+			} else {
+				newSelection.slideId = undefined
+			}
+		}
 		const newPresentation: Presentation = {
 			...presentation,
 			slides: newSlides,
 		}
-		setPresenter({ presentation: newPresentation, selection, operationHistory })
+		setPresenter({ presentation: newPresentation, selection: newSelection, operationHistory })
 	}
 
 	const slidesToRender = slides.map((slide, index) => {
@@ -98,6 +110,7 @@ function SlideList({ scale, presenter }: SlideListProps) {
 		return (
 			<SlidePreview
 				registerDndItem={registerDndItem}
+				unregisterDndItem={unregisterDndItem}
 				key={index}
 				index={index}
 				scale={slideScale}

@@ -11,7 +11,7 @@ function Editor() {
 	return (
 		<div className={styles.app}>
 			<ToolBar />
-			{selectedSlide && <WorkSpace selectedSlide={selectedSlide} />}
+			<WorkSpace selectedSlide={selectedSlide} />
 		</div>
 	)
 }
