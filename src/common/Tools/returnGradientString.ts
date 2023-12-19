@@ -1,14 +1,14 @@
 import { GradientColor } from '../../types'
 
 function returnGradientString(colors: GradientColor) {
-	let string = colors.colors[0].hex
+	let string = colors.colors[0].hsl
 	if (colors.colors.length == 1) {
-		return string;
+		return string
 	}
 	for (let i = 1; i < colors.colors.length; i++) {
-		string = string + ', ' + colors.colors[i].hex
+		string = string + ', ' + colors.colors[i].hsl + ' ' + colors.colors[i].percent
 	}
-	return 'linear-gradient(' + string + ')'
+	return 'linear-gradient(' + colors.rotation + 'deg, ' + string + ')'
 }
 
 export { returnGradientString }

@@ -23,7 +23,7 @@ function Ellipse({ hex, borderSize, borderColor }: PrimitiveElementProps) {
 			ry={`calc(50% - ${borderSize / 2}px)`}
 			fill={hex}
 			strokeWidth={borderSize}
-			stroke={borderColor.hex}
+			stroke={borderColor.hsl}
 		/>
 	)
 }
@@ -37,7 +37,7 @@ function Rectangle({ hex, borderSize, borderColor }: PrimitiveElementProps) {
 			height={'100%'}
 			fill={hex}
 			strokeWidth={borderSize}
-			stroke={borderColor.hex}
+			stroke={borderColor.hsl}
 		/>
 	)
 }
@@ -48,7 +48,7 @@ function Triangle({ hex, borderSize, borderColor }: PrimitiveElementProps) {
 			points={`${borderSize} 100, ${100 - borderSize} 100, 50 ${borderSize}`}
 			fill={hex}
 			strokeWidth={borderSize}
-			stroke={borderColor.hex}
+			stroke={borderColor.hsl}
 		/>
 	)
 }
@@ -62,7 +62,7 @@ const PrimitiveComponent = React.forwardRef(function (
 		case Primitives.CIRCLE:
 			primitiveEl = (
 				<Ellipse
-					hex={primitive.color.colors[0].hex}
+					hex={primitive.color.colors[0].hsl}
 					borderSize={primitive.borderSize / scale}
 					borderColor={primitive.borderColor}
 				/>
@@ -71,7 +71,7 @@ const PrimitiveComponent = React.forwardRef(function (
 		case Primitives.RECT:
 			primitiveEl = (
 				<Rectangle
-					hex={primitive.color.colors[0].hex}
+					hex={primitive.color.colors[0].hsl}
 					borderSize={primitive.borderSize / scale}
 					borderColor={primitive.borderColor}
 				/>
@@ -80,7 +80,7 @@ const PrimitiveComponent = React.forwardRef(function (
 		case Primitives.TRIANGLE:
 			primitiveEl = (
 				<Triangle
-					hex={primitive.color.colors[0].hex}
+					hex={primitive.color.colors[0].hsl}
 					borderSize={primitive.borderSize / scale}
 					borderColor={primitive.borderColor}
 				/>

@@ -53,7 +53,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 								? Type.Primitives.TRIANGLE
 								: Type.Primitives.CIRCLE,
 						color: {
-							colors: [{ hex: '#808080', opacity: 0 }],
+							colors: [{ hsl: '#808080', opacity: 0 }],
 						},
 						baseState: {
 							width:
@@ -75,7 +75,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 							rotation: 0,
 						},
 						borderSize: 5,
-						borderColor: { hex: '#00000', opacity: 0 },
+						borderColor: { hsl: '#00000', opacity: 0 },
 						borderType: Type.BorderTypes.SOLID,
 				  } as PrimitiveBlock)
 				: blockType === 'image'

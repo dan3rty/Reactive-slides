@@ -40,12 +40,14 @@ enum FontFamily {
 }
 
 type Color = {
-	hex: string
+	hsl: string
 	opacity: number
+	percent: string
 }
 
 type GradientColor = {
 	colors: Array<Color>
+	rotation: number
 }
 
 type Char = {

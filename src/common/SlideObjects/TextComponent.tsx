@@ -34,13 +34,13 @@ const TextComponent = React.forwardRef(function (
 			key={index}
 			className={styles.char}
 			style={{
-				color: char.color.hex,
+				color: char.color.hsl,
 				fontSize: char.fontSize / scale + 'px',
 				fontWeight: char.bold ? 'bold' : 'normal',
 				textDecoration: char.strokethrough ? 'line-through' : 'none',
 				borderBottomWidth: char.underline ? char.fontSize / scale / 10 + 'px' : '0',
 				borderStyle: char.underline ? 'solid' : 'none',
-				borderColor: char.underline ? char.color.hex : '#FFFFFF',
+				borderColor: char.underline ? char.color.hsl : '#FFFFFF',
 				fontStyle: char.italic ? 'italic' : 'none',
 			}}
 			onClick={onClick}

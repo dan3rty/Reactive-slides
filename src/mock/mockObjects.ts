@@ -1,28 +1,33 @@
 import * as Type from '../types'
 
 const BlackColor: Type.Color = {
-	hex: '#000000',
+	hsl: '#000000',
 	opacity: 0.5,
+	percent: '15%',
 }
 
 const WhiteColor: Type.Color = {
-	hex: '#FFFFFF',
+	hsl: '#FFFFFF',
 	opacity: 0,
+	percent: '30%',
 }
 
 const GrayColor: Type.Color = {
-	hex: '#969992',
+	hsl: '#969992',
 	opacity: 0,
+	percent: '60%',
 }
 
 const RedColor: Type.Color = {
-	hex: '#e52222',
+	hsl: '#e52222',
 	opacity: 0,
+	percent: '90%',
 }
 
 const GreenColor: Type.Color = {
-	hex: '#a6ff32',
+	hsl: '#a6ff32',
 	opacity: 0,
+	percent: '5%',
 }
 
 const letterH: Type.Char = {
@@ -267,18 +272,21 @@ const backgroundImage: Type.BackgroundImage = {
 const background1: Type.Background = {
 	color: {
 		colors: [WhiteColor, RedColor, GreenColor, RedColor, WhiteColor, GreenColor, RedColor],
+		rotation: 40,
 	},
 }
 
 const background2: Type.Background = {
 	color: {
 		colors: [BlackColor, WhiteColor],
+		rotation: 15,
 	},
 }
 
 const background5: Type.Background = {
 	color: {
 		colors: [RedColor, GreenColor],
+		rotation: 15,
 	},
 	image: backgroundImage,
 }
@@ -286,6 +294,7 @@ const background5: Type.Background = {
 const background4: Type.Background = {
 	color: {
 		colors: [GreenColor, GrayColor],
+		rotation: 15,
 	},
 }
 
@@ -329,6 +338,7 @@ const circle: Type.PrimitiveBlock = {
 	primitiveType: Type.Primitives.CIRCLE,
 	color: {
 		colors: [BlackColor],
+		rotation: 0,
 	},
 	borderSize: 20,
 	borderColor: WhiteColor,
@@ -375,6 +385,7 @@ const triangle: Type.PrimitiveBlock = {
 	primitiveType: Type.Primitives.TRIANGLE,
 	color: {
 		colors: [GreenColor],
+		rotation: 0,
 	},
 	borderSize: 5,
 	borderColor: WhiteColor,
@@ -421,6 +432,7 @@ const square: Type.PrimitiveBlock = {
 	primitiveType: Type.Primitives.RECT,
 	color: {
 		colors: [RedColor],
+		rotation: 0,
 	},
 	borderSize: 5,
 	borderColor: WhiteColor,
