@@ -123,24 +123,28 @@ function Corner({
 			const startLeft = parseFloat(objectRef.current.style.left)
 			onDragStart({
 				onDrag: (dragEvent) => {
-					if (canChangeWidth) {
+					if (canChangeWidth && !canChangeLeft) {
 						const newWidth = startWidth + dragEvent.clientX - mouseDownEvent.clientX
 						setWidth(newWidth)
 					}
 
-					if (canChangeHeight) {
+					if (canChangeHeight && !canChangeTop) {
 						const newHeight = startHeight + dragEvent.clientY - mouseDownEvent.clientY
 						setHeight(newHeight)
 					}
 
 					if (canChangeTop) {
 						const newTop = startTop + dragEvent.clientY - mouseDownEvent.clientY
+						const newHeight = startHeight - (dragEvent.clientY - mouseDownEvent.clientY)
 						setTop(newTop)
+						setHeight(newHeight)
 					}
 
 					if (canChangeLeft) {
 						const newLeft = startLeft + dragEvent.clientX - mouseDownEvent.clientX
+						const newWidth = startWidth - (dragEvent.clientX - mouseDownEvent.clientX)
 						setLeft(newLeft)
+						setWidth(newWidth)
 					}
 				},
 				onDrop: () => {
@@ -215,31 +219,31 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 		slideId: slideId,
 	})
 	const { clientWidth: width, clientHeight: height } = selectedObject.current
-	const { left, top } = selectedObject.current.style
-	const x = parseFloat(left)
-	const y = parseFloat(top)
 	const rotation = selectedObject.current.style.rotate
 		? parseFloat(selectedObject.current.style.rotate)
 		: 0
 	const borderSize = 3
 	const [widthState, setWidth] = useState(width)
 	const [heightState, setHeight] = useState(height)
-	const [topState, setTop] = useState(x)
-	const [leftState, setLeft] = useState(y)
+	const [topState, setTop] = useState(parseFloat(selectedObject.current.style.top))
+	const [leftState, setLeft] = useState(parseFloat(selectedObject.current.style.left))
 	useEffect(() => {
-		selectedObject.current.style.width = String(widthState)
-		selectedObject.current.style.height = String(heightState)
-	}, [widthState, heightState])
+		selectedObject.current.style.width = String(widthState) + 'px'
+		selectedObject.current.style.height = String(heightState) + 'px'
+		selectedObject.current.style.top = String(topState) + 'px'
+		console.log(String(topState) + 'px')
+		selectedObject.current.style.left = String(leftState) + 'px'
+	}, [widthState, heightState, topState, leftState])
 	return (
 		<div
 			className={styles.selection}
 			style={{
 				rotate: rotation + 'deg',
 				borderWidth: `${borderSize}px`,
-				top: topState - borderSize - 3,
-				left: leftState - borderSize - 3,
-				width: widthState,
-				height: heightState,
+				top: -borderSize,
+				left: -borderSize,
+				width: '100%',
+				height: '100%',
 			}}
 		>
 			<div ref={ref} className={styles.draggableSpace}></div>

@@ -1,4 +1,5 @@
 .image {
 	display: flex;
 	position: absolute;
+	user-select: none;
 }

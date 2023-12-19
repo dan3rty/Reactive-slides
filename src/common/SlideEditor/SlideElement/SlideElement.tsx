@@ -62,6 +62,7 @@ function SlideElement({
 	}
 	return (
 		<div
+			ref={ref}
 			style={{
 				position: 'absolute',
 				width: `${object.baseState.width / scale}px`,
