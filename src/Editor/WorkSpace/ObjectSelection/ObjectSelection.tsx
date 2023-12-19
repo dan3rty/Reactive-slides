@@ -231,14 +231,16 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 		selectedObject.current.style.width = String(widthState) + 'px'
 		selectedObject.current.style.height = String(heightState) + 'px'
 		selectedObject.current.style.top = String(topState) + 'px'
-		console.log(String(topState) + 'px')
 		selectedObject.current.style.left = String(leftState) + 'px'
 	}, [widthState, heightState, topState, leftState])
+	useEffect(() => {
+		setTop(parseFloat(selectedObject.current.style.top))
+		setLeft(parseFloat(selectedObject.current.style.left))
+	}, [selectedObject.current.style.top, selectedObject.current.style.left])
 	return (
 		<div
 			className={styles.selection}
 			style={{
-				rotate: rotation + 'deg',
 				borderWidth: `${borderSize}px`,
 				top: -borderSize,
 				left: -borderSize,

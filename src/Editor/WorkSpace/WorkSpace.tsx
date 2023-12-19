@@ -20,6 +20,7 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 	const createOnClick = (objectId: string) => {
 		return () => {
 			if (selection.objectsId.includes(objectId)) {
+				console.log('here')
 				return
 			}
 			const newObjectsId = selection.objectsId.concat(objectId)
@@ -27,7 +28,21 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 				...selection,
 				objectsId: newObjectsId,
 			}
-			setPresenter({ presentation, selection: newSelection, operationHistory })
+			// const slide = presentation.slides.find((slide) =>
+			// 	slide.objects.includes(slide.objects.find((object) => object.id == objectId)),
+			// )
+			// const newSlide = structuredClone(slide)
+			// const objects = newSlide.objects
+			// const object = objects.find((object) => object.id == objectId)
+			// objects.splice(objects.indexOf(object), 1)
+			// objects.push(object)
+			// const slides = structuredClone(presentation.slides)
+			// slides[presentation.slides.indexOf(slide)] = newSlide
+			setPresenter({
+				presentation,
+				selection: newSelection,
+				operationHistory,
+			})
 		}
 	}
 

@@ -53,10 +53,7 @@ function Triangle({ hex, borderSize, borderColor }: PrimitiveElementProps) {
 	)
 }
 
-const PrimitiveComponent = React.forwardRef(function (
-	{ primitive, scale, onClick }: PrimitiveProps,
-	ref: React.ForwardedRef<SVGSVGElement>,
-) {
+const PrimitiveComponent = function ({ primitive, scale, onClick }: PrimitiveProps) {
 	let primitiveEl
 	switch (primitive.primitiveType) {
 		case Primitives.CIRCLE:
@@ -88,23 +85,22 @@ const PrimitiveComponent = React.forwardRef(function (
 			break
 	}
 	return (
-		<>
-			<svg
-				ref={ref}
-				key={primitive.id}
-				style={{
-					position: 'absolute',
-					width: '100%',
-					height: '100%',
-				}}
-				viewBox={primitive.primitiveType == Primitives.TRIANGLE ? '0 0 100 100' : ''}
-				preserveAspectRatio='none'
-				onClick={onClick}
-			>
-				{primitiveEl}
-			</svg>
-		</>
+		<svg
+			key={primitive.id}
+			style={{
+				position: 'absolute',
+				width: '100%',
+				height: '100%',
+				top: '0px',
+				left: '0px',
+			}}
+			viewBox={primitive.primitiveType == Primitives.TRIANGLE ? '0 0 100 100' : ''}
+			preserveAspectRatio='none'
+			onClick={onClick}
+		>
+			{primitiveEl}
+		</svg>
 	)
-})
+}
 
 export { PrimitiveComponent }

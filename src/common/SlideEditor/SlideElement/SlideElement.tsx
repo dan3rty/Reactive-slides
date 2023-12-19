@@ -38,14 +38,7 @@ function SlideElement({
 			)
 			break
 		case BlockType.PRIMITIVE:
-			element = (
-				<PrimitiveComponent
-					primitive={object}
-					scale={scale}
-					onClick={onClick}
-					ref={ref as React.ForwardedRef<SVGSVGElement>}
-				/>
-			)
+			element = <PrimitiveComponent primitive={object} scale={scale} onClick={onClick} />
 			break
 		case BlockType.TEXT:
 			element = (
