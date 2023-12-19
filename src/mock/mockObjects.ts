@@ -12,12 +12,6 @@ const WhiteColor: Type.Color = {
 	percent: '30%',
 }
 
-const GrayColor: Type.Color = {
-	hsl: '#969992',
-	opacity: 0,
-	percent: '60%',
-}
-
 const RedColor: Type.Color = {
 	hsl: '#e52222',
 	opacity: 0,
@@ -291,13 +285,6 @@ const background5: Type.Background = {
 	image: backgroundImage,
 }
 
-const background4: Type.Background = {
-	color: {
-		colors: [GreenColor, GrayColor],
-		rotation: 15,
-	},
-}
-
 const circle: Type.PrimitiveBlock = {
 	blockType: Type.BlockType.PRIMITIVE,
 	id: 'DASD79DAS',
@@ -457,27 +444,9 @@ const slide3: Type.Slide = {
 	objects: [image3, image2],
 }
 
-const slide4: Type.Slide = {
-	id: 'djasdfgfdgADGKUAGUSDAD',
-	background: background4,
-	objects: [],
-}
-
-const slide5: Type.Slide = {
-	id: 'djjgfkUSDAD',
-	background: background1,
-	objects: [],
-}
-
-const slide6: Type.Slide = {
-	id: 'djahDHSsfdUSDAD',
-	background: background1,
-	objects: [],
-}
-
 const presentation: Type.Presentation = {
 	title: 'Max presentation',
-	slides: [slide1, slide2, slide3, slide4, slide5, slide6],
+	slides: [slide1, slide2, slide3],
 }
 
 const selection: Type.Selection = {
