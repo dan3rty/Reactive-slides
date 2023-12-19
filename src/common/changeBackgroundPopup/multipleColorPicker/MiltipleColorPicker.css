@@ -22,7 +22,7 @@
 	flex-direction: column;
 }
 
-.colorBlock {
+.color-block {
 	height: 70px;
 	width: 70px;
 	border: #006a82 3px solid;
@@ -31,7 +31,7 @@
 	margin-inline-start: 10px;
 }
 
-.pickButton {
+.pick-button {
 	cursor: pointer;
 	padding: 3px;
 	background-color: #a3e1ec;

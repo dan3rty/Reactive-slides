@@ -17,8 +17,8 @@ import {
 import { FontFamily, ImageBlock, PrimitiveBlock, TextBlock } from '../../../../types'
 import styles from './EditBar.css'
 import { useEffect, useRef, useState } from 'react'
-import { MultipleColorPicker } from '../../../../common/changeBackgroundPopup/multipleColorPicker/MultipleColorPicker'
 import { ColorPicker } from '../../../../common/changeBackgroundPopup/colorPicker/ColorPicker'
+import { ChangeBackgroundPopup } from '../../../../common/changeBackgroundPopup/ChangeBackgroundPopup'
 
 type EditBarProps = {
 	selectedObject: TextBlock | PrimitiveBlock | ImageBlock
@@ -143,14 +143,10 @@ function EditBar({ selectedObject }: EditBarProps) {
 									buttonContainerEl.current.offsetHeight +
 									buttonContainerEl.current.offsetTop +
 									10,
-								left: 0,
+								right: 0,
 							}}
 						>
-							<MultipleColorPicker
-								onColorPick={(color) => {
-									console.log(color)
-								}}
-							/>
+							<ChangeBackgroundPopup />
 						</div>
 					)}
 				</div>
