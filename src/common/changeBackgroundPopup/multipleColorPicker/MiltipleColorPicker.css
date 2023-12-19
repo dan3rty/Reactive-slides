@@ -1,0 +1,49 @@
+.popup {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 15px;
+	background-color: white;
+	border-radius: 5px;
+	flex-direction: row;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 25%);
+}
+
+.sliders {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+	width: 300px;
+	background-color: white;
+	border-radius: 5px;
+	flex-direction: column;
+}
+
+.color-block {
+	height: 70px;
+	width: 70px;
+	border: #006a82 3px solid;
+	border-radius: 999px;
+	margin-block: 10px;
+	margin-inline-start: 10px;
+}
+
+.pick-button {
+	cursor: pointer;
+	padding: 3px;
+	background-color: #a3e1ec;
+	border-radius: 5px;
+	font-size: 14px;
+	margin-inline: 5px;
+}
+
+.preview {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+}

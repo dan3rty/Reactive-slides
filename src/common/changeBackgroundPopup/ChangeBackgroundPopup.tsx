@@ -1,25 +1,45 @@
+import { ReactElement, useState } from 'react'
+import { MultipleColorPicker } from './multipleColorPicker/MultipleColorPicker'
 import styles from './ChangeBackgroundPopup.css'
-import {Slider} from "./slider/Slider";
-import {useState} from "react";
 
 function ChangeBackgroundPopup() {
-    const [hue, setHue] = useState('0%')
-    const [saturation, setSaturation] = useState('0%')
-    const [lightness, setLightness] = useState('0%')
-    console.log(`hsl(${hue}, ${saturation}, ${lightness})`)
-    return (
-        <div className={styles.popup}>
-            <span>Hue</span>
-            <Slider onSliderChange={setHue}/>
-            <span>Saturation</span>
-            <Slider onSliderChange={setSaturation}/>
-            <span>Lightness </span>
-            <Slider onSliderChange={setLightness}/>
-            <div className={styles.colorBlock} style={{
-                backgroundColor:`hsl(${ parseInt(hue.substring(0, hue.length-1)) * 3.6}, ${saturation}, ${lightness})`
-            }}></div>
-        </div>
-    )
+	const [backgroundType, setBackgroundType] = useState('none')
+	let window: ReactElement
+	switch (backgroundType) {
+		case 'gradient':
+			window = <MultipleColorPicker onColorPick={(color) => console.log(color)} />
+			break
+		case 'none':
+			window = <ChoseBackgroundType setBackgroundType={(color) => setBackgroundType(color)} />
+			break
+	}
+	return <div>{window}</div>
 }
 
-export {ChangeBackgroundPopup}
+type ChoseBackgroundTypeProps = {
+	setBackgroundType: (type: string) => void
+}
+function ChoseBackgroundType({ setBackgroundType }: ChoseBackgroundTypeProps) {
+	return (
+		<div className={styles.chose}>
+			<div
+				className={styles.pickButton}
+				onClick={() => {
+					setBackgroundType('image')
+				}}
+			>
+				image
+			</div>
+			<div
+				className={styles.pickButton}
+				onClick={() => {
+					setBackgroundType('gradient')
+				}}
+			>
+				gradient
+			</div>
+		</div>
+	)
+}
+
+export { ChangeBackgroundPopup }

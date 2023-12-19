@@ -17,11 +17,13 @@ import { SlidePreview } from './SlidePreview/SlidePreview'
 
 function generateBlankSlide() {
 	const gradientColor: Color = {
-		hex: '#FFFFFF',
+		hsl: '#FFFFFF',
 		opacity: 0,
+		percent: '100%',
 	}
 	const backgroundGradient: GradientColor = {
 		colors: [gradientColor],
+		rotation: 15,
 	}
 	const background: Background = {
 		color: backgroundGradient,

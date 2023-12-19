@@ -1,7 +1,7 @@
 import * as Type from '../types'
 
 const WhiteColor: Type.Color = {
-	hex: '#FFFFFF',
+	hsl: '#FFFFFF',
 	opacity: 0,
 }
 

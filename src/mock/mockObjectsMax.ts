@@ -1,22 +1,22 @@
 import * as Type from '../types'
 
 const BlackColor: Type.Color = {
-	hex: '#000000',
+	hsl: '#000000',
 	opacity: 0,
 }
 
 const WhiteColor: Type.Color = {
-	hex: '#FFFFFF',
+	hsl: '#FFFFFF',
 	opacity: 0,
 }
 
 const BlueColor: Type.Color = {
-	hex: '#0000FF',
+	hsl: '#0000FF',
 	opacity: 0,
 }
 
 const RedColor: Type.Color = {
-	hex: '#FF0000',
+	hsl: '#FF0000',
 	opacity: 0,
 }
 
@@ -205,6 +205,7 @@ const circle: Type.PrimitiveBlock = {
 	primitiveType: Type.Primitives.CIRCLE,
 	color: {
 		colors: [BlackColor],
+		rotation: 0,
 	},
 	borderSize: 20,
 	borderColor: BlackColor,
@@ -251,6 +252,7 @@ const triangle: Type.PrimitiveBlock = {
 	primitiveType: Type.Primitives.TRIANGLE,
 	color: {
 		colors: [BlackColor],
+		rotation: 0,
 	},
 	borderSize: 5,
 	borderColor: WhiteColor,
@@ -297,6 +299,7 @@ const square: Type.PrimitiveBlock = {
 	primitiveType: Type.Primitives.RECT,
 	color: {
 		colors: [BlackColor],
+		rotation: 0,
 	},
 	borderSize: 5,
 	borderColor: WhiteColor,
@@ -312,6 +315,7 @@ const backgroundImage: Type.BackgroundImage = {
 const background1: Type.Background = {
 	color: {
 		colors: [WhiteColor],
+		rotation: 0,
 	},
 	image: backgroundImage,
 }
@@ -319,6 +323,7 @@ const background1: Type.Background = {
 const background2: Type.Background = {
 	color: {
 		colors: [WhiteColor, BlueColor, RedColor],
+		rotation: 15,
 	},
 }
 

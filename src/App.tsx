@@ -1,5 +1,5 @@
 import { Editor } from './Editor/Editor'
-import {useRef, useState} from 'react'
+import { useRef, useState } from 'react'
 import { presenter } from './mock/mockObjects'
 import { PresenterContext } from './presenterContext/PresenterContext'
 
