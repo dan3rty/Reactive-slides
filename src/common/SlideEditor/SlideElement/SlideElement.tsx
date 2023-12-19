@@ -33,7 +33,6 @@ function SlideElement({
 					image={object}
 					scale={scale}
 					onClick={onClick}
-					ref={ref as React.ForwardedRef<HTMLImageElement>}
 				/>
 			)
 			break

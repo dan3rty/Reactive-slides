@@ -1,7 +1,6 @@
-import React, { MutableRefObject } from 'react'
+import React from 'react'
 import styles from './ImageComponent.css'
 import { ImageBlock, ImageSource } from '../../types'
-import { useDraggableObject } from '../../hooks/useDraggableObject'
 
 type ImageProps = {
 	image: ImageBlock
@@ -11,28 +10,17 @@ type ImageProps = {
 	slideId: string
 }
 
-const ImageComponent = React.forwardRef(function (
-	{ image, scale, onClick, isWorkspace, slideId }: ImageProps,
-	ref: React.ForwardedRef<HTMLImageElement>,
-) {
+const ImageComponent = function ({ image, onClick }: ImageProps) {
 	const imageStyle: React.CSSProperties = {
-		width: image.baseState.width / scale + 'px',
-		height: image.baseState.height / scale + 'px',
-		top: image.baseState.y / scale - 3 + 'px',
-		left: image.baseState.x / scale - 3 + 'px',
-		rotate: image.baseState.rotation + 'deg',
-	}
-	if (isWorkspace) {
-		useDraggableObject({
-			elementRef: ref as MutableRefObject<HTMLElement | SVGSVGElement>,
-			elementId: image.id,
-			slideId: slideId,
-		})
+		position: 'absolute',
+		width: '100%',
+		height: '100%',
+		top: 0,
+		left: 0,
 	}
 	if (image.typeValue === ImageSource.PATH) {
 		return (
 			<img
-				ref={ref}
 				draggable='false'
 				style={imageStyle}
 				className={styles.image}
@@ -43,6 +31,6 @@ const ImageComponent = React.forwardRef(function (
 		)
 	}
 	return <div style={imageStyle}></div>
-})
+}
 
 export { ImageComponent }
