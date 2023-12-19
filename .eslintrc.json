@@ -24,6 +24,7 @@
     ],
     "rules": {
         "no-self-compare": "error",
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "no-case-declarations": "off"
     }
 }

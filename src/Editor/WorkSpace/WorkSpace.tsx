@@ -20,7 +20,6 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 	const createOnClick = (objectId: string) => {
 		return () => {
 			if (selection.objectsId.includes(objectId)) {
-				console.log('here')
 				return
 			}
 			const newObjectsId = selection.objectsId.concat(objectId)
