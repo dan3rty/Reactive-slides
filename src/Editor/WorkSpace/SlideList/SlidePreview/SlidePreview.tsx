@@ -80,7 +80,7 @@ function SlidePreview({
 			<SlideRenderer
 				selectOnClick={createOnClick(slide.id)}
 				scale={scale}
-				slide={slide}
+				slideId={slide.id}
 				isWorkspace={false}
 				createOnClick={createOnClick}
 				selection={selection}

@@ -1,6 +1,6 @@
 import { MutableRefObject, useContext, useEffect } from 'react'
 import { PresenterContext } from '../presenterContext/PresenterContext'
-import { Presenter, Slide } from '../types'
+import { useAppActions, useAppSelector } from '../redux/hooks'
 
 type useDraggableObjectProps = {
 	elementRef: MutableRefObject<HTMLElement | SVGSVGElement>
@@ -9,10 +9,12 @@ type useDraggableObjectProps = {
 }
 
 function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObjectProps) {
-	const { presenter, setPresenter, editedSlideRef } = useContext(PresenterContext)
+	const { createChangeObjectAction } = useAppActions()
+	const slides = useAppSelector((state) => state.slides)
+	const { editedSlideRef } = useContext(PresenterContext)
 	const size = window.innerHeight
 	const scale = (1080 / (size - 205)) * 1.2
-	let obj = presenter.presentation.slides
+	let obj = slides
 		.find((slide) => slide.id === slideId)
 		.objects.find((object) => object.id === elementId)
 	let baseObjPosition = { x: 0, y: 0 }
@@ -30,27 +32,28 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 				y: baseObjPosition.y + dy * scale,
 			},
 		}
-		const slideIndex = presenter.presentation.slides.findIndex((slide) => slide.id === slideId)
-		const newSlide: Slide = {
-			...presenter.presentation.slides[slideIndex],
-			objects: presenter.presentation.slides[slideIndex].objects.map((object) => {
-				if (object.id === elementId) {
-					return obj
-				} else {
-					return object
-				}
-			}),
-		}
-		const newSlides: Array<Slide> = presenter.presentation.slides
-		newSlides[slideIndex] = newSlide
-		const newPresenter: Presenter = {
-			...presenter,
-			presentation: {
-				...presenter.presentation,
-				slides: newSlides,
-			},
-		}
-		setPresenter(newPresenter)
+		createChangeObjectAction(obj.id, obj)
+		// const slideIndex = presenter.presentation.slides.findIndex((slide) => slide.id === slideId)
+		// const newSlide: Slide = {
+		// 	...presenter.presentation.slides[slideIndex],
+		// 	objects: presenter.presentation.slides[slideIndex].objects.map((object) => {
+		// 		if (object.id === elementId) {
+		// 			return obj
+		// 		} else {
+		// 			return object
+		// 		}
+		// 	}),
+		// }
+		// const newSlides: Array<Slide> = presenter.presentation.slides
+		// newSlides[slideIndex] = newSlide
+		// const newPresenter: Presenter = {
+		// 	...presenter,
+		// 	presentation: {
+		// 		...presenter.presentation,
+		// 		slides: newSlides,
+		// 	},
+		// }
+		// setPresenter(newPresenter)
 	}
 
 	function stopMoving() {

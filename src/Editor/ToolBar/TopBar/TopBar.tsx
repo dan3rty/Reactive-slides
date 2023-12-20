@@ -11,11 +11,11 @@ function TopBar() {
 			</div>
 			<span
 				contentEditable={true}
-				suppressContentEditableWarning={true}
 				className={styles.presentationName}
 				onInput={(e: FormEvent<HTMLSpanElement>) => {
 					createChangeTitleAction(e.currentTarget.textContent)
 				}}
+				suppressContentEditableWarning={true}
 			>
 				{title}
 			</span>

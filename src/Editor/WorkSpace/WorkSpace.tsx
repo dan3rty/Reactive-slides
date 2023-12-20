@@ -3,7 +3,6 @@ import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
 import { useAppActions, useAppSelector } from '../../redux/hooks'
-import { useEffect } from 'react'
 
 function WorkSpace() {
 	const size = window.innerHeight
@@ -33,7 +32,6 @@ function WorkSpace() {
 			createDeleteObjectAction(selection.objectsId)
 		}
 	})
-	useEffect(() => {}, [])
 	return (
 		<div className={styles.workSpace}>
 			<div>
@@ -42,7 +40,7 @@ function WorkSpace() {
 					<div className={styles.slideEditorWrapper}>
 						<SlideRenderer
 							scale={scale}
-							slide={selectedSlide}
+							slideId={selectedSlide.id}
 							isWorkspace={true}
 							selection={selection}
 							createOnClick={createOnClick}
