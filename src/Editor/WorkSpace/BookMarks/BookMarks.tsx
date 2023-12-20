@@ -14,6 +14,7 @@ function BookMarks() {
 	}
 
 	const createOnClick = (tab: Tabs) => {
+		//TODO: убрать
 		return () => {
 			createChangeTabSelectionAction(tab)
 		}

@@ -29,6 +29,7 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 			return action.payload
 		case SlideActions.CHANGE_OBJECT:
 			state.forEach((slide) => {
+				//TODO
 				slide.objects.forEach((object, index) => {
 					if (object.id == action.payload.objectId) {
 						slide.objects[index] = action.payload.object
@@ -38,6 +39,7 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 			return state
 		case SlideActions.ADD_OBJECT:
 			state.forEach((slide) => {
+				//TODO: использовать деструктуризацию, также прокидывать slideId
 				if (slide.id == action.payload.slideId) {
 					slide.objects.push(action.payload.object)
 				}

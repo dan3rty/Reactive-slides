@@ -6,7 +6,7 @@ import { useAppActions, useAppSelector } from '../../redux/hooks'
 
 function WorkSpace() {
 	const size = window.innerHeight
-	const scale = (1080 / (size - 205)) * 1.2
+	const scale = (1080 / (size - 205)) * 1.2 //TODO magical number
 
 	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)
@@ -27,6 +27,7 @@ function WorkSpace() {
 	}
 
 	document.addEventListener('keydown', (e) => {
+		//TODO вынести в useEfffect с отпиской
 		if (e.code === 'Delete') {
 			createClearObjectSelectionAction()
 			createDeleteObjectAction(selection.objectsId)
@@ -38,6 +39,8 @@ function WorkSpace() {
 				<BookMarks />
 				{selectedSlide && (
 					<div className={styles.slideEditorWrapper}>
+						{' '}
+						//TODO выпилить
 						<SlideRenderer
 							scale={scale}
 							slideId={selectedSlide.id}

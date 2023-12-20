@@ -35,7 +35,7 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 		console.log(elementRef.current.parentElement.parentElement)
 		elementRef.current.parentElement.parentElement.style.left = baseObjPosition.x + dx + 'px'
 		elementRef.current.parentElement.parentElement.style.top = baseObjPosition.y + dy + 'px'
-		createChangeObjectAction(obj.id, obj)
+		createChangeObjectAction(obj.id, obj) //TODO на дроп, менять объекты на уровне action
 	}
 
 	function stopMoving() {
@@ -44,7 +44,7 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 		elementRef.current.addEventListener('mousedown', startMoving)
 	}
 
-	function startMoving(e) {
+	function startMoving(e: MouseEvent) {
 		baseMousePosition = { x: e.clientX, y: e.clientY }
 		baseObjPosition = {
 			x: parseFloat(elementRef.current.parentElement.parentElement.style.left),
@@ -52,7 +52,7 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 		}
 		elementRef.current.removeEventListener('mousedown', startMoving)
 		document.addEventListener('mousemove', moving)
-		editedSlideRef.current.addEventListener('mouseup', stopMoving)
+		editedSlideRef.current.addEventListener('mouseup', stopMoving) //TODO Заменить на документ
 	}
 
 	useEffect(() => {

@@ -150,7 +150,7 @@ function Corner({
 				onDrop: () => {
 					const slide = slides.find((slide) => slide.objects.some((obj) => obj.id == id))
 					const object = slide.objects.find((object) => object.id == id)
-					createChangeObjectAction(id, object)
+					createChangeObjectAction(id, object) //TODO сделать изменненны объект
 				},
 			})
 		}
@@ -205,7 +205,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 		selectedObject.current.style.height = String(heightState) + 'px'
 		selectedObject.current.style.top = String(topState) + 'px'
 		selectedObject.current.style.left = String(leftState) + 'px'
-	}, [widthState, heightState, topState, leftState])
+	}, [widthState, heightState, topState, leftState]) //TODO Убрать
 	useEffect(() => {
 		setTop(parseFloat(selectedObject.current.style.top))
 		setLeft(parseFloat(selectedObject.current.style.left))

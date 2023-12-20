@@ -11,6 +11,7 @@ type ImageProps = {
 }
 
 const ImageComponent = function ({ image, onClick }: ImageProps) {
+	//TODO: убрать
 	const imageStyle: React.CSSProperties = {
 		position: 'absolute',
 		width: '100%',
@@ -30,7 +31,7 @@ const ImageComponent = function ({ image, onClick }: ImageProps) {
 			></img>
 		)
 	}
-	return <div style={imageStyle}></div>
+	return null
 }
 
 export { ImageComponent }

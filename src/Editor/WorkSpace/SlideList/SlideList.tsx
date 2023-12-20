@@ -53,7 +53,7 @@ function SlideList({ scale }: SlideListProps) {
 	}
 
 	const createSlideOnClick = () => {
-		const newSlide = generateBlankSlide()
+		const newSlide = generateBlankSlide() //TODO: убрать
 		createAddSlideAction(newSlide)
 	}
 

@@ -23,7 +23,7 @@ function SlideRenderer({
 	createOnClick,
 	selectOnClick,
 }: SlideRendererProps) {
-	const width = 1920 / scale
+	const width = 1920 / scale //magical number
 	const height = 1080 / scale
 
 	const { editedSlideRef } = useContext(PresenterContext)
@@ -48,7 +48,7 @@ function SlideRenderer({
 			ref={isWorkspace ? editedSlideRef : null}
 		>
 			{slide.objects.map((obj, index) => {
-				const newObj = structuredClone(obj)
+				const newObj = obj
 				const selected = selection.objectsId.includes(obj.id) && isWorkspace
 				if (selection) {
 					if (
