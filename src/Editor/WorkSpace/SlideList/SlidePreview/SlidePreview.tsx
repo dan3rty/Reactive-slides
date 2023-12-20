@@ -16,6 +16,7 @@ type SlidePreviewProps = {
 	deleteOnClick: () => void
 	registerDndItem: RegisterDndItemFn
 	unregisterDndItem: UnregisterDndItemFn
+	showDeleteButton: boolean
 }
 
 function SlidePreview({
@@ -27,6 +28,7 @@ function SlidePreview({
 	registerDndItem,
 	deleteOnClick,
 	unregisterDndItem,
+	showDeleteButton,
 }: SlidePreviewProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const isChosen = slide.id == selection.slideId
@@ -86,7 +88,9 @@ function SlidePreview({
 				selection={selection}
 			/>
 			<Counter index={index + 1}></Counter>
-			{isHovering && <DeleteButton deleteSlideOnClick={deleteOnClick}></DeleteButton>}
+			{showDeleteButton && isHovering && (
+				<DeleteButton deleteSlideOnClick={deleteOnClick}></DeleteButton>
+			)}
 		</div>
 	)
 }

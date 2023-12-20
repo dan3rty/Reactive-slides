@@ -77,6 +77,7 @@ function SlideList({ scale }: SlideListProps) {
 	const slidesToRender: JSX.Element[] = slides.map((slide, index) => {
 		const isChosen = slide.id == selection.slideId
 		const slideScale = isChosen ? scale * 3.5 : scale * 4
+		const showDeleteButton = slides.length !== 1
 
 		return (
 			<SlidePreview
@@ -89,6 +90,7 @@ function SlideList({ scale }: SlideListProps) {
 				selection={selection}
 				createOnClick={createOnClick}
 				deleteOnClick={() => deleteSlideOnClick(slide.id)}
+				showDeleteButton={showDeleteButton}
 			></SlidePreview>
 		)
 	})
