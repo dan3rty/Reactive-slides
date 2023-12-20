@@ -3,21 +3,25 @@ import * as Type from '../types'
 const BlackColor: Type.Color = {
 	hsl: '#000000',
 	opacity: 0,
+	percent: '100%',
 }
 
 const WhiteColor: Type.Color = {
 	hsl: '#FFFFFF',
 	opacity: 0,
+	percent: '100%',
 }
 
 const BlueColor: Type.Color = {
 	hsl: '#0000FF',
 	opacity: 0,
+	percent: '100%',
 }
 
 const RedColor: Type.Color = {
 	hsl: '#FF0000',
 	opacity: 0,
+	percent: '100%',
 }
 
 const letterH: Type.Char = {
