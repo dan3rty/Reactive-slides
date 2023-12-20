@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
 
 type WorkSpaceProps = {
-	selectedSlide: Slide
+	selectedSlide?: Slide
 }
 
 function WorkSpace({ selectedSlide }: WorkSpaceProps) {
@@ -20,6 +20,7 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 	const createOnClick = (objectId: string) => {
 		return () => {
 			if (selection.objectsId.includes(objectId)) {
+				console.log('here')
 				return
 			}
 			const newObjectsId = selection.objectsId.concat(objectId)
@@ -27,7 +28,21 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 				...selection,
 				objectsId: newObjectsId,
 			}
-			setPresenter({ presentation, selection: newSelection, operationHistory })
+			// const slide = presentation.slides.find((slide) =>
+			// 	slide.objects.includes(slide.objects.find((object) => object.id == objectId)),
+			// )
+			// const newSlide = structuredClone(slide)
+			// const objects = newSlide.objects
+			// const object = objects.find((object) => object.id == objectId)
+			// objects.splice(objects.indexOf(object), 1)
+			// objects.push(object)
+			// const slides = structuredClone(presentation.slides)
+			// slides[presentation.slides.indexOf(slide)] = newSlide
+			setPresenter({
+				presentation,
+				selection: newSelection,
+				operationHistory,
+			})
 		}
 	}
 
@@ -55,15 +70,17 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 		<div className={styles.workSpace}>
 			<div>
 				<BookMarks selection={selection} />
-				<div className={styles.slideEditorWrapper}>
-					<SlideRenderer
-						scale={scale}
-						slide={selectedSlide}
-						isWorkspace={true}
-						selection={selection}
-						createOnClick={createOnClick}
-					/>
-				</div>
+				{selectedSlide && (
+					<div className={styles.slideEditorWrapper}>
+						<SlideRenderer
+							scale={scale}
+							slide={selectedSlide}
+							isWorkspace={true}
+							selection={selection}
+							createOnClick={createOnClick}
+						/>
+					</div>
+				)}
 			</div>
 			<SlideList presenter={presenter} scale={scale} createOnClick={createOnClick} />
 		</div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { joinCssClasses } from '../../../../classes/joinCssClasses'
 import { SlideRenderer } from '../../../../common/SlideEditor/SlideRenderer'
-import { RegisterDndItemFn } from '../../../../hooks/useDraggableList'
+import { RegisterDndItemFn, UnregisterDndItemFn } from '../../../../hooks/useDraggableList'
 import { Selection, Slide } from '../../../../types'
 import { Counter } from './Counter/Counter'
 import { DeleteButton } from './DeleteButton/DeleteButton'
@@ -15,6 +15,7 @@ type SlidePreviewProps = {
 	createOnClick: (slideId: string) => () => void
 	deleteOnClick: () => void
 	registerDndItem: RegisterDndItemFn
+	unregisterDndItem: UnregisterDndItemFn
 }
 
 function SlidePreview({
@@ -25,6 +26,7 @@ function SlidePreview({
 	createOnClick,
 	registerDndItem,
 	deleteOnClick,
+	unregisterDndItem,
 }: SlidePreviewProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const isChosen = slide.id == selection.slideId
@@ -62,7 +64,10 @@ function SlidePreview({
 
 		const control = ref.current!
 		control.addEventListener('mousedown', onMouseDown)
-		return () => control.removeEventListener('mousedown', onMouseDown)
+		return () => {
+			control.removeEventListener('mousedown', onMouseDown)
+			unregisterDndItem(index)
+		}
 	}, [index, registerDndItem])
 	return (
 		<div

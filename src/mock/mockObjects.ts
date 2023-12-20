@@ -12,12 +12,6 @@ const WhiteColor: Type.Color = {
 	percent: '30%',
 }
 
-const GrayColor: Type.Color = {
-	hsl: '#969992',
-	opacity: 0,
-	percent: '60%',
-}
-
 const RedColor: Type.Color = {
 	hsl: '#e52222',
 	opacity: 0,
@@ -227,7 +221,7 @@ const image2: Type.ImageBlock = {
 		height: 400,
 		x: 300,
 		y: 300,
-		rotation: -20,
+		rotation: 0,
 	},
 	value: 'https://greetcard.ru/uploads/posts/2022-07/1657870668_kartinka-privet-7.jpg',
 	opacity: 50,
@@ -242,7 +236,7 @@ const image3: Type.ImageBlock = {
 		height: 800,
 		x: 700,
 		y: 200,
-		rotation: 15,
+		rotation: 0,
 	},
 	value: 'https://www.jandewitenzonen.com/img/products/tulip/Katinka.jpg.webp',
 	opacity: 50,
@@ -257,7 +251,7 @@ const image4: Type.ImageBlock = {
 		height: 1200,
 		x: -200,
 		y: 500,
-		rotation: 40,
+		rotation: 0,
 	},
 	value: 'https://shutniks.com/wp-content/uploads/2020/04/smeshnye_kartinki_basseyn_45_27154905.jpg',
 	opacity: 50,
@@ -289,13 +283,6 @@ const background5: Type.Background = {
 		rotation: 15,
 	},
 	image: backgroundImage,
-}
-
-const background4: Type.Background = {
-	color: {
-		colors: [GreenColor, GrayColor],
-		rotation: 15,
-	},
 }
 
 const circle: Type.PrimitiveBlock = {
@@ -380,7 +367,7 @@ const triangle: Type.PrimitiveBlock = {
 		height: 800,
 		x: 700,
 		y: 100,
-		rotation: 68,
+		rotation: 0,
 	},
 	primitiveType: Type.Primitives.TRIANGLE,
 	color: {
@@ -457,27 +444,9 @@ const slide3: Type.Slide = {
 	objects: [image3, image2],
 }
 
-const slide4: Type.Slide = {
-	id: 'djasdfgfdgADGKUAGUSDAD',
-	background: background4,
-	objects: [],
-}
-
-const slide5: Type.Slide = {
-	id: 'djjgfkUSDAD',
-	background: background1,
-	objects: [],
-}
-
-const slide6: Type.Slide = {
-	id: 'djahDHSsfdUSDAD',
-	background: background1,
-	objects: [],
-}
-
 const presentation: Type.Presentation = {
 	title: 'Max presentation',
-	slides: [slide1, slide2, slide3, slide4, slide5, slide6],
+	slides: [slide1, slide2, slide3],
 }
 
 const selection: Type.Selection = {

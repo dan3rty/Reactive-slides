@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { PresenterContext } from '../presenterContext/PresenterContext'
 
 type useObjectCreationProps = {
-	rect: DOMRect
+	rect?: DOMRect
 }
 
 function useObjectCreation({ rect }: useObjectCreationProps): {

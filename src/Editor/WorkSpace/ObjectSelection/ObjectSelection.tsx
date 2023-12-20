@@ -81,11 +81,32 @@ type CornerProps = {
 	selectedObject: React.MutableRefObject<SVGSVGElement | HTMLDivElement>
 	setWidth: React.Dispatch<React.SetStateAction<number>>
 	setHeight: React.Dispatch<React.SetStateAction<number>>
+	setTop: React.Dispatch<React.SetStateAction<number>>
+	setLeft: React.Dispatch<React.SetStateAction<number>>
 	scale: number
 	id: string
+	canChangeWidth: boolean
+	canChangeHeight: boolean
+	canChangeTop: boolean
+	canChangeLeft: boolean
 }
 
-function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id, scale }: CornerProps) {
+function Corner({
+	x,
+	y,
+	cursor,
+	selectedObject,
+	setWidth,
+	setHeight,
+	setTop,
+	setLeft,
+	id,
+	scale,
+	canChangeWidth,
+	canChangeLeft,
+	canChangeHeight,
+	canChangeTop,
+}: CornerProps) {
 	const { presenter, setPresenter } = useContext(PresenterContext)
 	const { registerResizableItem } = useResizableObject()
 	const size = 5
@@ -93,18 +114,38 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id, scale }
 	const objectRef = selectedObject
 
 	useEffect(() => {
-		const { onDragStart } = registerResizableItem({ cornerRef, objectRef })
+		const { onDragStart } = registerResizableItem()
 
 		const onMouseDown = (mouseDownEvent: MouseEvent) => {
 			const startWidth = parseFloat(objectRef.current.style.width)
-			const startHeight = parseFloat(objectRef.current.style.width)
+			const startHeight = parseFloat(objectRef.current.style.height)
+			const startTop = parseFloat(objectRef.current.style.top)
+			const startLeft = parseFloat(objectRef.current.style.left)
 			onDragStart({
 				onDrag: (dragEvent) => {
-					const newWidth = startWidth + dragEvent.clientX - mouseDownEvent.clientX
-					setWidth(newWidth)
+					if (canChangeWidth && !canChangeLeft) {
+						const newWidth = startWidth + dragEvent.clientX - mouseDownEvent.clientX
+						setWidth(newWidth)
+					}
 
-					const newHeight = startHeight + dragEvent.clientY - mouseDownEvent.clientY
-					setHeight(newHeight)
+					if (canChangeHeight && !canChangeTop) {
+						const newHeight = startHeight + dragEvent.clientY - mouseDownEvent.clientY
+						setHeight(newHeight)
+					}
+
+					if (canChangeTop) {
+						const newTop = startTop + dragEvent.clientY - mouseDownEvent.clientY
+						const newHeight = startHeight - (dragEvent.clientY - mouseDownEvent.clientY)
+						setTop(newTop)
+						setHeight(newHeight)
+					}
+
+					if (canChangeLeft) {
+						const newLeft = startLeft + dragEvent.clientX - mouseDownEvent.clientX
+						const newWidth = startWidth - (dragEvent.clientX - mouseDownEvent.clientX)
+						setLeft(newLeft)
+						setWidth(newWidth)
+					}
 				},
 				onDrop: () => {
 					const { presentation } = structuredClone(presenter)
@@ -114,6 +155,8 @@ function Corner({ x, y, cursor, selectedObject, setWidth, setHeight, id, scale }
 						if (obj.id == id) {
 							obj.baseState = {
 								...obj.baseState,
+								x: parseFloat(objectRef.current.style.left) * scale,
+								y: parseFloat(objectRef.current.style.top) * scale,
 								width: parseFloat(objectRef.current.style.width) * scale,
 								height: parseFloat(objectRef.current.style.height) * scale,
 							}
@@ -176,29 +219,33 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 		slideId: slideId,
 	})
 	const { clientWidth: width, clientHeight: height } = selectedObject.current
-	const { left, top } = selectedObject.current.style
-	const x = parseFloat(left)
-	const y = parseFloat(top)
 	const rotation = selectedObject.current.style.rotate
 		? parseFloat(selectedObject.current.style.rotate)
 		: 0
 	const borderSize = 3
 	const [widthState, setWidth] = useState(width)
 	const [heightState, setHeight] = useState(height)
+	const [topState, setTop] = useState(parseFloat(selectedObject.current.style.top))
+	const [leftState, setLeft] = useState(parseFloat(selectedObject.current.style.left))
 	useEffect(() => {
-		selectedObject.current.style.width = String(widthState)
-		selectedObject.current.style.height = String(heightState)
-	}, [widthState, heightState])
+		selectedObject.current.style.width = String(widthState) + 'px'
+		selectedObject.current.style.height = String(heightState) + 'px'
+		selectedObject.current.style.top = String(topState) + 'px'
+		selectedObject.current.style.left = String(leftState) + 'px'
+	}, [widthState, heightState, topState, leftState])
+	useEffect(() => {
+		setTop(parseFloat(selectedObject.current.style.top))
+		setLeft(parseFloat(selectedObject.current.style.left))
+	}, [selectedObject.current.style.top, selectedObject.current.style.left])
 	return (
 		<div
 			className={styles.selection}
 			style={{
-				rotate: rotation + 'deg',
 				borderWidth: `${borderSize}px`,
-				top: y - borderSize,
-				left: x - borderSize,
-				width: widthState,
-				height: heightState,
+				top: -borderSize,
+				left: -borderSize,
+				width: '100%',
+				height: '100%',
 			}}
 		>
 			<div ref={ref} className={styles.draggableSpace}></div>
@@ -210,7 +257,13 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				setTop={setTop}
+				setLeft={setLeft}
 				scale={scale}
+				canChangeWidth={true}
+				canChangeHeight={true}
+				canChangeLeft={true}
+				canChangeTop={true}
 			/>
 			<Corner
 				id={id}
@@ -220,7 +273,13 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				setTop={setTop}
+				setLeft={setLeft}
 				scale={scale}
+				canChangeWidth={false}
+				canChangeHeight={true}
+				canChangeLeft={false}
+				canChangeTop={true}
 			/>
 			<Corner
 				id={id}
@@ -230,7 +289,13 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				setTop={setTop}
+				setLeft={setLeft}
 				scale={scale}
+				canChangeWidth={true}
+				canChangeHeight={true}
+				canChangeLeft={false}
+				canChangeTop={true}
 			/>
 			<Corner
 				id={id}
@@ -240,7 +305,13 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				setTop={setTop}
+				setLeft={setLeft}
 				scale={scale}
+				canChangeWidth={true}
+				canChangeHeight={false}
+				canChangeLeft={false}
+				canChangeTop={false}
 			/>
 			<Corner
 				id={id}
@@ -250,7 +321,13 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				setTop={setTop}
+				setLeft={setLeft}
 				scale={scale}
+				canChangeWidth={true}
+				canChangeHeight={true}
+				canChangeLeft={false}
+				canChangeTop={false}
 			/>
 			<Corner
 				id={id}
@@ -260,7 +337,13 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				setTop={setTop}
+				setLeft={setLeft}
 				scale={scale}
+				canChangeWidth={false}
+				canChangeHeight={true}
+				canChangeLeft={false}
+				canChangeTop={false}
 			/>
 			<Corner
 				id={id}
@@ -270,7 +353,13 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				setTop={setTop}
+				setLeft={setLeft}
 				scale={scale}
+				canChangeWidth={true}
+				canChangeHeight={true}
+				canChangeLeft={true}
+				canChangeTop={false}
 			/>
 			<Corner
 				id={id}
@@ -280,7 +369,13 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				selectedObject={selectedObject}
 				setWidth={setWidth}
 				setHeight={setHeight}
+				setTop={setTop}
+				setLeft={setLeft}
 				scale={scale}
+				canChangeWidth={true}
+				canChangeHeight={false}
+				canChangeLeft={true}
+				canChangeTop={false}
 			/>
 		</div>
 	)

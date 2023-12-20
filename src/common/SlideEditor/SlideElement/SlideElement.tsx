@@ -33,19 +33,11 @@ function SlideElement({
 					image={object}
 					scale={scale}
 					onClick={onClick}
-					ref={ref as React.ForwardedRef<HTMLImageElement>}
 				/>
 			)
 			break
 		case BlockType.PRIMITIVE:
-			element = (
-				<PrimitiveComponent
-					primitive={object}
-					scale={scale}
-					onClick={onClick}
-					ref={ref as React.ForwardedRef<SVGSVGElement>}
-				/>
-			)
+			element = <PrimitiveComponent primitive={object} scale={scale} onClick={onClick} />
 			break
 		case BlockType.TEXT:
 			element = (
@@ -61,7 +53,17 @@ function SlideElement({
 			break
 	}
 	return (
-		<div>
+		<div
+			ref={ref}
+			style={{
+				position: 'absolute',
+				width: `${object.baseState.width / scale}px`,
+				height: `${object.baseState.height / scale}px`,
+				top: `${object.baseState.y / scale}px`,
+				left: `${object.baseState.x / scale}px`,
+				rotate: `${object.baseState.rotation}deg`,
+			}}
+		>
 			{element}
 			{selected && (
 				<ObjectSelection

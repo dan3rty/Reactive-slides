@@ -11,14 +11,14 @@ import {
 	TextIcon,
 	TriangleIcon,
 } from '../../../../common/Icons/icons'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { PresenterContext } from '../../../../presenterContext/PresenterContext'
 import { useObjectCreation } from '../../../../hooks/useObjectCreation'
 
 function AddBar() {
 	const [imagePathInputOpened, setImagePathInputOpened] = useState(false)
 	const { editedSlideRef } = useContext(PresenterContext)
-	const rect = editedSlideRef.current.getBoundingClientRect()
+	const rect = editedSlideRef.current?.getBoundingClientRect()
 
 	const imagePathInputRef = useRef(null)
 
@@ -30,6 +30,8 @@ function AddBar() {
 			setImagePathInputOpened(false)
 		}
 	}
+
+	useEffect(() => {}, [editedSlideRef.current])
 
 	return (
 		<div className={styles.addBar}>
