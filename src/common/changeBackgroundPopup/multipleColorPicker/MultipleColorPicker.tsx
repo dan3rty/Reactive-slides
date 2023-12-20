@@ -5,7 +5,7 @@ import { returnGradientString } from '../../Tools/returnGradientString'
 import { GradientColor } from '../../../types'
 
 type ColorPickerProps = {
-	onColorPick: (color: string) => void
+	onColorPick: (color: GradientColor) => void
 }
 
 function MultipleColorPicker({ onColorPick }: ColorPickerProps) {
@@ -53,13 +53,22 @@ function MultipleColorPicker({ onColorPick }: ColorPickerProps) {
 	function handleOnColorPick() {
 		onColorPick(
 			allColors === null
-				? `hsl(${
-						parseInt(hue.substring(0, hue.length - 1)) * 3.6
-				  }, ${saturation}, ${lightness})`
-				: returnGradientString({
+				? {
+						colors: [
+							{
+								hsl: `hsl(${
+									parseInt(hue.substring(0, hue.length - 1)) * 3.6
+								}, ${saturation}, ${lightness})`,
+								opacity: 1,
+								percent: '100%',
+							},
+						],
+						rotation: 0,
+				  }
+				: {
 						colors: allColors.colors,
 						rotation: parseInt(angle.substring(0, angle.length - 1)) * 3.6,
-				  }),
+				  },
 		)
 	}
 
