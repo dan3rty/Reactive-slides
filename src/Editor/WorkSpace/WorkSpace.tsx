@@ -3,7 +3,7 @@ import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
 import { Presentation, Selection, Slide } from '../../types'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
 
 type WorkSpaceProps = {
@@ -15,7 +15,13 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 	const scale = (1080 / (size - 205)) * 1.2
 
 	const { presenter, setPresenter } = useContext(PresenterContext)
-	const { selection, presentation, operationHistory } = presenter
+	let { selection, presentation, operationHistory } = presenter
+
+	useEffect(() => {
+		selection = presenter.selection
+		presentation = presenter.presentation
+		operationHistory = presenter.operationHistory
+	}, [presenter])
 
 	const createOnClick = (objectId: string) => {
 		return () => {
