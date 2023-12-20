@@ -2,73 +2,42 @@ import styles from './WorkSpace.css'
 import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
-import { Presentation, Selection, Slide } from '../../types'
-import { useContext } from 'react'
-import { PresenterContext } from '../../presenterContext/PresenterContext'
+import { useAppActions, useAppSelector } from '../../redux/hooks'
+import { useEffect } from 'react'
 
-type WorkSpaceProps = {
-	selectedSlide?: Slide
-}
-
-function WorkSpace({ selectedSlide }: WorkSpaceProps) {
+function WorkSpace() {
 	const size = window.innerHeight
 	const scale = (1080 / (size - 205)) * 1.2
 
-	const { presenter, setPresenter } = useContext(PresenterContext)
-	const { selection, presentation, operationHistory } = presenter
+	const selection = useAppSelector((state) => state.selection)
+	const slides = useAppSelector((state) => state.slides)
+	const selectedSlide = slides.find((slide) => slide.id === selection.slideId)
+	const {
+		createAddObjectSelectionAction,
+		createDeleteObjectAction,
+		createClearObjectSelectionAction,
+	} = useAppActions()
 
 	const createOnClick = (objectId: string) => {
 		return () => {
 			if (selection.objectsId.includes(objectId)) {
 				return
 			}
-			const newObjectsId = selection.objectsId.concat(objectId)
-			const newSelection: Selection = {
-				...selection,
-				objectsId: newObjectsId,
-			}
-			// const slide = presentation.slides.find((slide) =>
-			// 	slide.objects.includes(slide.objects.find((object) => object.id == objectId)),
-			// )
-			// const newSlide = structuredClone(slide)
-			// const objects = newSlide.objects
-			// const object = objects.find((object) => object.id == objectId)
-			// objects.splice(objects.indexOf(object), 1)
-			// objects.push(object)
-			// const slides = structuredClone(presentation.slides)
-			// slides[presentation.slides.indexOf(slide)] = newSlide
-			setPresenter({
-				presentation,
-				selection: newSelection,
-				operationHistory,
-			})
+			createAddObjectSelectionAction(objectId)
 		}
 	}
 
 	document.addEventListener('keydown', (e) => {
 		if (e.code === 'Delete') {
-			const slideIndex = presenter.presentation.slides.findIndex(
-				(slide) => slide.id === presenter.selection.slideId,
-			)
-			const newSlide: Slide = {
-				...presenter.presentation.slides[slideIndex],
-				objects: presenter.presentation.slides[slideIndex].objects.filter(
-					(obj) => !presenter.selection.objectsId.includes(obj.id),
-				),
-			}
-			const newSlides: Array<Slide> = presenter.presentation.slides
-			newSlides[slideIndex] = newSlide
-			const newPresentation: Presentation = {
-				...presentation,
-				slides: newSlides,
-			}
-			setPresenter({ presentation: newPresentation, selection, operationHistory })
+			createClearObjectSelectionAction()
+			createDeleteObjectAction(selection.objectsId)
 		}
 	})
+	useEffect(() => {}, [])
 	return (
 		<div className={styles.workSpace}>
 			<div>
-				<BookMarks selection={selection} />
+				<BookMarks />
 				{selectedSlide && (
 					<div className={styles.slideEditorWrapper}>
 						<SlideRenderer
@@ -81,7 +50,7 @@ function WorkSpace({ selectedSlide }: WorkSpaceProps) {
 					</div>
 				)}
 			</div>
-			<SlideList presenter={presenter} scale={scale} createOnClick={createOnClick} />
+			<SlideList scale={scale} createOnClick={createOnClick} />
 		</div>
 	)
 }

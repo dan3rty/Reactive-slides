@@ -1,8 +1,7 @@
-import { useContext, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useDraggableList } from '../../../hooks/useDraggableList'
 import styles from './SlideList.css'
-import { Background, Color, GradientColor, Presenter, Selection, Slide, Tabs } from '../../../types'
-import { PresenterContext } from '../../../App'
+import { Background, Color, GradientColor, Slide } from '../../../types'
 import { AddSlideButton } from './AddSlideButton/AddSlideButton'
 import { SlidePreview } from './SlidePreview/SlidePreview'
 import { useAppActions, useAppSelector } from '../../../redux/hooks'
@@ -31,16 +30,17 @@ function generateBlankSlide() {
 type SlideListProps = {
 	scale: number
 	createOnClick: (objectId: string) => () => void
-	presenter: Presenter
 }
 
-function SlideList({ scale, presenter }: SlideListProps) {
+function SlideList({ scale }: SlideListProps) {
 	const ref = useRef<HTMLDivElement>(null)
-	const { createAddSlideAction, createChangeOrderSlidesAction, createDeleteSlideAction } =
-		useAppActions()
-	const { setPresenter } = useContext(PresenterContext)
-	const { presentation, selection, operationHistory } = presenter
-	const [chosen, setChosen] = useState(selection.slideId)
+	const {
+		createAddSlideAction,
+		createChangeOrderSlidesAction,
+		createDeleteSlideAction,
+		createChangeSlideSelectionAction,
+	} = useAppActions()
+	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)
 	const { registerDndItem, unregisterDndItem } = useDraggableList({
 		onOrderChange: createChangeOrderSlidesAction,
@@ -48,13 +48,7 @@ function SlideList({ scale, presenter }: SlideListProps) {
 
 	const createOnClick = (slideId: string) => {
 		return () => {
-			setChosen(slideId)
-			const newSelection: Selection = {
-				selectedTab: Tabs.CREATE,
-				objectsId: [],
-				slideId,
-			}
-			setPresenter({ presentation, selection: newSelection, operationHistory })
+			createChangeSlideSelectionAction(slideId)
 		}
 	}
 
@@ -64,23 +58,24 @@ function SlideList({ scale, presenter }: SlideListProps) {
 	}
 
 	const deleteSlideOnClick = (slideId: string) => {
-		const newSelection = { ...selection }
 		if (selection.slideId == slideId) {
 			const deletedSlide = slides.find((slide) => slide.id === selection.slideId)
+			let newSlideId = ''
 			if (slides[slides.indexOf(deletedSlide) + 1]) {
-				newSelection.slideId = slides[slides.indexOf(deletedSlide) + 1].id
+				newSlideId = slides[slides.indexOf(deletedSlide) + 1].id
+				createChangeSlideSelectionAction(newSlideId)
 			} else if (slides[slides.indexOf(deletedSlide) - 1]) {
-				newSelection.slideId = slides[slides.indexOf(deletedSlide) - 1].id
+				newSlideId = slides[slides.indexOf(deletedSlide) - 1].id
+				createChangeSlideSelectionAction(newSlideId)
 			} else {
-				newSelection.slideId = undefined
+				createChangeSlideSelectionAction(newSlideId)
 			}
 		}
 		createDeleteSlideAction(slideId)
-		setPresenter({ presentation, selection: newSelection, operationHistory })
 	}
 
 	const slidesToRender: JSX.Element[] = slides.map((slide, index) => {
-		const isChosen = slide.id == chosen
+		const isChosen = slide.id == selection.slideId
 		const slideScale = isChosen ? scale * 3.5 : scale * 4
 
 		return (

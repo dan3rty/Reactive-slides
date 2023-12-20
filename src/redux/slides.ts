@@ -4,6 +4,7 @@ enum SlideActions {
 	DELETE_SLIDE = 'DELETE_SLIDE',
 	ADD_SLIDE = 'ADD_SLIDE',
 	CHANGE_ORDER = 'CHANGE_ORDER',
+	DELETE_OBJECTS = 'DELETE_OBJECTS',
 }
 
 type DeleteSlideAction = {
@@ -24,6 +25,15 @@ type ChangeOrderSlidesAction = {
 	}
 }
 
-type Actions = DeleteSlideAction | AddSlideAction | ChangeOrderSlidesAction
+type DeleteObjectAction = {
+	type: SlideActions.DELETE_OBJECTS
+	payload: string[]
+}
 
-export { SlideActions, type Actions }
+type SlideActionsType =
+	| DeleteSlideAction
+	| AddSlideAction
+	| ChangeOrderSlidesAction
+	| DeleteObjectAction
+
+export { SlideActions, type SlideActionsType }

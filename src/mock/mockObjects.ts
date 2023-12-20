@@ -450,7 +450,7 @@ const presentation: Type.Presentation = {
 }
 
 const selection: Type.Selection = {
-	selectedTab: Type.Tabs.ANIMATION,
+	selectedTab: Type.Tabs.CREATE,
 	slideId: 'djahDHSADGKUAGUSDAD',
 	objectsId: [],
 }

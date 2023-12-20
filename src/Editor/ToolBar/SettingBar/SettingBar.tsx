@@ -1,24 +1,17 @@
-import { useContext } from 'react'
 import styles from './SettingBar.css'
 import { EditBar } from './EditBar/EditBar'
 import { FileSettings } from './FileSettings/FileSettings'
 import { AddBar } from './AddBar/AddBar'
 import { AnimationBar } from './AnimationBar/AnimationBar'
 import { Slide, Tabs } from '../../../types'
-import { PresenterContext } from '../../../App'
+import { useAppSelector } from '../../../redux/hooks'
 
 function SettingBar() {
-	const { selection, presentation } = useContext(PresenterContext).presenter
-	if (presentation.slides.length === 0) {
-		return (
-			<div className={styles.settingBar}>
-				<FileSettings />
-			</div>
-		)
-	}
+	const selection = useAppSelector((state) => state.selection)
+	const slides = useAppSelector((state) => state.slides)
 	const curChosen = selection.selectedTab
 	const chosenSlide = selection.slideId
-	const curSlide: Slide = presentation.slides.find((slide) => slide.id === chosenSlide)
+	const curSlide: Slide = slides.find((slide) => slide.id === chosenSlide)
 	const selectedObject = curSlide?.objects.find((object) => object.id == selection.objectsId[0])
 	let bar = <AddBar />
 	switch (curChosen) {

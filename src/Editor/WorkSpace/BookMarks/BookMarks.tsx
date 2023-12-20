@@ -1,38 +1,21 @@
 import styles from './BookMarks.css'
 import { BookMark } from './BookMark/BookMark'
-
 import { ArrowIcon, MoveIcon, SelectIcon } from '../../../common/Icons/icons'
-import { useContext, useState } from 'react'
-import { Selection, Tabs } from '../../../types'
-import { PresenterContext } from '../../../presenterContext/PresenterContext'
+import { Tabs } from '../../../types'
+import { useAppActions, useAppSelector } from '../../../redux/hooks'
 
-type BookMarksProps = {
-	selection: Selection
-}
-
-function BookMarks({ selection }: BookMarksProps) {
-	const [chosen, setChosen] = useState(Tabs.EDIT)
-	const { presenter, setPresenter } = useContext(PresenterContext)
-	const { presentation, operationHistory } = presenter
+function BookMarks() {
+	const { createChangeTabSelectionAction } = useAppActions()
+	const selection = useAppSelector((state) => state.selection)
 	const isAvailable = selection.objectsId.length == 1
 
-	if (!isAvailable && chosen != Tabs.CREATE) {
-		setChosen(Tabs.CREATE)
-		const newSelection: Selection = {
-			...selection,
-			selectedTab: Tabs.CREATE,
-		}
-		setPresenter({ presentation, selection: newSelection, operationHistory })
+	if (!isAvailable && selection.selectedTab != Tabs.CREATE) {
+		createChangeTabSelectionAction(Tabs.CREATE)
 	}
 
 	const createOnClick = (tab: Tabs) => {
 		return () => {
-			setChosen(tab)
-			const newSelection: Selection = {
-				...selection,
-				selectedTab: tab,
-			}
-			setPresenter({ presentation, selection: newSelection, operationHistory })
+			createChangeTabSelectionAction(tab)
 		}
 	}
 	return (
@@ -40,21 +23,21 @@ function BookMarks({ selection }: BookMarksProps) {
 			<BookMark
 				text='create'
 				icon={ArrowIcon}
-				isChosen={chosen == Tabs.CREATE}
+				isChosen={selection.selectedTab == Tabs.CREATE}
 				onClick={createOnClick(Tabs.CREATE)}
 				isAvailable={true}
 			></BookMark>
 			<BookMark
 				text='edit'
 				icon={SelectIcon}
-				isChosen={chosen == Tabs.EDIT}
+				isChosen={selection.selectedTab == Tabs.EDIT}
 				onClick={isAvailable ? createOnClick(Tabs.EDIT) : () => {}}
 				isAvailable={isAvailable}
 			></BookMark>
 			<BookMark
 				text='animation'
 				icon={MoveIcon}
-				isChosen={chosen == Tabs.ANIMATION}
+				isChosen={selection.selectedTab == Tabs.ANIMATION}
 				onClick={isAvailable ? createOnClick(Tabs.ANIMATION) : () => {}}
 				isAvailable={isAvailable}
 			></BookMark>

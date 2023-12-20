@@ -1,14 +1,23 @@
-import { useContext } from 'react'
+import { FormEvent } from 'react'
 import styles from './TopBar.css'
-import { PresenterContext } from '../../../App'
+import { useAppActions, useAppSelector } from '../../../redux/hooks'
 function TopBar() {
+	const title = useAppSelector((state) => state.title)
+	const { createChangeTitleAction } = useAppActions()
 	return (
 		<div className={styles.topBar}>
 			<div>
 				<span className={styles.logo}>Reactive slides</span>
 			</div>
-			<span className={styles.presentationName}>
-				{useContext(PresenterContext).presenter.presentation.title}
+			<span
+				contentEditable={true}
+				suppressContentEditableWarning={true}
+				className={styles.presentationName}
+				onInput={(e: FormEvent<HTMLSpanElement>) => {
+					createChangeTitleAction(e.currentTarget.textContent)
+				}}
+			>
+				{title}
 			</span>
 		</div>
 	)

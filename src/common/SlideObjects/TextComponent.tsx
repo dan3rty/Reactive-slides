@@ -16,11 +16,8 @@ const TextComponent = React.forwardRef(function (
 	ref: React.ForwardedRef<HTMLDivElement>,
 ) {
 	const textStyle: React.CSSProperties = {
-		width: text.baseState.width / scale + 'px',
-		height: text.baseState.height / scale + 'px',
-		top: text.baseState.y / scale - 3 + 'px',
-		left: text.baseState.x / scale - 3 + 'px',
-		rotate: text.baseState.rotation + 'deg',
+		width: '100%',
+		height: '100%',
 	}
 	if (isWorkspace) {
 		useDraggableObject({
@@ -31,6 +28,7 @@ const TextComponent = React.forwardRef(function (
 	}
 	const TextToRender = text.value.map((char, index) => (
 		<div
+			contentEditable={true}
 			key={index}
 			className={styles.char}
 			style={{
