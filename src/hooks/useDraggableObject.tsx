@@ -17,11 +17,6 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 	let obj = slides
 		.find((slide) => slide.id === slideId)
 		.objects.find((object) => object.id === elementId)
-	useEffect(() => {
-		obj = presenter.presentation.slides
-			.find((slide) => slide.id === slideId)
-			.objects.find((object) => object.id === elementId)
-	}, [presenter])
 	let baseObjPosition = { x: 0, y: 0 }
 	let baseMousePosition = { x: 0, y: 0 }
 	function moving(e: MouseEvent) {
@@ -38,27 +33,6 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 			},
 		}
 		createChangeObjectAction(obj.id, obj)
-		// const slideIndex = presenter.presentation.slides.findIndex((slide) => slide.id === slideId)
-		// const newSlide: Slide = {
-		// 	...presenter.presentation.slides[slideIndex],
-		// 	objects: presenter.presentation.slides[slideIndex].objects.map((object) => {
-		// 		if (object.id === elementId) {
-		// 			return obj
-		// 		} else {
-		// 			return object
-		// 		}
-		// 	}),
-		// }
-		// const newSlides: Array<Slide> = presenter.presentation.slides
-		// newSlides[slideIndex] = newSlide
-		// const newPresenter: Presenter = {
-		// 	...presenter,
-		// 	presentation: {
-		// 		...presenter.presentation,
-		// 		slides: newSlides,
-		// 	},
-		// }
-		// setPresenter(newPresenter)
 	}
 
 	function stopMoving() {
@@ -84,7 +58,7 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 				elementRef.current.removeEventListener('mousedown', startMoving)
 			}
 		}
-	}, [presenter])
+	}, [])
 }
 
 export { useDraggableObject }
