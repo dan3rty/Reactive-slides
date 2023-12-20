@@ -1,5 +1,5 @@
 import { SlideActions } from './slides'
-import { Slide, Tabs } from '../types'
+import { ImageBlock, PrimitiveBlock, Slide, Tabs, TextBlock } from '../types'
 import { SelectionActions } from './selection'
 import { TitleActions } from './title'
 
@@ -7,6 +7,13 @@ function createAddSlideAction(slide: Slide) {
 	return {
 		type: SlideActions.ADD_SLIDE,
 		payload: slide,
+	}
+}
+
+function createSetSlidesAction(slides: Slide[]) {
+	return {
+		type: SlideActions.SET_SLIDES,
+		payload: slides,
 	}
 }
 
@@ -31,6 +38,29 @@ function createDeleteObjectAction(objectIds: string[]) {
 	return {
 		type: SlideActions.DELETE_OBJECTS,
 		payload: objectIds,
+	}
+}
+
+function createChangeObjectAction(
+	objectId: string,
+	object: TextBlock | ImageBlock | PrimitiveBlock,
+) {
+	return {
+		type: SlideActions.CHANGE_OBJECT,
+		payload: {
+			objectId,
+			object,
+		},
+	}
+}
+
+function createAddObjectAction(slideId: string, object: TextBlock | ImageBlock | PrimitiveBlock) {
+	return {
+		type: SlideActions.ADD_OBJECT,
+		payload: {
+			slideId,
+			object,
+		},
 	}
 }
 
@@ -73,9 +103,12 @@ export {
 	createDeleteSlideAction,
 	createChangeOrderSlidesAction,
 	createDeleteObjectAction,
+	createChangeObjectAction,
+	createAddObjectAction,
 	createChangeSlideSelectionAction,
 	createAddObjectSelectionAction,
 	createClearObjectSelectionAction,
 	createChangeTabSelectionAction,
 	createChangeTitleAction,
+	createSetSlidesAction,
 }

@@ -24,7 +24,24 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 					(object) => !action.payload.includes(object.id),
 				)
 			})
-
+			return state
+		case SlideActions.SET_SLIDES:
+			return action.payload
+		case SlideActions.CHANGE_OBJECT:
+			state.forEach((slide) => {
+				slide.objects.forEach((object, index) => {
+					if (object.id == action.payload.objectId) {
+						slide.objects[index] = action.payload.object
+					}
+				})
+			})
+			return state
+		case SlideActions.ADD_OBJECT:
+			state.forEach((slide) => {
+				if (slide.id == action.payload.slideId) {
+					slide.objects.push(action.payload.object)
+				}
+			})
 			return state
 		default:
 			return state

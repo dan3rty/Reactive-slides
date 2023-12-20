@@ -1,8 +1,8 @@
 import styles from './ObjectSelection.css'
 import { useResizableObject } from '../../../hooks/useResizableObject'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { PresenterContext } from '../../../App'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDraggableObject } from '../../../hooks/useDraggableObject'
+import { useAppActions, useAppSelector } from '../../../redux/hooks'
 
 enum CursorType {
 	N = 'n-resize',
@@ -101,13 +101,13 @@ function Corner({
 	setTop,
 	setLeft,
 	id,
-	scale,
 	canChangeWidth,
 	canChangeLeft,
 	canChangeHeight,
 	canChangeTop,
 }: CornerProps) {
-	const { presenter, setPresenter } = useContext(PresenterContext)
+	const { createChangeObjectAction } = useAppActions()
+	const slides = useAppSelector((state) => state.slides)
 	const { registerResizableItem } = useResizableObject()
 	const size = 5
 	const cornerRef = useRef<HTMLDivElement>(null)
@@ -148,36 +148,9 @@ function Corner({
 					}
 				},
 				onDrop: () => {
-					const { presentation } = structuredClone(presenter)
-					const { slides } = presentation
 					const slide = slides.find((slide) => slide.objects.some((obj) => obj.id == id))
-					const objects = slide.objects.map((obj) => {
-						if (obj.id == id) {
-							obj.baseState = {
-								...obj.baseState,
-								x: parseFloat(objectRef.current.style.left) * scale,
-								y: parseFloat(objectRef.current.style.top) * scale,
-								width: parseFloat(objectRef.current.style.width) * scale,
-								height: parseFloat(objectRef.current.style.height) * scale,
-							}
-						}
-						return obj
-					})
-					const newSlide = {
-						...slide,
-						objects,
-					}
-					const newSlides = slides.map((el) => {
-						if (el.id === slide.id) {
-							return newSlide
-						} else {
-							return el
-						}
-					})
-					setPresenter({
-						...presenter,
-						presentation: { slides: newSlides, title: presentation.title },
-					})
+					const object = slide.objects.find((object) => object.id == id)
+					createChangeObjectAction(id, object)
 				},
 			})
 		}

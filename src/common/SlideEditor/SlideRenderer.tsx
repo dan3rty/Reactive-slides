@@ -1,13 +1,14 @@
 import styles from './SlideRenderer.css'
-import { Selection, Slide, Tabs } from '../../types'
+import { Selection, Tabs } from '../../types'
 import { returnGradientString } from '../Tools/returnGradientString'
 import { useContext } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
 import { SlideElement } from './SlideElement'
+import { useAppSelector } from '../../redux/hooks'
 
 type SlideRendererProps = {
 	scale: number
-	slide: Slide
+	slideId: string
 	isWorkspace: boolean
 	selection: Selection
 	createOnClick: (objectId: string) => () => void
@@ -16,7 +17,7 @@ type SlideRendererProps = {
 
 function SlideRenderer({
 	scale,
-	slide,
+	slideId,
 	isWorkspace,
 	selection,
 	createOnClick,
@@ -26,6 +27,8 @@ function SlideRenderer({
 	const height = 1080 / scale
 
 	const { editedSlideRef } = useContext(PresenterContext)
+	const slides = useAppSelector((state) => state.slides)
+	const slide = slides.find((slide) => slide.id == slideId)
 
 	const selectedTab = selection.selectedTab
 

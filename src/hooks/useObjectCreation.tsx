@@ -1,7 +1,6 @@
 import * as Type from '../types'
-import { ImageBlock, Presenter, PrimitiveBlock, Slide, TextBlock } from '../types'
-import { useContext } from 'react'
-import { PresenterContext } from '../presenterContext/PresenterContext'
+import { ImageBlock, PrimitiveBlock, TextBlock } from '../types'
+import { useAppActions, useAppSelector } from '../redux/hooks'
 
 type useObjectCreationProps = {
 	rect?: DOMRect
@@ -12,7 +11,8 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 	setBlockType: (v: string) => void
 	setImagePathInput: (v: string) => void
 } {
-	const { presenter, setPresenter } = useContext(PresenterContext)
+	const { createAddObjectAction, createClearObjectSelectionAction } = useAppActions()
+	const selection = useAppSelector((state) => state.selection)
 	let firstPosition = { x: 0, y: 0 }
 	let secondPosition = { x: 0, y: 0 }
 	let blockType = 'oval'
@@ -129,27 +129,9 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 						},
 						value: [],
 				  } as TextBlock)
-		const slideIndex = presenter.presentation.slides.findIndex(
-			(slide) => slide.id === presenter.selection.slideId,
-		)
-		const newSlide: Slide = {
-			...presenter.presentation.slides[slideIndex],
-			objects: presenter.presentation.slides[slideIndex].objects.concat(objectToAdd),
-		}
-		const newSlides: Array<Slide> = presenter.presentation.slides
-		newSlides[slideIndex] = newSlide
-		const newPresenter: Presenter = {
-			...presenter,
-			selection: {
-				...presenter.selection,
-				objectsId: [objectToAdd.id],
-			},
-			presentation: {
-				...presenter.presentation,
-				slides: newSlides,
-			},
-		}
-		setPresenter(newPresenter)
+
+		createClearObjectSelectionAction()
+		createAddObjectAction(selection.slideId, objectToAdd)
 	}
 
 	function handleAddDown(event: MouseEvent) {
