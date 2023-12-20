@@ -32,6 +32,9 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 				y: baseObjPosition.y + dy * scale,
 			},
 		}
+		console.log(elementRef.current.parentElement.parentElement)
+		elementRef.current.parentElement.parentElement.style.left = baseObjPosition.x + dx + 'px'
+		elementRef.current.parentElement.parentElement.style.top = baseObjPosition.y + dy + 'px'
 		createChangeObjectAction(obj.id, obj)
 	}
 
@@ -43,7 +46,10 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 
 	function startMoving(e) {
 		baseMousePosition = { x: e.clientX, y: e.clientY }
-		baseObjPosition = { x: obj.baseState.x, y: obj.baseState.y }
+		baseObjPosition = {
+			x: parseFloat(elementRef.current.parentElement.parentElement.style.left),
+			y: parseFloat(elementRef.current.parentElement.parentElement.style.top),
+		}
 		elementRef.current.removeEventListener('mousedown', startMoving)
 		document.addEventListener('mousemove', moving)
 		editedSlideRef.current.addEventListener('mouseup', stopMoving)
