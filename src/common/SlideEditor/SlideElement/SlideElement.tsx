@@ -4,24 +4,20 @@ import { PrimitiveComponent } from '../../SlideObjects/PrimitiveComponent'
 import { TextComponent } from '../../SlideObjects/TextComponent'
 import { ObjectSelection } from '../../../Editor/WorkSpace/ObjectSelection/ObjectSelection'
 import React from 'react'
+import { useAppActions, useAppSelector } from '../../../redux/hooks'
 
 type SlideElementProps = {
 	object: TextBlock | PrimitiveBlock | ImageBlock
 	isWorkspace: boolean
 	slideId: string
 	scale: number
-	selected: boolean
-	onClick: () => void
 }
 
-function SlideElement({
-	object,
-	isWorkspace,
-	slideId,
-	scale,
-	selected,
-	onClick,
-}: SlideElementProps) {
+function SlideElement({ object, isWorkspace, slideId, scale }: SlideElementProps) {
+	const selection = useAppSelector((state) => state.selection)
+	const selected = selection.objectsId.includes(object.id)
+	const { createAddObjectSelectionAction } = useAppActions()
+	const onClick = () => createAddObjectSelectionAction(object.id)
 	const ref = React.useRef()
 	let element
 	switch (object.blockType) {

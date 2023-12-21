@@ -5,3 +5,8 @@
 	overflow: hidden;
 	background-size: cover;
 }
+
+.slide-editor-wrapper {
+	top: 30px;
+	left: 30px;
+}

@@ -1,17 +1,38 @@
 import { SlideActionsType, SlideActions } from './slides'
-import { Slide } from '../types'
+import { Background, Color, GradientColor, Slide } from '../types'
 import { presenter } from '../mock/mockObjects'
 import { combineReducers } from 'redux'
 import { SelectionActions, SelectionActionsType } from './selection'
 import { Selection } from '../types'
 import { TitleActions, TitleActionsType } from './title'
 
+function generateBlankSlide() {
+	const gradientColor: Color = {
+		hsl: '#FFFFFF',
+		opacity: 0,
+		percent: '100%',
+	}
+	const backgroundGradient: GradientColor = {
+		colors: [gradientColor],
+		rotation: 15,
+	}
+	const background: Background = {
+		color: backgroundGradient,
+	}
+	const newSlide: Slide = {
+		id: Math.random().toString(16).slice(2),
+		background: background,
+		objects: [],
+	}
+	return newSlide
+}
+
 const initSlidesData: Slide[] = presenter.presentation.slides
 
 const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType) => {
 	switch (action.type) {
 		case SlideActions.ADD_SLIDE:
-			return state.concat(action.payload)
+			return state.concat(generateBlankSlide())
 		case SlideActions.DELETE_SLIDE:
 			return state.filter((slide) => slide.id !== action.payload)
 		case SlideActions.CHANGE_SLIDE_ORDER:

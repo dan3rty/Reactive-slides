@@ -1,32 +1,25 @@
 import styles from './SlideRenderer.css'
-import { Selection, Tabs } from '../../types'
+import { Tabs } from '../../types'
 import { returnGradientString } from '../Tools/returnGradientString'
 import { useContext } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
 import { SlideElement } from './SlideElement'
 import { useAppSelector } from '../../redux/hooks'
+import { joinCssClasses } from '../../classes/joinCssClasses'
 
 type SlideRendererProps = {
 	scale: number
 	slideId: string
 	isWorkspace: boolean
-	selection: Selection
-	createOnClick: (objectId: string) => () => void
 	selectOnClick?: () => void
 }
 
-function SlideRenderer({
-	scale,
-	slideId,
-	isWorkspace,
-	selection,
-	createOnClick,
-	selectOnClick,
-}: SlideRendererProps) {
+function SlideRenderer({ scale, slideId, isWorkspace, selectOnClick }: SlideRendererProps) {
 	const width = 1920 / scale //magical number
 	const height = 1080 / scale
 
 	const { editedSlideRef } = useContext(PresenterContext)
+	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)
 	const slide = slides.find((slide) => slide.id == slideId)
 
@@ -44,7 +37,10 @@ function SlideRenderer({
 				width: `${width}px`,
 				height: `${height}px`,
 			}}
-			className={styles.slideEditor}
+			className={joinCssClasses(
+				styles.slideEditor,
+				isWorkspace ? styles.slideEditorWrapper : null,
+			)}
 			ref={isWorkspace ? editedSlideRef : null}
 		>
 			{slide.objects.map((obj, index) => {
@@ -75,8 +71,6 @@ function SlideRenderer({
 						isWorkspace={isWorkspace}
 						slideId={slide.id}
 						scale={scale}
-						selected={selected}
-						onClick={createOnClick(newObj.id)}
 					/>
 				)
 			})}

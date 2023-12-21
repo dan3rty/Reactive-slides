@@ -12,22 +12,7 @@ function WorkSpace() {
 	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)
 	const selectedSlide = slides.find((slide) => slide.id === selection.slideId)
-	const {
-		createAddObjectSelectionAction,
-		createDeleteObjectAction,
-		createClearObjectSelectionAction,
-		// createMoveObjectToTopLayer,
-	} = useAppActions()
-
-	const createOnClick = (objectId: string) => {
-		return () => {
-			if (selection.objectsId.includes(objectId)) {
-				return
-			}
-			// createMoveObjectToTopLayer(selection.slideId, objectId)
-			createAddObjectSelectionAction(objectId)
-		}
-	}
+	const { createDeleteObjectAction, createClearObjectSelectionAction } = useAppActions()
 
 	useEffect(() => {
 		const deleteOnClick = (e: KeyboardEvent) => {
@@ -56,20 +41,10 @@ function WorkSpace() {
 			<div>
 				<BookMarks />
 				{selectedSlide && (
-					<div className={styles.slideEditorWrapper}>
-						{' '}
-						//TODO выпилить
-						<SlideRenderer
-							scale={scale}
-							slideId={selectedSlide.id}
-							isWorkspace={true}
-							selection={selection}
-							createOnClick={createOnClick}
-						/>
-					</div>
+					<SlideRenderer scale={scale} slideId={selectedSlide.id} isWorkspace={true} />
 				)}
 			</div>
-			<SlideList scale={scale} createOnClick={createOnClick} />
+			<SlideList scale={scale} />
 		</div>
 	)
 }

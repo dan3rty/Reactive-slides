@@ -19,7 +19,6 @@ type DeleteSlideAction = {
 
 type AddSlideAction = {
 	type: SlideActions.ADD_SLIDE
-	payload: Slide
 }
 
 type SetSlidesAction = {

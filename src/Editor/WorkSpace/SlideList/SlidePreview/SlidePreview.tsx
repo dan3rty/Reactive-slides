@@ -2,18 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 import { joinCssClasses } from '../../../../classes/joinCssClasses'
 import { SlideRenderer } from '../../../../common/SlideEditor/SlideRenderer'
 import { RegisterDndItemFn, UnregisterDndItemFn } from '../../../../hooks/useDraggableList'
-import { Selection, Slide } from '../../../../types'
 import { Counter } from './Counter/Counter'
 import { DeleteButton } from './DeleteButton/DeleteButton'
 import styles from './SlidePreview.css'
+import { useAppActions, useAppSelector } from '../../../../redux/hooks'
 
 type SlidePreviewProps = {
 	index: number
 	scale: number
-	slide: Slide
-	selection: Selection
 	createOnClick: (slideId: string) => () => void
-	deleteOnClick: () => void
 	registerDndItem: RegisterDndItemFn
 	unregisterDndItem: UnregisterDndItemFn
 	showDeleteButton: boolean
@@ -22,17 +19,34 @@ type SlidePreviewProps = {
 function SlidePreview({
 	index,
 	scale,
-	slide,
-	selection,
 	createOnClick,
 	registerDndItem,
-	deleteOnClick,
 	unregisterDndItem,
 	showDeleteButton,
 }: SlidePreviewProps) {
 	const ref = useRef<HTMLDivElement>(null)
-	const isChosen = slide.id == selection.slideId
 	const [isHovering, setIsHovering] = useState(false)
+	const selection = useAppSelector((state) => state.selection)
+	const slides = useAppSelector((state) => state.slides)
+	const slide = slides[index]
+	const isChosen = slide.id == selection.slideId
+	const { createDeleteSlideAction, createChangeSlideSelectionAction } = useAppActions()
+	const deleteSlideOnClick = () => {
+		if (isChosen) {
+			const deletedSlide = slides.find((slide) => slide.id === selection.slideId)
+			let newSlideId = ''
+			if (slides[slides.indexOf(deletedSlide) + 1]) {
+				newSlideId = slides[slides.indexOf(deletedSlide) + 1].id
+				createChangeSlideSelectionAction(newSlideId)
+			} else if (slides[slides.indexOf(deletedSlide) - 1]) {
+				newSlideId = slides[slides.indexOf(deletedSlide) - 1].id
+				createChangeSlideSelectionAction(newSlideId)
+			} else {
+				createChangeSlideSelectionAction(newSlideId)
+			}
+		}
+		createDeleteSlideAction(slide.id)
+	}
 	const handleMouseOver = () => {
 		setIsHovering(true)
 	}
@@ -84,12 +98,10 @@ function SlidePreview({
 				scale={scale}
 				slideId={slide.id}
 				isWorkspace={false}
-				createOnClick={createOnClick}
-				selection={selection}
 			/>
 			<Counter index={index + 1}></Counter>
 			{showDeleteButton && isHovering && (
-				<DeleteButton deleteSlideOnClick={deleteOnClick}></DeleteButton>
+				<DeleteButton deleteSlideOnClick={deleteSlideOnClick}></DeleteButton>
 			)}
 		</div>
 	)

@@ -3,10 +3,9 @@ import { Background, ImageBlock, PrimitiveBlock, Slide, Tabs, TextBlock } from '
 import { SelectionActions } from './selection'
 import { TitleActions } from './title'
 
-function createAddSlideAction(slide: Slide) {
+function createAddSlideAction() {
 	return {
 		type: SlideActions.ADD_SLIDE,
-		payload: slide,
 	}
 }
 

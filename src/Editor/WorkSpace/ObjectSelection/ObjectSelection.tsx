@@ -155,7 +155,7 @@ function Corner({
 						width,
 						height,
 					}
-					createChangeObjectAction(slideId, objectId, { baseState: newBaseState }) //TODO сделать изменненны объект
+					createChangeObjectAction(slideId, objectId, { baseState: newBaseState })
 				},
 			})
 		}
