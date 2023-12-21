@@ -3,12 +3,13 @@ import { Background, ImageBlock, PrimitiveBlock, Slide, TextBlock } from '../typ
 enum SlideActions {
 	DELETE_SLIDE = 'DELETE_SLIDE',
 	ADD_SLIDE = 'ADD_SLIDE',
-	CHANGE_ORDER = 'CHANGE_ORDER',
+	CHANGE_SLIDE_ORDER = 'CHANGE_SLIDE_ORDER',
 	DELETE_OBJECTS = 'DELETE_OBJECTS',
 	SET_SLIDES = 'SET_SLIDES',
 	CHANGE_OBJECT = 'CHANGE_OBJECT',
 	ADD_OBJECT = 'ADD_OBJECT',
 	CHANGE_SLIDE_BACKGROUND = 'CHANGE_SLIDE_BACKGROUND',
+	MOVE_OBJECT_TO_TOP_LAYER = 'MOVE_OBJECT_TO_TOP_LAYER',
 }
 
 type DeleteSlideAction = {
@@ -27,7 +28,7 @@ type SetSlidesAction = {
 }
 
 type ChangeOrderSlidesAction = {
-	type: SlideActions.CHANGE_ORDER
+	type: SlideActions.CHANGE_SLIDE_ORDER
 	payload: {
 		from: number
 		to: number
@@ -64,6 +65,14 @@ type ChangeSlideBackgroundAction = {
 	}
 }
 
+type MoveObjectToTopLayer = {
+	type: SlideActions.MOVE_OBJECT_TO_TOP_LAYER
+	payload: {
+		slideId: string
+		objectId: string
+	}
+}
+
 type SlideActionsType =
 	| DeleteSlideAction
 	| AddSlideAction
@@ -73,5 +82,6 @@ type SlideActionsType =
 	| ChangeObjectAction
 	| AddObjectAction
 	| ChangeSlideBackgroundAction
+	| MoveObjectToTopLayer
 
 export { SlideActions, type SlideActionsType }

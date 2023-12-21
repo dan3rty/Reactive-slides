@@ -26,10 +26,20 @@ function createDeleteSlideAction(slideId: string) {
 
 function createChangeOrderSlidesAction(from: number, to: number) {
 	return {
-		type: SlideActions.CHANGE_ORDER,
+		type: SlideActions.CHANGE_SLIDE_ORDER,
 		payload: {
 			from,
 			to,
+		},
+	}
+}
+
+function createMoveObjectToTopLayer(slideId: string, objectId: string) {
+	return {
+		type: SlideActions.MOVE_OBJECT_TO_TOP_LAYER,
+		payload: {
+			slideId,
+			objectId,
 		},
 	}
 }
@@ -120,4 +130,5 @@ export {
 	createChangeTitleAction,
 	createSetSlidesAction,
 	createChangeSlideBackgroundAction,
+	createMoveObjectToTopLayer,
 }

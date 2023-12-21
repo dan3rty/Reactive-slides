@@ -16,6 +16,7 @@ function WorkSpace() {
 		createAddObjectSelectionAction,
 		createDeleteObjectAction,
 		createClearObjectSelectionAction,
+		// createMoveObjectToTopLayer,
 	} = useAppActions()
 
 	const createOnClick = (objectId: string) => {
@@ -23,19 +24,31 @@ function WorkSpace() {
 			if (selection.objectsId.includes(objectId)) {
 				return
 			}
+			// createMoveObjectToTopLayer(selection.slideId, objectId)
 			createAddObjectSelectionAction(objectId)
 		}
 	}
 
 	useEffect(() => {
-		const onClick = (e: KeyboardEvent) => {
+		const deleteOnClick = (e: KeyboardEvent) => {
 			if (e.code === 'Delete') {
 				createClearObjectSelectionAction()
 				createDeleteObjectAction(selection.objectsId)
 			}
 		}
-		document.addEventListener('keydown', onClick)
-		return () => document.removeEventListener('keydown', onClick)
+
+		const clearSelectionObjectsOnClick = (e: KeyboardEvent) => {
+			if (e.code === 'Escape') {
+				createClearObjectSelectionAction()
+			}
+		}
+
+		document.addEventListener('keydown', deleteOnClick)
+		document.addEventListener('keydown', clearSelectionObjectsOnClick)
+		return () => {
+			document.removeEventListener('keydown', deleteOnClick)
+			document.removeEventListener('keydown', clearSelectionObjectsOnClick)
+		}
 	}, [])
 
 	return (

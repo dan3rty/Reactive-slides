@@ -104,7 +104,7 @@ function Corner({
 	const { createChangeObjectAction } = useAppActions()
 	const slides = useAppSelector((state) => state.slides)
 	const { registerResizableItem } = useResizableObject()
-	const size = 7
+	const size = 6
 	const cornerRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
@@ -171,8 +171,8 @@ function Corner({
 			className={styles.corner}
 			style={{
 				position: 'absolute',
-				top: `calc(${y} - ${size}px)`,
-				left: `calc(${x} - ${size}px)`,
+				top: `calc(${y} - ${size / 2}px)`,
+				left: `calc(${x} - ${size - 1.5}px)`,
 				cursor: cursor,
 			}}
 		></div>

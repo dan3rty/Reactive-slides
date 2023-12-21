@@ -14,7 +14,7 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 			return state.concat(action.payload)
 		case SlideActions.DELETE_SLIDE:
 			return state.filter((slide) => slide.id !== action.payload)
-		case SlideActions.CHANGE_ORDER:
+		case SlideActions.CHANGE_SLIDE_ORDER:
 			const removed = state.splice(action.payload.from, 1)
 			state.splice(action.payload.to, 0, removed[0])
 			return state
@@ -39,10 +39,6 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 						}
 						return object
 					})
-					console.log({
-						...slide,
-						objects: newObjects,
-					})
 					return {
 						...slide,
 						objects: newObjects,
@@ -51,13 +47,12 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 				return slide
 			})
 		case SlideActions.ADD_OBJECT:
-			state.forEach((slide) => {
-				//TODO: использовать деструктуризацию, также прокидывать slideId
+			return state.map((slide) => {
 				if (slide.id == action.payload.slideId) {
 					slide.objects.push(action.payload.object)
 				}
+				return slide
 			})
-			return state
 		case SlideActions.CHANGE_SLIDE_BACKGROUND:
 			return state.map((slide) => {
 				if (slide.id == action.payload.slideId) {
@@ -65,6 +60,17 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 						...slide,
 						background: action.payload.background,
 					}
+				}
+				return slide
+			})
+		case SlideActions.MOVE_OBJECT_TO_TOP_LAYER:
+			return state.map((slide) => {
+				if (slide.id == action.payload.slideId) {
+					const objectIndex = slide.objects.findIndex(
+						(object) => object.id == action.payload.objectId,
+					)
+					const removed = slide.objects.splice(objectIndex, 1)[0]
+					slide.objects.push(removed)
 				}
 				return slide
 			})
