@@ -1,40 +1,14 @@
-import { ReactElement, useContext, useState } from 'react'
+import { ReactElement, useState } from 'react'
 import { MultipleColorPicker } from './multipleColorPicker/MultipleColorPicker'
 import styles from './ChangeBackgroundPopup.css'
-import { PresenterContext } from '../../presenterContext/PresenterContext'
-import { GradientColor } from '../../types'
 
 function ChangeBackgroundPopup() {
 	const [backgroundType, setBackgroundType] = useState('none')
 
-	const { presenter, setPresenter } = useContext(PresenterContext)
-
-	function setGradientBackground(color: GradientColor) {
-		const chosenSlideId = presenter.selection.slideId
-		const newPresentation = structuredClone({
-			...presenter,
-			presentation: {
-				...presenter.presentation,
-				slides: presenter.presentation.slides.map((slide) => {
-					if (slide.id !== chosenSlideId) {
-						return slide
-					}
-					return {
-						...slide,
-						background: {
-							color,
-						},
-					}
-				}),
-			},
-		})
-		setPresenter(newPresentation)
-	}
-
 	let window: ReactElement
 	switch (backgroundType) {
 		case 'gradient':
-			window = <MultipleColorPicker onColorPick={setGradientBackground} />
+			window = <MultipleColorPicker />
 			break
 		case 'none':
 			window = <ChoseBackgroundType setBackgroundType={(color) => setBackgroundType(color)} />

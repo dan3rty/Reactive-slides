@@ -67,9 +67,9 @@ function SlideElement({
 			{element}
 			{selected && (
 				<ObjectSelection
+					scale={scale}
 					selectedObject={ref}
 					id={object.id}
-					scale={scale}
 					slideId={slideId}
 				/>
 			)}

@@ -3,6 +3,7 @@ import { BookMarks } from './BookMarks/BookMarks'
 import { SlideRenderer } from '../../common/SlideEditor/SlideRenderer'
 import { SlideList } from './SlideList/SlideList'
 import { useAppActions, useAppSelector } from '../../redux/hooks'
+import { useEffect } from 'react'
 
 function WorkSpace() {
 	const size = window.innerHeight
@@ -26,13 +27,17 @@ function WorkSpace() {
 		}
 	}
 
-	document.addEventListener('keydown', (e) => {
-		//TODO вынести в useEfffect с отпиской
-		if (e.code === 'Delete') {
-			createClearObjectSelectionAction()
-			createDeleteObjectAction(selection.objectsId)
+	useEffect(() => {
+		const onClick = (e: KeyboardEvent) => {
+			if (e.code === 'Delete') {
+				createClearObjectSelectionAction()
+				createDeleteObjectAction(selection.objectsId)
+			}
 		}
-	})
+		document.addEventListener('keydown', onClick)
+		return () => document.removeEventListener('keydown', onClick)
+	}, [])
+
 	return (
 		<div className={styles.workSpace}>
 			<div>

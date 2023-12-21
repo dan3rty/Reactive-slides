@@ -6,7 +6,6 @@ type SelectionProps = {
 	icons: Array<ReactNode>
 }
 
-//TODO: ПРОКИДЫВАТЬ МАССИВ
 function SelectionBar({ icons }: SelectionProps) {
 	return (
 		<div className={styles.selection}>

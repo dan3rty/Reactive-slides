@@ -28,15 +28,28 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 		case SlideActions.SET_SLIDES:
 			return action.payload
 		case SlideActions.CHANGE_OBJECT:
-			state.forEach((slide) => {
-				//TODO
-				slide.objects.forEach((object, index) => {
-					if (object.id == action.payload.objectId) {
-						slide.objects[index] = action.payload.object
+			return state.map((slide) => {
+				if (slide.id == action.payload.slideId) {
+					const newObjects = slide.objects.map((object) => {
+						if (object.id == action.payload.objectId) {
+							return {
+								...object,
+								...action.payload.propertyToChange,
+							}
+						}
+						return object
+					})
+					console.log({
+						...slide,
+						objects: newObjects,
+					})
+					return {
+						...slide,
+						objects: newObjects,
 					}
-				})
+				}
+				return slide
 			})
-			return state
 		case SlideActions.ADD_OBJECT:
 			state.forEach((slide) => {
 				//TODO: использовать деструктуризацию, также прокидывать slideId
@@ -45,6 +58,16 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 				}
 			})
 			return state
+		case SlideActions.CHANGE_SLIDE_BACKGROUND:
+			return state.map((slide) => {
+				if (slide.id == action.payload.slideId) {
+					return {
+						...slide,
+						background: action.payload.background,
+					}
+				}
+				return slide
+			})
 		default:
 			return state
 	}

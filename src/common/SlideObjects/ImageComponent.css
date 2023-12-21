@@ -1,5 +1,9 @@
 .image {
 	display: flex;
-	position: absolute;
+	height: 100%;
+	width: 100%;
 	user-select: none;
+	position: absolute;
+	top: 0;
+	left: 0;
 }

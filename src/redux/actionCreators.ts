@@ -1,5 +1,5 @@
 import { SlideActions } from './slides'
-import { ImageBlock, PrimitiveBlock, Slide, Tabs, TextBlock } from '../types'
+import { Background, ImageBlock, PrimitiveBlock, Slide, Tabs, TextBlock } from '../types'
 import { SelectionActions } from './selection'
 import { TitleActions } from './title'
 
@@ -41,15 +41,23 @@ function createDeleteObjectAction(objectIds: string[]) {
 	}
 }
 
-function createChangeObjectAction(
-	objectId: string,
-	object: TextBlock | ImageBlock | PrimitiveBlock,
-) {
+function createChangeObjectAction(slideId: string, objectId: string, propertyToChange: object) {
 	return {
 		type: SlideActions.CHANGE_OBJECT,
 		payload: {
+			slideId,
 			objectId,
-			object,
+			propertyToChange,
+		},
+	}
+}
+
+function createChangeSlideBackgroundAction(slideId: string, background: Background) {
+	return {
+		type: SlideActions.CHANGE_SLIDE_BACKGROUND,
+		payload: {
+			slideId,
+			background,
 		},
 	}
 }
@@ -111,4 +119,5 @@ export {
 	createChangeTabSelectionAction,
 	createChangeTitleAction,
 	createSetSlidesAction,
+	createChangeSlideBackgroundAction,
 }

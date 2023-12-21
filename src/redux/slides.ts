@@ -1,4 +1,4 @@
-import { ImageBlock, PrimitiveBlock, Slide, TextBlock } from '../types'
+import { Background, ImageBlock, PrimitiveBlock, Slide, TextBlock } from '../types'
 
 enum SlideActions {
 	DELETE_SLIDE = 'DELETE_SLIDE',
@@ -8,6 +8,7 @@ enum SlideActions {
 	SET_SLIDES = 'SET_SLIDES',
 	CHANGE_OBJECT = 'CHANGE_OBJECT',
 	ADD_OBJECT = 'ADD_OBJECT',
+	CHANGE_SLIDE_BACKGROUND = 'CHANGE_SLIDE_BACKGROUND',
 }
 
 type DeleteSlideAction = {
@@ -41,8 +42,9 @@ type DeleteObjectAction = {
 type ChangeObjectAction = {
 	type: SlideActions.CHANGE_OBJECT
 	payload: {
+		slideId: string
 		objectId: string
-		object: PrimitiveBlock | TextBlock | ImageBlock
+		propertyToChange: object
 	}
 }
 
@@ -54,6 +56,14 @@ type AddObjectAction = {
 	}
 }
 
+type ChangeSlideBackgroundAction = {
+	type: SlideActions.CHANGE_SLIDE_BACKGROUND
+	payload: {
+		slideId: string
+		background: Background
+	}
+}
+
 type SlideActionsType =
 	| DeleteSlideAction
 	| AddSlideAction
@@ -62,5 +72,6 @@ type SlideActionsType =
 	| SetSlidesAction
 	| ChangeObjectAction
 	| AddObjectAction
+	| ChangeSlideBackgroundAction
 
 export { SlideActions, type SlideActionsType }

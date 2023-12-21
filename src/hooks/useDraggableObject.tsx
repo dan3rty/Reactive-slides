@@ -1,5 +1,4 @@
-import { MutableRefObject, useContext, useEffect } from 'react'
-import { PresenterContext } from '../presenterContext/PresenterContext'
+import { MutableRefObject, useEffect } from 'react'
 import { useAppActions, useAppSelector } from '../redux/hooks'
 
 type useDraggableObjectProps = {
@@ -11,10 +10,9 @@ type useDraggableObjectProps = {
 function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObjectProps) {
 	const { createChangeObjectAction } = useAppActions()
 	const slides = useAppSelector((state) => state.slides)
-	const { editedSlideRef } = useContext(PresenterContext)
-	const size = window.innerHeight
-	const scale = (1080 / (size - 205)) * 1.2
-	let obj = slides
+	const size = window.innerHeight //TODO: Я думаю, что высчитывание размеров можно вынести в common функцию
+	const scale = (1080 / (size - 205)) * 1.2 //TODO: remove magical number
+	const obj = slides
 		.find((slide) => slide.id === slideId)
 		.objects.find((object) => object.id === elementId)
 	let baseObjPosition = { x: 0, y: 0 }
@@ -22,26 +20,28 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 	function moving(e: MouseEvent) {
 		const dx = e.clientX - baseMousePosition.x
 		const dy = e.clientY - baseMousePosition.y
-		obj = {
-			...obj,
-			baseState: {
-				...obj.baseState,
-				width: elementRef.current.clientWidth * scale,
-				height: elementRef.current.clientHeight * scale,
-				x: baseObjPosition.x + dx * scale,
-				y: baseObjPosition.y + dy * scale,
-			},
-		}
-		console.log(elementRef.current.parentElement.parentElement)
 		elementRef.current.parentElement.parentElement.style.left = baseObjPosition.x + dx + 'px'
 		elementRef.current.parentElement.parentElement.style.top = baseObjPosition.y + dy + 'px'
-		createChangeObjectAction(obj.id, obj) //TODO на дроп, менять объекты на уровне action
 	}
 
-	function stopMoving() {
+	function stopMoving(e: MouseEvent) {
 		document.removeEventListener('mousemove', moving)
-		editedSlideRef.current.removeEventListener('mouseup', stopMoving)
-		elementRef.current.addEventListener('mousedown', startMoving)
+		document.removeEventListener('mouseup', stopMoving)
+		elementRef.current.addEventListener('mousedown', (event: Event) =>
+			startMoving(event as MouseEvent),
+		)
+		const dx = e.clientX - baseMousePosition.x
+		const dy = e.clientY - baseMousePosition.y
+		const newBaseState = {
+			...obj.baseState,
+			width: elementRef.current.clientWidth * scale,
+			height: elementRef.current.clientHeight * scale,
+			x: (baseObjPosition.x + dx) * scale,
+			y: (baseObjPosition.y + dy) * scale,
+		}
+		createChangeObjectAction(slideId, obj.id, {
+			baseState: newBaseState,
+		})
 	}
 
 	function startMoving(e: MouseEvent) {
@@ -50,18 +50,24 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 			x: parseFloat(elementRef.current.parentElement.parentElement.style.left),
 			y: parseFloat(elementRef.current.parentElement.parentElement.style.top),
 		}
-		elementRef.current.removeEventListener('mousedown', startMoving)
+		elementRef.current.removeEventListener('mousedown', (event: Event) =>
+			startMoving(event as MouseEvent),
+		)
 		document.addEventListener('mousemove', moving)
-		editedSlideRef.current.addEventListener('mouseup', stopMoving) //TODO Заменить на документ
+		document.addEventListener('mouseup', stopMoving)
 	}
 
 	useEffect(() => {
 		if (elementRef.current) {
-			elementRef.current.addEventListener('mousedown', startMoving)
+			elementRef.current.addEventListener('mousedown', (event: Event) =>
+				startMoving(event as MouseEvent),
+			)
 		}
 		return () => {
 			if (elementRef.current) {
-				elementRef.current.removeEventListener('mousedown', startMoving)
+				elementRef.current.removeEventListener('mousedown', (event: Event) =>
+					startMoving(event as MouseEvent),
+				)
 			}
 		}
 	}, [])

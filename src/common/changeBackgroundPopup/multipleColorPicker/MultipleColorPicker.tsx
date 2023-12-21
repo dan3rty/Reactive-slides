@@ -3,12 +3,19 @@ import { Slider } from './slider/Slider'
 import { useEffect, useRef, useState } from 'react'
 import { returnGradientString } from '../../Tools/returnGradientString'
 import { GradientColor } from '../../../types'
+import { useAppActions, useAppSelector } from '../../../redux/hooks'
 
-type ColorPickerProps = {
-	onColorPick: (color: GradientColor) => void
+function createGradientColor(allColors: GradientColor, angle: string): GradientColor {
+	return {
+		colors: allColors.colors,
+		rotation: parseInt(angle.substring(0, angle.length - 1)) * 3.6,
+	}
 }
 
-function MultipleColorPicker({ onColorPick }: ColorPickerProps) {
+function MultipleColorPicker() {
+	const selection = useAppSelector((state) => state.selection)
+	const { createChangeSlideBackgroundAction } = useAppActions()
+
 	const [hue, setHue] = useState('0%')
 	const [saturation, setSaturation] = useState('0%')
 	const [lightness, setLightness] = useState('0%')
@@ -51,7 +58,7 @@ function MultipleColorPicker({ onColorPick }: ColorPickerProps) {
 	}
 
 	function handleOnColorPick() {
-		onColorPick(
+		const color: GradientColor =
 			allColors === null
 				? {
 						colors: [
@@ -65,11 +72,8 @@ function MultipleColorPicker({ onColorPick }: ColorPickerProps) {
 						],
 						rotation: 0,
 				  }
-				: {
-						colors: allColors.colors,
-						rotation: parseInt(angle.substring(0, angle.length - 1)) * 3.6,
-				  },
-		)
+				: createGradientColor(allColors, angle)
+		createChangeSlideBackgroundAction(selection.slideId, { color })
 	}
 
 	function handleOnColorReset() {
@@ -146,11 +150,7 @@ function MultipleColorPicker({ onColorPick }: ColorPickerProps) {
 								? `hsl(${
 										parseInt(hue.substring(0, hue.length - 1)) * 3.6
 								  }, ${saturation}, ${lightness})`
-								: returnGradientString({
-										colors: allColors.colors,
-										rotation:
-											parseInt(angle.substring(0, angle.length - 1)) * 3.6,
-								  }),
+								: returnGradientString(createGradientColor(allColors, angle)),
 					}}
 				></div>
 			</div>
