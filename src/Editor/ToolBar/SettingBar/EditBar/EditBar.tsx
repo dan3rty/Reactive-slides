@@ -14,19 +14,22 @@ import {
 	UnderstrokeIcon,
 	VerticalAlignCenterIcon,
 } from '../../../../common/Icons/icons'
-import { FontFamily, ImageBlock, PrimitiveBlock, TextBlock } from '../../../../types'
+import { FontFamily } from '../../../../types'
 import styles from './EditBar.css'
 import { useEffect, useRef, useState } from 'react'
 import { ColorPicker } from '../../../../common/changeBackgroundPopup/colorPicker/ColorPicker'
 import { ChangeBackgroundPopup } from '../../../../common/changeBackgroundPopup/ChangeBackgroundPopup'
+import { useAppSelector } from '../../../../redux/hooks'
 
-type EditBarProps = {
-	selectedObject: TextBlock | PrimitiveBlock | ImageBlock
-}
-
-function EditBar({ selectedObject }: EditBarProps) {
+function EditBar() {
 	const [isTextColorPicker, setStateTextColorPicker] = useState(false)
 	const [isBackgroundColorPicker, setStateBackgroundColorPicker] = useState(false)
+
+	const selection = useAppSelector((state) => state.selection)
+	const slides = useAppSelector((state) => state.slides)
+	const selectedObject = slides
+		.find((slide) => slide.id === selection.slideId)
+		.objects.find((obj) => obj.id == selection.objectsId[0])
 
 	const toggleTextColorPickerState = () => setStateTextColorPicker((state) => !state)
 	const toggleBackgroundColorPickerState = () => setStateBackgroundColorPicker((state) => !state)

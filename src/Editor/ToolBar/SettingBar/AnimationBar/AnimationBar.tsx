@@ -1,15 +1,19 @@
 import { InputField } from '../../../../common/Components/InputFields/InputField'
-import { ImageBlock, PrimitiveBlock, TextBlock } from '../../../../types'
 import styles from './AnimationBar.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { Timeline } from './Timeline/Timeline'
+import { useAppSelector } from '../../../../redux/hooks'
 
 type AnimationBarProps = {
-	selectedObject: TextBlock | ImageBlock | PrimitiveBlock
 	chosenState?: string
 }
 
-function AnimationBar({ selectedObject, chosenState }: AnimationBarProps) {
+function AnimationBar({ chosenState }: AnimationBarProps) {
+	const selection = useAppSelector((state) => state.selection)
+	const slides = useAppSelector((state) => state.slides)
+	const selectedObject = slides
+		.find((slide) => slide.id === selection.slideId)
+		.objects.find((obj) => obj.id == selection.objectsId[0])
 	const animation = selectedObject?.animation
 	return (
 		<div className={styles.animationBar}>

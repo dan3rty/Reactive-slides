@@ -117,6 +117,7 @@ const selectionReducer = (state: Selection = initSelectionData, action: Selectio
 		case SelectionActions.CHANGE_SLIDE_SELECTION:
 			return {
 				...state,
+				objectsId: [],
 				slideId: action.payload,
 			}
 		case SelectionActions.CLEAR_OBJECTS_SELECTION:
