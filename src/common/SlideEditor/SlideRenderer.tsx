@@ -1,24 +1,24 @@
 import styles from './SlideRenderer.css'
 import { Tabs } from '../../types'
 import { returnGradientString } from '../Tools/returnGradientString'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { PresenterContext } from '../../presenterContext/PresenterContext'
 import { SlideElement } from './SlideElement'
-import { useAppSelector } from '../../redux/hooks'
+import { useAppActions, useAppSelector } from '../../redux/hooks'
 import { joinCssClasses } from '../../classes/joinCssClasses'
 
 type SlideRendererProps = {
 	scale: number
 	slideId: string
 	isWorkspace: boolean
-	selectOnClick?: () => void
 }
 
 const SLIDE_HEIGHT = 1080
 const SLIDE_WIDTH = 1920
-function SlideRenderer({ scale, slideId, isWorkspace, selectOnClick }: SlideRendererProps) {
+function SlideRenderer({ scale, slideId, isWorkspace }: SlideRendererProps) {
 	const width = SLIDE_WIDTH / scale //magical number
 	const height = SLIDE_HEIGHT / scale
+	const { createDeleteObjectAction, createClearObjectSelectionAction } = useAppActions()
 
 	const { editedSlideRef } = useContext(PresenterContext)
 	const selection = useAppSelector((state) => state.selection)
@@ -31,9 +31,34 @@ function SlideRenderer({ scale, slideId, isWorkspace, selectOnClick }: SlideRend
 		? { backgroundImage: `url("${slide.background.image.value}")` }
 		: { background: returnGradientString(slide.background.color) }
 
+	const deleteOnClick = (e: KeyboardEvent) => {
+		if (e.code === 'Delete') {
+			createDeleteObjectAction(slideId, selection.objectsId)
+			createClearObjectSelectionAction()
+		}
+	}
+
+	const clearSelectionObjectsOnClick = (e: KeyboardEvent) => {
+		if (e.code === 'Escape') {
+			createClearObjectSelectionAction()
+		}
+	}
+
+	useEffect(() => {
+		if (!isWorkspace) {
+			return
+		}
+
+		document.addEventListener('keydown', deleteOnClick)
+		document.addEventListener('keydown', clearSelectionObjectsOnClick)
+		return () => {
+			document.removeEventListener('keydown', deleteOnClick)
+			document.removeEventListener('keydown', clearSelectionObjectsOnClick)
+		}
+	}, [])
+
 	return (
 		<div
-			onClick={selectOnClick}
 			style={{
 				...backgroundStyle,
 				width: `${width}px`,

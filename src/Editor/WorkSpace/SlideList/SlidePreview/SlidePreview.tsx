@@ -8,18 +8,18 @@ import styles from './SlidePreview.css'
 import { useAppActions, useAppSelector } from '../../../../redux/hooks'
 
 type SlidePreviewProps = {
+	slideId: string
 	index: number
 	scale: number
-	createOnClick: (slideId: string) => () => void
 	registerDndItem: RegisterDndItemFn
 	unregisterDndItem: UnregisterDndItemFn
 	showDeleteButton: boolean
 }
 
 function SlidePreview({
+	slideId,
 	index,
 	scale,
-	createOnClick,
 	registerDndItem,
 	unregisterDndItem,
 	showDeleteButton,
@@ -28,7 +28,7 @@ function SlidePreview({
 	const [isHovering, setIsHovering] = useState(false)
 	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)
-	const slide = slides[index]
+	const slide = slides.find((slide) => slide.id == slideId)
 	const isChosen = slide.id == selection.slideId
 	const { createDeleteSlideAction, createChangeSlideSelectionAction } = useAppActions()
 	const deleteSlideOnClick = () => {
@@ -47,12 +47,7 @@ function SlidePreview({
 		}
 		createDeleteSlideAction(slide.id)
 	}
-	const handleMouseOver = () => {
-		setIsHovering(true)
-	}
-	const handleMouseOut = () => {
-		setIsHovering(false)
-	}
+
 	useEffect(() => {
 		if (!registerDndItem) {
 			return
@@ -62,6 +57,7 @@ function SlidePreview({
 		})
 
 		const onMouseDown = (mouseDownEvent: MouseEvent) => {
+			createChangeSlideSelectionAction(slide.id)
 			onDragStart({
 				onDrag: (dragEvent) => {
 					ref.current!.style.position = 'relative'
@@ -87,18 +83,13 @@ function SlidePreview({
 	}, [index, registerDndItem])
 	return (
 		<div
-			onMouseOver={handleMouseOver}
-			onMouseOut={handleMouseOut}
+			onMouseOver={() => setIsHovering(true)}
+			onMouseOut={() => setIsHovering(false)}
 			ref={ref}
 			key={index}
 			className={joinCssClasses(styles.smallSlide, isChosen ? styles.smallSlideChosen : null)}
 		>
-			<SlideRenderer
-				selectOnClick={createOnClick(slide.id)}
-				scale={scale}
-				slideId={slide.id}
-				isWorkspace={false}
-			/>
+			<SlideRenderer scale={scale} slideId={slide.id} isWorkspace={false} />
 			<Counter index={index + 1}></Counter>
 			{showDeleteButton && isHovering && (
 				<DeleteButton deleteSlideOnClick={deleteSlideOnClick}></DeleteButton>

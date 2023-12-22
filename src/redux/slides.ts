@@ -36,7 +36,10 @@ type ChangeOrderSlidesAction = {
 
 type DeleteObjectAction = {
 	type: SlideActions.DELETE_OBJECTS
-	payload: string[]
+	payload: {
+		slideId: string
+		objectsId: string[]
+	}
 }
 
 type ChangeObjectAction = {

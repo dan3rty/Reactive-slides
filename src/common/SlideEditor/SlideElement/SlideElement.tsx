@@ -17,7 +17,7 @@ function SlideElement({ object, isWorkspace, slideId, scale }: SlideElementProps
 	const selection = useAppSelector((state) => state.selection)
 	const selected = selection.objectsId.includes(object.id)
 	const { createAddObjectSelectionAction } = useAppActions()
-	const onClick = () => createAddObjectSelectionAction(object.id)
+	const onClick = isWorkspace ? () => createAddObjectSelectionAction(object.id) : () => {}
 	const ref = React.useRef()
 	let element
 	switch (object.blockType) {
@@ -61,7 +61,7 @@ function SlideElement({ object, isWorkspace, slideId, scale }: SlideElementProps
 			}}
 		>
 			{element}
-			{selected && (
+			{selected && isWorkspace && (
 				<ObjectSelection
 					scale={scale}
 					selectedObject={ref}

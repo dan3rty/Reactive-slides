@@ -164,11 +164,6 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 			x: event.clientX - rect.x,
 			y: event.clientY - rect.y,
 		})
-		console.log({
-			x: event.clientX - rect.x,
-			y: event.clientY - rect.y,
-		})
-		console.log(firstPosition)
 		document.addEventListener('mouseup', useHandleAddUp)
 	}
 
