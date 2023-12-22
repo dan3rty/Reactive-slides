@@ -37,7 +37,7 @@ const TextComponent = React.forwardRef(function (
 				className={styles.text}
 				contentEditable={isWorkSpace}
 				onClick={onClick}
-				onInput={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+				onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
 					createChangeObjectAction(slideId, text.id, {
 						value: e.target.value,
 					})
