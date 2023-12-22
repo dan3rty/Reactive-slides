@@ -9,7 +9,7 @@ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 const useAppActions = () => {
 	const dispatch = useDispatch()
-	return bindActionCreators({ ...ActionCreators }, dispatch)
+	return bindActionCreators(ActionCreators, dispatch)
 }
 
 export { useAppActions, useAppSelector }

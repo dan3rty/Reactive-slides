@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styles from './TextComponent.css'
 import { useAppActions, useAppSelector } from '../../redux/hooks'
 import { TextBlock } from '../../types'
@@ -11,14 +11,14 @@ type TextProps = {
 	slideId: string
 }
 
-const TextComponent = React.forwardRef(function (
-	{ textId, scale, isWorkSpace, onClick, slideId }: TextProps,
-	ref: React.ForwardedRef<HTMLDivElement>,
-) {
-	const slides = useAppSelector((state) => state.slides)
-	const text: TextBlock = slides
-		.find((slide) => slide.id == slideId)
-		.objects.find((object) => object.id == textId) as TextBlock
+const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }: TextProps) {
+	const ref = useRef(null)
+	const text = useAppSelector((state) =>
+		state.slides
+			.find((slide) => slide.id == slideId)
+			.objects.find((object) => object.id == textId),
+	) as TextBlock
+
 	const textStyle: React.CSSProperties = {
 		color: text.color.hsl,
 		fontSize: text.fontSize / scale + 'px',
@@ -31,22 +31,22 @@ const TextComponent = React.forwardRef(function (
 	}
 	const { createChangeObjectAction } = useAppActions()
 	return (
-		<div ref={ref}>
+		<div>
 			<textarea
+				ref={ref}
 				style={textStyle}
 				className={styles.text}
 				contentEditable={isWorkSpace}
+				value={text.value}
 				onClick={onClick}
 				onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
 					createChangeObjectAction(slideId, text.id, {
 						value: e.target.value,
 					})
 				}}
-			>
-				{text.value}
-			</textarea>
+			></textarea>
 		</div>
 	)
-})
+}
 
 export { TextComponent }
