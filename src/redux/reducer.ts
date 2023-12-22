@@ -38,9 +38,8 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 		case SlideActions.CHANGE_SLIDE_ORDER:
 			const removed = state.splice(action.payload.from, 1)
 			state.splice(action.payload.to, 0, removed[0])
-			return state
+			return [...state]
 		case SlideActions.DELETE_OBJECTS:
-			console.log(action.payload)
 			return state.map((slide) => {
 				if (slide.id == action.payload.slideId) {
 					return {
@@ -65,10 +64,6 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 							}
 						}
 						return object
-					})
-					console.log({
-						...slide,
-						objects: newObjects,
 					})
 					return {
 						...slide,
