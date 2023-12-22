@@ -7,11 +7,14 @@ type useDraggableObjectProps = {
 	slideId: string
 }
 
+const SLIDE_HEIGHT = 1080
+const TOOLBAR_HEIGHT = 205
+const WORKSPACE_SCALER = 1.2
 function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObjectProps) {
 	const { createChangeObjectAction } = useAppActions()
 	const slides = useAppSelector((state) => state.slides)
 	const size = window.innerHeight //TODO: Я думаю, что высчитывание размеров можно вынести в common функцию
-	const scale = (1080 / (size - 205)) * 1.2 //TODO: remove magical number
+	const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER //TODO: remove magical number
 	const obj = slides
 		.find((slide) => slide.id === slideId)
 		.objects.find((object) => object.id === elementId)

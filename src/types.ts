@@ -50,7 +50,8 @@ type GradientColor = {
 	rotation: number
 }
 
-type Char = {
+type TextBlock = CommonObjectProperties & {
+	blockType: BlockType.TEXT
 	value: string
 	fontSize: number
 	fontFamily: FontFamily
@@ -59,11 +60,6 @@ type Char = {
 	underline: boolean
 	strokethrough: boolean
 	color: Color
-}
-
-type TextBlock = CommonObjectProperties & {
-	blockType: BlockType.TEXT
-	value: Array<Char>
 }
 
 type Crop = {
@@ -162,7 +158,6 @@ export type {
 	ObjectStateList,
 	PrimitiveBlock,
 	TextBlock,
-	Char,
 	Crop,
 	Background,
 	BackgroundImage,

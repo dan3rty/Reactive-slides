@@ -5,9 +5,12 @@ import { SlideList } from './SlideList/SlideList'
 import { useAppActions, useAppSelector } from '../../redux/hooks'
 import { useEffect } from 'react'
 
+const SLIDE_HEIGHT = 1080
+const TOOLBAR_HEIGHT = 205
+const WORKSPACE_SCALER = 1.2
 function WorkSpace() {
 	const size = window.innerHeight
-	const scale = (1080 / (size - 205)) * 1.2 //TODO magical number
+	const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER //TODO magical number
 
 	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)

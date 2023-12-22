@@ -38,12 +38,12 @@ function SlideElement({ object, isWorkspace, slideId, scale }: SlideElementProps
 		case BlockType.TEXT:
 			element = (
 				<TextComponent
-					isWorkspace={isWorkspace}
-					slideId={slideId}
-					text={object}
+					textId={object.id}
 					scale={scale}
-					onClick={onClick}
 					ref={ref as React.ForwardedRef<HTMLDivElement>}
+					isWorkSpace={isWorkspace}
+					onClick={onClick}
+					slideId={slideId}
 				/>
 			)
 			break

@@ -1,54 +1,50 @@
 import React from 'react'
 import styles from './TextComponent.css'
+import { useAppActions, useAppSelector } from '../../redux/hooks'
 import { TextBlock } from '../../types'
-import { useDraggableObject } from '../../hooks/useDraggableObject'
 
 type TextProps = {
-	text: TextBlock
+	textId: string
 	scale: number
+	isWorkSpace: boolean
 	onClick: () => void
-	isWorkspace: boolean
 	slideId: string
 }
 
 const TextComponent = React.forwardRef(function (
-	{ text, scale, onClick, isWorkspace, slideId }: TextProps,
+	{ textId, scale, isWorkSpace, onClick, slideId }: TextProps,
 	ref: React.ForwardedRef<HTMLDivElement>,
 ) {
+	const slides = useAppSelector((state) => state.slides)
+	const text: TextBlock = slides
+		.find((slide) => slide.id == slideId)
+		.objects.find((object) => object.id == textId) as TextBlock
 	const textStyle: React.CSSProperties = {
-		width: '100%',
-		height: '100%',
+		color: text.color.hsl,
+		fontSize: text.fontSize / scale + 'px',
+		fontWeight: text.bold ? 'bold' : 'normal',
+		textDecoration: text.strokethrough ? 'line-through' : 'none',
+		borderBottomWidth: text.underline ? text.fontSize / scale / 10 + 'px' : '0',
+		borderStyle: text.underline ? 'solid' : 'none',
+		borderColor: text.underline ? text.color.hsl : '#FFFFFF',
+		fontStyle: text.italic ? 'italic' : 'none',
 	}
-	if (isWorkspace) {
-		useDraggableObject({
-			elementRef: ref as React.MutableRefObject<HTMLElement | SVGSVGElement>,
-			elementId: text.id,
-			slideId: slideId,
-		})
-	}
-	const TextToRender = text.value.map((char, index) => (
-		<div
-			contentEditable={true}
-			key={index}
-			className={styles.char}
-			style={{
-				color: char.color.hsl,
-				fontSize: char.fontSize / scale + 'px',
-				fontWeight: char.bold ? 'bold' : 'normal',
-				textDecoration: char.strokethrough ? 'line-through' : 'none',
-				borderBottomWidth: char.underline ? char.fontSize / scale / 10 + 'px' : '0',
-				borderStyle: char.underline ? 'solid' : 'none',
-				borderColor: char.underline ? char.color.hsl : '#FFFFFF',
-				fontStyle: char.italic ? 'italic' : 'none',
-			}}
-			onClick={onClick}
-		>
-			{char.value}
-		</div>
-	))
+	const { createChangeObjectAction } = useAppActions()
 	return (
-		<div style={textStyle} className={styles.text} ref={ref}>
-			{TextToRender}
+		<div ref={ref}>
+			<textarea
+				style={textStyle}
+				className={styles.text}
+				contentEditable={isWorkSpace}
+				onClick={onClick}
+				onInput={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+					createChangeObjectAction(slideId, text.id, {
+						value: e.target.value,
+					})
+				}}
+			>
+				{text.value}
+			</textarea>
 		</div>
 	)
 })

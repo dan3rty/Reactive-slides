@@ -6,6 +6,10 @@ type useObjectCreationProps = {
 	rect?: DOMRect
 }
 
+const SLIDE_HEIGHT = 1080
+const TOOLBAR_HEIGHT = 205
+const WORKSPACE_SCALER = 1.2
+
 function useObjectCreation({ rect }: useObjectCreationProps): {
 	handleAddDown: (event: MouseEvent) => void
 	setBlockType: (v: string) => void
@@ -36,7 +40,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 	function useHandleAddUp(event: MouseEvent) {
 		document.removeEventListener('mouseup', useHandleAddUp)
 		const size = window.innerHeight
-		const scale = (1080 / (size - 205)) * 1.2
+		const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER
 		setSecondPosition({
 			x: event.clientX - rect.x,
 			y: event.clientY - rect.y,
@@ -127,7 +131,18 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 									: secondPosition.y) * scale,
 							rotation: 0,
 						},
-						value: [],
+						value: '',
+						fontSize: 20,
+						fontFamily: Type.FontFamily.ARIAL,
+						bold: false,
+						italic: true,
+						underline: false,
+						strokethrough: false,
+						color: {
+							hsl: '#000000',
+							opacity: 1,
+							percent: '100%',
+						},
 				  } as TextBlock)
 
 		createClearObjectSelectionAction()

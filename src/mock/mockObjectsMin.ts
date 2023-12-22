@@ -3,11 +3,13 @@ import * as Type from '../types'
 const WhiteColor: Type.Color = {
 	hsl: '#FFFFFF',
 	opacity: 0,
+	percent: '100%',
 }
 
 const background: Type.Background = {
 	color: {
 		colors: [WhiteColor],
+		rotation: 2,
 	},
 }
 

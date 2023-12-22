@@ -60,6 +60,10 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 						}
 						return object
 					})
+					console.log({
+						...slide,
+						objects: newObjects,
+					})
 					return {
 						...slide,
 						objects: newObjects,

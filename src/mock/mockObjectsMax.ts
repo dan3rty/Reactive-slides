@@ -24,28 +24,6 @@ const RedColor: Type.Color = {
 	percent: '100%',
 }
 
-const letterH: Type.Char = {
-	value: 'H',
-	fontSize: 12,
-	fontFamily: Type.FontFamily.ARIAL,
-	bold: false,
-	italic: false,
-	underline: false,
-	strokethrough: false,
-	color: BlackColor,
-}
-
-const letterE: Type.Char = {
-	value: 'E',
-	fontSize: 15,
-	fontFamily: Type.FontFamily.ARIAL,
-	bold: true,
-	italic: true,
-	underline: true,
-	strokethrough: true,
-	color: BlackColor,
-}
-
 const text: Type.TextBlock = {
 	blockType: Type.BlockType.TEXT,
 	id: 'D5DAS67F5A',
@@ -83,7 +61,14 @@ const text: Type.TextBlock = {
 		y: 200,
 		rotation: 0,
 	},
-	value: [letterH, letterE],
+	value: 'aLO',
+	fontSize: 40,
+	fontFamily: Type.FontFamily.ARIAL,
+	bold: false,
+	italic: true,
+	underline: false,
+	strokethrough: false,
+	color: BlackColor,
 }
 
 const image2: Type.ImageBlock = {
@@ -383,6 +368,4 @@ export {
 	circle,
 	image,
 	text,
-	letterE,
-	letterH,
 }

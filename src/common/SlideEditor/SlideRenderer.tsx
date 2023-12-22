@@ -14,9 +14,11 @@ type SlideRendererProps = {
 	selectOnClick?: () => void
 }
 
+const SLIDE_HEIGHT = 1080
+const SLIDE_WIDTH = 1920
 function SlideRenderer({ scale, slideId, isWorkspace, selectOnClick }: SlideRendererProps) {
-	const width = 1920 / scale //magical number
-	const height = 1080 / scale
+	const width = SLIDE_WIDTH / scale //magical number
+	const height = SLIDE_HEIGHT / scale
 
 	const { editedSlideRef } = useContext(PresenterContext)
 	const selection = useAppSelector((state) => state.selection)

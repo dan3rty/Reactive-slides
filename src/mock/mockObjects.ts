@@ -24,53 +24,9 @@ const GreenColor: Type.Color = {
 	percent: '5%',
 }
 
-const letterH: Type.Char = {
-	value: 'H',
-	fontSize: 40,
-	fontFamily: Type.FontFamily.ARIAL,
-	bold: false,
-	italic: true,
-	underline: false,
-	strokethrough: false,
-	color: BlackColor,
-}
-
-const letterE: Type.Char = {
-	value: 'E',
-	fontSize: 80,
-	fontFamily: Type.FontFamily.ARIAL,
-	bold: false,
-	italic: true,
-	underline: true,
-	strokethrough: false,
-	color: GreenColor,
-}
-
-const letterL: Type.Char = {
-	value: 'L',
-	fontSize: 160,
-	fontFamily: Type.FontFamily.ARIAL,
-	bold: false,
-	italic: false,
-	underline: false,
-	strokethrough: false,
-	color: BlackColor,
-}
-
-const letterO: Type.Char = {
-	value: 'O',
-	fontSize: 160,
-	fontFamily: Type.FontFamily.ARIAL,
-	bold: true,
-	italic: true,
-	underline: true,
-	strokethrough: true,
-	color: RedColor,
-}
-
 const text: Type.TextBlock = {
 	blockType: Type.BlockType.TEXT,
-	id: 'D5DAS67авлтплвF5A',
+	id: 'JGSFHL2569562',
 	animation: {
 		stateList: [
 			{
@@ -105,7 +61,14 @@ const text: Type.TextBlock = {
 		y: 200,
 		rotation: -15,
 	},
-	value: [letterH, letterE, letterL],
+	value: 'WELCOME',
+	fontSize: 40,
+	fontFamily: Type.FontFamily.ARIAL,
+	bold: true,
+	italic: true,
+	underline: false,
+	strokethrough: false,
+	color: RedColor,
 }
 
 const text2: Type.TextBlock = {
@@ -178,23 +141,14 @@ const text2: Type.TextBlock = {
 		y: 200,
 		rotation: -15,
 	},
-	value: [
-		letterH,
-		letterE,
-		letterL,
-		letterL,
-		letterO,
-		letterH,
-		letterE,
-		letterL,
-		letterL,
-		letterO,
-		letterH,
-		letterE,
-		letterL,
-		letterL,
-		letterO,
-	],
+	value: 'craZYYYY',
+	fontSize: 40,
+	fontFamily: Type.FontFamily.ARIAL,
+	bold: false,
+	italic: true,
+	underline: false,
+	strokethrough: true,
+	color: BlackColor,
 }
 
 const image: Type.ImageBlock = {
@@ -477,6 +431,5 @@ export {
 	backgroundImage,
 	image,
 	image2,
-	letterH,
 	text,
 }
