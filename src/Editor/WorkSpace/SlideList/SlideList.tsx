@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { ReactElement, useRef } from 'react'
 import { useDraggableList } from '../../../hooks/useDraggableList'
 import styles from './SlideList.css'
 import { AddSlideButton } from './AddSlideButton/AddSlideButton'
@@ -11,40 +11,24 @@ type SlideListProps = {
 
 function SlideList({ scale }: SlideListProps) {
 	const ref = useRef<HTMLDivElement>(null)
-	const {
-		createAddSlideAction,
-		createChangeOrderSlidesAction,
-		createChangeSlideSelectionAction,
-	} = useAppActions()
-	const selection = useAppSelector((state) => state.selection)
+	const { createChangeOrderSlidesAction } = useAppActions()
 	const slides = useAppSelector((state) => state.slides)
 	const { registerDndItem, unregisterDndItem } = useDraggableList({
 		onOrderChange: createChangeOrderSlidesAction,
 	})
 
-	const createOnClick = (slideId: string) => {
-		return () => {
-			createChangeSlideSelectionAction(slideId)
-		}
-	}
-
-	const createSlideOnClick = () => {
-		createAddSlideAction()
-	}
-
-	const slidesToRender: JSX.Element[] = slides.map((slide, index) => {
-		const isChosen = slide.id == selection.slideId
-		const slideScale = isChosen ? scale * 3.5 : scale * 4
+	const slidesToRender: ReactElement[] = slides.map((slide, index) => {
+		const slideScale = scale * 4
 		const showDeleteButton = slides.length !== 1
 
 		return (
 			<SlidePreview
+				slideId={slide.id}
 				registerDndItem={registerDndItem}
 				unregisterDndItem={unregisterDndItem}
 				key={index}
 				index={index}
 				scale={slideScale}
-				createOnClick={createOnClick}
 				showDeleteButton={showDeleteButton}
 			></SlidePreview>
 		)
@@ -53,7 +37,7 @@ function SlideList({ scale }: SlideListProps) {
 	return (
 		<div ref={ref} className={styles.slideList}>
 			{slidesToRender}
-			<AddSlideButton scale={scale * 4} createSlideOnClick={createSlideOnClick} />
+			<AddSlideButton scale={scale * 4} />
 		</div>
 	)
 }

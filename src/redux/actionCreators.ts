@@ -43,10 +43,13 @@ function createMoveObjectToTopLayer(slideId: string, objectId: string) {
 	}
 }
 
-function createDeleteObjectAction(objectIds: string[]) {
+function createDeleteObjectAction(slideId: string, objectIds: string[]) {
 	return {
 		type: SlideActions.DELETE_OBJECTS,
-		payload: objectIds,
+		payload: {
+			slideId,
+			objectIds,
+		},
 	}
 }
 

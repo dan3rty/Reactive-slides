@@ -40,12 +40,18 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 			state.splice(action.payload.to, 0, removed[0])
 			return state
 		case SlideActions.DELETE_OBJECTS:
-			state.forEach((slide) => {
-				slide.objects = slide.objects.filter(
-					(object) => !action.payload.includes(object.id),
-				)
+			console.log(action.payload)
+			return state.map((slide) => {
+				if (slide.id == action.payload.slideId) {
+					return {
+						...slide,
+						objects: slide.objects.filter((obj) =>
+							action.payload.objectsId.includes(obj.id),
+						),
+					}
+				}
+				return slide
 			})
-			return state
 		case SlideActions.SET_SLIDES:
 			return action.payload
 		case SlideActions.CHANGE_OBJECT:

@@ -36,7 +36,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 	function useHandleAddUp(event: MouseEvent) {
 		document.removeEventListener('mouseup', useHandleAddUp)
 		const size = window.innerHeight
-		const scale = (1080 / (size - 205)) * 1.2
+		const scale = (1080 / (size - 205)) * 1.2 //TODO: magical number
 		setSecondPosition({
 			x: event.clientX - rect.x,
 			y: event.clientY - rect.y,
@@ -149,11 +149,6 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 			x: event.clientX - rect.x,
 			y: event.clientY - rect.y,
 		})
-		console.log({
-			x: event.clientX - rect.x,
-			y: event.clientY - rect.y,
-		})
-		console.log(firstPosition)
 		document.addEventListener('mouseup', useHandleAddUp)
 	}
 
