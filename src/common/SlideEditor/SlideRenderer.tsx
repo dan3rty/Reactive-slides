@@ -71,7 +71,7 @@ function SlideRenderer({ scale, slideId, isWorkspace }: SlideRendererProps) {
 			ref={isWorkspace ? editedSlideRef : null}
 		>
 			{slide.objects.map((obj, index) => {
-				const newObj = obj
+				const newObj = { ...obj }
 				const selected = selection.objectsId.includes(obj.id) && isWorkspace
 				if (selection) {
 					if (

@@ -40,7 +40,6 @@ function SlideElement({ object, isWorkspace, slideId, scale }: SlideElementProps
 				<TextComponent
 					textId={object.id}
 					scale={scale}
-					ref={ref as React.ForwardedRef<HTMLDivElement>}
 					isWorkSpace={isWorkspace}
 					onClick={onClick}
 					slideId={slideId}

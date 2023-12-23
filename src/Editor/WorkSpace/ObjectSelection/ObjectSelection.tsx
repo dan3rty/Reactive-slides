@@ -213,8 +213,8 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 		>
 			<div ref={ref} className={styles.draggableSpace}></div>
 			<Corner
-				x={'0'}
-				y={'0'}
+				x={'0%'}
+				y={'0%'}
 				cursor={getCursorType(CursorIntType.NW, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
@@ -227,7 +227,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 			/>
 			<Corner
 				x={'50%'}
-				y={'0'}
+				y={'0%'}
 				cursor={getCursorType(CursorIntType.N, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
@@ -240,7 +240,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 			/>
 			<Corner
 				x={'100%'}
-				y={'0'}
+				y={'0%'}
 				cursor={getCursorType(CursorIntType.NE, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
@@ -291,7 +291,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				canChangeTop={false}
 			/>
 			<Corner
-				x={'0'}
+				x={'0%'}
 				y={'100%'}
 				cursor={getCursorType(CursorIntType.SW, rotation)}
 				selectedObject={selectedObject}
@@ -304,7 +304,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				canChangeTop={false}
 			/>
 			<Corner
-				x={'0'}
+				x={'0%'}
 				y={'50%'}
 				cursor={getCursorType(CursorIntType.W, rotation)}
 				selectedObject={selectedObject}
