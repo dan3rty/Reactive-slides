@@ -4,11 +4,7 @@ import { Button } from '../../../../common/Components/Buttons/Button'
 import { Timeline } from './Timeline/Timeline'
 import { useAppSelector } from '../../../../redux/hooks'
 
-type AnimationBarProps = {
-	chosenState?: string
-}
-
-function AnimationBar({ chosenState }: AnimationBarProps) {
+function AnimationBar() {
 	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)
 	const selectedObject = slides
@@ -68,7 +64,7 @@ function AnimationBar({ chosenState }: AnimationBarProps) {
 					<Button text={'add keyframe'} style={'dark'} size={'large'} />
 					<Button text={'delete keyframe'} style={'dark'} size={'large'} />
 				</div>
-				<Timeline animation={animation} chosenState={chosenState}></Timeline>
+				<Timeline animation={animation} chosenState={selection.keyFrameId}></Timeline>
 			</div>
 		</div>
 	)

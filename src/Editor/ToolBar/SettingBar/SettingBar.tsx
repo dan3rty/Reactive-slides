@@ -18,8 +18,7 @@ function SettingBar() {
 			bar = <EditBar />
 			break
 		case Tabs.ANIMATION: {
-			const chosenState = selection.keyFrameId
-			bar = <AnimationBar chosenState={chosenState} />
+			bar = <AnimationBar />
 			break
 		}
 	}
