@@ -55,7 +55,6 @@ function EditBar() {
 		document.addEventListener('mousedown', handleWindowClick)
 		return () => document.removeEventListener('mousedown', handleWindowClick)
 	}, [])
-	const selection = useAppSelector((state) => state.selection)
 	const { createChangeObjectAction } = useAppActions()
 	return (
 		<div className={styles.editBar}>

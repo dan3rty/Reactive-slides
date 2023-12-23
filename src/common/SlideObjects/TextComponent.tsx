@@ -35,9 +35,8 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 	}
 	const { createChangeObjectAction } = useAppActions()
 	return (
-		<div>
+		<div ref={ref}>
 			<textarea
-				ref={ref}
 				disabled={!isWorkSpace}
 				style={textStyle}
 				className={styles.text}
