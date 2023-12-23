@@ -14,11 +14,12 @@ import {
 	UnderstrokeIcon,
 	VerticalAlignCenterIcon,
 } from '../../../../common/Icons/icons'
-import { FontFamily, ImageBlock, PrimitiveBlock, TextBlock } from '../../../../types'
+import { BlockType, FontFamily, ImageBlock, PrimitiveBlock, TextBlock } from '../../../../types'
 import styles from './EditBar.css'
 import { useEffect, useRef, useState } from 'react'
 import { ColorPicker } from '../../../../common/changeBackgroundPopup/colorPicker/ColorPicker'
 import { ChangeBackgroundPopup } from '../../../../common/changeBackgroundPopup/ChangeBackgroundPopup'
+import { useAppActions, useAppSelector } from '../../../../redux/hooks'
 
 type EditBarProps = {
 	selectedObject: TextBlock | PrimitiveBlock | ImageBlock
@@ -52,6 +53,8 @@ function EditBar({ selectedObject }: EditBarProps) {
 		document.addEventListener('mousedown', handleWindowClick)
 		return () => document.removeEventListener('mousedown', handleWindowClick)
 	}, [])
+	const selection = useAppSelector((state) => state.selection)
+	const { createChangeObjectAction } = useAppActions()
 	return (
 		<div className={styles.editBar}>
 			<div className={styles.bigContainer}>
@@ -98,8 +101,17 @@ function EditBar({ selectedObject }: EditBarProps) {
 					label={'Font size:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={0}
+					initialValue={
+						selectedObject.blockType === BlockType.TEXT ? selectedObject.fontSize : 0
+					}
 					suffix={'px'}
+					onChange={(value) => {
+						if (selectedObject.blockType === BlockType.TEXT) {
+							createChangeObjectAction(selection.slideId, selectedObject.id, {
+								fontSize: Number(value),
+							})
+						}
+					}}
 				></InputField>
 				<FontFamilySelection value={FontFamily.ARIAL} />
 				<div className={styles.buttonHorizontalContainer} ref={buttonContainerEl}>
@@ -123,7 +135,19 @@ function EditBar({ selectedObject }: EditBarProps) {
 						>
 							<ColorPicker
 								onColorPick={(color) => {
-									console.log(color)
+									if (selectedObject.blockType === BlockType.TEXT) {
+										createChangeObjectAction(
+											selection.slideId,
+											selectedObject.id,
+											{
+												color: {
+													hsl: color,
+													opacity: 1,
+													percent: '100%',
+												},
+											},
+										)
+									}
 								}}
 							/>
 						</div>
@@ -152,10 +176,54 @@ function EditBar({ selectedObject }: EditBarProps) {
 				</div>
 			</div>
 			<div className={styles.buttonVerticalContainer}>
-				<Button style={'light'} size={'small'} icon={BoldIcon} />
-				<Button style={'light'} size={'small'} icon={ItalicIcon} />
-				<Button style={'light'} size={'small'} icon={UnderstrokeIcon} />
-				<Button style={'light'} size={'small'} icon={StrokethroughIcon} />
+				<Button
+					style={'light'}
+					size={'small'}
+					icon={BoldIcon}
+					onClick={() => {
+						if (selectedObject.blockType === BlockType.TEXT) {
+							createChangeObjectAction(selection.slideId, selectedObject.id, {
+								bold: !selectedObject.bold,
+							})
+						}
+					}}
+				/>
+				<Button
+					style={'light'}
+					size={'small'}
+					icon={ItalicIcon}
+					onClick={() => {
+						if (selectedObject.blockType === BlockType.TEXT) {
+							createChangeObjectAction(selection.slideId, selectedObject.id, {
+								italic: !selectedObject.italic,
+							})
+						}
+					}}
+				/>
+				<Button
+					style={'light'}
+					size={'small'}
+					icon={UnderstrokeIcon}
+					onClick={() => {
+						if (selectedObject.blockType === BlockType.TEXT) {
+							createChangeObjectAction(selection.slideId, selectedObject.id, {
+								underline: !selectedObject.underline,
+							})
+						}
+					}}
+				/>
+				<Button
+					style={'light'}
+					size={'small'}
+					icon={StrokethroughIcon}
+					onClick={() => {
+						if (selectedObject.blockType === BlockType.TEXT) {
+							createChangeObjectAction(selection.slideId, selectedObject.id, {
+								strokethrough: !selectedObject.strokethrough,
+							})
+						}
+					}}
+				/>
 			</div>
 			<div className={styles.selectionWrapper}>
 				<Button text={'clear'} style={'light'} size={'medium'} icon={BoldIcon} />

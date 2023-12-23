@@ -10,10 +10,11 @@
 	align-items: baseline;
 	height: auto;
 	width: 100%;
-	background: none;
 	user-select: none;
 	position: absolute;
 	flex-wrap: wrap;
 	resize: none;
 	min-height: 100%;
+	border: none;
+	background: none;
 }

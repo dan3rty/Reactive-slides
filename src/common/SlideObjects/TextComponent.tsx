@@ -23,16 +23,22 @@ const TextComponent = React.forwardRef(function (
 		color: text.color.hsl,
 		fontSize: text.fontSize / scale + 'px',
 		fontWeight: text.bold ? 'bold' : 'normal',
-		textDecoration: text.strokethrough ? 'line-through' : 'none',
-		borderBottomWidth: text.underline ? text.fontSize / scale / 10 + 'px' : '0',
-		borderStyle: text.underline ? 'solid' : 'none',
-		borderColor: text.underline ? text.color.hsl : '#FFFFFF',
-		fontStyle: text.italic ? 'italic' : 'none',
+		textDecoration:
+			text.strokethrough && text.underline
+				? 'line-through underline'
+				: text.strokethrough
+				? 'line-through'
+				: text.underline
+				? 'underline'
+				: 'none',
+		fontStyle: text.italic ? 'italic' : 'normal',
 	}
+	console.log(textStyle)
 	const { createChangeObjectAction } = useAppActions()
 	return (
 		<div ref={ref}>
 			<textarea
+				disabled={!isWorkSpace}
 				style={textStyle}
 				className={styles.text}
 				contentEditable={isWorkSpace}
