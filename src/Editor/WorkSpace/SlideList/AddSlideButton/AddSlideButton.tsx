@@ -5,8 +5,10 @@ import { useAppActions } from '../../../../redux/hooks'
 type AddSlideButtonProps = {
 	scale: number
 }
+
+const SLIDE_WIDTH = 1920
 function AddSlideButton({ scale }: AddSlideButtonProps) {
-	const width = 1920 / scale //TODO magical number
+	const width = SLIDE_WIDTH / scale
 	const { createAddSlideAction } = useAppActions()
 	return (
 		<div
