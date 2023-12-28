@@ -11,22 +11,20 @@ import {
 	TextIcon,
 	TriangleIcon,
 } from '../../../../common/Icons/icons'
-import {useContext, useEffect, useRef, useState} from 'react'
-import { PresenterContext } from '../../../../presenterContext/PresenterContext'
+import { useRef, useState } from 'react'
 import { useObjectCreation } from '../../../../hooks/useObjectCreation'
 
-function AddBar() {
+type AddBarProps = {
+	slideRect: DOMRect
+}
+
+function AddBar({ slideRect }: AddBarProps) {
 	const [imagePathInputOpened, setImagePathInputOpened] = useState(false)
 	const imagePathInputRef = useRef(null)
 
-	const { editedSlideRef } = useContext(PresenterContext)
-	const [rect, setRect] = useState(editedSlideRef.current?.getBoundingClientRect())
-
-	useEffect(() => {
-		setRect(editedSlideRef.current?.getBoundingClientRect())
-	}, []);
-
-	const { handleAddDown, setBlockType, setImagePathInput } = useObjectCreation({ rect })
+	const { handleAddDown, setBlockType, setImagePathInput } = useObjectCreation({
+		rect: slideRect,
+	})
 
 	function handleDownInInput(event: MouseEvent) {
 		if (event.target !== imagePathInputRef.current) {

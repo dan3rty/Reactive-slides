@@ -1,8 +1,7 @@
 import styles from './SlideRenderer.css'
 import { Tabs } from '../../types'
 import { returnGradientString } from '../Tools/returnGradientString'
-import { useContext, useEffect } from 'react'
-import { PresenterContext } from '../../presenterContext/PresenterContext'
+import React, { useEffect, useRef } from 'react'
 import { SlideElement } from './SlideElement'
 import { useAppActions, useAppSelector } from '../../redux/hooks'
 import { joinCssClasses } from '../../classes/joinCssClasses'
@@ -11,16 +10,17 @@ type SlideRendererProps = {
 	scale: number
 	slideId: string
 	isWorkspace: boolean
+	setSlideRect?: React.Dispatch<React.SetStateAction<DOMRect>>
 }
 
 const SLIDE_HEIGHT = 1080
 const SLIDE_WIDTH = 1920
-function SlideRenderer({ scale, slideId, isWorkspace }: SlideRendererProps) {
+function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRendererProps) {
 	const width = SLIDE_WIDTH / scale //magical number
 	const height = SLIDE_HEIGHT / scale
+	const ref = useRef(null)
 	const { createDeleteObjectAction, createClearObjectSelectionAction } = useAppActions()
 
-	const { editedSlideRef } = useContext(PresenterContext)
 	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)
 	const slide = slides.find((slide) => slide.id == slideId)
@@ -55,6 +55,8 @@ function SlideRenderer({ scale, slideId, isWorkspace }: SlideRendererProps) {
 			return
 		}
 
+		setSlideRect && setSlideRect(ref.current.getBoundingClientRect())
+
 		document.addEventListener('keydown', clearSelectionObjectsOnClick)
 		return () => {
 			document.removeEventListener('keydown', clearSelectionObjectsOnClick)
@@ -72,7 +74,7 @@ function SlideRenderer({ scale, slideId, isWorkspace }: SlideRendererProps) {
 				styles.slideEditor,
 				isWorkspace ? styles.slideEditorWrapper : null,
 			)}
-			ref={isWorkspace ? editedSlideRef : null}
+			ref={ref}
 		>
 			{slide.objects.map((obj, index) => {
 				const newObj = { ...obj }

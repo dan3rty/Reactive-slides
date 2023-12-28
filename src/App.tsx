@@ -1,17 +1,14 @@
 import { Editor } from './Editor/Editor'
-import { useRef } from 'react'
-import { PresenterContext } from './presenterContext/PresenterContext'
+import { useEffect } from 'react'
+import { useAppActions, useAppSelector } from './redux/hooks'
 
 function App() {
-	return (
-		<PresenterContext.Provider
-			value={{
-				editedSlideRef: useRef(null),
-			}}
-		>
-			<Editor />
-		</PresenterContext.Provider>
-	)
+	const slides = useAppSelector((state) => state.slides)
+	const { createChangeSlideSelectionAction } = useAppActions()
+	useEffect(() => {
+		createChangeSlideSelectionAction(slides[0].id)
+	}, [])
+
+	return <Editor />
 }
 export default App
-export { PresenterContext }

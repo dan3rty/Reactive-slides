@@ -1,9 +1,8 @@
-import { SlideActionsType, SlideActions } from './slides'
-import { Background, Color, GradientColor, Slide } from '../types'
+import { SlideActions, SlideActionsType } from './slides'
+import { Background, Color, GradientColor, Selection, Slide, Tabs } from '../types'
 import { presenter } from '../mock/mockObjects'
 import { combineReducers } from 'redux'
 import { SelectionActions, SelectionActionsType } from './selection'
-import { Selection } from '../types'
 import { TitleActions, TitleActionsType } from './title'
 
 function generateBlankSlide() {
@@ -103,7 +102,11 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 	}
 }
 
-const initSelectionData: Selection = presenter.selection
+const initSelectionData: Selection = {
+	selectedTab: Tabs.CREATE,
+	objectId: null,
+	slideId: '',
+}
 
 const selectionReducer = (state: Selection = initSelectionData, action: SelectionActionsType) => {
 	switch (action.type) {

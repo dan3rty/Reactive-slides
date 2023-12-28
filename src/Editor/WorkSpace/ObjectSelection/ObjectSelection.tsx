@@ -205,7 +205,6 @@ function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelec
 
 	const cursorMoveOffset = 0.15
 	const onMouseMove = (e: MouseEvent) => {
-		selectionRef.current.style.cursor = 'move'
 		const height = selectionRef.current.clientHeight
 		const width = selectionRef.current.clientWidth
 		const yOffset = height * cursorMoveOffset
@@ -219,8 +218,13 @@ function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelec
 		) {
 			if (object.blockType === BlockType.TEXT) {
 				selectionRef.current.style.cursor = 'text'
+				ref.current.style.display = 'none'
+				console.log(ref.current)
+				return
 			}
 		}
+		selectionRef.current.style.cursor = 'move'
+		ref.current.style.display = 'normal'
 	}
 
 	useEffect(() => {

@@ -2,11 +2,15 @@ import styles from './ToolBar.css'
 import { TopBar } from './TopBar/TopBar'
 import { SettingBar } from './SettingBar/SettingBar'
 
-function ToolBar() {
+type ToolBarProps = {
+	slideRect: DOMRect
+}
+
+function ToolBar({ slideRect }: ToolBarProps) {
 	return (
 		<div className={styles.toolBar}>
 			<TopBar />
-			<SettingBar />
+			<SettingBar slideRect={slideRect} />
 		</div>
 	)
 }
