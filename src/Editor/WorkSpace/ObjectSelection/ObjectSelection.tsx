@@ -119,20 +119,30 @@ function Corner({
 			onDragStart({
 				onDrag: (dragEvent) => {
 					if (canChangeWidth && !canChangeLeft) {
-						selectedObject.current.style.width =
-							startWidth + dragEvent.clientX - mouseDownEvent.clientX + 'px'
+						const newWidth = startWidth + dragEvent.clientX - mouseDownEvent.clientX
+						if (newWidth < 0) {
+							selectedObject.current.style.left = startLeft + newWidth + 'px'
+							selectedObject.current.style.width = -newWidth + 'px'
+						} else {
+							selectedObject.current.style.width = newWidth + 'px'
+						}
 					}
 
 					if (canChangeHeight && !canChangeTop) {
-						selectedObject.current.style.height =
-							startHeight + dragEvent.clientY - mouseDownEvent.clientY + 'px'
+						const newHeight = startHeight + dragEvent.clientY - mouseDownEvent.clientY
+						if (newHeight < 0) {
+							selectedObject.current.style.top = startTop + newHeight + 'px'
+							selectedObject.current.style.height = -newHeight + 'px'
+						} else {
+							selectedObject.current.style.height = newHeight + 'px'
+						}
 					}
 
 					if (canChangeTop) {
-						selectedObject.current.style.top =
-							startTop + dragEvent.clientY - mouseDownEvent.clientY + 'px'
-						selectedObject.current.style.height =
-							startHeight - (dragEvent.clientY - mouseDownEvent.clientY) + 'px'
+						const newTop = startTop + dragEvent.clientY - mouseDownEvent.clientY
+						const newHeight = startHeight - (dragEvent.clientY - mouseDownEvent.clientY)
+						selectedObject.current.style.top = newTop + 'px'
+						selectedObject.current.style.height = newHeight + 'px'
 					}
 
 					if (canChangeLeft) {
