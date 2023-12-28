@@ -16,7 +16,25 @@
 }
 
 .presentation-name {
+	box-sizing: border-box;
+	display: flex;
+	align-items: baseline;
+	height: 100%;
 	width: 50%;
+	background: none;
+	border: none;
+	color: #006a82;
+	font-style: normal;
+	font-weight: 500;
 	font-size: 30px;
+	font-family: Montserrat, sans-serif;
+	line-height: normal;
 	text-align: end;
+	user-select: none;
+	flex-wrap: wrap;
+	resize: none;
+	min-height: 100%;
+	white-space: normal;
+	vertical-align: middle;
+	text-overflow: ellipsis;
 }
