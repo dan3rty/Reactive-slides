@@ -32,9 +32,7 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 				? 'underline'
 				: 'none',
 		fontStyle: text.italic ? 'italic' : 'normal',
-		display: 'flex',
 		textAlign: text.horizontalAlign,
-		whiteSpace: 'normal',
 		fontFamily: text.fontFamily,
 	}
 	const { createChangeObjectAction } = useAppActions()
@@ -44,7 +42,6 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 				disabled={!isWorkSpace}
 				style={textStyle}
 				className={styles.text}
-				contentEditable={isWorkSpace}
 				value={text.value}
 				onClick={onClick}
 				onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
