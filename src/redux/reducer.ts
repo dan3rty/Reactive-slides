@@ -39,14 +39,12 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 			const removed = state.splice(action.payload.from, 1)
 			state.splice(action.payload.to, 0, removed[0])
 			return [...state]
-		case SlideActions.DELETE_OBJECTS:
+		case SlideActions.DELETE_OBJECT:
 			return state.map((slide) => {
 				if (slide.id == action.payload.slideId) {
 					return {
 						...slide,
-						objects: slide.objects.filter((obj) =>
-							action.payload.objectsId.includes(obj.id),
-						),
+						objects: slide.objects.filter((obj) => action.payload.objectId != obj.id),
 					}
 				}
 				return slide
@@ -57,7 +55,7 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 			return state.map((slide) => {
 				if (slide.id == action.payload.slideId) {
 					const newObjects = slide.objects.map((object) => {
-						if (object.id == action.payload.objectId) {
+						if (action.payload.objectId == object.id) {
 							return {
 								...object,
 								...action.payload.propertyToChange,
@@ -109,21 +107,21 @@ const initSelectionData: Selection = presenter.selection
 
 const selectionReducer = (state: Selection = initSelectionData, action: SelectionActionsType) => {
 	switch (action.type) {
-		case SelectionActions.ADD_OBJECT_SELECTION:
+		case SelectionActions.CHANGE_OBJECT_SELECTION:
 			return {
 				...state,
-				objectsId: state.objectsId.concat(action.payload),
+				objectId: action.payload,
 			}
 		case SelectionActions.CHANGE_SLIDE_SELECTION:
 			return {
 				...state,
-				objectsId: [],
+				objectId: null,
 				slideId: action.payload,
 			}
-		case SelectionActions.CLEAR_OBJECTS_SELECTION:
+		case SelectionActions.CLEAR_OBJECT_SELECTION:
 			return {
 				...state,
-				objectsId: [],
+				objectId: null,
 			}
 		case SelectionActions.CHANGE_TAB_SELECTION:
 			return {

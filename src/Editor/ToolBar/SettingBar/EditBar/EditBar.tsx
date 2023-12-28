@@ -29,7 +29,7 @@ function EditBar() {
 	const slides = useAppSelector((state) => state.slides)
 	const selectedObject = slides
 		.find((slide) => slide.id === selection.slideId)
-		.objects.find((obj) => obj.id == selection.objectsId[0])
+		.objects.find((obj) => obj.id == selection.objectId)
 
 	const toggleTextColorPickerState = () => setStateTextColorPicker((state) => !state)
 	const toggleBackgroundColorPickerState = () => setStateBackgroundColorPicker((state) => !state)
