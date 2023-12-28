@@ -4,7 +4,7 @@ enum SlideActions {
 	DELETE_SLIDE = 'DELETE_SLIDE',
 	ADD_SLIDE = 'ADD_SLIDE',
 	CHANGE_SLIDE_ORDER = 'CHANGE_SLIDE_ORDER',
-	DELETE_OBJECTS = 'DELETE_OBJECTS',
+	DELETE_OBJECT = 'DELETE_OBJECT',
 	SET_SLIDES = 'SET_SLIDES',
 	CHANGE_OBJECT = 'CHANGE_OBJECT',
 	ADD_OBJECT = 'ADD_OBJECT',
@@ -35,10 +35,10 @@ type ChangeOrderSlidesAction = {
 }
 
 type DeleteObjectAction = {
-	type: SlideActions.DELETE_OBJECTS
+	type: SlideActions.DELETE_OBJECT
 	payload: {
 		slideId: string
-		objectsId: string[]
+		objectId: string
 	}
 }
 

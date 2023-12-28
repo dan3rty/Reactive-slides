@@ -144,7 +144,7 @@ type Presentation = {
 type Selection = {
 	selectedTab: Tabs
 	slideId: string
-	objectsId?: Array<string>
+	objectId?: string
 	keyFrameId?: string
 }
 

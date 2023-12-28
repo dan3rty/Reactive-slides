@@ -8,7 +8,7 @@ import { useAppSelector } from '../../../redux/hooks'
 
 function SettingBar() {
 	const selection = useAppSelector((state) => state.selection)
-	const curChosen = selection.objectsId.length > 0 ? selection.selectedTab : Tabs.CREATE
+	const curChosen = selection.objectId ? selection.selectedTab : Tabs.CREATE
 	let bar = null
 	switch (curChosen) {
 		case Tabs.CREATE:

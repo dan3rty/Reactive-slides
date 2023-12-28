@@ -10,8 +10,10 @@ type useDraggableObjectProps = {
 const SLIDE_HEIGHT = 1080
 const TOOLBAR_HEIGHT = 205
 const WORKSPACE_SCALER = 1.2
+
 function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObjectProps) {
-	const { createChangeObjectAction } = useAppActions()
+	const { createChangeObjectAction, createMoveObjectToTopLayer } = useAppActions()
+	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)
 	const size = window.innerHeight //TODO: Я думаю, что высчитывание размеров можно вынести в common функцию
 	const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER //TODO: remove magical number
@@ -20,11 +22,13 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 		.objects.find((object) => object.id === elementId)
 	let baseObjPosition = { x: 0, y: 0 }
 	let baseMousePosition = { x: 0, y: 0 }
+
 	function moving(e: MouseEvent) {
 		const dx = e.clientX - baseMousePosition.x
 		const dy = e.clientY - baseMousePosition.y
 		elementRef.current.parentElement.parentElement.style.left = baseObjPosition.x + dx + 'px'
 		elementRef.current.parentElement.parentElement.style.top = baseObjPosition.y + dy + 'px'
+		elementRef.current.parentElement.parentElement.style.zIndex = '1'
 	}
 
 	function stopMoving(e: MouseEvent) {
@@ -37,14 +41,14 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 		const dy = e.clientY - baseMousePosition.y
 		const newBaseState = {
 			...obj.baseState,
-			width: elementRef.current.clientWidth * scale,
-			height: elementRef.current.clientHeight * scale,
 			x: (baseObjPosition.x + dx) * scale,
 			y: (baseObjPosition.y + dy) * scale,
 		}
-		createChangeObjectAction(slideId, obj.id, {
+		createMoveObjectToTopLayer(slideId, obj.id)
+		createChangeObjectAction(slideId, selection.objectId, {
 			baseState: newBaseState,
 		})
+		elementRef.current.parentElement.parentElement.style.zIndex = '0'
 	}
 
 	function startMoving(e: MouseEvent) {

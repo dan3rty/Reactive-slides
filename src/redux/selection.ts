@@ -2,8 +2,8 @@ import { Tabs } from '../types'
 
 enum SelectionActions {
 	CHANGE_SLIDE_SELECTION = 'CHANGE_SLIDE_SELECTION',
-	ADD_OBJECT_SELECTION = 'ADD_OBJECT_SELECTION',
-	CLEAR_OBJECTS_SELECTION = 'CLEAR_OBJECTS_SELECTION',
+	CHANGE_OBJECT_SELECTION = 'CHANGE_OBJECT_SELECTION',
+	CLEAR_OBJECT_SELECTION = 'CLEAR_OBJECT_SELECTION',
 	CHANGE_TAB_SELECTION = 'CHANGE_TAB_SELECTION',
 }
 
@@ -13,12 +13,12 @@ type ChangeSlideSelectionAction = {
 }
 
 type AddObjectSelectionAction = {
-	type: SelectionActions.ADD_OBJECT_SELECTION
+	type: SelectionActions.CHANGE_OBJECT_SELECTION
 	payload: string
 }
 
 type ClearObjectSelectionAction = {
-	type: SelectionActions.CLEAR_OBJECTS_SELECTION
+	type: SelectionActions.CLEAR_OBJECT_SELECTION
 }
 
 type ChangeTabSelectionAction = {

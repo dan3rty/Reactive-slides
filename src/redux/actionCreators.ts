@@ -43,12 +43,12 @@ function createMoveObjectToTopLayer(slideId: string, objectId: string) {
 	}
 }
 
-function createDeleteObjectAction(slideId: string, objectIds: string[]) {
+function createDeleteObjectAction(slideId: string, objectId: string) {
 	return {
-		type: SlideActions.DELETE_OBJECTS,
+		type: SlideActions.DELETE_OBJECT,
 		payload: {
 			slideId,
-			objectIds,
+			objectId,
 		},
 	}
 }
@@ -93,14 +93,14 @@ function createChangeSlideSelectionAction(slideId: string) {
 
 function createAddObjectSelectionAction(objectId: string) {
 	return {
-		type: SelectionActions.ADD_OBJECT_SELECTION,
+		type: SelectionActions.CHANGE_OBJECT_SELECTION,
 		payload: objectId,
 	}
 }
 
 function createClearObjectSelectionAction() {
 	return {
-		type: SelectionActions.CLEAR_OBJECTS_SELECTION,
+		type: SelectionActions.CLEAR_OBJECT_SELECTION,
 	}
 }
 

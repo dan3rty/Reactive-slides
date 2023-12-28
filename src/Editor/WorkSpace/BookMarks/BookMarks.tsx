@@ -7,7 +7,7 @@ import { useAppActions, useAppSelector } from '../../../redux/hooks'
 function BookMarks() {
 	const { createChangeTabSelectionAction } = useAppActions()
 	const selection = useAppSelector((state) => state.selection)
-	const isAvailable = selection.objectsId.length == 1
+	const isAvailable = !!selection.objectId
 
 	if (!isAvailable && selection.selectedTab != Tabs.CREATE) {
 		createChangeTabSelectionAction(Tabs.CREATE)

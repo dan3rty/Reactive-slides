@@ -12,9 +12,10 @@ type PrimitiveElementProps = {
 	hex: string
 	borderSize: number
 	borderColor: Color
+	onClick: () => void
 }
 
-function Ellipse({ hex, borderSize, borderColor }: PrimitiveElementProps) {
+function Ellipse({ hex, borderSize, borderColor, onClick }: PrimitiveElementProps) {
 	return (
 		<ellipse
 			cx='50%'
@@ -24,11 +25,12 @@ function Ellipse({ hex, borderSize, borderColor }: PrimitiveElementProps) {
 			fill={hex}
 			strokeWidth={borderSize}
 			stroke={borderColor.hsl}
+			onClick={onClick}
 		/>
 	)
 }
 
-function Rectangle({ hex, borderSize, borderColor }: PrimitiveElementProps) {
+function Rectangle({ hex, borderSize, borderColor, onClick }: PrimitiveElementProps) {
 	return (
 		<rect
 			x={0}
@@ -38,17 +40,19 @@ function Rectangle({ hex, borderSize, borderColor }: PrimitiveElementProps) {
 			fill={hex}
 			strokeWidth={borderSize}
 			stroke={borderColor.hsl}
+			onClick={onClick}
 		/>
 	)
 }
 
-function Triangle({ hex, borderSize, borderColor }: PrimitiveElementProps) {
+function Triangle({ hex, borderSize, borderColor, onClick }: PrimitiveElementProps) {
 	return (
 		<polygon
 			points={`${borderSize} 100, ${100 - borderSize} 100, 50 ${borderSize}`}
 			fill={hex}
 			strokeWidth={borderSize}
 			stroke={borderColor.hsl}
+			onClick={onClick}
 		/>
 	)
 }
@@ -62,6 +66,7 @@ const PrimitiveComponent = function ({ primitive, scale, onClick }: PrimitivePro
 					hex={primitive.color.colors[0].hsl}
 					borderSize={primitive.borderSize / scale}
 					borderColor={primitive.borderColor}
+					onClick={onClick}
 				/>
 			)
 			break
@@ -71,6 +76,7 @@ const PrimitiveComponent = function ({ primitive, scale, onClick }: PrimitivePro
 					hex={primitive.color.colors[0].hsl}
 					borderSize={primitive.borderSize / scale}
 					borderColor={primitive.borderColor}
+					onClick={onClick}
 				/>
 			)
 			break
@@ -80,6 +86,7 @@ const PrimitiveComponent = function ({ primitive, scale, onClick }: PrimitivePro
 					hex={primitive.color.colors[0].hsl}
 					borderSize={primitive.borderSize / scale}
 					borderColor={primitive.borderColor}
+					onClick={onClick}
 				/>
 			)
 			break
@@ -94,9 +101,8 @@ const PrimitiveComponent = function ({ primitive, scale, onClick }: PrimitivePro
 				top: '0px',
 				left: '0px',
 			}}
-			viewBox={primitive.primitiveType == Primitives.TRIANGLE ? '0 0 100 100' : ''}
+			viewBox={primitive.primitiveType == Primitives.TRIANGLE ? '0 0 100 100' : null}
 			preserveAspectRatio='none'
-			onClick={onClick}
 		>
 			{primitiveEl}
 		</svg>

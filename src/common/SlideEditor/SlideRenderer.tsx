@@ -31,13 +31,6 @@ function SlideRenderer({ scale, slideId, isWorkspace }: SlideRendererProps) {
 		? { backgroundImage: `url("${slide.background.image.value}")` }
 		: { background: returnGradientString(slide.background.color) }
 
-	const deleteOnClick = (e: KeyboardEvent) => {
-		if (e.code === 'Delete') {
-			createDeleteObjectAction(slideId, selection.objectsId)
-			createClearObjectSelectionAction()
-		}
-	}
-
 	const clearSelectionObjectsOnClick = (e: KeyboardEvent) => {
 		if (e.code === 'Escape') {
 			createClearObjectSelectionAction()
@@ -45,14 +38,25 @@ function SlideRenderer({ scale, slideId, isWorkspace }: SlideRendererProps) {
 	}
 
 	useEffect(() => {
+		const deleteOnClick = (e: KeyboardEvent) => {
+			if (e.code === 'Delete') {
+				createDeleteObjectAction(slideId, selection.objectId)
+				createClearObjectSelectionAction()
+			}
+		}
+		document.addEventListener('keydown', deleteOnClick)
+		return () => {
+			document.removeEventListener('keydown', deleteOnClick)
+		}
+	}, [selection])
+
+	useEffect(() => {
 		if (!isWorkspace) {
 			return
 		}
 
-		document.addEventListener('keydown', deleteOnClick)
 		document.addEventListener('keydown', clearSelectionObjectsOnClick)
 		return () => {
-			document.removeEventListener('keydown', deleteOnClick)
 			document.removeEventListener('keydown', clearSelectionObjectsOnClick)
 		}
 	}, [])
@@ -72,7 +76,7 @@ function SlideRenderer({ scale, slideId, isWorkspace }: SlideRendererProps) {
 		>
 			{slide.objects.map((obj, index) => {
 				const newObj = { ...obj }
-				const selected = selection.objectsId.includes(obj.id) && isWorkspace
+				const selected = selection.objectId == obj.id && isWorkspace
 				if (selection) {
 					if (
 						obj.animation &&

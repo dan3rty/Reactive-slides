@@ -411,7 +411,6 @@ const presentation: Type.Presentation = {
 const selection: Type.Selection = {
 	selectedTab: Type.Tabs.CREATE,
 	slideId: 'djahDHSADGKUAGUSDAD',
-	objectsId: [],
 }
 
 const operationHistory: Type.OperationHistory = {

@@ -9,7 +9,7 @@ function AnimationBar() {
 	const slides = useAppSelector((state) => state.slides)
 	const selectedObject = slides
 		.find((slide) => slide.id === selection.slideId)
-		.objects.find((obj) => obj.id == selection.objectsId[0])
+		.objects.find((obj) => obj.id == selection.objectId)
 	const animation = selectedObject?.animation
 	return (
 		<div className={styles.animationBar}>
