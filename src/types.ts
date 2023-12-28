@@ -83,13 +83,8 @@ type Crop = {
 	height: number
 }
 
-enum ImageSource {
-	BINARY = 'binary',
-	PATH = 'path',
-}
 
 type BaseImage = {
-	typeValue: ImageSource
 	value: string
 }
 
@@ -184,7 +179,6 @@ export {
 	Primitives,
 	FontFamily,
 	BlockType,
-	ImageSource,
 	BorderTypes,
 	Tabs,
 	HorizontalAligns,

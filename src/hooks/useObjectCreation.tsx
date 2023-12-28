@@ -13,7 +13,7 @@ const WORKSPACE_SCALER = 1.2
 function useObjectCreation({ rect }: useObjectCreationProps): {
 	handleAddDown: (event: MouseEvent) => void
 	setBlockType: (v: string) => void
-	setImagePathInput: (v: string) => void
+	setImageValue: (v: string) => void
 } {
 	console.log(rect)
 	const { createAddObjectAction, createClearObjectSelectionAction } = useAppActions()
@@ -34,9 +34,9 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 		secondPosition = position
 	}
 
-	let imagePathInput = ''
-	function setImagePathInput(path: string) {
-		imagePathInput = path
+	let imageValue = ''
+	function setImageValue(path: string) {
+		imageValue = path
 	}
 	function useHandleAddUp(event: MouseEvent) {
 		document.removeEventListener('mouseup', useHandleAddUp)
@@ -85,7 +85,6 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 				  } as PrimitiveBlock)
 				: blockType === 'image'
 				? ({
-						typeValue: Type.ImageSource.PATH,
 						blockType: Type.BlockType.IMAGE,
 						id: Math.random().toString(16).slice(2),
 						baseState: {
@@ -107,7 +106,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 									: secondPosition.y) * scale,
 							rotation: 0,
 						},
-						value: imagePathInput,
+						value: imageValue,
 						opacity: 0,
 				  } as ImageBlock)
 				: ({
@@ -171,7 +170,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 		document.addEventListener('mouseup', useHandleAddUp)
 	}
 
-	return { handleAddDown, setBlockType, setImagePathInput }
+	return { handleAddDown, setBlockType, setImageValue: setImageValue }
 }
 
 export { useObjectCreation }
