@@ -36,6 +36,7 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 		textAlign: text.horizontalAlign,
 		whiteSpace: 'normal',
 		fontFamily: text.fontFamily,
+		overflowY: isWorkSpace ? 'auto' : 'hidden',
 	}
 	const { createChangeObjectAction } = useAppActions()
 	return (
