@@ -41,6 +41,8 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 		const dy = e.clientY - baseMousePosition.y
 		const newBaseState = {
 			...obj.baseState,
+			width: elementRef.current.clientWidth * scale,
+			height: elementRef.current.clientHeight * scale,
 			x: (baseObjPosition.x + dx) * scale,
 			y: (baseObjPosition.y + dy) * scale,
 		}

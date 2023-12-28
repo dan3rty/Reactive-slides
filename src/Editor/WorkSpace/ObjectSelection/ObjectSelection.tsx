@@ -219,7 +219,6 @@ function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelec
 			if (object.blockType === BlockType.TEXT) {
 				selectionRef.current.style.cursor = 'text'
 				ref.current.style.display = 'none'
-				console.log(ref.current)
 				return
 			}
 		}
