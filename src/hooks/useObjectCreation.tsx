@@ -1,6 +1,6 @@
 import * as Type from '../types'
-import { HorizontalAligns, ImageBlock, PrimitiveBlock, TextBlock, VerticalAligns } from '../types'
-import { useAppActions, useAppSelector } from '../redux/hooks'
+import {HorizontalAligns, ImageBlock, PrimitiveBlock, TextBlock, VerticalAligns} from '../types'
+import {useAppActions, useAppSelector} from '../redux/hooks'
 
 type useObjectCreationProps = {
 	rect?: DOMRect

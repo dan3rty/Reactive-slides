@@ -1,21 +1,31 @@
-import { FontFamily } from '../../../types'
+import {DropDownList} from "../DropDownList/DropDownList";
 import styles from './FontFamilySelection.css'
 
-type FontFamilySelectionProps = {
-	value: FontFamily
+// type FontFamilySelectionProps = {
+//     choices: string[];
+// }
+
+function FontFamilySelection() {
+    return (
+        <div className={styles.selectionField}>
+            <DropDownList choices={[
+                {
+                    name: 'HELLO',
+                    returnValue: 1,
+                },
+                {
+                    name: 'WOW',
+                    returnValue: 2,
+                },
+                {
+                    name: 'HO-HO-Ho',
+                    returnValue: 3,
+                }
+            ]} header={'chose font'} onChoice={font => {
+                console.log(font)
+            }}/>
+        </div>
+    )
 }
 
-function FontFamilySelection({ value }: FontFamilySelectionProps) {
-	return (
-		<div className={styles.selectionField}>
-			<div className={styles.selectionFieldLabel}>
-				<span>Font family:</span>
-			</div>
-			<div className={styles.selectionFieldValue}>
-				<span>{value}</span>
-			</div>
-		</div>
-	)
-}
-
-export { FontFamilySelection }
+export {FontFamilySelection}
