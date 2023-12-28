@@ -1,6 +1,6 @@
 import * as Type from '../types'
-import {HorizontalAligns, ImageBlock, PrimitiveBlock, TextBlock, VerticalAligns} from '../types'
-import {useAppActions, useAppSelector} from '../redux/hooks'
+import { HorizontalAligns, ImageBlock, PrimitiveBlock, TextBlock, VerticalAligns } from '../types'
+import { useAppActions, useAppSelector } from '../redux/hooks'
 
 type useObjectCreationProps = {
 	rect?: DOMRect
@@ -15,7 +15,6 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 	setBlockType: (v: string) => void
 	setImageValue: (v: string) => void
 } {
-	console.log(rect)
 	const { createAddObjectAction, createClearObjectSelectionAction } = useAppActions()
 	const selection = useAppSelector((state) => state.selection)
 	let firstPosition = { x: 0, y: 0 }
