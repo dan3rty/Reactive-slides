@@ -15,6 +15,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 	setBlockType: (v: string) => void
 	setImagePathInput: (v: string) => void
 } {
+	console.log(rect)
 	const { createAddObjectAction, createClearObjectSelectionAction } = useAppActions()
 	const selection = useAppSelector((state) => state.selection)
 	let firstPosition = { x: 0, y: 0 }
@@ -153,6 +154,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 
 	function handleAddDown(event: MouseEvent) {
 		event.preventDefault()
+		console.log(rect)
 		document.removeEventListener('mousedown', handleAddDown)
 		if (
 			rect.x > event.x ||
