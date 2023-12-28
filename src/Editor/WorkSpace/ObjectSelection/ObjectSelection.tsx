@@ -192,7 +192,7 @@ function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelec
 		return null
 	}
 	const ref = useRef(null)
-	const selectionRef = useRef(null)
+	const selectionRef = useRef<HTMLDivElement>(null)
 	useDraggableObject({
 		elementRef: ref,
 		elementId: object.id,
@@ -203,13 +203,19 @@ function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelec
 		: 0
 	const borderSize = 3
 
+	const cursorMoveOffset = 0.15
 	const onMouseMove = (e: MouseEvent) => {
 		selectionRef.current.style.cursor = 'move'
+		const height = selectionRef.current.clientHeight
+		const width = selectionRef.current.clientWidth
+		const yOffset = height * cursorMoveOffset
+		const xOffset = width * cursorMoveOffset
+		const offset = Math.min(xOffset, yOffset)
 		if (
-			e.offsetY > 10 &&
-			e.offsetY < parseFloat(selectedObject.current.style.height) - 10 &&
-			e.offsetX > 10 &&
-			e.offsetX < parseFloat(selectedObject.current.style.width) - 10
+			e.offsetY > offset &&
+			e.offsetY < height - offset &&
+			e.offsetX > offset &&
+			e.offsetX < width - offset
 		) {
 			if (object.blockType === BlockType.TEXT) {
 				selectionRef.current.style.cursor = 'text'
