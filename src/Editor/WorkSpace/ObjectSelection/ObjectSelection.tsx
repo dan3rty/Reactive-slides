@@ -223,7 +223,7 @@ function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelec
 			}
 		}
 		selectionRef.current.style.cursor = 'move'
-		ref.current.style.display = 'normal'
+		ref.current.style.display = 'block'
 	}
 
 	useEffect(() => {
