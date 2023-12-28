@@ -64,7 +64,7 @@ function SlideElement({ object, isWorkspace, slideId, scale }: SlideElementProps
 				<ObjectSelection
 					scale={scale}
 					selectedObject={ref}
-					id={object.id}
+					object={object}
 					slideId={slideId}
 				/>
 			)}

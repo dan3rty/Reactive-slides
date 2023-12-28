@@ -3,6 +3,7 @@ import { useResizableObject } from '../../../hooks/useResizableObject'
 import React, { useEffect, useRef } from 'react'
 import { useDraggableObject } from '../../../hooks/useDraggableObject'
 import { useAppActions, useAppSelector } from '../../../redux/hooks'
+import { BlockType, ImageBlock, PrimitiveBlock, TextBlock } from '../../../types'
 
 enum CursorType {
 	N = 'n-resize',
@@ -181,27 +182,58 @@ function Corner({
 
 type ObjectSelectionProps = {
 	selectedObject: React.MutableRefObject<SVGSVGElement | HTMLDivElement>
-	id: string
+	object: ImageBlock | PrimitiveBlock | TextBlock
 	slideId: string
 	scale: number
 }
 
-function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelectionProps) {
+function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelectionProps) {
 	if (!selectedObject.current) {
 		return null
 	}
 	const ref = useRef(null)
+	const selectionRef = useRef(null)
 	useDraggableObject({
 		elementRef: ref,
-		elementId: id,
+		elementId: object.id,
 		slideId: slideId,
 	})
 	const rotation = selectedObject.current.style.rotate
 		? parseFloat(selectedObject.current.style.rotate)
 		: 0
 	const borderSize = 3
+
+	const onMouseMove = (e: MouseEvent) => {
+		selectionRef.current.style.cursor = 'move'
+		if (
+			e.offsetY > 10 &&
+			e.offsetY < parseFloat(selectedObject.current.style.height) - 10 &&
+			e.offsetX > 10 &&
+			e.offsetX < parseFloat(selectedObject.current.style.width) - 10
+		) {
+			if (object.blockType === BlockType.TEXT) {
+				selectionRef.current.style.cursor = 'text'
+			}
+		}
+	}
+
+	useEffect(() => {
+		selectionRef.current?.addEventListener('mousemove', (e: MouseEvent) => onMouseMove(e))
+		return () => {
+			selectionRef.current?.removeEventListener('mousemove', (e) => onMouseMove(e))
+		}
+	}, [])
+
+	const onClick = () => {
+		if (object.blockType === BlockType.TEXT && selectionRef.current.style.cursor == 'text') {
+			const textArea = selectedObject.current.children[0].children[0] as HTMLTextAreaElement
+			textArea.focus()
+		}
+	}
+
 	return (
 		<div
+			ref={selectionRef}
 			className={styles.selection}
 			style={{
 				borderWidth: `${borderSize}px`,
@@ -210,6 +242,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				width: '100%',
 				height: '100%',
 			}}
+			onClick={onClick}
 		>
 			<div ref={ref} className={styles.draggableSpace}></div>
 			<Corner
@@ -218,7 +251,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				cursor={getCursorType(CursorIntType.NW, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
-				objectId={id}
+				objectId={object.id}
 				scale={scale}
 				canChangeWidth={true}
 				canChangeHeight={true}
@@ -231,7 +264,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				cursor={getCursorType(CursorIntType.N, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
-				objectId={id}
+				objectId={object.id}
 				scale={scale}
 				canChangeWidth={false}
 				canChangeHeight={true}
@@ -244,7 +277,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				cursor={getCursorType(CursorIntType.NE, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
-				objectId={id}
+				objectId={object.id}
 				scale={scale}
 				canChangeWidth={true}
 				canChangeHeight={true}
@@ -257,7 +290,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				cursor={getCursorType(CursorIntType.E, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
-				objectId={id}
+				objectId={object.id}
 				scale={scale}
 				canChangeWidth={true}
 				canChangeHeight={false}
@@ -270,7 +303,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				cursor={getCursorType(CursorIntType.SE, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
-				objectId={id}
+				objectId={object.id}
 				scale={scale}
 				canChangeWidth={true}
 				canChangeHeight={true}
@@ -283,7 +316,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				cursor={getCursorType(CursorIntType.S, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
-				objectId={id}
+				objectId={object.id}
 				scale={scale}
 				canChangeWidth={false}
 				canChangeHeight={true}
@@ -296,7 +329,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				cursor={getCursorType(CursorIntType.SW, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
-				objectId={id}
+				objectId={object.id}
 				scale={scale}
 				canChangeWidth={true}
 				canChangeHeight={true}
@@ -309,7 +342,7 @@ function ObjectSelection({ selectedObject, id, slideId, scale }: ObjectSelection
 				cursor={getCursorType(CursorIntType.W, rotation)}
 				selectedObject={selectedObject}
 				slideId={slideId}
-				objectId={id}
+				objectId={object.id}
 				scale={scale}
 				canChangeWidth={true}
 				canChangeHeight={false}
