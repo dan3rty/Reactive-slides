@@ -14,7 +14,7 @@ import {
 	UnderstrokeIcon,
 	VerticalAlignCenterIcon,
 } from '../../../../common/Icons/icons'
-import { BlockType, FontFamily } from '../../../../types'
+import { BlockType, FontFamily, HorizontalAligns } from '../../../../types'
 import styles from './EditBar.css'
 import { useEffect, useRef, useState } from 'react'
 import { ColorPicker } from '../../../../common/changeBackgroundPopup/colorPicker/ColorPicker'
@@ -228,8 +228,62 @@ function EditBar() {
 			</div>
 			<div className={styles.selectionWrapper}>
 				<Button text={'clear'} style={'light'} size={'medium'} icon={BoldIcon} />
-				<SelectionBar icons={[AlignRightIcon, AlignCenterIcon, AlignLeftIcon]} />
-				<SelectionBar icons={[AlignTopIcon, VerticalAlignCenterIcon, AlignBottomIcon]} />
+				<SelectionBar
+					propsOfButtons={[
+						{
+							icon: AlignRightIcon,
+							onClick: () => {
+								if (selectedObject.blockType === BlockType.TEXT) {
+									createChangeObjectAction(selection.slideId, selectedObject.id, {
+										horizontalAlign: HorizontalAligns.RIGHT,
+									})
+								}
+							},
+						},
+						{
+							icon: AlignCenterIcon,
+							onClick: () => {
+								if (selectedObject.blockType === BlockType.TEXT) {
+									createChangeObjectAction(selection.slideId, selectedObject.id, {
+										horizontalAlign: HorizontalAligns.CENTER,
+									})
+								}
+							},
+						},
+						{
+							icon: AlignLeftIcon,
+							onClick: () => {
+								if (selectedObject.blockType === BlockType.TEXT) {
+									createChangeObjectAction(selection.slideId, selectedObject.id, {
+										horizontalAlign: HorizontalAligns.LEFT,
+									})
+								}
+							},
+						},
+					]}
+				/>
+				<SelectionBar
+					propsOfButtons={[
+						{
+							icon: AlignTopIcon,
+							onClick: () => {
+								console.log('Top')
+							},
+						},
+						{
+							icon: VerticalAlignCenterIcon,
+							onClick: () => {
+								console.log('VerticalCenter')
+							},
+						},
+						{
+							icon: AlignBottomIcon,
+							onClick: () => {
+								console.log('bottom')
+							},
+						},
+					]}
+				/>
 			</div>
 		</div>
 	)

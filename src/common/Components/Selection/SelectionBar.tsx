@@ -1,16 +1,26 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import styles from './SelectionBar.css'
 import { SelectionButton } from '../Buttons/SelectionButton'
 
-type SelectionProps = {
-	icons: Array<ReactNode>
+type buttonInfo = {
+	icon: ReactNode
+	onClick: (event: React.MouseEvent<HTMLDivElement>) => void
 }
 
-function SelectionBar({ icons }: SelectionProps) {
+type SelectionProps = {
+	propsOfButtons: Array<buttonInfo>
+}
+
+function SelectionBar({ propsOfButtons }: SelectionProps) {
 	return (
 		<div className={styles.selection}>
-			{icons.map((icon, index) => (
-				<SelectionButton key={index} style={'light'} icon={icon} />
+			{propsOfButtons.map((props, index) => (
+				<SelectionButton
+					key={index}
+					style={'light'}
+					icon={props.icon}
+					onClick={props.onClick}
+				/>
 			))}
 		</div>
 	)

@@ -1,5 +1,5 @@
 import buttonStyle from './SelectionButton.css'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { joinCssClasses } from '../../../classes/joinCssClasses'
 
 type styles = 'light' | 'dark'
@@ -7,7 +7,7 @@ type styles = 'light' | 'dark'
 type ButtonProps = {
 	style: styles
 	icon: ReactNode
-	onClick?: () => void
+	onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
 }
 
 function SelectionButton({ style, icon, onClick }: ButtonProps) {

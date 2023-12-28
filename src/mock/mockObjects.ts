@@ -1,4 +1,5 @@
 import * as Type from '../types'
+import { HorizontalAligns, VerticalAligns } from '../types'
 
 const BlackColor: Type.Color = {
 	hsl: '#000000',
@@ -69,6 +70,8 @@ const text: Type.TextBlock = {
 	underline: false,
 	strokethrough: false,
 	color: RedColor,
+	horizontalAlign: HorizontalAligns.LEFT,
+	verticalAlign: VerticalAligns.TOP,
 }
 
 const text2: Type.TextBlock = {
@@ -149,6 +152,8 @@ const text2: Type.TextBlock = {
 	underline: false,
 	strokethrough: true,
 	color: BlackColor,
+	horizontalAlign: HorizontalAligns.RIGHT,
+	verticalAlign: VerticalAligns.TOP,
 }
 
 const image: Type.ImageBlock = {

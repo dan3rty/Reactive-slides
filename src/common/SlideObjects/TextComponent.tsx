@@ -32,6 +32,9 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 				? 'underline'
 				: 'none',
 		fontStyle: text.italic ? 'italic' : 'normal',
+		display: 'flex',
+		textAlign: text.horizontalAlign,
+		whiteSpace: 'normal',
 	}
 	const { createChangeObjectAction } = useAppActions()
 	return (

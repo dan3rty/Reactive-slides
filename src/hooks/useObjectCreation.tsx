@@ -1,5 +1,5 @@
 import * as Type from '../types'
-import { ImageBlock, PrimitiveBlock, TextBlock } from '../types'
+import { HorizontalAligns, ImageBlock, PrimitiveBlock, TextBlock, VerticalAligns } from '../types'
 import { useAppActions, useAppSelector } from '../redux/hooks'
 
 type useObjectCreationProps = {
@@ -143,6 +143,8 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 							opacity: 1,
 							percent: '100%',
 						},
+						horizontalAlign: HorizontalAligns.LEFT,
+						verticalAlign: VerticalAligns.TOP,
 				  } as TextBlock)
 
 		createClearObjectSelectionAction()

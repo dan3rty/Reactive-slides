@@ -50,6 +50,18 @@ type GradientColor = {
 	rotation: number
 }
 
+enum VerticalAligns {
+	TOP = 'start',
+	CENTER = 'center',
+	BOTTOM = 'end',
+}
+
+enum HorizontalAligns {
+	RIGHT = 'right',
+	CENTER = 'center',
+	LEFT = 'left',
+}
+
 type TextBlock = CommonObjectProperties & {
 	blockType: BlockType.TEXT
 	value: string
@@ -60,6 +72,8 @@ type TextBlock = CommonObjectProperties & {
 	underline: boolean
 	strokethrough: boolean
 	color: Color
+	verticalAlign: VerticalAligns
+	horizontalAlign: HorizontalAligns
 }
 
 type Crop = {
@@ -166,4 +180,13 @@ export type {
 	GradientColor,
 }
 
-export { Primitives, FontFamily, BlockType, ImageSource, BorderTypes, Tabs }
+export {
+	Primitives,
+	FontFamily,
+	BlockType,
+	ImageSource,
+	BorderTypes,
+	Tabs,
+	HorizontalAligns,
+	VerticalAligns,
+}
