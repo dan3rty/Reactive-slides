@@ -134,7 +134,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 						fontSize: 20,
 						fontFamily: Type.FontFamily.ARIAL,
 						bold: false,
-						italic: true,
+						italic: false,
 						underline: false,
 						strokethrough: false,
 						color: {
