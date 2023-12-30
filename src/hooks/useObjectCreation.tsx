@@ -15,7 +15,7 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 	setBlockType: (v: string) => void
 	setImagePathInput: (v: string) => void
 } {
-	const { createAddObjectAction, createClearObjectSelectionAction } = useAppActions()
+	const { createAddObjectAction, createChangeObjectSelectionAction } = useAppActions()
 	const selection = useAppSelector((state) => state.selection)
 	let firstPosition = { x: 0, y: 0 }
 	let secondPosition = { x: 0, y: 0 }
@@ -147,13 +147,12 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 						verticalAlign: VerticalAligns.TOP,
 				  } as TextBlock)
 
-		createClearObjectSelectionAction()
+		createChangeObjectSelectionAction(objectToAdd.id)
 		createAddObjectAction(selection.slideId, objectToAdd)
 	}
 
 	function handleAddDown(event: MouseEvent) {
 		event.preventDefault()
-		console.log(rect)
 		document.removeEventListener('mousedown', handleAddDown)
 		if (
 			rect.x > event.x ||
