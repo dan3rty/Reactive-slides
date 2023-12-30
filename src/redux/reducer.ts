@@ -4,6 +4,7 @@ import { presenter } from '../mock/mockObjects'
 import { combineReducers } from 'redux'
 import { SelectionActions, SelectionActionsType } from './selection'
 import { TitleActions, TitleActionsType } from './title'
+import { PreviewModeActions, PreviewModeActionsType } from './previewMode'
 
 function generateBlankSlide() {
 	const gradientColor: Color = {
@@ -147,7 +148,24 @@ const titleReducer = (state: string = initTitleData, action: TitleActionsType) =
 	}
 }
 
+const initPreviewModeData = false
+
+const previewModeReducer = (
+	state: boolean = initPreviewModeData,
+	action: PreviewModeActionsType,
+) => {
+	switch (action.type) {
+		case PreviewModeActions.START_PREVIEW:
+			return true
+		case PreviewModeActions.END_PREVIEW:
+			return false
+		default:
+			return state
+	}
+}
+
 const rootReducer = combineReducers({
+	previewMode: previewModeReducer,
 	slides: slidesReducer,
 	selection: selectionReducer,
 	title: titleReducer,

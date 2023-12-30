@@ -2,6 +2,7 @@ import { SlideActions } from './slides'
 import { Background, ImageBlock, PrimitiveBlock, Slide, Tabs, TextBlock } from '../types'
 import { SelectionActions } from './selection'
 import { TitleActions } from './title'
+import { PreviewModeActions } from './previewMode'
 
 function createAddSlideAction() {
 	return {
@@ -118,6 +119,18 @@ function createChangeTitleAction(newTitle: string) {
 	}
 }
 
+function createStartPreviewAction() {
+	return {
+		type: PreviewModeActions.START_PREVIEW,
+	}
+}
+
+function createEndPreviewAction() {
+	return {
+		type: PreviewModeActions.END_PREVIEW,
+	}
+}
+
 export {
 	createAddSlideAction,
 	createDeleteSlideAction,
@@ -133,4 +146,6 @@ export {
 	createSetSlidesAction,
 	createChangeSlideBackgroundAction,
 	createMoveObjectToTopLayer,
+	createStartPreviewAction,
+	createEndPreviewAction,
 }

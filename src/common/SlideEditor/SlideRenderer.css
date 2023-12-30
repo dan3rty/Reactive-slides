@@ -1,6 +1,5 @@
 .slide-editor {
 	position: relative;
-	border-radius: 10px;
 	user-select: text;
 	overflow: hidden;
 	background-size: cover;

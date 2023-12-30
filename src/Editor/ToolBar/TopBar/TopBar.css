@@ -38,3 +38,17 @@
 	vertical-align: middle;
 	text-overflow: ellipsis;
 }
+
+.run {
+	cursor: pointer;
+	padding: 5px;
+	margin-left: 10px;
+	background-color: #90c9d3;
+	border-radius: 999px;
+}
+
+.left-group {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

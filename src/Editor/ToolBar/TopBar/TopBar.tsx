@@ -4,11 +4,17 @@ import { useAppActions, useAppSelector } from '../../../redux/hooks'
 
 function TopBar() {
 	const title = useAppSelector((state) => state.title)
-	const { createChangeTitleAction } = useAppActions()
+	const { createChangeTitleAction, createStartPreviewAction } = useAppActions()
 	return (
 		<div className={styles.topBar}>
-			<div>
+			<div className={styles.leftGroup}>
 				<span className={styles.logo}>Reactive slides</span>
+				<span
+					className={styles.run}
+					onClick={() => document.body.requestFullscreen().then(createStartPreviewAction)}
+				>
+					Run!
+				</span>
 			</div>
 			<textarea
 				value={title}

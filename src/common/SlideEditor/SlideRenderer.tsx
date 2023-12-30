@@ -20,10 +20,12 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 	const height = SLIDE_HEIGHT / scale
 	const ref = useRef(null)
 	const { createDeleteObjectAction, createClearObjectSelectionAction } = useAppActions()
-
+	const previewMode = useAppSelector((state) => state.previewMode)
 	const selection = useAppSelector((state) => state.selection)
+
 	const slides = useAppSelector((state) => state.slides)
 	const slide = slides.find((slide) => slide.id == slideId)
+	console.log(slide)
 
 	const selectedTab = selection.selectedTab
 
@@ -63,12 +65,15 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 		}
 	}, [])
 
+	console.log(previewMode)
+
 	return (
 		<div
 			style={{
 				...backgroundStyle,
 				width: `${width}px`,
 				height: `${height}px`,
+				borderRadius: previewMode ? 0 : 10,
 			}}
 			className={joinCssClasses(
 				styles.slideEditor,

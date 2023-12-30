@@ -83,7 +83,6 @@ type Crop = {
 	height: number
 }
 
-
 type BaseImage = {
 	value: string
 }
@@ -151,6 +150,7 @@ type OperationHistory = {
 }
 
 type Presenter = {
+	previewMode: boolean
 	presentation: Presentation
 	selection: Selection
 	operationHistory: OperationHistory
@@ -175,12 +175,4 @@ export type {
 	GradientColor,
 }
 
-export {
-	Primitives,
-	FontFamily,
-	BlockType,
-	BorderTypes,
-	Tabs,
-	HorizontalAligns,
-	VerticalAligns,
-}
+export { Primitives, FontFamily, BlockType, BorderTypes, Tabs, HorizontalAligns, VerticalAligns }
