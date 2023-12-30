@@ -92,7 +92,7 @@ function createChangeSlideSelectionAction(slideId: string) {
 	}
 }
 
-function createAddObjectSelectionAction(objectId: string) {
+function createChangeObjectSelectionAction(objectId: string) {
 	return {
 		type: SelectionActions.CHANGE_OBJECT_SELECTION,
 		payload: objectId,
@@ -139,7 +139,7 @@ export {
 	createChangeObjectAction,
 	createAddObjectAction,
 	createChangeSlideSelectionAction,
-	createAddObjectSelectionAction,
+	createChangeObjectSelectionAction,
 	createClearObjectSelectionAction,
 	createChangeTabSelectionAction,
 	createChangeTitleAction,

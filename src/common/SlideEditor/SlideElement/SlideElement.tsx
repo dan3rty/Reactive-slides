@@ -16,8 +16,8 @@ type SlideElementProps = {
 function SlideElement({ object, isWorkspace, slideId, scale }: SlideElementProps) {
 	const selection = useAppSelector((state) => state.selection)
 	const selected = selection.objectId == object.id
-	const { createAddObjectSelectionAction } = useAppActions()
-	const onClick = isWorkspace ? () => createAddObjectSelectionAction(object.id) : () => {}
+	const { createChangeObjectSelectionAction } = useAppActions()
+	const onClick = isWorkspace ? () => createChangeObjectSelectionAction(object.id) : () => {}
 	const ref = React.useRef()
 	let element
 	switch (object.blockType) {

@@ -208,6 +208,7 @@ function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelec
 		elementId: object.id,
 		slideId: slideId,
 	})
+
 	const rotation = selectedObject.current.style.rotate
 		? parseFloat(selectedObject.current.style.rotate)
 		: 0
