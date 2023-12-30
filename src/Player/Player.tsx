@@ -22,10 +22,16 @@ function Player() {
 				}
 				break
 			case 'Escape':
-				document.exitFullscreen().then(createEndPreviewAction)
+				document.exitFullscreen()
 				break
 			default:
 				break
+		}
+	}
+
+	function handleFullscreen() {
+		if (!document.fullscreenElement) {
+			createEndPreviewAction()
 		}
 	}
 
@@ -34,7 +40,15 @@ function Player() {
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown)
 		}
-	}, [handleKeyDown, document])
+	}, [handleKeyDown])
+
+	useEffect(() => {
+		document.addEventListener('fullscreenchange', handleFullscreen)
+		return () => {
+			document.removeEventListener('fullscreenchange', handleFullscreen)
+		}
+	}, [handleFullscreen])
+
 	return (
 		<div>
 			<SlideRenderer scale={scale} slideId={slides[currentSlide].id} isWorkspace={false} />
