@@ -16,7 +16,7 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)
 	const size = window.innerHeight //TODO: Я думаю, что высчитывание размеров можно вынести в common функцию
-	const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER //TODO: remove magical number
+	const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER
 	const obj = slides
 		.find((slide) => slide.id === slideId)
 		.objects.find((object) => object.id === elementId)

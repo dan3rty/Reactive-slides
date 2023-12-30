@@ -14,7 +14,7 @@ const TOOLBAR_HEIGHT = 205
 const WORKSPACE_SCALER = 1.2
 function WorkSpace({ setSlideRect }: WorkSpaceProps) {
 	const size = window.innerHeight
-	const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER //TODO magical number
+	const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER
 
 	const selection = useAppSelector((state) => state.selection)
 	const slides = useAppSelector((state) => state.slides)

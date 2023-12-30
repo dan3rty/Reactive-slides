@@ -1,5 +1,5 @@
 import styles from './ImageComponent.css'
-import { ImageBlock, ImageSource } from '../../types'
+import { ImageBlock } from '../../types'
 
 type ImageProps = {
 	image: ImageBlock
@@ -10,18 +10,15 @@ type ImageProps = {
 }
 
 const ImageComponent = function ({ image, onClick }: ImageProps) {
-	if (image.typeValue === ImageSource.PATH) {
-		return (
-			<img
-				draggable='false'
-				className={styles.image}
-				src={image.value}
-				alt='image'
-				onClick={onClick}
-			></img>
-		)
-	}
-	return null
+	return (
+		<img
+			draggable='false'
+			className={styles.image}
+			src={image.value}
+			alt='image'
+			onClick={onClick}
+		></img>
+	)
 }
 
 export { ImageComponent }
