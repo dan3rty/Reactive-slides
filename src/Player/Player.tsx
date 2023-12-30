@@ -22,7 +22,7 @@ function Player() {
 				}
 				break
 			case 'Escape':
-				document.exitFullscreen()
+				document.exitFullscreen().then()
 				break
 			default:
 				break
