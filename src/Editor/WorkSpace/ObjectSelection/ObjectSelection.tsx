@@ -237,10 +237,20 @@ function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelec
 		ref.current.style.display = 'block'
 	}
 
+	const { createClearObjectSelectionAction } = useAppActions()
+
+	const onMouseDown = (e: MouseEvent) => {
+		if (e.target != ref.current) {
+			createClearObjectSelectionAction()
+		}
+	}
+
 	useEffect(() => {
 		selectionRef.current?.addEventListener('mousemove', (e: MouseEvent) => onMouseMove(e))
+		document.addEventListener('mousedown', onMouseDown)
 		return () => {
 			selectionRef.current?.removeEventListener('mousemove', (e) => onMouseMove(e))
+			document.removeEventListener('mousedown', onMouseDown)
 		}
 	}, [])
 

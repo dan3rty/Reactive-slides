@@ -13,6 +13,7 @@ type TextProps = {
 
 const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }: TextProps) {
 	const ref = useRef(null)
+	const selection = useAppSelector((state) => state.selection)
 	const text = useAppSelector((state) =>
 		state.slides
 			.find((slide) => slide.id == slideId)
@@ -35,7 +36,7 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 		textAlign: text.horizontalAlign,
 		fontFamily: text.fontFamily,
 		overflowY: isWorkSpace ? 'auto' : 'hidden',
-		userSelect: isWorkSpace ? 'text' : 'none',
+		userSelect: isWorkSpace && selection.objectId == textId ? 'text' : 'none',
 	}
 	const { createChangeObjectAction } = useAppActions()
 	return (
