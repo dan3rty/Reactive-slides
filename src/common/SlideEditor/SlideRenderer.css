@@ -3,9 +3,16 @@
 	user-select: text;
 	overflow: hidden;
 	background-size: cover;
+	border-radius: 10px;
 }
 
 .slide-editor-wrapper {
 	top: 30px;
 	left: 30px;
+}
+
+.preview-mode {
+	user-select: none;
+	border-radius: 0;
+	pointer-events: none;
 }

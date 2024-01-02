@@ -25,7 +25,6 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 
 	const slides = useAppSelector((state) => state.slides)
 	const slide = slides.find((slide) => slide.id == slideId)
-	console.log(slide)
 
 	const selectedTab = selection.selectedTab
 
@@ -65,19 +64,17 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 		}
 	}, [])
 
-	console.log(previewMode)
-
 	return (
 		<div
 			style={{
 				...backgroundStyle,
 				width: `${width}px`,
 				height: `${height}px`,
-				borderRadius: previewMode ? 0 : 10,
 			}}
 			className={joinCssClasses(
 				styles.slideEditor,
 				isWorkspace ? styles.slideEditorWrapper : null,
+				previewMode ? styles.previewMode : null,
 			)}
 			ref={ref}
 		>
