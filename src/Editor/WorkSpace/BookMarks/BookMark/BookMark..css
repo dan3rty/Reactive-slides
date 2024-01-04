@@ -15,6 +15,10 @@
 	background-color: #95ccd7;
 }
 
+.bookmark:hover {
+	height: 45px;
+}
+
 .bookmark_chosen {
 	height: 39px;
 	background-color: #a3e1ec;
@@ -28,6 +32,6 @@
 	background-color: #c2c0c0;
 }
 
-.bookmark:hover {
-	height: 45px;
+.bookmark_unavailable:hover {
+	height: 33px;
 }
