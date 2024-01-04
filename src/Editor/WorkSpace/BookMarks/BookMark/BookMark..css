@@ -11,6 +11,10 @@
 	transition: height 0.3s ease-out;
 }
 
+.bookmark:active {
+	background-color: #95ccd7;
+}
+
 .bookmark_chosen {
 	height: 39px;
 	background-color: #a3e1ec;
@@ -20,6 +24,10 @@
 	background-color: #c2c0c0;
 }
 
+.bookmark_unavailable:active {
+	background-color: #c2c0c0;
+}
+
 .bookmark:hover {
-	height: 40px;
+	height: 45px;
 }
