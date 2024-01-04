@@ -1,5 +1,5 @@
 import styles from './Button.css'
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode } from 'react'
 import { joinCssClasses } from '../../../classes/joinCssClasses'
 
 type Sizes = 'small' | 'medium' | 'big' | 'large'
@@ -14,20 +14,15 @@ type ButtonProps = {
 }
 
 function Button({ text, style, size, icon, onClick }: ButtonProps) {
-	const [selected, setSelected] = useState(false)
 
 	if (size === 'large') {
 		return (
 			<div
-				onClick={(event) => {
-					setSelected(true)
-					onClick(event)
-				}}
+				onClick={onClick}
 				className={joinCssClasses(
 					styles.button,
 					styles.buttonBig,
 					styles[style],
-					selected ? styles[`${style}-selected`] : null,
 				)}
 			>
 				<span>{text}</span>
@@ -38,15 +33,11 @@ function Button({ text, style, size, icon, onClick }: ButtonProps) {
 	if (size === 'big') {
 		return (
 			<div
-				onClick={(event) => {
-					setSelected(true)
-					onClick(event)
-				}}
+				onClick={onClick}
 				className={joinCssClasses(
 					styles.button,
 					styles.buttonBig,
 					styles[style],
-					selected ? styles[`${style}-selected`] : null,
 				)}
 			>
 				{icon}
@@ -58,15 +49,11 @@ function Button({ text, style, size, icon, onClick }: ButtonProps) {
 	if (size === 'medium') {
 		return (
 			<div
-				onClick={(event) => {
-					setSelected(true)
-					onClick(event)
-				}}
+				onClick={onClick}
 				className={joinCssClasses(
 					styles.button,
 					styles.buttonBig,
 					styles[style],
-					selected ? styles[`${style}-selected`] : null,
 				)}
 			>
 				<span>{text}</span>
@@ -77,15 +64,11 @@ function Button({ text, style, size, icon, onClick }: ButtonProps) {
 	if (size === 'small') {
 		return (
 			<div
-				onClick={(event) => {
-					setSelected(true)
-					onClick(event)
-				}}
+				onClick={onClick}
 				className={joinCssClasses(
 					styles.button,
 					styles.buttonBig,
 					styles[style],
-					selected ? styles[`${style}-selected`] : null,
 				)}
 			>
 				{icon}
