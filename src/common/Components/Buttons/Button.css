@@ -26,6 +26,7 @@
 	box-sizing: border-box;
 	cursor: pointer;
 	height: 25px;
+	transition: background-color 0.15s ease-out;
 }
 
 .button-large {
