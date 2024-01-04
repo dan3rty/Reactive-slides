@@ -7,7 +7,8 @@
 	height: 33px;
 	width: 148px;
 	background-color: #90c9d3;
-	border-radius: 0 0 3px 3px;
+	border-radius: 0 0 7px 7px;
+	transition: height 0.3s ease-out;
 }
 
 .bookmark_chosen {
@@ -17,4 +18,8 @@
 
 .bookmark_unavailable {
 	background-color: #c2c0c0;
+}
+
+.bookmark:hover {
+	height: 40px;
 }
