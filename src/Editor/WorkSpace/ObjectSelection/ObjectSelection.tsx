@@ -195,9 +195,16 @@ type ObjectSelectionProps = {
 	object: ImageBlock | PrimitiveBlock | TextBlock
 	slideId: string
 	scale: number
+	slideRef: React.MutableRefObject<HTMLDivElement>
 }
 
-function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelectionProps) {
+function ObjectSelection({
+	selectedObject,
+	object,
+	slideId,
+	scale,
+	slideRef,
+}: ObjectSelectionProps) {
 	if (!selectedObject.current) {
 		return null
 	}
@@ -240,7 +247,7 @@ function ObjectSelection({ selectedObject, object, slideId, scale }: ObjectSelec
 	const { createClearObjectSelectionAction } = useAppActions()
 
 	const onMouseDown = (e: MouseEvent) => {
-		if (e.target != ref.current) {
+		if (e.target != ref.current && e.target == slideRef.current) {
 			createClearObjectSelectionAction()
 		}
 	}

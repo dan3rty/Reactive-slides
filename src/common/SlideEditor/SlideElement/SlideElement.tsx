@@ -11,9 +11,10 @@ type SlideElementProps = {
 	isWorkspace: boolean
 	slideId: string
 	scale: number
+	slideRef: React.MutableRefObject<HTMLDivElement>
 }
 
-function SlideElement({ object, isWorkspace, slideId, scale }: SlideElementProps) {
+function SlideElement({ object, isWorkspace, slideId, scale, slideRef }: SlideElementProps) {
 	const selection = useAppSelector((state) => state.selection)
 	const selected = selection.objectId == object.id
 	const { createChangeObjectSelectionAction } = useAppActions()
@@ -62,6 +63,7 @@ function SlideElement({ object, isWorkspace, slideId, scale }: SlideElementProps
 			{element}
 			{selected && isWorkspace && (
 				<ObjectSelection
+					slideRef={slideRef}
 					scale={scale}
 					selectedObject={ref}
 					object={object}
