@@ -11,7 +11,7 @@ type SlideElementProps = {
 	isWorkspace: boolean
 	slideId: string
 	scale: number
-	slideRef: React.MutableRefObject<HTMLDivElement>
+	slideRef?: React.MutableRefObject<HTMLDivElement>
 }
 
 function SlideElement({ object, isWorkspace, slideId, scale, slideRef }: SlideElementProps) {

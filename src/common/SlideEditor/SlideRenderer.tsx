@@ -106,7 +106,7 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 						isWorkspace={isWorkspace}
 						slideId={slide.id}
 						scale={scale}
-						slideRef={ref}
+						slideRef={isWorkspace ? ref : null}
 					/>
 				)
 			})}
