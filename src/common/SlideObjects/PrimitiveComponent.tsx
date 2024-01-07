@@ -1,11 +1,9 @@
 import { Color, PrimitiveBlock, Primitives } from '../../types'
-import React from 'react'
 
 type PrimitiveProps = {
 	primitive: PrimitiveBlock
 	scale: number
 	onClick: () => void
-	ref?: React.MutableRefObject<SVGSVGElement>
 }
 
 type PrimitiveElementProps = {
@@ -18,6 +16,7 @@ type PrimitiveElementProps = {
 function Ellipse({ hex, borderSize, borderColor, onClick }: PrimitiveElementProps) {
 	return (
 		<ellipse
+			pointerEvents={'visibleFill'}
 			cx='50%'
 			cy='50%'
 			rx={`calc(50% - ${borderSize / 2}px)`}
@@ -33,6 +32,7 @@ function Ellipse({ hex, borderSize, borderColor, onClick }: PrimitiveElementProp
 function Rectangle({ hex, borderSize, borderColor, onClick }: PrimitiveElementProps) {
 	return (
 		<rect
+			pointerEvents={'visibleFill'}
 			x={0}
 			y={0}
 			width={'100%'}
@@ -48,6 +48,7 @@ function Rectangle({ hex, borderSize, borderColor, onClick }: PrimitiveElementPr
 function Triangle({ hex, borderSize, borderColor, onClick }: PrimitiveElementProps) {
 	return (
 		<polygon
+			pointerEvents={'visibleFill'}
 			points={`${borderSize} 100, ${100 - borderSize} 100, 50 ${borderSize}`}
 			fill={hex}
 			strokeWidth={borderSize}
@@ -100,6 +101,7 @@ const PrimitiveComponent = function ({ primitive, scale, onClick }: PrimitivePro
 				height: '100%',
 				top: '0px',
 				left: '0px',
+				pointerEvents: 'none',
 			}}
 			viewBox={primitive.primitiveType == Primitives.TRIANGLE ? '0 0 100 100' : null}
 			preserveAspectRatio='none'

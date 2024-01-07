@@ -29,6 +29,12 @@ function Player() {
 		}
 	}
 
+	function handleMouseDown() {
+		if (currentSlide + 1 < slides.length) {
+			setCurrentSlide(currentSlide + 1)
+		}
+	}
+
 	function handleFullscreen() {
 		if (!document.fullscreenElement) {
 			createEndPreviewAction()
@@ -37,10 +43,12 @@ function Player() {
 
 	useEffect(() => {
 		document.addEventListener('keydown', handleKeyDown)
+		document.addEventListener('mousedown', handleMouseDown)
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown)
+			document.removeEventListener('mousedown', handleMouseDown)
 		}
-	}, [handleKeyDown])
+	}, [handleKeyDown, handleMouseDown])
 
 	useEffect(() => {
 		document.addEventListener('fullscreenchange', handleFullscreen)
