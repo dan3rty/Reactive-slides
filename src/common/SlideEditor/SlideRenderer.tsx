@@ -15,6 +15,7 @@ type SlideRendererProps = {
 
 const SLIDE_HEIGHT = 1080
 const SLIDE_WIDTH = 1920
+
 function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRendererProps) {
 	const width = SLIDE_WIDTH / scale //magical number
 	const height = SLIDE_HEIGHT / scale
@@ -79,24 +80,24 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 			ref={ref}
 		>
 			{slide.objects.map((obj, index) => {
-				const newObj = { ...obj }
+				const newObj = structuredClone(obj)
 				const selected = selection.objectId == obj.id && isWorkspace
-				if (selection) {
-					if (
-						obj.animation &&
-						selection.keyFrameId &&
-						selected &&
-						selectedTab == Tabs.ANIMATION
-					) {
-						const index = obj.animation.stateList.findIndex(
-							(state) => state.id === selection.keyFrameId,
-						)
-
-						newObj.baseState.width = obj.animation.stateList[index].state.width
-						newObj.baseState.height = obj.animation.stateList[index].state.height
-						newObj.baseState.rotation = obj.animation.stateList[index].state.rotation
-						newObj.baseState.x = obj.animation.stateList[index].state.x
-						newObj.baseState.y = obj.animation.stateList[index].state.y
+				if (obj.animation && selected && selectedTab == Tabs.ANIMATION) {
+					const index = obj.animation.findIndex(
+						(state) => state.id === selection.keyFrameId,
+					)
+					if (index !== -1) {
+						newObj.baseState.width = obj.animation[index].state.width
+						newObj.baseState.height = obj.animation[index].state.height
+						newObj.baseState.rotation = obj.animation[index].state.rotation
+						newObj.baseState.x = obj.animation[index].state.x
+						newObj.baseState.y = obj.animation[index].state.y
+					} else {
+						newObj.baseState.width = obj.baseState.width
+						newObj.baseState.height = obj.baseState.height
+						newObj.baseState.rotation = obj.baseState.rotation
+						newObj.baseState.x = obj.baseState.x
+						newObj.baseState.y = obj.baseState.y
 					}
 				}
 				return (

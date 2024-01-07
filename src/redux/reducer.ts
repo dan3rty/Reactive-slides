@@ -107,6 +107,7 @@ const initSelectionData: Selection = {
 	selectedTab: Tabs.CREATE,
 	objectId: null,
 	slideId: '',
+	keyFrameId: '',
 }
 
 const selectionReducer = (state: Selection = initSelectionData, action: SelectionActionsType) => {
@@ -115,22 +116,30 @@ const selectionReducer = (state: Selection = initSelectionData, action: Selectio
 			return {
 				...state,
 				objectId: action.payload,
+				keyFrameId: '',
 			}
 		case SelectionActions.CHANGE_SLIDE_SELECTION:
 			return {
 				...state,
 				objectId: null,
 				slideId: action.payload,
+				keyFrameId: '',
 			}
 		case SelectionActions.CLEAR_OBJECT_SELECTION:
 			return {
 				...state,
 				objectId: null,
+				keyFrameId: '',
 			}
 		case SelectionActions.CHANGE_TAB_SELECTION:
 			return {
 				...state,
 				selectedTab: action.payload,
+			}
+		case SelectionActions.CHANGE_KEYFRAME_SELECTION:
+			return {
+				...state,
+				keyFrameId: action.payload,
 			}
 		default:
 			return state

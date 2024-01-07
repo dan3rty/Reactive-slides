@@ -131,6 +131,13 @@ function createEndPreviewAction() {
 	}
 }
 
+function createChangeKeyframeSelectionAction(keyframeId: string) {
+	return {
+		type: SelectionActions.CHANGE_KEYFRAME_SELECTION,
+		payload: keyframeId,
+	}
+}
+
 export {
 	createAddSlideAction,
 	createDeleteSlideAction,
@@ -148,4 +155,5 @@ export {
 	createMoveObjectToTopLayer,
 	createStartPreviewAction,
 	createEndPreviewAction,
+	createChangeKeyframeSelectionAction,
 }

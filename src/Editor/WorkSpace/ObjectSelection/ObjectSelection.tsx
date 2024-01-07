@@ -196,6 +196,7 @@ type ObjectSelectionProps = {
 	slideId: string
 	scale: number
 	slideRef: React.MutableRefObject<HTMLDivElement>
+	keyframeId?: string
 }
 
 function ObjectSelection({
@@ -204,16 +205,18 @@ function ObjectSelection({
 	slideId,
 	scale,
 	slideRef,
+	keyframeId,
 }: ObjectSelectionProps) {
 	if (!selectedObject.current) {
 		return null
 	}
 	const ref = useRef(null)
 	const selectionRef = useRef<HTMLDivElement>(null)
-	useDraggableObject({
+	const { startMoving } = useDraggableObject({
 		elementRef: ref,
 		elementId: object.id,
-		slideId: slideId,
+		slideId,
+		keyframeId,
 	})
 
 	const rotation = selectedObject.current.style.rotate
@@ -255,11 +258,13 @@ function ObjectSelection({
 	useEffect(() => {
 		selectionRef.current?.addEventListener('mousemove', (e: MouseEvent) => onMouseMove(e))
 		document.addEventListener('mousedown', onMouseDown)
+		ref.current.addEventListener('mousedown', startMoving)
 		return () => {
 			selectionRef.current?.removeEventListener('mousemove', (e) => onMouseMove(e))
 			document.removeEventListener('mousedown', onMouseDown)
+			ref.current?.removeEventListener('mousedown', startMoving)
 		}
-	}, [])
+	}, [startMoving, onMouseDown])
 
 	const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		if (object.blockType === BlockType.TEXT && selectionRef.current.style.cursor == 'text') {

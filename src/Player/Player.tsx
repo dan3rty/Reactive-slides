@@ -8,6 +8,7 @@ function Player() {
 	const windowHeight = window.innerHeight
 	const scale = 1080 / windowHeight
 	const [currentSlide, setCurrentSlide] = useState(0)
+	// const [currentAnimation, setCurrentAnimation] = useState(0)
 
 	function handleKeyDown(e: KeyboardEvent) {
 		switch (e.code) {
@@ -57,11 +58,7 @@ function Player() {
 		}
 	}, [handleFullscreen])
 
-	return (
-		<div>
-			<SlideRenderer scale={scale} slideId={slides[currentSlide].id} isWorkspace={false} />
-		</div>
-	)
+	return <SlideRenderer scale={scale} slideId={slides[currentSlide].id} isWorkspace={false} />
 }
 
 export { Player }
