@@ -221,7 +221,7 @@ function ObjectSelection({
 		: 0
 	const borderSize = 3
 
-	const cursorMoveOffset = 0.15
+	const cursorMoveOffset = 0.05
 	const onMouseMove = (e: MouseEvent) => {
 		const height = selectionRef.current.clientHeight
 		const width = selectionRef.current.clientWidth
@@ -261,9 +261,34 @@ function ObjectSelection({
 		}
 	}, [])
 
-	const onClick = () => {
+	const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		if (object.blockType === BlockType.TEXT && selectionRef.current.style.cursor == 'text') {
 			const textArea = selectedObject.current.children[0].children[0] as HTMLTextAreaElement
+
+			const canvas = document.createElement('canvas')
+			const canvasContext = canvas.getContext('2d')
+			canvasContext.font = `${textArea.style.fontSize} ${textArea.style.fontFamily}`
+			const text = textArea.value
+			const textMetrics = canvasContext.measureText(text)
+
+			const cols = textArea.clientWidth / textMetrics.actualBoundingBoxAscent
+			const lines = Math.ceil(text.length / cols)
+			const clickX = event.clientX
+			const clickY = event.clientY
+
+			const textareaRect = textArea.getBoundingClientRect()
+			const textareaX = textareaRect.left
+			const textareaY = textareaRect.top
+
+			const relativeX = clickX - textareaX
+			const relativeY = clickY - textareaY
+
+			const charIndex = Math.floor(relativeX / (textArea.clientWidth / cols))
+
+			const lineIndex = Math.floor(relativeY / (textArea.clientHeight / lines))
+
+			const cursorPosition = charIndex + lineIndex * cols
+			textArea.setSelectionRange(cursorPosition, cursorPosition)
 			textArea.focus()
 		}
 	}
@@ -279,7 +304,7 @@ function ObjectSelection({
 				width: '100%',
 				height: '100%',
 			}}
-			onClick={onClick}
+			onClick={(event: React.MouseEvent<HTMLDivElement>) => onClick(event)}
 		>
 			<div ref={ref} className={styles.draggableSpace}></div>
 			<Corner
