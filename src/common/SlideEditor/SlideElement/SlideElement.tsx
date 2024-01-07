@@ -63,23 +63,26 @@ function SlideElement({
 			style={{
 				position: 'absolute',
 				width:
-					currentAnimation == 0
+					!currentAnimation || currentAnimation == 0
 						? `${object.baseState.width / scale}px`
 						: `${object.animation[currentAnimation].state.width / scale}px`,
 				height:
-					currentAnimation == 0
+					!currentAnimation || currentAnimation == 0
 						? `${object.baseState.height / scale}px`
 						: `${object.animation[currentAnimation].state.height / scale}px`,
 				top:
-					currentAnimation == 0
+					!currentAnimation || currentAnimation == 0
 						? `${object.baseState.y / scale}px`
 						: `${object.animation[currentAnimation].state.y / scale}px`,
 				left:
-					currentAnimation == 0
+					!currentAnimation || currentAnimation == 0
 						? `${object.baseState.x / scale}px`
 						: `${object.animation[currentAnimation].state.x / scale}px`,
 				rotate: `${object.baseState.rotation}deg`,
-				transition: `all ${object.animation[currentAnimation].duration} ease`,
+				transition:
+					currentAnimation &&
+					currentAnimation != 0 &&
+					`all ${object.animation[currentAnimation].duration} ease`,
 			}}
 		>
 			{element}
