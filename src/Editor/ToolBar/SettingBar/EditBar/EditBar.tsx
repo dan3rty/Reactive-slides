@@ -13,7 +13,7 @@ import {
 	UnderstrokeIcon,
 	VerticalAlignCenterIcon,
 } from '../../../../common/Icons/icons'
-import { BlockType, HorizontalAligns } from '../../../../types'
+import { BlockType, HorizontalAligns } from '../../../../model/types'
 import styles from './EditBar.css'
 import { useEffect, useRef, useState } from 'react'
 import { ColorPicker } from '../../../../common/changeBackgroundPopup/colorPicker/ColorPicker'
@@ -26,8 +26,9 @@ function EditBar() {
 	const [isTextColorPicker, setStateTextColorPicker] = useState(false)
 	const [isBackgroundColorPicker, setStateBackgroundColorPicker] = useState(false)
 
-	const selection = useAppSelector((state) => state.selection)
-	const slides = useAppSelector((state) => state.slides)
+	const presenter = useAppSelector((state) => state)
+	const selection = presenter.selection
+	const slides = presenter.presentation.slides
 	const selectedObject = slides
 		.find((slide) => slide.id === selection.slideId)
 		.objects.find((obj) => obj.id == selection.objectId)

@@ -1,5 +1,5 @@
-import * as Type from '../types'
-import { HorizontalAligns, VerticalAligns } from '../types'
+import * as Type from '../model/types'
+import { HorizontalAligns, VerticalAligns } from '../model/types'
 
 const BlackColor: Type.Color = {
 	hsl: '#000000',
@@ -28,33 +28,30 @@ const GreenColor: Type.Color = {
 const text: Type.TextBlock = {
 	blockType: Type.BlockType.TEXT,
 	id: 'JGSFHL2569562',
-	animation: {
-		stateList: [
-			{
-				id: 'pororo',
-				keyPercent: 50,
-				state: {
-					width: 100,
-					height: 150,
-					x: 200,
-					y: 200,
-					rotation: 0,
-				},
+	animation: [
+		{
+			id: 'pororo',
+			duration: 5,
+			state: {
+				width: 300,
+				height: 100,
+				x: 200,
+				y: 200,
+				rotation: 0,
 			},
-			{
-				id: 'yomayo',
-				keyPercent: 100,
-				state: {
-					width: 300,
-					height: 100,
-					x: 400,
-					y: 150,
-					rotation: 0,
-				},
+		},
+		{
+			id: 'yomayo',
+			duration: 5,
+			state: {
+				width: 300,
+				height: 100,
+				x: 400,
+				y: 150,
+				rotation: 0,
 			},
-		],
-		duration: 10,
-	},
+		},
+	],
 	baseState: {
 		width: 100,
 		height: 150,
@@ -77,66 +74,63 @@ const text: Type.TextBlock = {
 const text2: Type.TextBlock = {
 	blockType: Type.BlockType.TEXT,
 	id: 'D5DAS67F5A',
-	animation: {
-		stateList: [
-			{
-				id: 'quq',
-				keyPercent: 33,
-				state: {
-					width: 10,
-					height: 150,
-					x: 200,
-					y: 200,
-					rotation: 0,
-				},
+	animation: [
+		{
+			id: 'quq',
+			duration: 3,
+			state: {
+				width: 10,
+				height: 150,
+				x: 200,
+				y: 200,
+				rotation: 0,
 			},
-			{
-				id: 'polkaq',
-				keyPercent: 50,
-				state: {
-					width: 200,
-					height: 150,
-					x: 400,
-					y: 200,
-					rotation: -20,
-				},
+		},
+		{
+			id: 'polkaq',
+			duration: 2,
+			state: {
+				width: 200,
+				height: 150,
+				x: 400,
+				y: 200,
+				rotation: -20,
 			},
-			{
-				id: 'polkaew',
-				keyPercent: 60,
-				state: {
-					width: 200,
-					height: 150,
-					x: 400,
-					y: 200,
-					rotation: -20,
-				},
+		},
+		{
+			id: 'polkaew',
+			duration: 1,
+			state: {
+				width: 200,
+				height: 150,
+				x: 400,
+				y: 200,
+				rotation: -20,
 			},
-			{
-				id: 'polkawe',
-				keyPercent: 70,
-				state: {
-					width: 200,
-					height: 150,
-					x: 400,
-					y: 200,
-					rotation: -20,
-				},
+		},
+		{
+			id: 'polkawe',
+			duration: 3,
+			state: {
+				width: 200,
+				height: 150,
+				x: 400,
+				y: 200,
+				rotation: -20,
 			},
-			{
-				id: 'jfasn',
-				keyPercent: 100,
-				state: {
-					width: 300,
-					height: 100,
-					x: 400,
-					y: 150,
-					rotation: -15,
-				},
+		},
+		{
+			id: 'jfasn',
+			duration: 5,
+			state: {
+				width: 300,
+				height: 100,
+				x: 400,
+				y: 150,
+				rotation: -15,
 			},
-		],
-		duration: 60,
-	},
+		},
+	],
 	baseState: {
 		width: 500,
 		height: 150,
@@ -242,33 +236,30 @@ const background5: Type.Background = {
 const circle: Type.PrimitiveBlock = {
 	blockType: Type.BlockType.PRIMITIVE,
 	id: 'DASD79DAS',
-	animation: {
-		stateList: [
-			{
-				id: 'jnkz',
-				keyPercent: 50,
-				state: {
-					width: 100,
-					height: 150,
-					x: 200,
-					y: 200,
-					rotation: 0,
-				},
+	animation: [
+		{
+			id: 'jnkz',
+			duration: 50,
+			state: {
+				width: 100,
+				height: 150,
+				x: 200,
+				y: 200,
+				rotation: 0,
 			},
-			{
-				id: 'mameq',
-				keyPercent: 100,
-				state: {
-					width: 300,
-					height: 100,
-					x: 400,
-					y: 150,
-					rotation: 0,
-				},
+		},
+		{
+			id: 'mameq',
+			duration: 100,
+			state: {
+				width: 300,
+				height: 100,
+				x: 400,
+				y: 150,
+				rotation: 0,
 			},
-		],
-		duration: 10,
-	},
+		},
+	],
 	baseState: {
 		width: 100,
 		height: 100,
@@ -289,33 +280,30 @@ const circle: Type.PrimitiveBlock = {
 const triangle: Type.PrimitiveBlock = {
 	blockType: Type.BlockType.PRIMITIVE,
 	id: 'DASD79DAS1',
-	animation: {
-		stateList: [
-			{
-				id: 'lomnao',
-				keyPercent: 50,
-				state: {
-					width: 100,
-					height: 150,
-					x: 200,
-					y: 200,
-					rotation: 0,
-				},
+	animation: [
+		{
+			id: 'lomnao',
+			duration: 50,
+			state: {
+				width: 100,
+				height: 150,
+				x: 200,
+				y: 200,
+				rotation: 0,
 			},
-			{
-				id: 'ldka1',
-				keyPercent: 100,
-				state: {
-					width: 300,
-					height: 100,
-					x: 400,
-					y: 150,
-					rotation: 0,
-				},
+		},
+		{
+			id: 'ldka1',
+			duration: 100,
+			state: {
+				width: 300,
+				height: 100,
+				x: 400,
+				y: 150,
+				rotation: 0,
 			},
-		],
-		duration: 10,
-	},
+		},
+	],
 	baseState: {
 		width: 400,
 		height: 800,
@@ -336,33 +324,30 @@ const triangle: Type.PrimitiveBlock = {
 const square: Type.PrimitiveBlock = {
 	blockType: Type.BlockType.PRIMITIVE,
 	id: 'PFASD79DAS',
-	animation: {
-		stateList: [
-			{
-				id: 'eqrreq',
-				keyPercent: 50,
-				state: {
-					width: 100,
-					height: 150,
-					x: 200,
-					y: 200,
-					rotation: 0,
-				},
+	animation: [
+		{
+			id: 'eqrreq',
+			duration: 50,
+			state: {
+				width: 100,
+				height: 150,
+				x: 200,
+				y: 200,
+				rotation: 0,
 			},
-			{
-				id: 'lpldqlp',
-				keyPercent: 100,
-				state: {
-					width: 300,
-					height: 100,
-					x: 400,
-					y: 150,
-					rotation: 0,
-				},
+		},
+		{
+			id: 'lpldqlp',
+			duration: 100,
+			state: {
+				width: 300,
+				height: 100,
+				x: 400,
+				y: 150,
+				rotation: 0,
 			},
-		],
-		duration: 10,
-	},
+		},
+	],
 	baseState: {
 		width: 100,
 		height: 100,
@@ -408,21 +393,14 @@ const selection: Type.Selection = {
 	slideId: 'djahDHSADGKUAGUSDAD',
 }
 
-const operationHistory: Type.OperationHistory = {
-	operations: [],
-	curIndex: 1,
-}
-
 const presenter: Type.Presenter = {
 	previewMode: false,
 	presentation,
 	selection,
-	operationHistory,
 }
 
 export {
 	presenter,
-	operationHistory,
 	selection,
 	presentation,
 	slide2,

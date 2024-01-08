@@ -3,7 +3,7 @@ import { useResizableObject } from '../../../hooks/useResizableObject'
 import React, { useEffect, useRef } from 'react'
 import { useDraggableObject } from '../../../hooks/useDraggableObject'
 import { useAppActions, useAppSelector } from '../../../redux/hooks'
-import { BlockType, ImageBlock, PrimitiveBlock, TextBlock } from '../../../types'
+import { BlockType, ImageBlock, PrimitiveBlock, TextBlock } from '../../../model/types'
 
 enum CursorType {
 	N = 'n-resize',
@@ -103,7 +103,7 @@ function Corner({
 	canChangeTop,
 }: CornerProps) {
 	const { createChangeObjectAction } = useAppActions()
-	const slides = useAppSelector((state) => state.slides)
+	const slides = useAppSelector((state) => state).presentation.slides
 	const { registerResizableItem } = useResizableObject()
 	const size = 6
 	const cornerRef = useRef<HTMLDivElement>(null)
@@ -196,6 +196,7 @@ type ObjectSelectionProps = {
 	slideId: string
 	scale: number
 	slideRef: React.MutableRefObject<HTMLDivElement>
+	keyframeId?: string
 }
 
 function ObjectSelection({
@@ -204,16 +205,18 @@ function ObjectSelection({
 	slideId,
 	scale,
 	slideRef,
+	keyframeId,
 }: ObjectSelectionProps) {
 	if (!selectedObject.current) {
 		return null
 	}
 	const ref = useRef(null)
 	const selectionRef = useRef<HTMLDivElement>(null)
-	useDraggableObject({
+	const { startMoving } = useDraggableObject({
 		elementRef: ref,
 		elementId: object.id,
-		slideId: slideId,
+		slideId,
+		keyframeId,
 	})
 
 	const rotation = selectedObject.current.style.rotate
@@ -255,11 +258,13 @@ function ObjectSelection({
 	useEffect(() => {
 		selectionRef.current?.addEventListener('mousemove', (e: MouseEvent) => onMouseMove(e))
 		document.addEventListener('mousedown', onMouseDown)
+		ref.current.addEventListener('mousedown', startMoving)
 		return () => {
 			selectionRef.current?.removeEventListener('mousemove', (e) => onMouseMove(e))
 			document.removeEventListener('mousedown', onMouseDown)
+			ref.current?.removeEventListener('mousedown', startMoving)
 		}
-	}, [])
+	}, [startMoving, onMouseDown])
 
 	const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		if (object.blockType === BlockType.TEXT && selectionRef.current.style.cursor == 'text') {

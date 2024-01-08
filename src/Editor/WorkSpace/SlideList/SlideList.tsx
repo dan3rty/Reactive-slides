@@ -14,7 +14,7 @@ type SlideListProps = {
 function SlideList({ scale, setSlideRefList, slideRefList }: SlideListProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const { createChangeOrderSlidesAction } = useAppActions()
-	const slides = useAppSelector((state) => state.slides)
+	const slides = useAppSelector((state) => state).presentation.slides
 	const { registerDndItem, unregisterDndItem } = useDraggableList({
 		onOrderChange: createChangeOrderSlidesAction,
 	})

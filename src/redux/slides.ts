@@ -1,4 +1,4 @@
-import { Background, ImageBlock, PrimitiveBlock, Slide, TextBlock } from '../types'
+import { Background, ImageBlock, PrimitiveBlock, Slide, TextBlock } from '../model/types'
 
 enum SlideActions {
 	DELETE_SLIDE = 'DELETE_SLIDE',

@@ -1,7 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styles from './TextComponent.css'
 import { useAppActions, useAppSelector } from '../../redux/hooks'
-import { TextBlock } from '../../types'
+import { TextBlock } from '../../model/types'
 
 type TextProps = {
 	textId: string
@@ -13,9 +13,9 @@ type TextProps = {
 
 const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }: TextProps) {
 	const ref = useRef(null)
-	const selection = useAppSelector((state) => state.selection)
+	const textareaRef = useRef(null)
 	const text = useAppSelector((state) =>
-		state.slides
+		state.presentation.slides
 			.find((slide) => slide.id == slideId)
 			.objects.find((object) => object.id == textId),
 	) as TextBlock
@@ -36,12 +36,28 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 		textAlign: text.horizontalAlign,
 		fontFamily: text.fontFamily,
 		overflowY: isWorkSpace ? 'auto' : 'hidden',
-		userSelect: isWorkSpace && selection.objectId == textId ? 'text' : 'none',
 	}
 	const { createChangeObjectAction } = useAppActions()
+	const onBlur = () => {
+		ref.current.style.userSelect = 'none'
+	}
+
+	const onFocus = () => {
+		ref.current.style.userSelect = 'text'
+	}
+
+	useEffect(() => {
+		textareaRef.current.addEventListener('focus', onFocus)
+		textareaRef.current.addEventListener('blur', onBlur)
+		return () => {
+			textareaRef.current?.removeEventListener('focus', onFocus)
+			textareaRef.current?.removeEventListener('blur', onBlur)
+		}
+	}, [])
 	return (
-		<div ref={ref}>
+		<div ref={ref} style={{ userSelect: 'none' }}>
 			<textarea
+				ref={textareaRef}
 				disabled={!isWorkSpace}
 				style={textStyle}
 				className={styles.text}

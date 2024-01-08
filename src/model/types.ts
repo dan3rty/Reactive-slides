@@ -8,19 +8,14 @@ type ObjectBlock = {
 
 type ObjectState = {
 	id: string
-	keyPercent: number // keyframes
+	duration: number // keyframes
 	state: ObjectBlock
-}
-
-type ObjectStateList = {
-	stateList: Array<ObjectState>
-	duration: number
 }
 
 type CommonObjectProperties = {
 	id: string
 	baseState: ObjectBlock
-	animation?: ObjectStateList
+	animation?: Array<ObjectState>
 }
 
 enum BlockType {
@@ -142,29 +137,19 @@ type Selection = {
 	keyFrameId?: string
 }
 
-type Operation = object
-
-type OperationHistory = {
-	operations: Array<Operation>
-	curIndex?: number
-}
-
 type Presenter = {
 	previewMode: boolean
 	presentation: Presentation
 	selection: Selection
-	operationHistory: OperationHistory
 }
 
 export type {
 	Presenter,
-	OperationHistory,
-	Operation,
 	Selection,
 	Presentation,
 	Slide,
 	ObjectBlock,
-	ObjectStateList,
+	ObjectState,
 	PrimitiveBlock,
 	TextBlock,
 	Crop,

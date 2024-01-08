@@ -1,10 +1,12 @@
 import styles from '../common/Styles/App.css'
 import { ToolBar } from './ToolBar/ToolBar'
 import { WorkSpace } from './WorkSpace/WorkSpace'
+import { useUndoRedoListeners } from '../hooks/useUndoRedoListeners'
 import React, { useState } from 'react'
 
 function Editor() {
 	const [slideRect, setSlideRect] = useState<DOMRect>(null)
+	useUndoRedoListeners()
 	const [slideRefList, setSlideRefList] = useState<React.MutableRefObject<HTMLDivElement[]>>({
 		current: [],
 	})

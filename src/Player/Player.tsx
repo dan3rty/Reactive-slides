@@ -1,13 +1,12 @@
 import { useAppActions, useAppSelector } from '../redux/hooks'
-import { SlideRenderer } from '../common/SlideEditor/SlideRenderer'
 import { useEffect, useState } from 'react'
+import { PlayerSlideRenderer } from '../common/Player/PlayerSlideRenderer'
 
 function Player() {
 	const { createEndPreviewAction } = useAppActions()
-	const slides = useAppSelector((state) => state.slides)
-	const windowHeight = window.innerHeight
-	const scale = 1080 / windowHeight
+	const slides = useAppSelector((state) => state).presentation.slides
 	const [currentSlide, setCurrentSlide] = useState(0)
+	// const [currentAnimation, setCurrentAnimation] = useState(0)
 
 	function handleKeyDown(e: KeyboardEvent) {
 		switch (e.code) {
@@ -57,11 +56,7 @@ function Player() {
 		}
 	}, [handleFullscreen])
 
-	return (
-		<div>
-			<SlideRenderer scale={scale} slideId={slides[currentSlide].id} isWorkspace={false} />
-		</div>
-	)
+	return <PlayerSlideRenderer slide={slides[currentSlide]} />
 }
 
 export { Player }

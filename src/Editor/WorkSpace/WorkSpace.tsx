@@ -19,7 +19,7 @@ function WorkSpace({ setSlideRect, setSlideRefList, slideRefList }: WorkSpacePro
 	const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER
 
 	const selection = useAppSelector((state) => state.selection)
-	const slides = useAppSelector((state) => state.slides)
+	const slides = useAppSelector((state) => state).presentation.slides
 	const selectedSlide = slides.find((slide) => slide.id === selection.slideId)
 
 	return (

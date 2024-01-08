@@ -1,46 +1,60 @@
 import { SlideActions, SlideActionsType } from './slides'
-import { Background, Color, GradientColor, Selection, Slide, Tabs } from '../types'
+import { Presenter } from '../model/types'
 import { presenter } from '../mock/mockObjects'
-import { combineReducers } from 'redux'
 import { SelectionActions, SelectionActionsType } from './selection'
 import { TitleActions, TitleActionsType } from './title'
 import { PreviewModeActions, PreviewModeActionsType } from './previewMode'
+import { generateBlankSlide } from '../model/utils'
+import { createHistory } from '../model/History'
+import { HistoryActions, HistoryActionsType } from './history'
 
-function generateBlankSlide() {
-	const gradientColor: Color = {
-		hsl: '#FFFFFF',
-		opacity: 0,
-		percent: '100%',
-	}
-	const backgroundGradient: GradientColor = {
-		colors: [gradientColor],
-		rotation: 15,
-	}
-	const background: Background = {
-		color: backgroundGradient,
-	}
-	const newSlide: Slide = {
-		id: Math.random().toString(16).slice(2),
-		background: background,
-		objects: [],
-	}
-	return newSlide
-}
+const history = createHistory<Presenter>(presenter)
 
-const initSlidesData: Slide[] = presenter.presentation.slides
-
-const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType) => {
+const rootReducer = (
+	state: Presenter = presenter,
+	action:
+		| SlideActionsType
+		| PreviewModeActionsType
+		| SelectionActionsType
+		| TitleActionsType
+		| HistoryActionsType,
+) => {
 	switch (action.type) {
-		case SlideActions.ADD_SLIDE:
-			return state.concat(generateBlankSlide())
-		case SlideActions.DELETE_SLIDE:
-			return state.filter((slide) => slide.id !== action.payload)
-		case SlideActions.CHANGE_SLIDE_ORDER:
-			const removed = state.splice(action.payload.from, 1)
-			state.splice(action.payload.to, 0, removed[0])
-			return [...state]
-		case SlideActions.DELETE_OBJECT:
-			return state.map((slide) => {
+		case SlideActions.ADD_SLIDE: {
+			const newSlides = state.presentation.slides.concat(generateBlankSlide())
+			const newState: Presenter = {
+				...state,
+				presentation: {
+					...state.presentation,
+					slides: newSlides,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SlideActions.DELETE_SLIDE: {
+			const newSlides = state.presentation.slides.filter(
+				(slide) => slide.id !== action.payload,
+			)
+			const newState: Presenter = {
+				...state,
+				presentation: {
+					...state.presentation,
+					slides: newSlides,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SlideActions.CHANGE_SLIDE_ORDER: {
+			const removed = state.presentation.slides.splice(action.payload.from, 1)
+			state.presentation.slides.splice(action.payload.to, 0, removed[0])
+			const newState = { ...state }
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SlideActions.DELETE_OBJECT: {
+			const newSlides = state.presentation.slides.map((slide) => {
 				if (slide.id == action.payload.slideId) {
 					return {
 						...slide,
@@ -49,10 +63,29 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 				}
 				return slide
 			})
-		case SlideActions.SET_SLIDES:
-			return action.payload
-		case SlideActions.CHANGE_OBJECT:
-			return state.map((slide) => {
+			const newState: Presenter = {
+				...state,
+				presentation: {
+					...state.presentation,
+					slides: newSlides,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SlideActions.SET_SLIDES: {
+			const newState: Presenter = {
+				...state,
+				presentation: {
+					...state.presentation,
+					slides: action.payload,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SlideActions.CHANGE_OBJECT: {
+			const newSlides = state.presentation.slides.map((slide) => {
 				if (slide.id == action.payload.slideId) {
 					const newObjects = slide.objects.map((object) => {
 						if (action.payload.objectId == object.id) {
@@ -70,15 +103,35 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 				}
 				return slide
 			})
-		case SlideActions.ADD_OBJECT:
-			return state.map((slide) => {
+			const newState: Presenter = {
+				...state,
+				presentation: {
+					...state.presentation,
+					slides: newSlides,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SlideActions.ADD_OBJECT: {
+			const newSlides = state.presentation.slides.map((slide) => {
 				if (slide.id == action.payload.slideId) {
 					slide.objects.push(action.payload.object)
 				}
 				return slide
 			})
-		case SlideActions.CHANGE_SLIDE_BACKGROUND:
-			return state.map((slide) => {
+			const newState: Presenter = {
+				...state,
+				presentation: {
+					...state.presentation,
+					slides: newSlides,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SlideActions.CHANGE_SLIDE_BACKGROUND: {
+			const newSlides = state.presentation.slides.map((slide) => {
 				if (slide.id == action.payload.slideId) {
 					return {
 						...slide,
@@ -87,8 +140,18 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 				}
 				return slide
 			})
-		case SlideActions.MOVE_OBJECT_TO_TOP_LAYER:
-			return state.map((slide) => {
+			const newState: Presenter = {
+				...state,
+				presentation: {
+					...state.presentation,
+					slides: newSlides,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SlideActions.MOVE_OBJECT_TO_TOP_LAYER: {
+			const newSlides = state.presentation.slides.map((slide) => {
 				if (slide.id == action.payload.slideId) {
 					const objectIndex = slide.objects.findIndex(
 						(object) => object.id == action.payload.objectId,
@@ -98,77 +161,117 @@ const slidesReducer = (state: Slide[] = initSlidesData, action: SlideActionsType
 				}
 				return slide
 			})
+			const newState: Presenter = {
+				...state,
+				presentation: {
+					...state.presentation,
+					slides: newSlides,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SelectionActions.CHANGE_OBJECT_SELECTION: {
+			const newState: Presenter = {
+				...state,
+				selection: {
+					...state.selection,
+					objectId: action.payload,
+					keyFrameId: '',
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SelectionActions.CHANGE_SLIDE_SELECTION: {
+			const newState: Presenter = {
+				...state,
+				selection: {
+					...state.selection,
+					objectId: null,
+					slideId: action.payload,
+					keyFrameId: '',
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SelectionActions.CLEAR_OBJECT_SELECTION: {
+			const newState: Presenter = {
+				...state,
+				selection: {
+					...state.selection,
+					objectId: null,
+					keyFrameId: '',
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SelectionActions.CHANGE_TAB_SELECTION: {
+			const newState: Presenter = {
+				...state,
+				selection: {
+					...state.selection,
+					selectedTab: action.payload,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SelectionActions.CHANGE_KEYFRAME_SELECTION: {
+			const newState: Presenter = {
+				...state,
+				selection: {
+					...state.selection,
+					keyFrameId: action.payload,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case PreviewModeActions.START_PREVIEW: {
+			const newState: Presenter = {
+				...state,
+				previewMode: true,
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case PreviewModeActions.END_PREVIEW: {
+			const newState: Presenter = {
+				...state,
+				previewMode: false,
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case TitleActions.CHANGE_TITLE: {
+			const newState: Presenter = {
+				...state,
+				presentation: {
+					...state.presentation,
+					title: action.payload,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case HistoryActions.UNDO:
+			const prevState = history.undo()
+			if (prevState) {
+				return prevState
+			}
+			return state
+		case HistoryActions.REDO:
+			const nextState = history.redo()
+			if (nextState) {
+				return nextState
+			}
+			return state
 		default:
 			return state
 	}
 }
-
-const initSelectionData: Selection = {
-	selectedTab: Tabs.CREATE,
-	objectId: null,
-	slideId: '',
-}
-
-const selectionReducer = (state: Selection = initSelectionData, action: SelectionActionsType) => {
-	switch (action.type) {
-		case SelectionActions.CHANGE_OBJECT_SELECTION:
-			return {
-				...state,
-				objectId: action.payload,
-			}
-		case SelectionActions.CHANGE_SLIDE_SELECTION:
-			return {
-				...state,
-				objectId: null,
-				slideId: action.payload,
-			}
-		case SelectionActions.CLEAR_OBJECT_SELECTION:
-			return {
-				...state,
-				objectId: null,
-			}
-		case SelectionActions.CHANGE_TAB_SELECTION:
-			return {
-				...state,
-				selectedTab: action.payload,
-			}
-		default:
-			return state
-	}
-}
-
-const initTitleData = presenter.presentation.title
-
-const titleReducer = (state: string = initTitleData, action: TitleActionsType) => {
-	switch (action.type) {
-		case TitleActions.CHANGE_TITLE:
-			return action.payload
-		default:
-			return state
-	}
-}
-
-const initPreviewModeData = false
-
-const previewModeReducer = (
-	state: boolean = initPreviewModeData,
-	action: PreviewModeActionsType,
-) => {
-	switch (action.type) {
-		case PreviewModeActions.START_PREVIEW:
-			return true
-		case PreviewModeActions.END_PREVIEW:
-			return false
-		default:
-			return state
-	}
-}
-
-const rootReducer = combineReducers({
-	previewMode: previewModeReducer,
-	slides: slidesReducer,
-	selection: selectionReducer,
-	title: titleReducer,
-})
 
 export { rootReducer }

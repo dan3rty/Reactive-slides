@@ -1,0 +1,7 @@
+.slide {
+	user-select: none;
+	border-radius: 0;
+	pointer-events: none;
+	overflow: hidden;
+	background-size: cover;
+}

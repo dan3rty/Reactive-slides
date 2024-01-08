@@ -1,4 +1,4 @@
-import { BlockType, ImageBlock, PrimitiveBlock, TextBlock } from '../../../types'
+import { BlockType, ImageBlock, PrimitiveBlock, TextBlock } from '../../../model/types'
 import { ImageComponent } from '../../SlideObjects/ImageComponent'
 import { PrimitiveComponent } from '../../SlideObjects/PrimitiveComponent'
 import { TextComponent } from '../../SlideObjects/TextComponent'
@@ -12,9 +12,17 @@ type SlideElementProps = {
 	slideId: string
 	scale: number
 	slideRef?: React.MutableRefObject<HTMLDivElement>
+	currentAnimation?: number
 }
 
-function SlideElement({ object, isWorkspace, slideId, scale, slideRef }: SlideElementProps) {
+function SlideElement({
+	object,
+	isWorkspace,
+	slideId,
+	scale,
+	slideRef,
+	currentAnimation,
+}: SlideElementProps) {
 	const selection = useAppSelector((state) => state.selection)
 	const selected = selection.objectId == object.id
 	const { createChangeObjectSelectionAction } = useAppActions()
@@ -48,16 +56,33 @@ function SlideElement({ object, isWorkspace, slideId, scale, slideRef }: SlideEl
 			)
 			break
 	}
+
 	return (
 		<div
 			ref={ref}
 			style={{
 				position: 'absolute',
-				width: `${object.baseState.width / scale}px`,
-				height: `${object.baseState.height / scale}px`,
-				top: `${object.baseState.y / scale}px`,
-				left: `${object.baseState.x / scale}px`,
+				width:
+					!currentAnimation || currentAnimation == 0
+						? `${object.baseState.width / scale}px`
+						: `${object.animation[currentAnimation].state.width / scale}px`,
+				height:
+					!currentAnimation || currentAnimation == 0
+						? `${object.baseState.height / scale}px`
+						: `${object.animation[currentAnimation].state.height / scale}px`,
+				top:
+					!currentAnimation || currentAnimation == 0
+						? `${object.baseState.y / scale}px`
+						: `${object.animation[currentAnimation].state.y / scale}px`,
+				left:
+					!currentAnimation || currentAnimation == 0
+						? `${object.baseState.x / scale}px`
+						: `${object.animation[currentAnimation].state.x / scale}px`,
 				rotate: `${object.baseState.rotation}deg`,
+				transition:
+					currentAnimation &&
+					currentAnimation != 0 &&
+					`all ${object.animation[currentAnimation].duration} ease`,
 			}}
 		>
 			{element}
@@ -68,6 +93,7 @@ function SlideElement({ object, isWorkspace, slideId, scale, slideRef }: SlideEl
 					selectedObject={ref}
 					object={object}
 					slideId={slideId}
+					keyframeId={selection.keyFrameId}
 				/>
 			)}
 		</div>

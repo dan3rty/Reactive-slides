@@ -1,7 +1,7 @@
 import styles from './BookMarks.css'
 import { BookMark } from './BookMark/BookMark'
 import { ArrowIcon, MoveIcon, SelectIcon } from '../../../common/Icons/icons'
-import { Tabs } from '../../../types'
+import { Tabs } from '../../../model/types'
 import { useAppActions, useAppSelector } from '../../../redux/hooks'
 
 function BookMarks() {

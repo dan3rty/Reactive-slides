@@ -4,7 +4,7 @@ import { useAppActions, useAppSelector } from './redux/hooks'
 import { Player } from './Player/Player'
 
 function App() {
-	const slides = useAppSelector((state) => state.slides)
+	const slides = useAppSelector((state) => state).presentation.slides
 	const previewMode = useAppSelector((state) => state.previewMode)
 	const { createChangeSlideSelectionAction } = useAppActions()
 	useEffect(() => {

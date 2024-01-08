@@ -1,10 +1,11 @@
-import { Presentation, Tabs } from '../types'
+import { Presentation, Tabs } from '../model/types'
 import { ChangeEvent, useCallback } from 'react'
 import { useAppActions, useAppSelector } from '../redux/hooks'
 
 function useSavePresentationToFile(): () => void {
-	const title = useAppSelector((state) => state.title)
-	const slides = useAppSelector((state) => state.slides)
+	const presenter = useAppSelector((state) => state)
+	const title = presenter.presentation.title
+	const slides = presenter.presentation.slides
 	const presentation = { title, slides }
 	return useCallback(() => {
 		const content = JSON.stringify(presentation)

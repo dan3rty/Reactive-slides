@@ -9,7 +9,7 @@ type TopBarProps = {
 }
 
 function TopBar({ slideRefList }: TopBarProps) {
-	const title = useAppSelector((state) => state.title)
+	const title = useAppSelector((state) => state).presentation.title
 	const { createChangeTitleAction, createStartPreviewAction } = useAppActions()
 	function convertToPdf() {
 		const pdf = new jsPDF('l', 'mm', [1068, 600], true)
