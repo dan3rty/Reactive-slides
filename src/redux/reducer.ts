@@ -235,7 +235,6 @@ const rootReducer = (
 				...state,
 				previewMode: true,
 			}
-			history.addHistoryItem(newState)
 			return newState
 		}
 		case PreviewModeActions.END_PREVIEW: {
@@ -243,7 +242,6 @@ const rootReducer = (
 				...state,
 				previewMode: false,
 			}
-			history.addHistoryItem(newState)
 			return newState
 		}
 		case TitleActions.CHANGE_TITLE: {
