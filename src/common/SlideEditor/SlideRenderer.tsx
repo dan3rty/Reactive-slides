@@ -81,7 +81,7 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 				const selected = selection.objectId == obj.id && isWorkspace
 				if (obj.animation && selected && selectedTab == Tabs.ANIMATION) {
 					const index = obj.animation.stateList.findIndex(
-						(state) => state.id === selection.keyFrameId,
+						state => state.id === selection.keyFrameId,
 					)
 					if (index !== -1) {
 						newObj.baseState.width = obj.animation[index].state.width

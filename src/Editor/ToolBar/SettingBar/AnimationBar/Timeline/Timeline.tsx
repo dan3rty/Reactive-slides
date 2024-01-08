@@ -1,29 +1,34 @@
-import { ObjectStateList } from '../../../../../types'
 import { Dot } from './Dot/Dot'
 import styles from './Timeline.css'
+import {ObjectStateList} from '../../../../../types'
 
 type TimelineProps = {
 	animation?: ObjectStateList
 	chosenState?: string
 }
 
-function Timeline(props: TimelineProps) {
-	const { animation, chosenState } = props
-	const objectsToRender = animation?.stateList.map(({ keyPercent, id }) => {
-		const percent = keyPercent / 100
-		const text = animation.duration * percent
+function Timeline({ animation, chosenState }: TimelineProps) {
+	const objectsToRender = animation.stateList?.map(({  id, keyPercent }) => {
 		const offset = `${keyPercent}%`
 		const isChosen = id === chosenState
-		return { text, offset, isChosen }
+		return { keyPercent, offset, isChosen, id }
 	})
 
 	return (
 		<div className={styles.timelineContainer}>
 			<div className={styles.timelineLine}>
-				<Dot text={0} isChosen={!chosenState} offset={'0'}></Dot>
+				<Dot duration={0} isChosen={!chosenState} offset={'0'} id={''}></Dot>
 				{objectsToRender?.map((circle, index) => {
-					const { text, offset, isChosen } = circle
-					return <Dot key={index} text={text} offset={offset} isChosen={isChosen}></Dot>
+					const { keyPercent, offset, isChosen, id } = circle
+					return (
+						<Dot
+							key={index}
+							duration={animation.duration * keyPercent / 100}
+							offset={offset}
+							isChosen={isChosen}
+							id={id}
+						></Dot>
+					)
 				})}
 			</div>
 		</div>
