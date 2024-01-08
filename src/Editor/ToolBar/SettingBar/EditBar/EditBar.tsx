@@ -1,4 +1,8 @@
+import { useEffect, useRef, useState } from 'react'
+import { ChangeBackgroundPopup } from '../../../../common/changeBackgroundPopup/ChangeBackgroundPopup'
+import { ColorPicker } from '../../../../common/changeBackgroundPopup/colorPicker/ColorPicker'
 import { Button } from '../../../../common/Components/Buttons/Button'
+import { DropDownList } from '../../../../common/Components/DropDownList/DropDownList'
 import { InputField } from '../../../../common/Components/InputFields/InputField'
 import { SelectionBar } from '../../../../common/Components/Selection/SelectionBar'
 import {
@@ -13,14 +17,10 @@ import {
 	UnderstrokeIcon,
 	VerticalAlignCenterIcon,
 } from '../../../../common/Icons/icons'
-import { BlockType, HorizontalAligns } from '../../../../model/types'
-import styles from './EditBar.css'
-import { useEffect, useRef, useState } from 'react'
-import { ColorPicker } from '../../../../common/changeBackgroundPopup/colorPicker/ColorPicker'
-import { ChangeBackgroundPopup } from '../../../../common/changeBackgroundPopup/ChangeBackgroundPopup'
-import { useAppActions, useAppSelector } from '../../../../redux/hooks'
-import { DropDownList } from '../../../../common/Components/DropDownList/DropDownList'
 import { FONTS } from '../../../../Fonts'
+import { BlockType, HorizontalAligns } from '../../../../model/types'
+import { useAppActions, useAppSelector } from '../../../../redux/hooks'
+import styles from './EditBar.css'
 
 function EditBar() {
 	const [isTextColorPicker, setStateTextColorPicker] = useState(false)
@@ -33,7 +33,16 @@ function EditBar() {
 		.find((slide) => slide.id === selection.slideId)
 		.objects.find((obj) => obj.id == selection.objectId)
 	const isTextBlock = selectedObject.blockType === 'text'
-
+	let isBold = false
+	let isItalic = false
+	let isUnderstroke = false
+	let isStrokethrough = false
+	if (selectedObject.blockType === BlockType.TEXT) {
+		isBold = selectedObject.bold
+		isItalic = selectedObject.italic
+		isUnderstroke = selectedObject.underline
+		isStrokethrough = selectedObject.strokethrough
+	}
 	const toggleTextColorPickerState = () => setStateTextColorPicker((state) => !state)
 	const toggleBackgroundColorPickerState = () => setStateBackgroundColorPicker((state) => !state)
 
@@ -203,7 +212,7 @@ function EditBar() {
 			{isTextBlock && (
 				<div className={styles.buttonVerticalContainer}>
 					<Button
-						style={'light'}
+						style={isBold ? 'dark' : 'light'}
 						size={'small'}
 						icon={BoldIcon}
 						onClick={() => {
@@ -215,7 +224,7 @@ function EditBar() {
 						}}
 					/>
 					<Button
-						style={'light'}
+						style={isItalic ? 'dark' : 'light'}
 						size={'small'}
 						icon={ItalicIcon}
 						onClick={() => {
@@ -227,7 +236,7 @@ function EditBar() {
 						}}
 					/>
 					<Button
-						style={'light'}
+						style={isUnderstroke ? 'dark' : 'light'}
 						size={'small'}
 						icon={UnderstrokeIcon}
 						onClick={() => {
@@ -239,7 +248,7 @@ function EditBar() {
 						}}
 					/>
 					<Button
-						style={'light'}
+						style={isStrokethrough ? 'dark' : 'light'}
 						size={'small'}
 						icon={StrokethroughIcon}
 						onClick={() => {
