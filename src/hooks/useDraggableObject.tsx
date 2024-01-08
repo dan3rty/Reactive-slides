@@ -64,7 +64,7 @@ function useDraggableObject({
 				baseState: newState,
 			})
 		} else {
-			const newAnimation = obj.animation.stateList.map((state) => {
+			const newStateList = obj.animation.stateList.map((state) => {
 				if (state.id === keyframeId) {
 					return {
 						...state,
@@ -74,7 +74,10 @@ function useDraggableObject({
 				return state
 			})
 			createChangeObjectAction(slideId, elementId, {
-				animation: newAnimation,
+				animation: {
+					...obj.animation,
+					stateList: newStateList,
+				},
 			})
 		}
 

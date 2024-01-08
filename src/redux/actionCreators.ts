@@ -151,6 +151,12 @@ function createRedoAction() {
 	}
 }
 
+function createCreateBlankPresentationAction() {
+	return {
+		type: SlideActions.CREATE_BLANK_PRESENTATION,
+	}
+}
+
 export {
 	createRedoAction,
 	createUndoAction,
@@ -171,4 +177,5 @@ export {
 	createStartPreviewAction,
 	createEndPreviewAction,
 	createChangeKeyframeSelectionAction,
+	createCreateBlankPresentationAction,
 }

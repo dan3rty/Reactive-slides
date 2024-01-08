@@ -39,11 +39,15 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 	}
 	const { createChangeObjectAction } = useAppActions()
 	const onBlur = () => {
-		ref.current.style.userSelect = 'none'
+		if (ref.current) {
+			ref.current.style.userSelect = 'none'
+		}
 	}
 
 	const onFocus = () => {
-		ref.current.style.userSelect = 'text'
+		if (ref.current) {
+			ref.current.style.userSelect = 'text'
+		}
 	}
 
 	useEffect(() => {
