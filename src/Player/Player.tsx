@@ -1,10 +1,10 @@
 import { useAppActions, useAppSelector } from '../redux/hooks'
 import { useEffect, useState } from 'react'
-import {PlayerSlideRenderer} from "../common/Player/PlayerSlideRenderer";
+import { PlayerSlideRenderer } from '../common/Player/PlayerSlideRenderer'
 
 function Player() {
 	const { createEndPreviewAction } = useAppActions()
-	const slides = useAppSelector((state) => state.slides)
+	const slides = useAppSelector((state) => state).presentation.slides
 	const [currentSlide, setCurrentSlide] = useState(0)
 	// const [currentAnimation, setCurrentAnimation] = useState(0)
 
@@ -56,7 +56,7 @@ function Player() {
 		}
 	}, [handleFullscreen])
 
-	return <PlayerSlideRenderer slide={slides[currentSlide]}/>
+	return <PlayerSlideRenderer slide={slides[currentSlide]} />
 }
 
 export { Player }

@@ -1,6 +1,6 @@
 import { Dot } from './Dot/Dot'
 import styles from './Timeline.css'
-import {ObjectStateList} from '../../../../../types'
+import { ObjectStateList } from '../../../../../model/types'
 
 type TimelineProps = {
 	animation?: ObjectStateList

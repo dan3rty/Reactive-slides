@@ -1,5 +1,5 @@
 import styles from './ImageComponent.css'
-import { ImageBlock } from '../../types'
+import { ImageBlock } from '../../model/types'
 
 type ImageProps = {
 	image: ImageBlock

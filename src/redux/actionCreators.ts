@@ -1,8 +1,9 @@
 import { SlideActions } from './slides'
-import { Background, ImageBlock, PrimitiveBlock, Slide, Tabs, TextBlock } from '../types'
+import { Background, ImageBlock, PrimitiveBlock, Slide, Tabs, TextBlock } from '../model/types'
 import { SelectionActions } from './selection'
 import { TitleActions } from './title'
 import { PreviewModeActions } from './previewMode'
+import { HistoryActions } from './history'
 
 function createAddSlideAction() {
 	return {
@@ -138,7 +139,21 @@ function createChangeKeyframeSelectionAction(keyframeId: string) {
 	}
 }
 
+function createUndoAction() {
+	return {
+		type: HistoryActions.UNDO,
+	}
+}
+
+function createRedoAction() {
+	return {
+		type: HistoryActions.REDO,
+	}
+}
+
 export {
+	createRedoAction,
+	createUndoAction,
 	createAddSlideAction,
 	createDeleteSlideAction,
 	createChangeOrderSlidesAction,

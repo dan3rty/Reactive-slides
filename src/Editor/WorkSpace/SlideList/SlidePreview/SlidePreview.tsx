@@ -26,8 +26,9 @@ function SlidePreview({
 }: SlidePreviewProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const [isHovering, setIsHovering] = useState(false)
-	const selection = useAppSelector((state) => state.selection)
-	const slides = useAppSelector((state) => state.slides)
+	const presenter = useAppSelector((state) => state)
+	const selection = presenter.selection
+	const slides = presenter.presentation.slides
 	const slide = slides.find((slide) => slide.id == slideId)
 	const isChosen = slide.id == selection.slideId
 	const { createDeleteSlideAction, createChangeSlideSelectionAction } = useAppActions()

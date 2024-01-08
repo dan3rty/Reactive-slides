@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import styles from './TextComponent.css'
 import { useAppActions, useAppSelector } from '../../redux/hooks'
-import { TextBlock } from '../../types'
+import { TextBlock } from '../../model/types'
 
 type TextProps = {
 	textId: string
@@ -15,7 +15,7 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 	const ref = useRef(null)
 	const textareaRef = useRef(null)
 	const text = useAppSelector((state) =>
-		state.slides
+		state.presentation.slides
 			.find((slide) => slide.id == slideId)
 			.objects.find((object) => object.id == textId),
 	) as TextBlock
@@ -36,7 +36,6 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 		textAlign: text.horizontalAlign,
 		fontFamily: text.fontFamily,
 		overflowY: isWorkSpace ? 'auto' : 'hidden',
-		userSelect: 'none',
 	}
 	const { createChangeObjectAction } = useAppActions()
 	const onBlur = () => {
@@ -56,7 +55,7 @@ const TextComponent = function ({ textId, scale, isWorkSpace, onClick, slideId }
 		}
 	}, [])
 	return (
-		<div ref={ref}>
+		<div ref={ref} style={{ userSelect: 'none' }}>
 			<textarea
 				ref={textareaRef}
 				disabled={!isWorkSpace}

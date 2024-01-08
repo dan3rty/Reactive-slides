@@ -3,7 +3,7 @@ import styles from './TopBar.css'
 import { useAppActions, useAppSelector } from '../../../redux/hooks'
 
 function TopBar() {
-	const title = useAppSelector((state) => state.title)
+	const title = useAppSelector((state) => state).presentation.title
 	const { createChangeTitleAction, createStartPreviewAction } = useAppActions()
 	return (
 		<div className={styles.topBar}>

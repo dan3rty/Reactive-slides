@@ -1,4 +1,4 @@
-import { GradientColor } from '../../types'
+import { GradientColor } from '../../model/types'
 
 function returnGradientString(colors: GradientColor) {
 	let string = colors.colors[0].hsl

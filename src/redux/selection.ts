@@ -1,4 +1,4 @@
-import { Tabs } from '../types'
+import { Tabs } from '../model/types'
 
 enum SelectionActions {
 	CHANGE_SLIDE_SELECTION = 'CHANGE_SLIDE_SELECTION',

@@ -1,10 +1,5 @@
-import {FontFamily} from "./types";
+import { FontFamily } from './model/types'
 
-const FONTS = [
-    FontFamily.ARIAL,
-    FontFamily.TIMES_NEW_ROMAN,
-]
+const FONTS = [FontFamily.ARIAL, FontFamily.TIMES_NEW_ROMAN]
 
-export {
-    FONTS,
-}
+export { FONTS }
