@@ -14,7 +14,7 @@ type InputProps = {
 	onChange?: (value: string) => void
 }
 
-function InputField({ label, size, type, initialValue, suffix, onChange }: InputProps) {
+function InputField({ label, size, type, initialValue, suffix }: InputProps) {
 	const ref = useRef<HTMLInputElement>()
 	return (
 		<div className={joinCssClasses(styles.inputField, styles['inputField' + size])}>
@@ -27,9 +27,6 @@ function InputField({ label, size, type, initialValue, suffix, onChange }: Input
 					className={styles.input}
 					type={type}
 					ref={ref}
-					onChange={() => {
-						onChange(ref.current.value)
-					}}
 				></input>
 				<span>{suffix}</span>
 			</div>

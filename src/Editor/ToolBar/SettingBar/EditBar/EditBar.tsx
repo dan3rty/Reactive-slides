@@ -75,14 +75,14 @@ function EditBar() {
 					label={'X:'}
 					type={'number'}
 					size={'Large'}
-					initialValue={selectedObject.baseState.x}
+					initialValue={Math.floor(selectedObject.baseState.x)}
 					suffix={'px'}
 				/>
 				<InputField
 					label={'Y:'}
 					type={'number'}
 					size={'Large'}
-					initialValue={selectedObject.baseState.y}
+					initialValue={Math.floor(selectedObject.baseState.y)}
 					suffix={'px'}
 				/>
 			</div>
@@ -91,21 +91,21 @@ function EditBar() {
 					label={'Rotation:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={selectedObject.baseState.rotation}
+					initialValue={Math.floor(selectedObject.baseState.rotation)}
 					suffix={'deg'}
 				/>
 				<InputField
 					label={'Width:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={selectedObject.baseState.width}
+					initialValue={Math.floor(selectedObject.baseState.width)}
 					suffix={'px'}
 				/>
 				<InputField
 					label={'Height:'}
 					type={'number'}
 					size={'Medium'}
-					initialValue={selectedObject.baseState.height}
+					initialValue={Math.floor(selectedObject.baseState.height)}
 					suffix={'px'}
 				/>
 			</div>
