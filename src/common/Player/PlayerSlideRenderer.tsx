@@ -1,7 +1,6 @@
 import styles from './PlayerSlideRenderer.css'
 import {Slide} from '../../types'
 import { returnGradientString } from '../Tools/returnGradientString'
-import { useRef } from 'react'
 import { joinCssClasses } from '../../classes/joinCssClasses'
 import {SlideElement} from "../SlideEditor/SlideElement";
 import {getScaledSlideSize, getSlideSize} from "../Tools/getSlideSize";
@@ -13,7 +12,6 @@ type SlideRendererProps = {
 function PlayerSlideRenderer({ slide }: SlideRendererProps) {
     const scale = getSlideSize().height / window.innerHeight
     let {width, height} = getScaledSlideSize(scale)
-    const ref = useRef(null)
 
     const backgroundStyle = slide.background.image
         ? { backgroundImage: `url("${slide.background.image.value}")` }
@@ -29,7 +27,6 @@ function PlayerSlideRenderer({ slide }: SlideRendererProps) {
             className={joinCssClasses(
                 styles.slide,
             )}
-            ref={ref}
         >
             {slide.objects.map((obj, index) => {
                 return (
