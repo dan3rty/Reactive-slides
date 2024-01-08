@@ -80,7 +80,7 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 				const newObj = structuredClone(obj)
 				const selected = selection.objectId == obj.id && isWorkspace
 				if (obj.animation && selected && selectedTab == Tabs.ANIMATION) {
-					const index = obj.animation.findIndex(
+					const index = obj.animation.stateList.findIndex(
 						(state) => state.id === selection.keyFrameId,
 					)
 					if (index !== -1) {
@@ -99,6 +99,7 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 				}
 				return (
 					<SlideElement
+						isPlayer={false}
 						key={index}
 						object={newObj}
 						isWorkspace={isWorkspace}

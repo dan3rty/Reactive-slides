@@ -8,14 +8,19 @@ type ObjectBlock = {
 
 type ObjectState = {
 	id: string
-	duration: number // keyframes
+	keyPercent: number // keyframes
 	state: ObjectBlock
+}
+
+type ObjectStateList = {
+	stateList: Array<ObjectState>
+	duration: number
 }
 
 type CommonObjectProperties = {
 	id: string
 	baseState: ObjectBlock
-	animation?: Array<ObjectState>
+	animation?: ObjectStateList
 }
 
 enum BlockType {
@@ -160,6 +165,7 @@ export type {
 	Slide,
 	ObjectBlock,
 	ObjectState,
+	ObjectStateList,
 	PrimitiveBlock,
 	TextBlock,
 	Crop,

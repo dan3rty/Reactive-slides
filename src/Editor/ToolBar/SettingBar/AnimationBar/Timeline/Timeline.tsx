@@ -1,47 +1,29 @@
+import { ObjectStateList } from '../../../../../types'
 import { Dot } from './Dot/Dot'
 import styles from './Timeline.css'
-import { ObjectState } from '../../../../../types'
 
 type TimelineProps = {
-	animation?: Array<ObjectState>
+	animation?: ObjectStateList
 	chosenState?: string
 }
 
-const getAnimationDuration = (animation: Array<ObjectState>): number => {
-	let animationDuration = 0
-	animation.forEach((state) => {
-		animationDuration += state.duration
-	})
-	return animationDuration
-}
-
-function Timeline({ animation, chosenState }: TimelineProps) {
-	const animationsDuration = getAnimationDuration(animation)
-	let percent = 0
-	let stateDuration = 0
-	const objectsToRender = animation?.map(({ duration, id }) => {
-		percent += (duration / animationsDuration) * 100
-		const offset = `${percent}%`
+function Timeline(props: TimelineProps) {
+	const { animation, chosenState } = props
+	const objectsToRender = animation?.stateList.map(({ keyPercent, id }) => {
+		const percent = keyPercent / 100
+		const text = animation.duration * percent
+		const offset = `${keyPercent}%`
 		const isChosen = id === chosenState
-		stateDuration += duration
-		return { stateDuration, offset, isChosen, id }
+		return { text, offset, isChosen }
 	})
 
 	return (
 		<div className={styles.timelineContainer}>
 			<div className={styles.timelineLine}>
-				<Dot duration={0} isChosen={!chosenState} offset={'0'} id={''}></Dot>
+				<Dot text={0} isChosen={!chosenState} offset={'0'}></Dot>
 				{objectsToRender?.map((circle, index) => {
-					const { stateDuration, offset, isChosen, id } = circle
-					return (
-						<Dot
-							key={index}
-							duration={stateDuration}
-							offset={offset}
-							isChosen={isChosen}
-							id={id}
-						></Dot>
-					)
+					const { text, offset, isChosen } = circle
+					return <Dot key={index} text={text} offset={offset} isChosen={isChosen}></Dot>
 				})}
 			</div>
 		</div>

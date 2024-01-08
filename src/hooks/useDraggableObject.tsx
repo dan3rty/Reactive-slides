@@ -64,7 +64,7 @@ function useDraggableObject({
 				baseState: newState,
 			})
 		} else {
-			const newAnimation = obj.animation.map((state) => {
+			const newAnimation = obj.animation.stateList.map((state) => {
 				if (state.id === keyframeId) {
 					return {
 						...state,

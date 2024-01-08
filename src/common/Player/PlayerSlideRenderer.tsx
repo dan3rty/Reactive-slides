@@ -1,7 +1,7 @@
 import styles from './PlayerSlideRenderer.css'
-import {Slide} from '../../types'
-import { returnGradientString } from '../Tools/returnGradientString'
-import { joinCssClasses } from '../../classes/joinCssClasses'
+import {BlockType, Slide} from '../../types'
+import {returnGradientString} from '../Tools/returnGradientString'
+import {joinCssClasses} from '../../classes/joinCssClasses'
 import {SlideElement} from "../SlideEditor/SlideElement";
 import {getScaledSlideSize, getSlideSize} from "../Tools/getSlideSize";
 
@@ -29,8 +29,12 @@ function PlayerSlideRenderer({ slide }: SlideRendererProps) {
             )}
         >
             {slide.objects.map((obj, index) => {
+                if (obj.animation && obj.blockType === BlockType.IMAGE) {
+                    console.log('AA')
+                }
                 return (
                     <SlideElement
+                        isPlayer={true}
                         key={index}
                         object={obj}
                         isWorkspace={false}
