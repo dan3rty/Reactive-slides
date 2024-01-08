@@ -14,16 +14,11 @@ type ButtonProps = {
 }
 
 function Button({ text, style, size, icon, onClick }: ButtonProps) {
-
 	if (size === 'large') {
 		return (
 			<div
 				onClick={onClick}
-				className={joinCssClasses(
-					styles.button,
-					styles.buttonBig,
-					styles[style],
-				)}
+				className={joinCssClasses(styles.button, styles.buttonLarge, styles[style])}
 			>
 				<span>{text}</span>
 			</div>
@@ -34,11 +29,7 @@ function Button({ text, style, size, icon, onClick }: ButtonProps) {
 		return (
 			<div
 				onClick={onClick}
-				className={joinCssClasses(
-					styles.button,
-					styles.buttonBig,
-					styles[style],
-				)}
+				className={joinCssClasses(styles.button, styles.buttonBig, styles[style])}
 			>
 				{icon}
 				<span>{text}</span>
@@ -50,11 +41,7 @@ function Button({ text, style, size, icon, onClick }: ButtonProps) {
 		return (
 			<div
 				onClick={onClick}
-				className={joinCssClasses(
-					styles.button,
-					styles.buttonBig,
-					styles[style],
-				)}
+				className={joinCssClasses(styles.button, styles.buttonMedium, styles[style])}
 			>
 				<span>{text}</span>
 			</div>
@@ -65,11 +52,7 @@ function Button({ text, style, size, icon, onClick }: ButtonProps) {
 		return (
 			<div
 				onClick={onClick}
-				className={joinCssClasses(
-					styles.button,
-					styles.buttonBig,
-					styles[style],
-				)}
+				className={joinCssClasses(styles.button, styles.buttonSmall, styles[style])}
 			>
 				{icon}
 			</div>
