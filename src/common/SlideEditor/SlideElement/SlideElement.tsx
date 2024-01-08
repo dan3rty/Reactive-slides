@@ -38,10 +38,10 @@ function SlideElement({
 			.map(
 				(state) => `
       ${state.keyPercent}% {
-        width: ${state.state.width}px;
-        height: ${state.state.height}px;
-        top: ${state.state.y}px;
-        left: ${state.state.x}px;
+        width: ${state.state.width / scale}px;
+        height: ${state.state.height / scale}px;
+        top: ${state.state.y / scale}px;
+        left: ${state.state.x / scale}px;
       }
       `,
 			)
