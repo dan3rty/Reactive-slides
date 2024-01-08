@@ -15,7 +15,7 @@ function TopBar() {
 	const { createChangeTitleAction, createStartPreviewAction } = useAppActions()
 	const { width, height } = getSlideSize()
 	function convertToPdf() {
-		const pdf = new jsPDF('l', 'mm', [width, height], true)
+		const pdf = new jsPDF('l', 'px', [width, height], true)
 		let pagesCounter = 1
 		const promises = refs.current.map(async (slideRef) => {
 			slideRef.current.style.display = 'block'
