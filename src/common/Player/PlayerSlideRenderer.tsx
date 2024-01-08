@@ -37,6 +37,7 @@ const PlayerSlideRenderer = forwardRef(
 				{slide.objects.map((obj, index) => {
 					return (
 						<SlideElement
+							isPlayer={true}
 							key={index}
 							object={obj}
 							isWorkspace={false}
