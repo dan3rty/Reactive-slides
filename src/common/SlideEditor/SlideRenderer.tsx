@@ -78,17 +78,18 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 		>
 			{slide.objects.map((obj, index) => {
 				const newObj = structuredClone(obj)
+				console.log(selection)
 				const selected = selection.objectId == obj.id && isWorkspace
 				if (obj.animation && selected && selectedTab == Tabs.ANIMATION) {
 					const index = obj.animation.stateList.findIndex(
-						(state) => state.id === selection.keyFrameId,
+						state => state.id === selection.keyFrameId,
 					)
 					if (index !== -1) {
-						newObj.baseState.width = obj.animation[index].state.width
-						newObj.baseState.height = obj.animation[index].state.height
-						newObj.baseState.rotation = obj.animation[index].state.rotation
-						newObj.baseState.x = obj.animation[index].state.x
-						newObj.baseState.y = obj.animation[index].state.y
+						newObj.baseState.width = obj.animation.stateList[index].state.width
+						newObj.baseState.height = obj.animation.stateList[index].state.height
+						newObj.baseState.rotation = obj.animation.stateList[index].state.rotation
+						newObj.baseState.x = obj.animation.stateList[index].state.x
+						newObj.baseState.y = obj.animation.stateList[index].state.y
 					} else {
 						newObj.baseState.width = obj.baseState.width
 						newObj.baseState.height = obj.baseState.height
