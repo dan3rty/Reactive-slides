@@ -52,6 +52,7 @@ const text: Type.TextBlock = {
                     rotation: 0,
                 },
             }],
+        looped: true,
     },
     baseState: {
         width: 100,
@@ -99,6 +100,7 @@ const text2: Type.TextBlock = {
                     rotation: 0,
                 },
             }],
+        looped: true,
     },
     baseState: {
         width: 500,
@@ -146,6 +148,7 @@ const image: Type.ImageBlock = {
                     rotation: 0,
                 },
             }],
+        looped: false,
     },
     baseState: {
         width: 400,
@@ -185,6 +188,7 @@ const image2: Type.ImageBlock = {
                     rotation: 0,
                 },
             }],
+        looped: true,
     },
     baseState: {
         width: 400,
@@ -224,6 +228,7 @@ const image3: Type.ImageBlock = {
                     rotation: 0,
                 },
             }],
+        looped: false,
     },
     baseState: {
         width: 400,
@@ -263,6 +268,7 @@ const image4: Type.ImageBlock = {
                     rotation: 0,
                 },
             }],
+        looped: false,
     },
     baseState: {
         width: 1600,
@@ -308,27 +314,39 @@ const circle: Type.PrimitiveBlock = {
     animation: {
         duration: 2,
         stateList: [{
-            id: 'jnkz',
-            keyPercent: 0,
-            state: {
-                width: 100,
-                height: 150,
-                x: 200,
-                y: 200,
-                rotation: 0,
+                id: 'jnkz',
+                keyPercent: 0,
+                state: {
+                    width: 100,
+                    height: 150,
+                    x: 200,
+                    y: 200,
+                    rotation: 0,
+                },
             },
-        },
+            {
+                id: 'fdfg',
+                keyPercent: 50,
+                state: {
+                    width: 300,
+                    height: 100,
+                    x: 1000,
+                    y: 150,
+                    rotation: 0,
+                },
+            },
             {
                 id: 'mameq',
                 keyPercent: 100,
                 state: {
-                    width: 300,
-                    height: 100,
+                    width: 0,
+                    height: 500,
                     x: 400,
-                    y: 150,
+                    y: 800,
                     rotation: 0,
                 },
             }],
+        looped: true,
     },
     baseState: {
         width: 100,
@@ -374,6 +392,7 @@ const triangle: Type.PrimitiveBlock = {
                     rotation: 0,
                 },
             }],
+        looped: true,
     },
     baseState: {
         width: 400,
@@ -419,6 +438,7 @@ const square: Type.PrimitiveBlock = {
                     rotation: 0,
                 },
             }],
+        looped: false,
     },
     baseState: {
         width: 100,

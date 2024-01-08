@@ -68,7 +68,8 @@ function SlideElement({
 			break
 	}
 	const AnimatedComponent = object.animation ? styled.div`
-            animation: ${animation} ${object.animation.duration}s linear infinite;
+            animation: ${animation} ${object.animation.duration}s linear ${object.animation.looped ? 'infinite' : ''};
+			animation-fill-mode: forwards;
             ` : null
 	if (object.animation && isPlayer) {
 		return (

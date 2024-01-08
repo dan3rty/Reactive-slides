@@ -15,6 +15,7 @@ type ObjectState = {
 type ObjectStateList = {
 	stateList: Array<ObjectState>
 	duration: number
+	looped: boolean
 }
 
 type CommonObjectProperties = {
