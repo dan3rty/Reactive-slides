@@ -1,12 +1,10 @@
 import { useAppActions, useAppSelector } from '../redux/hooks'
-import { SlideRenderer } from '../common/SlideEditor/SlideRenderer'
 import { useEffect, useState } from 'react'
+import {PlayerSlideRenderer} from "../common/Player/PlayerSlideRenderer";
 
 function Player() {
 	const { createEndPreviewAction } = useAppActions()
 	const slides = useAppSelector((state) => state.slides)
-	const windowHeight = window.innerHeight
-	const scale = 1080 / windowHeight
 	const [currentSlide, setCurrentSlide] = useState(0)
 	// const [currentAnimation, setCurrentAnimation] = useState(0)
 
@@ -58,7 +56,7 @@ function Player() {
 		}
 	}, [handleFullscreen])
 
-	return <SlideRenderer scale={scale} slideId={slides[currentSlide].id} isWorkspace={false} />
+	return <PlayerSlideRenderer slide={slides[currentSlide]}/>
 }
 
 export { Player }

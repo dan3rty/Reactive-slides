@@ -5,6 +5,7 @@ import React, { useEffect, useRef } from 'react'
 import { SlideElement } from './SlideElement'
 import { useAppActions, useAppSelector } from '../../redux/hooks'
 import { joinCssClasses } from '../../classes/joinCssClasses'
+import {getScaledSlideSize} from "../Tools/getSlideSize";
 
 type SlideRendererProps = {
 	scale: number
@@ -13,12 +14,8 @@ type SlideRendererProps = {
 	setSlideRect?: React.Dispatch<React.SetStateAction<DOMRect>>
 }
 
-const SLIDE_HEIGHT = 1080
-const SLIDE_WIDTH = 1920
-
 function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRendererProps) {
-	const width = SLIDE_WIDTH / scale //magical number
-	const height = SLIDE_HEIGHT / scale
+	const {width, height} = getScaledSlideSize(scale)
 	const ref = useRef(null)
 	const { createDeleteObjectAction, createClearObjectSelectionAction } = useAppActions()
 	const previewMode = useAppSelector((state) => state.previewMode)
