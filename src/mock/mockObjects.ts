@@ -32,7 +32,7 @@ const text: Type.TextBlock = {
         duration: 1,
         stateList: [{
             id: 'jnkz',
-            keyPercent: 0,
+            keyPercent: 87,
             state: {
                 width: 100,
                 height: 150,
@@ -80,7 +80,7 @@ const text2: Type.TextBlock = {
         duration: 5,
         stateList: [{
             id: 'jnkz',
-            keyPercent: 0,
+            keyPercent: 16,
             state: {
                 width: 999,
                 height: 150,
@@ -128,7 +128,7 @@ const image: Type.ImageBlock = {
         duration: 2,
         stateList: [{
             id: 'jnkz',
-            keyPercent: 0,
+            keyPercent: 57,
             state: {
                 width: 800,
                 height: 150,
@@ -168,7 +168,7 @@ const image2: Type.ImageBlock = {
         duration: 10,
         stateList: [{
             id: 'jnkz',
-            keyPercent: 0,
+            keyPercent: 90,
             state: {
                 width: 100,
                 height: 150,
@@ -208,7 +208,7 @@ const image3: Type.ImageBlock = {
         duration: 7,
         stateList: [{
             id: 'jnkz',
-            keyPercent: 0,
+            keyPercent: 10,
             state: {
                 width: 100,
                 height: 150,
@@ -248,7 +248,7 @@ const image4: Type.ImageBlock = {
         duration: 4,
         stateList: [{
             id: 'jnkz',
-            keyPercent: 0,
+            keyPercent: 79,
             state: {
                 width: 100,
                 height: 150,
@@ -315,7 +315,7 @@ const circle: Type.PrimitiveBlock = {
         duration: 2,
         stateList: [{
                 id: 'jnkz',
-                keyPercent: 0,
+                keyPercent: 30,
                 state: {
                     width: 100,
                     height: 150,
@@ -372,7 +372,7 @@ const triangle: Type.PrimitiveBlock = {
         duration: 1,
         stateList: [{
             id: 'jnkz',
-            keyPercent: 0,
+            keyPercent: 40,
             state: {
                 width: 100,
                 height: 150,
@@ -418,7 +418,7 @@ const square: Type.PrimitiveBlock = {
         duration: 2,
         stateList: [{
             id: 'jnkz',
-            keyPercent: 0,
+            keyPercent: 15,
             state: {
                 width: 100,
                 height: 150,
