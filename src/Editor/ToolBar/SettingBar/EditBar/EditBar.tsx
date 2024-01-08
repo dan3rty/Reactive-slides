@@ -263,7 +263,21 @@ function EditBar() {
 			)}
 			{isTextBlock && (
 				<div className={styles.selectionWrapper}>
-					<Button text={'clear'} style={'light'} size={'medium'} icon={BoldIcon} />
+					<Button
+						text={'clear'}
+						style={'light'}
+						size={'medium'}
+						onClick={() => {
+							if (selectedObject.blockType === BlockType.TEXT) {
+								createChangeObjectAction(selection.slideId, selectedObject.id, {
+									bold: false,
+									italic: false,
+									underline: false,
+									strokethrough: false,
+								})
+							}
+						}}
+					/>
 					<SelectionBar
 						propsOfButtons={[
 							{
