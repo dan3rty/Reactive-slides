@@ -1,5 +1,5 @@
 import { SlideActions, SlideActionsType } from './slides'
-import { Presenter } from '../model/types'
+import { Presenter, Tabs } from '../model/types'
 import { presenter } from '../mock/mockObjects'
 import { SelectionActions, SelectionActionsType } from './selection'
 import { TitleActions, TitleActionsType } from './title'
@@ -166,6 +166,24 @@ const rootReducer = (
 				presentation: {
 					...state.presentation,
 					slides: newSlides,
+				},
+			}
+			history.addHistoryItem(newState)
+			return newState
+		}
+		case SlideActions.CREATE_BLANK_PRESENTATION: {
+			const slide = generateBlankSlide()
+			const newState: Presenter = {
+				previewMode: false,
+				presentation: {
+					title: 'Новая презентация',
+					slides: [slide],
+				},
+				selection: {
+					objectId: '',
+					keyFrameId: '',
+					slideId: slide.id,
+					selectedTab: Tabs.CREATE,
 				},
 			}
 			history.addHistoryItem(newState)

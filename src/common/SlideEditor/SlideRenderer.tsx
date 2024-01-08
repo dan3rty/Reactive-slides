@@ -78,11 +78,15 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 		>
 			{slide.objects.map((obj, index) => {
 				const newObj = structuredClone(obj)
-				console.log(selection)
 				const selected = selection.objectId == obj.id && isWorkspace
-				if (obj.animation && selected && selectedTab == Tabs.ANIMATION) {
+				if (
+					obj.animation &&
+					obj.animation.stateList &&
+					selected &&
+					selectedTab == Tabs.ANIMATION
+				) {
 					const index = obj.animation.stateList.findIndex(
-						state => state.id === selection.keyFrameId,
+						(state) => state.id === selection.keyFrameId,
 					)
 					if (index !== -1) {
 						newObj.baseState.width = obj.animation.stateList[index].state.width

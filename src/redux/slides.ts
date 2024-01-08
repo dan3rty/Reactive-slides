@@ -10,6 +10,7 @@ enum SlideActions {
 	ADD_OBJECT = 'ADD_OBJECT',
 	CHANGE_SLIDE_BACKGROUND = 'CHANGE_SLIDE_BACKGROUND',
 	MOVE_OBJECT_TO_TOP_LAYER = 'MOVE_OBJECT_TO_TOP_LAYER',
+	CREATE_BLANK_PRESENTATION = 'CREATE_BLANK_PRESENTATION',
 }
 
 type DeleteSlideAction = {
@@ -75,6 +76,10 @@ type MoveObjectToTopLayer = {
 	}
 }
 
+type CreateBlankPresentation = {
+	type: SlideActions.CREATE_BLANK_PRESENTATION
+}
+
 type SlideActionsType =
 	| DeleteSlideAction
 	| AddSlideAction
@@ -85,5 +90,6 @@ type SlideActionsType =
 	| AddObjectAction
 	| ChangeSlideBackgroundAction
 	| MoveObjectToTopLayer
+	| CreateBlankPresentation
 
 export { SlideActions, type SlideActionsType }
