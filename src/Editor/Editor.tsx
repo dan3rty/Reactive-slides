@@ -1,14 +1,21 @@
 import styles from '../common/Styles/App.css'
 import { ToolBar } from './ToolBar/ToolBar'
 import { WorkSpace } from './WorkSpace/WorkSpace'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 function Editor() {
 	const [slideRect, setSlideRect] = useState<DOMRect>(null)
+	const [slideRefList, setSlideRefList] = useState<React.MutableRefObject<HTMLDivElement[]>>({
+		current: [],
+	})
 	return (
 		<div className={styles.app}>
-			<ToolBar slideRect={slideRect} />
-			<WorkSpace setSlideRect={setSlideRect} />
+			<ToolBar slideRect={slideRect} slideRefList={slideRefList} />
+			<WorkSpace
+				setSlideRect={setSlideRect}
+				setSlideRefList={setSlideRefList}
+				slideRefList={slideRefList}
+			/>
 		</div>
 	)
 }

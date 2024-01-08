@@ -7,12 +7,14 @@ import React from 'react'
 
 type WorkSpaceProps = {
 	setSlideRect: React.Dispatch<React.SetStateAction<DOMRect>>
+	setSlideRefList: React.Dispatch<React.SetStateAction<React.MutableRefObject<HTMLDivElement[]>>>
+	slideRefList: React.MutableRefObject<HTMLDivElement[]>
 }
 
 const SLIDE_HEIGHT = 1080
 const TOOLBAR_HEIGHT = 205
 const WORKSPACE_SCALER = 1.2
-function WorkSpace({ setSlideRect }: WorkSpaceProps) {
+function WorkSpace({ setSlideRect, setSlideRefList, slideRefList }: WorkSpaceProps) {
 	const size = window.innerHeight
 	const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER
 
@@ -33,7 +35,11 @@ function WorkSpace({ setSlideRect }: WorkSpaceProps) {
 					/>
 				)}
 			</div>
-			<SlideList scale={scale} />
+			<SlideList
+				scale={scale}
+				setSlideRefList={setSlideRefList}
+				slideRefList={slideRefList}
+			/>
 		</div>
 	)
 }
