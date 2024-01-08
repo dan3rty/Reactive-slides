@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { joinCssClasses } from '../../../../classes/joinCssClasses'
 import { SlideRenderer } from '../../../../common/SlideEditor/SlideRenderer'
 import { RegisterDndItemFn, UnregisterDndItemFn } from '../../../../hooks/useDraggableList'
@@ -14,8 +14,6 @@ type SlidePreviewProps = {
 	registerDndItem: RegisterDndItemFn
 	unregisterDndItem: UnregisterDndItemFn
 	showDeleteButton: boolean
-	setSlideRefList: React.Dispatch<React.SetStateAction<React.MutableRefObject<HTMLDivElement[]>>>
-	slideRefList: React.MutableRefObject<HTMLDivElement[]>
 }
 
 function SlidePreview({
@@ -25,8 +23,6 @@ function SlidePreview({
 	registerDndItem,
 	unregisterDndItem,
 	showDeleteButton,
-	setSlideRefList,
-	slideRefList,
 }: SlidePreviewProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const [isHovering, setIsHovering] = useState(false)
@@ -94,14 +90,7 @@ function SlidePreview({
 			key={index}
 			className={joinCssClasses(styles.smallSlide, isChosen ? styles.smallSlideChosen : null)}
 		>
-			<SlideRenderer
-				scale={scale}
-				slideId={slide.id}
-				isWorkspace={false}
-				setSlideRefList={setSlideRefList}
-				slideRefList={slideRefList}
-				index={index}
-			/>
+			<SlideRenderer scale={scale} slideId={slide.id} isWorkspace={false} />
 			<Counter index={index + 1}></Counter>
 			{showDeleteButton && isHovering && (
 				<DeleteButton deleteSlideOnClick={deleteSlideOnClick}></DeleteButton>

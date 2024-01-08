@@ -1,34 +1,42 @@
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import React from 'react'
+import React, { useRef } from 'react'
 import styles from './TopBar.css'
 import { useAppActions, useAppSelector } from '../../../redux/hooks'
+import { getSlideSize } from '../../../common/Tools/getSlideSize'
+import { PlayerSlideRenderer } from '../../../common/Player/PlayerSlideRenderer'
 
-type TopBarProps = {
-	slideRefList: React.MutableRefObject<HTMLDivElement[]>
-}
-
-function TopBar({ slideRefList }: TopBarProps) {
+function TopBar() {
 	const title = useAppSelector((state) => state).presentation.title
+	const slides = useAppSelector((state) => state).presentation.slides
+
+	const refs = useRef<React.MutableRefObject<HTMLDivElement>[]>([])
+
 	const { createChangeTitleAction, createStartPreviewAction } = useAppActions()
+	const { width, height } = getSlideSize()
 	function convertToPdf() {
-		const pdf = new jsPDF('l', 'mm', [1068, 600], true)
+		const pdf = new jsPDF('l', 'mm', [width, height], true)
 		let pagesCounter = 1
-		const promises = slideRefList.current.map(async (slideRef) => {
-			const canvas = await html2canvas(slideRef, {
-				onclone: ({}, clone) => {
-					clone.style.width = 1068 + 'px' //просто растягивание
-					clone.style.height = 600 + 'px'
-				},
-			})
+		const promises = refs.current.map(async (slideRef) => {
+			slideRef.current.style.display = 'block'
+			const canvas = await html2canvas(slideRef.current)
 			const pdfWidth = pdf.internal.pageSize.getWidth()
 			const pdfHeight = pdf.internal.pageSize.getHeight()
-			const imageData = canvas.toDataURL()
-			const imageWidth = canvas.width
-			const imageHeight = canvas.height
+			const image = document.createElement('img')
+			const imageLoadPromise = new Promise((resolve) => {
+				image.onload = resolve
+			})
+			image.src = canvas.toDataURL()
+
+			await imageLoadPromise
+
+			// Обработчик события onload
+			const imageWidth = image.width
+			const imageHeight = image.height
 			const ratio = Math.min(pdfWidth / imageWidth, pdfHeight / imageHeight)
-			pdf.addImage(imageData, 'PNG', 0, 0, imageWidth * ratio, imageHeight * ratio)
+			pdf.addImage(image, 'PNG', 0, 0, imageWidth * ratio, imageHeight * ratio)
 			pdf.addPage()
+			slideRef.current.style.display = 'none'
 			pagesCounter++
 		})
 		Promise.all(promises).then(() => {
@@ -36,6 +44,13 @@ function TopBar({ slideRefList }: TopBarProps) {
 			pdf.save('presentation.pdf')
 		})
 	}
+
+	const slideList = slides.map((slide, index) => {
+		const ref = useRef<HTMLDivElement>(null)
+		refs.current[index] = ref
+		return <PlayerSlideRenderer key={index} isHidden={true} ref={ref} slide={slide} />
+	})
+
 	return (
 		<div className={styles.topBar}>
 			<div className={styles.leftGroup}>
@@ -60,6 +75,7 @@ function TopBar({ slideRefList }: TopBarProps) {
 			>
 				{title}
 			</textarea>
+			{slideList}
 		</div>
 	)
 }

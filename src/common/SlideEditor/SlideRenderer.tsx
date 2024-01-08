@@ -12,14 +12,9 @@ type SlideRendererProps = {
 	slideId: string
 	isWorkspace: boolean
 	setSlideRect?: React.Dispatch<React.SetStateAction<DOMRect>>
-	setSlideRefList?: React.Dispatch<React.SetStateAction<React.MutableRefObject<HTMLDivElement[]>>>
-	slideRefList?: React.MutableRefObject<HTMLDivElement[]>
-	index?: number
 }
 
-function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect,	setSlideRefList,
-	slideRefList,
-	index, }: SlideRendererProps) {
+function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRendererProps) {
 	const { width, height } = getScaledSlideSize(scale)
 	const ref = useRef(null)
 	const { createDeleteObjectAction, createClearObjectSelectionAction } = useAppActions()
@@ -55,10 +50,6 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect,	setSlideRefL
 	}, [selection])
 
 	useEffect(() => {
-		if (setSlideRefList) {
-			slideRefList.current[index] = ref.current
-			setSlideRefList(slideRefList)
-		}
 		if (!isWorkspace) {
 			return
 		}

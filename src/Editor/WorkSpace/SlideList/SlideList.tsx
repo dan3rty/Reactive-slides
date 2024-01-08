@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef } from 'react'
+import { ReactElement, useRef } from 'react'
 import { useDraggableList } from '../../../hooks/useDraggableList'
 import styles from './SlideList.css'
 import { AddSlideButton } from './AddSlideButton/AddSlideButton'
@@ -7,11 +7,9 @@ import { useAppActions, useAppSelector } from '../../../redux/hooks'
 
 type SlideListProps = {
 	scale: number
-	setSlideRefList: React.Dispatch<React.SetStateAction<React.MutableRefObject<HTMLDivElement[]>>>
-	slideRefList: React.MutableRefObject<HTMLDivElement[]>
 }
 
-function SlideList({ scale, setSlideRefList, slideRefList }: SlideListProps) {
+function SlideList({ scale }: SlideListProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const { createChangeOrderSlidesAction } = useAppActions()
 	const slides = useAppSelector((state) => state).presentation.slides
@@ -32,8 +30,6 @@ function SlideList({ scale, setSlideRefList, slideRefList }: SlideListProps) {
 				index={index}
 				scale={slideScale}
 				showDeleteButton={showDeleteButton}
-				setSlideRefList={setSlideRefList}
-				slideRefList={slideRefList}
 			></SlidePreview>
 		)
 	})
