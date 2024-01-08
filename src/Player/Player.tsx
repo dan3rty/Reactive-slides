@@ -8,22 +8,49 @@ function Player() {
 	const windowHeight = window.innerHeight
 	const scale = 1080 / windowHeight
 	const [currentSlide, setCurrentSlide] = useState(0)
-	// const [currentAnimation, setCurrentAnimation] = useState(0)
+	const [currentAnimation, setCurrentAnimation] = useState(-1)
+	const [currentObject, setCurrentObject] = useState(0)
+
+	const nextStep = () => {
+		if (slides[currentSlide].objects[currentObject].animation?.length > currentAnimation + 1) {
+			setCurrentAnimation(currentAnimation + 1)
+		} else if (slides[currentSlide].objects.length > currentObject + 1) {
+			setCurrentAnimation(-1)
+			setCurrentObject(currentObject + 1)
+		} else if (currentSlide + 1 < slides.length) {
+			setCurrentAnimation(-1)
+			setCurrentObject(0)
+			setCurrentSlide(currentSlide + 1)
+		}
+	}
+
+	const prevStep = () => {
+		if (currentAnimation > -1) {
+			setCurrentAnimation(currentAnimation - 1)
+		} else if (currentObject > 0) {
+			const animation = slides[currentSlide].objects[currentObject - 1].animation
+			setCurrentAnimation(animation ? animation.length - 1 : -1)
+			setCurrentObject(currentObject - 1)
+		} else if (currentSlide > 0) {
+			const animation =
+				slides[currentSlide - 1].objects[slides[currentSlide - 1].objects.length - 1]
+					.animation
+			setCurrentAnimation(animation ? animation.length - 1 : -1)
+			setCurrentObject(slides[currentSlide - 1].objects.length - 1)
+			setCurrentSlide(currentSlide - 1)
+		}
+	}
 
 	function handleKeyDown(e: KeyboardEvent) {
 		switch (e.code) {
 			case 'ArrowRight':
-				if (currentSlide + 1 < slides.length) {
-					setCurrentSlide(currentSlide + 1)
-				}
+				nextStep()
 				break
 			case 'ArrowLeft':
-				if (currentSlide > 0) {
-					setCurrentSlide(currentSlide - 1)
-				}
+				prevStep()
 				break
 			case 'Escape':
-				document.exitFullscreen().then()
+				document.exitFullscreen()
 				break
 			default:
 				break
@@ -31,9 +58,7 @@ function Player() {
 	}
 
 	function handleMouseDown() {
-		if (currentSlide + 1 < slides.length) {
-			setCurrentSlide(currentSlide + 1)
-		}
+		nextStep()
 	}
 
 	function handleFullscreen() {
@@ -58,7 +83,15 @@ function Player() {
 		}
 	}, [handleFullscreen])
 
-	return <SlideRenderer scale={scale} slideId={slides[currentSlide].id} isWorkspace={false} />
+	return (
+		<SlideRenderer
+			scale={scale}
+			slideId={slides[currentSlide].id}
+			isWorkspace={false}
+			currentObject={currentObject}
+			currentAnimation={currentAnimation}
+		/>
+	)
 }
 
 export { Player }

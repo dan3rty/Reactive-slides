@@ -11,12 +11,21 @@ type SlideRendererProps = {
 	slideId: string
 	isWorkspace: boolean
 	setSlideRect?: React.Dispatch<React.SetStateAction<DOMRect>>
+	currentAnimation?: number
+	currentObject?: number
 }
 
 const SLIDE_HEIGHT = 1080
 const SLIDE_WIDTH = 1920
 
-function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRendererProps) {
+function SlideRenderer({
+	scale,
+	slideId,
+	isWorkspace,
+	setSlideRect,
+	currentAnimation,
+	currentObject,
+}: SlideRendererProps) {
 	const width = SLIDE_WIDTH / scale //magical number
 	const height = SLIDE_HEIGHT / scale
 	const ref = useRef(null)
@@ -82,10 +91,13 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 			{slide.objects.map((obj, index) => {
 				const newObj = structuredClone(obj)
 				const selected = selection.objectId == obj.id && isWorkspace
-				if (obj.animation && selected && selectedTab == Tabs.ANIMATION) {
-					const index = obj.animation.findIndex(
-						(state) => state.id === selection.keyFrameId,
-					)
+				if (
+					(previewMode && obj.id == slide.objects[currentObject].id) ||
+					(obj.animation && selected && selectedTab == Tabs.ANIMATION)
+				) {
+					const index = !previewMode
+						? obj.animation.findIndex((state) => state.id === selection.keyFrameId)
+						: currentAnimation
 					if (index !== -1) {
 						newObj.baseState.width = obj.animation[index].state.width
 						newObj.baseState.height = obj.animation[index].state.height
