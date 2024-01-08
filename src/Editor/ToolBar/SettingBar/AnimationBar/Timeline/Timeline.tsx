@@ -1,6 +1,6 @@
 import { Dot } from './Dot/Dot'
 import styles from './Timeline.css'
-import { ObjectState } from '../../../../../types'
+import { ObjectState } from '../../../../../model/types'
 
 type TimelineProps = {
 	animation?: Array<ObjectState>

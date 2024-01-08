@@ -1,4 +1,4 @@
-import { Color, PrimitiveBlock, Primitives } from '../../types'
+import { Color, PrimitiveBlock, Primitives } from '../../model/types'
 
 type PrimitiveProps = {
 	primitive: PrimitiveBlock

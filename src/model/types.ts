@@ -137,24 +137,14 @@ type Selection = {
 	keyFrameId?: string
 }
 
-type Operation = object
-
-type OperationHistory = {
-	operations: Array<Operation>
-	curIndex?: number
-}
-
 type Presenter = {
 	previewMode: boolean
 	presentation: Presentation
 	selection: Selection
-	operationHistory: OperationHistory
 }
 
 export type {
 	Presenter,
-	OperationHistory,
-	Operation,
 	Selection,
 	Presentation,
 	Slide,

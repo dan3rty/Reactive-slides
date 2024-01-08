@@ -2,7 +2,7 @@ import styles from './MiltipleColorPicker.css'
 import { Slider } from './slider/Slider'
 import { useEffect, useRef, useState } from 'react'
 import { returnGradientString } from '../../Tools/returnGradientString'
-import { GradientColor } from '../../../types'
+import { GradientColor } from '../../../model/types'
 import { useAppActions, useAppSelector } from '../../../redux/hooks'
 
 function createGradientColor(allColors: GradientColor, angle: string): GradientColor {

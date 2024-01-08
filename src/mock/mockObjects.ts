@@ -1,5 +1,5 @@
-import * as Type from '../types'
-import { HorizontalAligns, VerticalAligns } from '../types'
+import * as Type from '../model/types'
+import { HorizontalAligns, VerticalAligns } from '../model/types'
 
 const BlackColor: Type.Color = {
 	hsl: '#000000',
@@ -393,21 +393,14 @@ const selection: Type.Selection = {
 	slideId: 'djahDHSADGKUAGUSDAD',
 }
 
-const operationHistory: Type.OperationHistory = {
-	operations: [],
-	curIndex: 1,
-}
-
 const presenter: Type.Presenter = {
 	previewMode: false,
 	presentation,
 	selection,
-	operationHistory,
 }
 
 export {
 	presenter,
-	operationHistory,
 	selection,
 	presentation,
 	slide2,

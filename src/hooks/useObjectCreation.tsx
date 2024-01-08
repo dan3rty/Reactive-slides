@@ -1,5 +1,11 @@
-import * as Type from '../types'
-import { HorizontalAligns, ImageBlock, PrimitiveBlock, TextBlock, VerticalAligns } from '../types'
+import * as Type from '../model/types'
+import {
+	HorizontalAligns,
+	ImageBlock,
+	PrimitiveBlock,
+	TextBlock,
+	VerticalAligns,
+} from '../model/types'
 import { useAppActions, useAppSelector } from '../redux/hooks'
 
 type useObjectCreationProps = {

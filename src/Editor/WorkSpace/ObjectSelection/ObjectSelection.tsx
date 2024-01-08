@@ -3,7 +3,7 @@ import { useResizableObject } from '../../../hooks/useResizableObject'
 import React, { useEffect, useRef } from 'react'
 import { useDraggableObject } from '../../../hooks/useDraggableObject'
 import { useAppActions, useAppSelector } from '../../../redux/hooks'
-import { BlockType, ImageBlock, PrimitiveBlock, TextBlock } from '../../../types'
+import { BlockType, ImageBlock, PrimitiveBlock, TextBlock } from '../../../model/types'
 
 enum CursorType {
 	N = 'n-resize',
@@ -103,7 +103,7 @@ function Corner({
 	canChangeTop,
 }: CornerProps) {
 	const { createChangeObjectAction } = useAppActions()
-	const slides = useAppSelector((state) => state.slides)
+	const slides = useAppSelector((state) => state).presentation.slides
 	const { registerResizableItem } = useResizableObject()
 	const size = 6
 	const cornerRef = useRef<HTMLDivElement>(null)

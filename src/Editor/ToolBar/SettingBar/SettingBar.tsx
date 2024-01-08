@@ -3,7 +3,7 @@ import { EditBar } from './EditBar/EditBar'
 import { FileSettings } from './FileSettings/FileSettings'
 import { AddBar } from './AddBar/AddBar'
 import { AnimationBar } from './AnimationBar/AnimationBar'
-import { Tabs } from '../../../types'
+import { Tabs } from '../../../model/types'
 import { useAppSelector } from '../../../redux/hooks'
 
 type SettingBarProps = {

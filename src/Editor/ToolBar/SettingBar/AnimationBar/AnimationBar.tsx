@@ -5,8 +5,9 @@ import { Timeline } from './Timeline/Timeline'
 import { useAppSelector } from '../../../../redux/hooks'
 
 function AnimationBar() {
-	const selection = useAppSelector((state) => state.selection)
-	const slides = useAppSelector((state) => state.slides)
+	const presenter = useAppSelector((state) => state)
+	const selection = presenter.selection
+	const slides = presenter.presentation.slides
 	const selectedObject = slides
 		.find((slide) => slide.id === selection.slideId)
 		.objects.find((obj) => obj.id == selection.objectId)

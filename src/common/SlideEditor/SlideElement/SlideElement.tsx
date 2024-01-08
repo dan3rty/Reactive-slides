@@ -1,4 +1,4 @@
-import { BlockType, ImageBlock, PrimitiveBlock, TextBlock } from '../../../types'
+import { BlockType, ImageBlock, PrimitiveBlock, TextBlock } from '../../../model/types'
 import { ImageComponent } from '../../SlideObjects/ImageComponent'
 import { PrimitiveComponent } from '../../SlideObjects/PrimitiveComponent'
 import { TextComponent } from '../../SlideObjects/TextComponent'
