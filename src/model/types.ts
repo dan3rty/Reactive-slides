@@ -110,7 +110,7 @@ enum BorderTypes {
 type PrimitiveBlock = CommonObjectProperties & {
 	blockType: BlockType.PRIMITIVE
 	primitiveType: Primitives
-	color: GradientColor
+	color: Color
 	borderSize: number
 	borderColor: Color
 	borderType: BorderTypes

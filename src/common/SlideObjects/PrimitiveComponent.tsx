@@ -64,7 +64,7 @@ const PrimitiveComponent = function ({ primitive, scale, onClick }: PrimitivePro
 		case Primitives.CIRCLE:
 			primitiveEl = (
 				<Ellipse
-					hex={primitive.color.colors[0].hsl}
+					hex={primitive.color.hsl}
 					borderSize={primitive.borderSize / scale}
 					borderColor={primitive.borderColor}
 					onClick={onClick}
@@ -74,7 +74,7 @@ const PrimitiveComponent = function ({ primitive, scale, onClick }: PrimitivePro
 		case Primitives.RECT:
 			primitiveEl = (
 				<Rectangle
-					hex={primitive.color.colors[0].hsl}
+					hex={primitive.color.hsl}
 					borderSize={primitive.borderSize / scale}
 					borderColor={primitive.borderColor}
 					onClick={onClick}
@@ -84,7 +84,7 @@ const PrimitiveComponent = function ({ primitive, scale, onClick }: PrimitivePro
 		case Primitives.TRIANGLE:
 			primitiveEl = (
 				<Triangle
-					hex={primitive.color.colors[0].hsl}
+					hex={primitive.color.hsl}
 					borderSize={primitive.borderSize / scale}
 					borderColor={primitive.borderColor}
 					onClick={onClick}
