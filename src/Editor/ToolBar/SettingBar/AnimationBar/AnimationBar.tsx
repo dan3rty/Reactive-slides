@@ -15,6 +15,9 @@ function AnimationBar() {
 	const animation = selectedObject?.animation
 	const { createChangeObjectAction, createChangeKeyframeSelectionAction } = useAppActions()
 	const [keyframeTimeState, setKeyframeTimeState] = useState(0)
+	const durations = selectedObject.animation.stateList.map((state) => {
+		return state.keyPercent
+	})
 	return (
 		<div className={styles.animationBar}>
 			<div className={styles.bigContainer}>
@@ -90,7 +93,6 @@ function AnimationBar() {
 						size={'Small'}
 						suffix={'sec'}
 						onChange={(time) => {
-							console.log(Number(time))
 							setKeyframeTimeState(Number(time))
 						}}
 					/>
@@ -99,6 +101,13 @@ function AnimationBar() {
 						style={'dark'}
 						size={'large'}
 						onClick={() => {
+							const keyframeTime =
+								(keyframeTimeState / selectedObject.animation.duration) * 100
+							console.log(keyframeTime)
+							if (durations.includes(keyframeTime) || !keyframeTimeState) {
+								console.log('pop')
+								return
+							}
 							createChangeObjectAction(selection.slideId, selectedObject.id, {
 								animation: {
 									...selectedObject.animation,
