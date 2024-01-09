@@ -10,16 +10,22 @@ function TopBar() {
 	const title = useAppSelector((state) => state).presentation.title
 	const slides = useAppSelector((state) => state).presentation.slides
 
-	const refs = useRef<React.MutableRefObject<HTMLDivElement>[]>([])
+	const refs = useRef<HTMLDivElement[]>([])
 
 	const { createChangeTitleAction, createStartPreviewAction } = useAppActions()
 	const { width, height } = getSlideSize()
 	function convertToPdf() {
-		const pdf = new jsPDF('l', 'px', [width, height], true)
+		const pdf = new jsPDF('l', 'mm', [width, height], true)
 		let pagesCounter = 1
 		const promises = refs.current.map(async (slideRef) => {
-			slideRef.current.style.display = 'block'
-			const canvas = await html2canvas(slideRef.current)
+			slideRef.style.display = 'block'
+			const canvas = await html2canvas(slideRef, {
+				// eslint-disable-next-line no-empty-pattern
+				onclone: ({}, clone) => {
+					clone.style.width = width + 'px' //просто растягивание
+					clone.style.height = height + 'px'
+				},
+			})
 			const pdfWidth = pdf.internal.pageSize.getWidth()
 			const pdfHeight = pdf.internal.pageSize.getHeight()
 			const image = document.createElement('img')
@@ -36,7 +42,7 @@ function TopBar() {
 			const ratio = Math.min(pdfWidth / imageWidth, pdfHeight / imageHeight)
 			pdf.addImage(image, 'PNG', 0, 0, imageWidth * ratio, imageHeight * ratio)
 			pdf.addPage()
-			slideRef.current.style.display = 'none'
+			slideRef.style.display = 'none'
 			pagesCounter++
 		})
 		Promise.all(promises).then(() => {
@@ -46,9 +52,14 @@ function TopBar() {
 	}
 
 	const slideList = slides.map((slide, index) => {
-		const ref = useRef<HTMLDivElement>(null)
-		refs.current[index] = ref
-		return <PlayerSlideRenderer key={index} isHidden={true} ref={ref} slide={slide} />
+		return (
+			<PlayerSlideRenderer
+				key={index}
+				isHidden={true}
+				ref={(el) => (refs.current[index] = el)}
+				slide={slide}
+			/>
+		)
 	})
 
 	return (
