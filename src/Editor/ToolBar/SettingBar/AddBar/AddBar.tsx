@@ -64,11 +64,36 @@ function AddBar({ slideRect }: AddBarProps) {
 			<Button
 				style='light'
 				size='big'
-				icon={TriangleIcon}
-				text='triangle'
+				icon={ImageIcon}
+				text='File image'
 				onClick={() => {
-					setBlockType('triangle')
-					document.addEventListener('mousedown', handleAddDown)
+					fileInputRef.current.click()
+				}}
+			/>
+			<input
+				type={'file'}
+				hidden={true}
+				ref={fileInputRef}
+				onInput={() => {
+					if (fileInputRef.current) {
+						const file = fileInputRef.current.files[0]
+
+						const reader = new FileReader()
+
+						reader.readAsDataURL(file)
+
+						reader.onload = () => {
+							if (typeof reader.result === 'string') {
+								setBlockType('image')
+								setImageValue(reader.result)
+								document.addEventListener('mousedown', handleAddDown)
+							}
+						}
+
+						reader.onerror = () => {
+							console.log(reader.error)
+						}
+					}
 				}}
 			/>
 			{!imagePathInputOpened && (
@@ -109,36 +134,11 @@ function AddBar({ slideRect }: AddBarProps) {
 			<Button
 				style='light'
 				size='big'
-				icon={ImageIcon}
-				text='File image'
+				icon={TriangleIcon}
+				text='triangle'
 				onClick={() => {
-					fileInputRef.current.click()
-				}}
-			/>
-			<input
-				type={'file'}
-				hidden={true}
-				ref={fileInputRef}
-				onInput={() => {
-					if (fileInputRef.current) {
-						const file = fileInputRef.current.files[0]
-
-						const reader = new FileReader()
-
-						reader.readAsDataURL(file)
-
-						reader.onload = () => {
-							if (typeof reader.result === 'string') {
-								setBlockType('image')
-								setImageValue(reader.result)
-								document.addEventListener('mousedown', handleAddDown)
-							}
-						}
-
-						reader.onerror = () => {
-							console.log(reader.error)
-						}
-					}
+					setBlockType('triangle')
+					document.addEventListener('mousedown', handleAddDown)
 				}}
 			/>
 			<Button
@@ -167,7 +167,7 @@ function AddBar({ slideRect }: AddBarProps) {
 								buttonContainerEl.current.offsetHeight +
 								buttonContainerEl.current.offsetTop +
 								10,
-							right: 0,
+							left: buttonContainerEl.current.offsetLeft,
 						}}
 					>
 						<ChangeBackgroundPopup />
