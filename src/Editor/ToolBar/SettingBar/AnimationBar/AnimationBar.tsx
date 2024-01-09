@@ -90,7 +90,6 @@ function AnimationBar() {
 						size={'Small'}
 						suffix={'sec'}
 						onChange={(time) => {
-							console.log(Number(time))
 							setKeyframeTimeState(Number(time))
 						}}
 					/>
