@@ -13,9 +13,10 @@ import { ChangeBackgroundPopup } from '../../../../common/changeBackgroundPopup/
 
 type AddBarProps = {
 	slideRect: DOMRect
+	editedSlideRef: HTMLDivElement
 }
 
-function AddBar({ slideRect }: AddBarProps) {
+function AddBar({ slideRect, editedSlideRef }: AddBarProps) {
 	const [imagePathInputOpened, setImagePathInputOpened] = useState(false)
 	const imagePathInputRef = useRef(null)
 	const [isBackgroundColorPicker, setStateBackgroundColorPicker] = useState(false)
@@ -23,8 +24,10 @@ function AddBar({ slideRect }: AddBarProps) {
 	const buttonContainerEl = useRef<HTMLDivElement>(null)
 	const toggleBackgroundColorPickerState = () => setStateBackgroundColorPicker((state) => !state)
 
+	console.log(editedSlideRef)
 	const { handleAddDown, setBlockType, setImageValue } = useObjectCreation({
 		rect: slideRect,
+		editedSlideRef: editedSlideRef,
 	})
 
 	const handleWindowClick = (event: MouseEvent) => {

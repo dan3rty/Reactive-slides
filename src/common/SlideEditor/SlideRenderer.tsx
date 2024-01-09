@@ -12,9 +12,16 @@ type SlideRendererProps = {
 	slideId: string
 	isWorkspace: boolean
 	setSlideRect?: React.Dispatch<React.SetStateAction<DOMRect>>
+	setEditedSlideRef?: React.Dispatch<React.SetStateAction<HTMLDivElement>>
 }
 
-function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRendererProps) {
+function SlideRenderer({
+	scale,
+	slideId,
+	isWorkspace,
+	setSlideRect,
+	setEditedSlideRef,
+}: SlideRendererProps) {
 	const { width, height } = getScaledSlideSize(scale)
 	const ref = useRef(null)
 	const { createDeleteObjectAction, createClearObjectSelectionAction } = useAppActions()
@@ -55,6 +62,7 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 		}
 
 		setSlideRect && setSlideRect(ref.current.getBoundingClientRect())
+		setEditedSlideRef && setEditedSlideRef(ref.current)
 
 		document.addEventListener('keydown', clearSelectionObjectsOnClick)
 		return () => {

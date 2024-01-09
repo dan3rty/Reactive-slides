@@ -6,11 +6,12 @@ import { useState } from 'react'
 
 function Editor() {
 	const [slideRect, setSlideRect] = useState<DOMRect>(null)
+	const [editedSlideRef, setEditedSlideRef] = useState<HTMLDivElement>(null)
 	useUndoRedoListeners()
 	return (
 		<div className={styles.app}>
-			<ToolBar slideRect={slideRect} />
-			<WorkSpace setSlideRect={setSlideRect} />
+			<ToolBar slideRect={slideRect} editedSlideRef={editedSlideRef} />
+			<WorkSpace setSlideRect={setSlideRect} setEditedSlideRef={setEditedSlideRef} />
 		</div>
 	)
 }

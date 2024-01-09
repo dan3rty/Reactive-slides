@@ -8,15 +8,16 @@ import { useAppSelector } from '../../../redux/hooks'
 
 type SettingBarProps = {
 	slideRect: DOMRect
+	editedSlideRef: HTMLDivElement
 }
 
-function SettingBar({ slideRect }: SettingBarProps) {
+function SettingBar({ slideRect, editedSlideRef }: SettingBarProps) {
 	const selection = useAppSelector((state) => state.selection)
 	const curChosen = selection.objectId ? selection.selectedTab : Tabs.CREATE
 	let bar = null
 	switch (curChosen) {
 		case Tabs.CREATE:
-			bar = <AddBar slideRect={slideRect} />
+			bar = <AddBar slideRect={slideRect} editedSlideRef={editedSlideRef} />
 			break
 		case Tabs.EDIT:
 			bar = <EditBar />

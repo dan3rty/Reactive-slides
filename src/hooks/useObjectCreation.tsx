@@ -10,6 +10,7 @@ import { useAppActions, useAppSelector } from '../redux/hooks'
 
 type useObjectCreationProps = {
 	rect?: DOMRect
+	editedSlideRef?: HTMLDivElement
 }
 
 const SLIDE_HEIGHT = 1080
@@ -127,13 +128,16 @@ function createObjectToAdd(blockType, imageValue, firstPosition, secondPosition,
 		  } as TextBlock)
 }
 
-function useObjectCreation({ rect }: useObjectCreationProps): {
+function useObjectCreation({ rect, editedSlideRef }: useObjectCreationProps): {
 	handleAddDown: (event: MouseEvent) => void
 	setBlockType: (v: string) => void
 	setImageValue: (v: string) => void
 } {
 	const { createAddObjectAction, createChangeObjectSelectionAction } = useAppActions()
 	const selection = useAppSelector((state) => state.selection)
+	const previewObject: HTMLDivElement = document.createElement('div')
+	previewObject.style.border = '1px solid #000000'
+	previewObject.style.position = 'absolute'
 	let firstPosition = { x: 0, y: 0 }
 	let secondPosition = { x: 0, y: 0 }
 	let blockType = 'oval'
@@ -156,6 +160,8 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 	}
 	function useHandleAddUp(event: MouseEvent) {
 		document.removeEventListener('mouseup', useHandleAddUp)
+		document.removeEventListener('mousemove', handleMouseMove)
+		editedSlideRef.removeChild(previewObject)
 		const size = window.innerHeight
 		const scale = (SLIDE_HEIGHT / (size - TOOLBAR_HEIGHT)) * WORKSPACE_SCALER
 		setSecondPosition({
@@ -174,6 +180,16 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 		createAddObjectAction(selection.slideId, objectToAdd)
 	}
 
+	function handleMouseMove(event: MouseEvent) {
+		const secondPosition = {
+			x: event.clientX - rect.x,
+			y: event.clientY - rect.y,
+		}
+		console.log(firstPosition, secondPosition)
+		previewObject.style.width = secondPosition.x - firstPosition.x + 'px'
+		previewObject.style.height = secondPosition.y - firstPosition.y + 'px'
+	}
+
 	function handleAddDown(event: MouseEvent) {
 		event.preventDefault()
 		document.removeEventListener('mousedown', handleAddDown)
@@ -189,7 +205,12 @@ function useObjectCreation({ rect }: useObjectCreationProps): {
 			x: event.clientX - rect.x,
 			y: event.clientY - rect.y,
 		})
+		console.log('here', editedSlideRef)
+		editedSlideRef.appendChild(previewObject)
+		previewObject.style.left = firstPosition.x + 'px'
+		previewObject.style.top = firstPosition.y + 'px'
 		document.addEventListener('mouseup', useHandleAddUp)
+		document.addEventListener('mousemove', handleMouseMove)
 	}
 
 	return { handleAddDown, setBlockType, setImageValue }
