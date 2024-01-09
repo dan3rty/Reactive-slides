@@ -159,7 +159,7 @@ function AnimationBar() {
 				<Button
 					text={'loop'}
 					style={'dark'}
-					size={'medium'}
+					size={'normal'}
 					onClick={() => {
 						createChangeObjectAction(selection.slideId, selectedObject.id, {
 							animation: {
@@ -172,7 +172,7 @@ function AnimationBar() {
 				<Button
 					text={'unloop'}
 					style={'dark'}
-					size={'medium'}
+					size={'normal'}
 					onClick={() => {
 						createChangeObjectAction(selection.slideId, selectedObject.id, {
 							animation: {

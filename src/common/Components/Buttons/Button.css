@@ -54,6 +54,15 @@
 	justify-content: center;
 	align-items: center;
 	height: 31px;
+	width: 149px;
+	border-radius: 3px;
+}
+
+.button-normal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 31px;
 	width: 100px;
 	border-radius: 3px;
 }

@@ -166,7 +166,7 @@ function EditBar() {
 						<Button
 							text={'Text color'}
 							style={'light'}
-							size={'big'}
+							size={'medium'}
 							onClick={toggleTextColorPickerState}
 						/>
 					)}
@@ -260,7 +260,7 @@ function EditBar() {
 					<Button
 						text={'clear'}
 						style={'light'}
-						size={'big'}
+						size={'medium'}
 						onClick={() => {
 							if (selectedObject.blockType === BlockType.TEXT) {
 								createChangeObjectAction(selection.slideId, selectedObject.id, {
