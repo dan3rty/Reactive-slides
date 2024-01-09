@@ -76,7 +76,7 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 			)}
 			ref={ref}
 		>
-			{slide.objects.map((obj, index) => {
+			{slide.objects.map((obj) => {
 				const newObj = structuredClone(obj)
 				const selected = selection.objectId == obj.id && isWorkspace
 				if (
@@ -105,7 +105,7 @@ function SlideRenderer({ scale, slideId, isWorkspace, setSlideRect }: SlideRende
 				return (
 					<SlideElement
 						isPlayer={false}
-						key={index}
+						key={obj.id}
 						object={newObj}
 						isWorkspace={isWorkspace}
 						slideId={slide.id}
