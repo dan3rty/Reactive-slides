@@ -120,7 +120,6 @@ function SlideElement({
 						selectedObject={ref}
 						object={object}
 						slideId={slideId}
-						keyframeId={selection.keyFrameId}
 					/>
 				)}
 			</AnimatedComponent>
@@ -162,7 +161,6 @@ function SlideElement({
 						selectedObject={ref}
 						object={object}
 						slideId={slideId}
-						keyframeId={selection.keyFrameId}
 					/>
 				)}
 			</div>
