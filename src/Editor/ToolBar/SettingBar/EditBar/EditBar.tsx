@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { ChangeBackgroundPopup } from '../../../../common/changeBackgroundPopup/ChangeBackgroundPopup'
 import { ColorPicker } from '../../../../common/changeBackgroundPopup/colorPicker/ColorPicker'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import { DropDownList } from '../../../../common/Components/DropDownList/DropDownList'
@@ -24,7 +23,6 @@ import styles from './EditBar.css'
 
 function EditBar() {
 	const [isTextColorPicker, setStateTextColorPicker] = useState(false)
-	const [isBackgroundColorPicker, setStateBackgroundColorPicker] = useState(false)
 
 	const presenter = useAppSelector((state) => state)
 	const selection = presenter.selection
@@ -44,22 +42,14 @@ function EditBar() {
 		isStrokethrough = selectedObject.strokethrough
 	}
 	const toggleTextColorPickerState = () => setStateTextColorPicker((state) => !state)
-	const toggleBackgroundColorPickerState = () => setStateBackgroundColorPicker((state) => !state)
 
 	const textColorPickerRef = useRef(null)
-	const backgroundColorPickerRef = useRef(null)
 
 	const buttonContainerEl = useRef<HTMLDivElement>(null)
 
 	const handleWindowClick = (event: MouseEvent) => {
 		if (textColorPickerRef.current && !textColorPickerRef.current.contains(event.target)) {
 			setStateTextColorPicker(false)
-		}
-		if (
-			backgroundColorPickerRef.current &&
-			!backgroundColorPickerRef.current.contains(event.target)
-		) {
-			setStateBackgroundColorPicker(false)
 		}
 	}
 
@@ -176,7 +166,7 @@ function EditBar() {
 						<Button
 							text={'Text color'}
 							style={'light'}
-							size={'medium'}
+							size={'big'}
 							onClick={toggleTextColorPickerState}
 						/>
 					)}
@@ -209,27 +199,6 @@ function EditBar() {
 									}
 								}}
 							/>
-						</div>
-					)}
-					<Button
-						text={'Background'}
-						style={'light'}
-						size={'medium'}
-						onClick={toggleBackgroundColorPickerState}
-					/>
-					{isBackgroundColorPicker && (
-						<div
-							ref={backgroundColorPickerRef}
-							className={styles.colorPicker}
-							style={{
-								top:
-									buttonContainerEl.current.offsetHeight +
-									buttonContainerEl.current.offsetTop +
-									10,
-								right: 0,
-							}}
-						>
-							<ChangeBackgroundPopup />
 						</div>
 					)}
 				</div>
@@ -291,7 +260,7 @@ function EditBar() {
 					<Button
 						text={'clear'}
 						style={'light'}
-						size={'medium'}
+						size={'big'}
 						onClick={() => {
 							if (selectedObject.blockType === BlockType.TEXT) {
 								createChangeObjectAction(selection.slideId, selectedObject.id, {
