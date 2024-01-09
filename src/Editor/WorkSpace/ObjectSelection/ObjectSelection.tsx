@@ -88,6 +88,7 @@ type CornerProps = {
 	canChangeTop: boolean
 	canChangeLeft: boolean
 	keyframeId: string
+	object: TextBlock | ImageBlock | PrimitiveBlock
 }
 
 function Corner({
@@ -103,9 +104,9 @@ function Corner({
 	canChangeHeight,
 	canChangeTop,
 	keyframeId,
+	object,
 }: CornerProps) {
 	const { createChangeObjectAction } = useAppActions()
-	const slides = useAppSelector((state) => state).presentation.slides
 	const { registerResizableItem } = useResizableObject()
 	const size = 6
 	const cornerRef = useRef<HTMLDivElement>(null)
@@ -155,8 +156,6 @@ function Corner({
 					}
 				},
 				onDrop: () => {
-					const slide = slides.find((slide) => slide.id == slideId)
-					const object = slide.objects.find((object) => object.id == objectId)
 					const x = parseFloat(selectedObject.current.style.left) * scale
 					const y = parseFloat(selectedObject.current.style.top) * scale
 					const width = parseFloat(selectedObject.current.style.width) * scale
@@ -173,6 +172,7 @@ function Corner({
 							baseState: newBaseState,
 						})
 					} else {
+						console.log('mew', object.animation.stateList)
 						const newStateList = object.animation.stateList.map((state) => {
 							if (state.id === keyframeId) {
 								return {
@@ -196,7 +196,7 @@ function Corner({
 		const control = cornerRef.current!
 		control.addEventListener('mousedown', onMouseDown)
 		return () => control.removeEventListener('mousedown', onMouseDown)
-	}, [registerResizableItem])
+	}, [registerResizableItem, object])
 
 	return (
 		<div
@@ -231,6 +231,11 @@ function ObjectSelection({
 		return null
 	}
 	const selection = useAppSelector((state) => state).selection
+	const slides = useAppSelector((state) => state).presentation.slides
+	const slideObject = slides
+		.find((slide) => slide.id == slideId)
+		.objects.find((obj) => obj.id == object.id)
+	console.log(slideObject.animation.stateList)
 	const ref = useRef(null)
 	const selectionRef = useRef<HTMLDivElement>(null)
 	const { startMoving } = useDraggableObject({
@@ -345,6 +350,7 @@ function ObjectSelection({
 				canChangeLeft={true}
 				canChangeTop={true}
 				keyframeId={selection.keyFrameId}
+				object={slideObject}
 			/>
 			<Corner
 				x={'50%'}
@@ -359,6 +365,7 @@ function ObjectSelection({
 				canChangeLeft={false}
 				canChangeTop={true}
 				keyframeId={selection.keyFrameId}
+				object={slideObject}
 			/>
 			<Corner
 				x={'100%'}
@@ -373,6 +380,7 @@ function ObjectSelection({
 				canChangeLeft={false}
 				canChangeTop={true}
 				keyframeId={selection.keyFrameId}
+				object={slideObject}
 			/>
 			<Corner
 				x={'100%'}
@@ -387,6 +395,7 @@ function ObjectSelection({
 				canChangeLeft={false}
 				canChangeTop={false}
 				keyframeId={selection.keyFrameId}
+				object={slideObject}
 			/>
 			<Corner
 				x={'100%'}
@@ -401,6 +410,7 @@ function ObjectSelection({
 				canChangeLeft={false}
 				canChangeTop={false}
 				keyframeId={selection.keyFrameId}
+				object={slideObject}
 			/>
 			<Corner
 				x={'50%'}
@@ -415,6 +425,7 @@ function ObjectSelection({
 				canChangeLeft={false}
 				canChangeTop={false}
 				keyframeId={selection.keyFrameId}
+				object={slideObject}
 			/>
 			<Corner
 				x={'0%'}
@@ -429,6 +440,7 @@ function ObjectSelection({
 				canChangeLeft={true}
 				canChangeTop={false}
 				keyframeId={selection.keyFrameId}
+				object={slideObject}
 			/>
 			<Corner
 				x={'0%'}
@@ -443,6 +455,7 @@ function ObjectSelection({
 				canChangeLeft={true}
 				canChangeTop={false}
 				keyframeId={selection.keyFrameId}
+				object={slideObject}
 			/>
 		</div>
 	)
