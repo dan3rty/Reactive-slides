@@ -148,12 +148,25 @@ function AnimationBar() {
 						style={'dark'}
 						size={'large'}
 						onClick={() => {
+							let maxPercent = 0
+							selectedObject.animation.stateList
+								.filter((state) => state.id !== selection.keyFrameId)
+								.map((state) => {
+									if (state.keyPercent > maxPercent) {
+										maxPercent = state.keyPercent
+									}
+								})
 							createChangeObjectAction(selection.slideId, selectedObject.id, {
 								animation: {
 									...selectedObject.animation,
-									stateList: selectedObject.animation.stateList.filter(
-										(state) => state.id !== selection.keyFrameId,
-									),
+									duration:
+										(maxPercent * selectedObject.animation.duration) / 100,
+									stateList: selectedObject.animation.stateList
+										.filter((state) => state.id !== selection.keyFrameId)
+										.map((state) => ({
+											...state,
+											keyPercent: (maxPercent / state.keyPercent) * 100,
+										})),
 								},
 							})
 							createChangeKeyframeSelectionAction('')
