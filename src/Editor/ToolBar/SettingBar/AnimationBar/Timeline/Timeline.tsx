@@ -8,7 +8,7 @@ type TimelineProps = {
 }
 
 function Timeline({ animation, chosenState }: TimelineProps) {
-	const objectsToRender = animation.stateList?.map(({  id, keyPercent }) => {
+	const objectsToRender = animation.stateList?.map(({ id, keyPercent }) => {
 		const offset = `${keyPercent}%`
 		const isChosen = id === chosenState
 		return { keyPercent, offset, isChosen, id }
@@ -23,7 +23,7 @@ function Timeline({ animation, chosenState }: TimelineProps) {
 					return (
 						<Dot
 							key={index}
-							duration={animation.duration * keyPercent / 100}
+							duration={(animation.duration * keyPercent) / 100}
 							offset={offset}
 							isChosen={isChosen}
 							id={id}

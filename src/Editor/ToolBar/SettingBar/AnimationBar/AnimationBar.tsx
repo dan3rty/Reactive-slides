@@ -103,9 +103,7 @@ function AnimationBar() {
 						onClick={() => {
 							const keyframeTime =
 								(keyframeTimeState / selectedObject.animation.duration) * 100
-							console.log(keyframeTime)
 							if (durations.includes(keyframeTime) || !keyframeTimeState) {
-								console.log('pop')
 								return
 							}
 							createChangeObjectAction(selection.slideId, selectedObject.id, {

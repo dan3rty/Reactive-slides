@@ -375,9 +375,27 @@ const AddSlideButtonIcon = (
 )
 
 const DeleteButtonIcon = (
-	<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<line x1="1.5" y1="-1.5" x2="30.5806" y2="-1.5" transform="matrix(0.697131 -0.716944 0.697131 0.716944 2.63565 25)" stroke="#FF0000" strokeWidth="3" strokeLinecap="round"/>
-		<line x1="1.5" y1="-1.5" x2="30.5806" y2="-1.5" transform="matrix(0.697131 0.716944 -0.697131 0.716944 0 2)" stroke="#FF0000" strokeWidth="3" strokeLinecap="round"/>
+	<svg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
+		<line
+			x1='1.5'
+			y1='-1.5'
+			x2='30.5806'
+			y2='-1.5'
+			transform='matrix(0.697131 -0.716944 0.697131 0.716944 2.63565 25)'
+			stroke='#FF0000'
+			strokeWidth='3'
+			strokeLinecap='round'
+		/>
+		<line
+			x1='1.5'
+			y1='-1.5'
+			x2='30.5806'
+			y2='-1.5'
+			transform='matrix(0.697131 0.716944 -0.697131 0.716944 0 2)'
+			stroke='#FF0000'
+			strokeWidth='3'
+			strokeLinecap='round'
+		/>
 	</svg>
 )
 
