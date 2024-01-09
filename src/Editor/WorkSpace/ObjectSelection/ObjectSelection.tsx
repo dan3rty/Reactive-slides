@@ -167,7 +167,7 @@ function Corner({
 						width,
 						height,
 					}
-					if (keyframeId) {
+					if (!keyframeId) {
 						createChangeObjectAction(slideId, objectId, {
 							baseState: newBaseState,
 						})
