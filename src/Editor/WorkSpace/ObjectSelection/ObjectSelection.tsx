@@ -255,11 +255,11 @@ function ObjectSelection({
 	useEffect(() => {
 		selectionRef.current?.addEventListener('mousemove', (e: MouseEvent) => onMouseMove(e))
 		document.addEventListener('mousedown', onMouseDown)
-		ref.current.addEventListener('mousedown', startMoving)
+		ref.current?.addEventListener('mousedown', startMoving)
 		return () => {
 			selectionRef.current?.removeEventListener('mousemove', (e) => onMouseMove(e))
 			document.removeEventListener('mousedown', onMouseDown)
-			ref.current.removeEventListener('mousedown', startMoving)
+			ref.current?.removeEventListener('mousedown', startMoving)
 		}
 	}, [startMoving, onMouseDown])
 
