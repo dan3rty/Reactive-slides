@@ -250,7 +250,7 @@ function ObjectSelection({
 	const rotation = 0
 	const borderSize = 3
 
-	const cursorMoveOffset = 0.05
+	const cursorMoveOffset = 0.08
 	const onMouseMove = (e: MouseEvent) => {
 		const height = selectionRef.current.clientHeight
 		const width = selectionRef.current.clientWidth
