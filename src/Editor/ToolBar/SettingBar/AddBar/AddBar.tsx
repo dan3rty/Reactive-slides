@@ -1,17 +1,15 @@
 import styles from './AddBar.css'
 import { Button } from '../../../../common/Components/Buttons/Button'
 import {
-	BulletListIcon,
 	ImageIcon,
-	NumberedListIcon,
 	OvalIcon,
 	SquareIcon,
-	TableIcon,
 	TextIcon,
 	TriangleIcon,
 } from '../../../../common/Icons/icons'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useObjectCreation } from '../../../../hooks/useObjectCreation'
+import { ChangeBackgroundPopup } from '../../../../common/changeBackgroundPopup/ChangeBackgroundPopup'
 
 type AddBarProps = {
 	slideRect: DOMRect
@@ -20,10 +18,28 @@ type AddBarProps = {
 function AddBar({ slideRect }: AddBarProps) {
 	const [imagePathInputOpened, setImagePathInputOpened] = useState(false)
 	const imagePathInputRef = useRef(null)
+	const [isBackgroundColorPicker, setStateBackgroundColorPicker] = useState(false)
+	const backgroundColorPickerRef = useRef(null)
+	const buttonContainerEl = useRef<HTMLDivElement>(null)
+	const toggleBackgroundColorPickerState = () => setStateBackgroundColorPicker((state) => !state)
 
 	const { handleAddDown, setBlockType, setImageValue } = useObjectCreation({
 		rect: slideRect,
 	})
+
+	const handleWindowClick = (event: MouseEvent) => {
+		if (
+			backgroundColorPickerRef.current &&
+			!backgroundColorPickerRef.current.contains(event.target)
+		) {
+			setStateBackgroundColorPicker(false)
+		}
+	}
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleWindowClick)
+		return () => document.removeEventListener('mousedown', handleWindowClick)
+	}, [])
 
 	function handleDownInInput(event: MouseEvent) {
 		if (event.target !== imagePathInputRef.current) {
@@ -45,7 +61,6 @@ function AddBar({ slideRect }: AddBarProps) {
 					document.addEventListener('mousedown', handleAddDown)
 				}}
 			/>
-			<Button style='light' size='big' icon={TableIcon} text='table' />
 			<Button
 				style='light'
 				size='big'
@@ -56,7 +71,6 @@ function AddBar({ slideRect }: AddBarProps) {
 					document.addEventListener('mousedown', handleAddDown)
 				}}
 			/>
-			<Button style='light' size='big' icon={BulletListIcon} text='bullet list' />
 			{!imagePathInputOpened && (
 				<Button
 					style='light'
@@ -92,7 +106,6 @@ function AddBar({ slideRect }: AddBarProps) {
 					document.addEventListener('mousedown', handleAddDown)
 				}}
 			/>
-			<Button style='light' size='big' icon={NumberedListIcon} text='numbered list' />
 			<Button
 				style='light'
 				size='big'
@@ -138,6 +151,29 @@ function AddBar({ slideRect }: AddBarProps) {
 					document.addEventListener('mousedown', handleAddDown)
 				}}
 			/>
+			<div ref={buttonContainerEl}>
+				<Button
+					text={'Background'}
+					style={'light'}
+					size={'medium'}
+					onClick={toggleBackgroundColorPickerState}
+				/>
+				{isBackgroundColorPicker && (
+					<div
+						ref={backgroundColorPickerRef}
+						className={styles.colorPicker}
+						style={{
+							top:
+								buttonContainerEl.current.offsetHeight +
+								buttonContainerEl.current.offsetTop +
+								10,
+							right: 0,
+						}}
+					>
+						<ChangeBackgroundPopup />
+					</div>
+				)}
+			</div>
 		</div>
 	)
 }
