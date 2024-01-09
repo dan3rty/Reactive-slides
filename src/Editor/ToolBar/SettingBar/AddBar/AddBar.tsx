@@ -24,7 +24,6 @@ function AddBar({ slideRect, editedSlideRef }: AddBarProps) {
 	const buttonContainerEl = useRef<HTMLDivElement>(null)
 	const toggleBackgroundColorPickerState = () => setStateBackgroundColorPicker((state) => !state)
 
-	console.log(editedSlideRef)
 	const { handleAddDown, setBlockType, setImageValue } = useObjectCreation({
 		rect: slideRect,
 		editedSlideRef: editedSlideRef,

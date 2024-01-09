@@ -55,7 +55,6 @@ function useDraggableObject({ elementRef, elementId, slideId }: useDraggableObje
 		}
 
 		createMoveObjectToTopLayer(slideId, obj.id)
-		console.log(selection.keyFrameId)
 		if (!selection.keyFrameId) {
 			createChangeObjectAction(slideId, elementId, {
 				baseState: newState,

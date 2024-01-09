@@ -185,7 +185,6 @@ function useObjectCreation({ rect, editedSlideRef }: useObjectCreationProps): {
 			x: event.clientX - rect.x,
 			y: event.clientY - rect.y,
 		}
-		console.log(firstPosition, secondPosition)
 		previewObject.style.width = secondPosition.x - firstPosition.x + 'px'
 		previewObject.style.height = secondPosition.y - firstPosition.y + 'px'
 	}
@@ -205,7 +204,6 @@ function useObjectCreation({ rect, editedSlideRef }: useObjectCreationProps): {
 			x: event.clientX - rect.x,
 			y: event.clientY - rect.y,
 		})
-		console.log('here', editedSlideRef)
 		editedSlideRef.appendChild(previewObject)
 		previewObject.style.left = firstPosition.x + 'px'
 		previewObject.style.top = firstPosition.y + 'px'
