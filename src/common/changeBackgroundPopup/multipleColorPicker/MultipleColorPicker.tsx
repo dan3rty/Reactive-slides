@@ -1,6 +1,6 @@
 import styles from './MiltipleColorPicker.css'
 import { Slider } from './slider/Slider'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { returnGradientString } from '../../Tools/returnGradientString'
 import { GradientColor } from '../../../model/types'
 import { useAppActions, useAppSelector } from '../../../redux/hooks'
@@ -22,9 +22,6 @@ function MultipleColorPicker() {
 	const [angle, setAngle] = useState('0%')
 	const [percent, setPercent] = useState('0%')
 	const [allColors, setAllColors] = useState<GradientColor | null>(null)
-	const pickColorButtonRef = useRef<HTMLDivElement>()
-	const addColorButtonRef = useRef<HTMLDivElement>()
-	const resetColorButtonRef = useRef<HTMLDivElement>()
 
 	function handleOnColorAdd() {
 		setAllColors(
@@ -80,16 +77,6 @@ function MultipleColorPicker() {
 		setAllColors(null)
 	}
 
-	useEffect(() => {
-		addColorButtonRef?.current?.addEventListener('click', handleOnColorAdd)
-		pickColorButtonRef?.current?.addEventListener('click', handleOnColorPick)
-		resetColorButtonRef?.current?.addEventListener('click', handleOnColorReset)
-		return () => {
-			addColorButtonRef?.current?.removeEventListener('click', handleOnColorAdd)
-			pickColorButtonRef?.current?.removeEventListener('click', handleOnColorPick)
-			resetColorButtonRef?.current?.removeEventListener('click', handleOnColorReset)
-		}
-	}, [hue, saturation, lightness, allColors, percent])
 	return (
 		<div className={styles.popup}>
 			<div className={styles.sliders}>
@@ -104,13 +91,13 @@ function MultipleColorPicker() {
 				<span>Percent </span>
 				<Slider onSliderChange={setPercent} />
 				<div>
-					<span className={styles.pickButton} ref={addColorButtonRef}>
+					<span className={styles.pickButton} onClick={handleOnColorAdd}>
 						add color
 					</span>
-					<span className={styles.pickButton} ref={pickColorButtonRef}>
+					<span className={styles.pickButton} onClick={handleOnColorPick}>
 						pick gradient
 					</span>
-					<span className={styles.pickButton} ref={resetColorButtonRef}>
+					<span className={styles.pickButton} onClick={handleOnColorReset}>
 						reset colors
 					</span>
 				</div>
