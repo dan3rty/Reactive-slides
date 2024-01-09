@@ -5,16 +5,13 @@ import { DropDownList } from '../../../../common/Components/DropDownList/DropDow
 import { InputField } from '../../../../common/Components/InputFields/InputField'
 import { SelectionBar } from '../../../../common/Components/Selection/SelectionBar'
 import {
-	AlignBottomIcon,
 	AlignCenterIcon,
 	AlignLeftIcon,
 	AlignRightIcon,
-	AlignTopIcon,
 	BoldIcon,
 	ItalicIcon,
 	StrokethroughIcon,
 	UnderstrokeIcon,
-	VerticalAlignCenterIcon,
 } from '../../../../common/Icons/icons'
 import { FONTS } from '../../../../Fonts'
 import { BlockType, HorizontalAligns } from '../../../../model/types'
@@ -162,14 +159,6 @@ function EditBar() {
 					/>
 				)}
 				<div className={styles.buttonHorizontalContainer} ref={buttonContainerEl}>
-					{isTextBlock && (
-						<Button
-							text={'Text color'}
-							style={'light'}
-							size={'big'}
-							onClick={toggleTextColorPickerState}
-						/>
-					)}
 					{isTextColorPicker && (
 						<div
 							ref={textColorPickerRef}
@@ -260,7 +249,7 @@ function EditBar() {
 					<Button
 						text={'clear'}
 						style={'light'}
-						size={'big'}
+						size={'medium'}
 						onClick={() => {
 							if (selectedObject.blockType === BlockType.TEXT) {
 								createChangeObjectAction(selection.slideId, selectedObject.id, {
@@ -318,28 +307,14 @@ function EditBar() {
 							},
 						]}
 					/>
-					<SelectionBar
-						propsOfButtons={[
-							{
-								icon: AlignTopIcon,
-								onClick: () => {
-									console.log('Top')
-								},
-							},
-							{
-								icon: VerticalAlignCenterIcon,
-								onClick: () => {
-									console.log('VerticalCenter')
-								},
-							},
-							{
-								icon: AlignBottomIcon,
-								onClick: () => {
-									console.log('bottom')
-								},
-							},
-						]}
-					/>
+					{isTextBlock && (
+						<Button
+							text={'Text color'}
+							style={'light'}
+							size={'medium'}
+							onClick={toggleTextColorPickerState}
+						/>
+					)}
 				</div>
 			)}
 		</div>

@@ -2,7 +2,7 @@ import styles from './Button.css'
 import React, { ReactNode } from 'react'
 import { joinCssClasses } from '../../../classes/joinCssClasses'
 
-type Sizes = 'small' | 'medium' | 'big' | 'large'
+type Sizes = 'small' | 'normal' | 'medium' | 'big' | 'large'
 type ButtonStyles = 'light' | 'dark'
 
 type ButtonProps = {
@@ -42,6 +42,17 @@ function Button({ text, style, size, icon, onClick }: ButtonProps) {
 			<div
 				onClick={onClick}
 				className={joinCssClasses(styles.button, styles.buttonMedium, styles[style])}
+			>
+				<span>{text}</span>
+			</div>
+		)
+	}
+
+	if (size === 'normal') {
+		return (
+			<div
+				onClick={onClick}
+				className={joinCssClasses(styles.button, styles.buttonNormal, styles[style])}
 			>
 				<span>{text}</span>
 			</div>
