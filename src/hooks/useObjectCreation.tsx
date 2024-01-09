@@ -20,6 +20,11 @@ function createObjectToAdd(blockType, imageValue, firstPosition, secondPosition,
 	return blockType === 'rectangle' || blockType === 'triangle' || blockType === 'oval'
 		? ({
 				blockType: Type.BlockType.PRIMITIVE,
+				animation: {
+					duration: 0,
+					looped: false,
+					stateList: [],
+				},
 				id: Math.random().toString(16).slice(2),
 				primitiveType:
 					blockType === 'rectangle'
@@ -54,6 +59,11 @@ function createObjectToAdd(blockType, imageValue, firstPosition, secondPosition,
 		: blockType === 'image'
 		? ({
 				blockType: Type.BlockType.IMAGE,
+				animation: {
+					duration: 0,
+					looped: false,
+					stateList: [],
+				},
 				id: Math.random().toString(16).slice(2),
 				baseState: {
 					width:
@@ -77,6 +87,11 @@ function createObjectToAdd(blockType, imageValue, firstPosition, secondPosition,
 		  } as ImageBlock)
 		: ({
 				blockType: Type.BlockType.TEXT,
+				animation: {
+					duration: 0,
+					looped: false,
+					stateList: [],
+				},
 				id: Math.random().toString(16).slice(2),
 				baseState: {
 					width:

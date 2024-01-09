@@ -32,3 +32,8 @@
 	flex-direction: column;
 	gap: 3px;
 }
+
+.loop-wrapper {
+	display: flex;
+	flex-direction: column;
+}

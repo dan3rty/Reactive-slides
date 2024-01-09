@@ -21,7 +21,7 @@ type ObjectStateList = {
 type CommonObjectProperties = {
 	id: string
 	baseState: ObjectBlock
-	animation?: ObjectStateList
+	animation: ObjectStateList
 }
 
 enum BlockType {

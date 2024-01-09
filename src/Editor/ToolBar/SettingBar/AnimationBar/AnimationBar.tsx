@@ -1,124 +1,165 @@
-import {InputField} from '../../../../common/Components/InputFields/InputField'
+import { InputField } from '../../../../common/Components/InputFields/InputField'
 import styles from './AnimationBar.css'
-import {Button} from '../../../../common/Components/Buttons/Button'
-import {Timeline} from './Timeline/Timeline'
-import {useAppActions, useAppSelector} from '../../../../redux/hooks'
-import {useState} from "react";
+import { Button } from '../../../../common/Components/Buttons/Button'
+import { Timeline } from './Timeline/Timeline'
+import { useAppActions, useAppSelector } from '../../../../redux/hooks'
+import { useState } from 'react'
 
 function AnimationBar() {
-    const presenter = useAppSelector((state) => state)
-    const selection = presenter.selection
-    const slides = presenter.presentation.slides
-    const selectedObject = slides
-        .find((slide) => slide.id === selection.slideId)
-        .objects.find((obj) => obj.id == selection.objectId)
-    const animation = selectedObject?.animation
-    const {createChangeObjectAction, createChangeKeyframeSelectionAction} = useAppActions()
-    const [keyframeTimeState, setKeyframeTimeState] = useState(0)
-    return (
-        <div className={styles.animationBar}>
-            <div className={styles.bigContainer}>
-                <InputField
-                    label={'X:'}
-                    type={'number'}
-                    size={'Large'}
-                    initialValue={Math.floor(selectedObject?.baseState.x)}
-                    suffix={'px'}
-                />
-                <InputField
-                    label={'Y:'}
-                    type={'number'}
-                    size={'Large'}
-                    initialValue={Math.floor(selectedObject?.baseState.y)}
-                    suffix={'px'}
-                />
-            </div>
-            <div className={styles.mediumContainer}>
-                <InputField
-                    label={'Rotation:'}
-                    type={'number'}
-                    size={'Medium'}
-                    initialValue={Math.floor(selectedObject?.baseState.rotation)}
-                    suffix={'deg'}
-                />
-                <InputField
-                    label={'Width:'}
-                    type={'number'}
-                    size={'Medium'}
-                    initialValue={Math.floor(selectedObject?.baseState.width)}
-                    suffix={'px'}
-                />
-                <InputField
-                    label={'Height:'}
-                    type={'number'}
-                    size={'Medium'}
-                    initialValue={Math.floor(selectedObject?.baseState.height)}
-                    suffix={'px'}
-                />
-            </div>
-            <div className={styles.mediumContainer}>
-                <div className={styles.horizontalContainer}>
-                    <InputField
-                        label={'keyframeTime:'}
-                        type={'number'}
-                        initialValue={0}
-                        size={'Small'}
-                        suffix={'sec'}
-                        onChange={time => {
-                            console.log(Number(time))
-                            setKeyframeTimeState(Number(time))
-                        }}
-                    />
-                    <Button text={'add keyframe'} style={'dark'} size={'large'} onClick={() => {
-                        createChangeObjectAction(selection.slideId, selectedObject.id, {
-                            animation: {
-                                ...selectedObject.animation,
-                                duration: Math.max(keyframeTimeState, selectedObject.animation.duration),
-                                stateList: [
-                                    ...selectedObject.animation.stateList.map(state => ({
-                                        ...state,
-                                        keyPercent: (state.keyPercent * selectedObject.animation.duration / 100) / Math.max(keyframeTimeState, selectedObject.animation.duration) * 100
-                                    })),
-                                    {
-                                        id: Math.random().toString(16).slice(2),
-                                        keyPercent: keyframeTimeState / Math.max(keyframeTimeState, selectedObject.animation.duration) * 100,
-                                        state: selectedObject.baseState,
-                                    }
-                                ]
-                            }
-                        })
-                        createChangeKeyframeSelectionAction('')
-                    }}/>
-                    <Button text={'delete keyframe'} style={'dark'} size={'large'} onClick={() => {
-                        createChangeObjectAction(selection.slideId, selectedObject.id, {
-                            animation: {
-                                ...selectedObject.animation,
-                                stateList: selectedObject.animation.stateList.filter(state => state.id !== selection.keyFrameId)
-                            }
-                        })
-                        createChangeKeyframeSelectionAction('')
-                    }}/>
-                </div>
-                <Timeline animation={animation} chosenState={selection.keyFrameId}></Timeline>
-            </div>
-            <Button text={'loop'} style={'dark'} size={'large'} onClick={() => {
-                createChangeObjectAction(selection.slideId, selectedObject.id, {
-                    animation: {
-                        ...selectedObject.animation,
-                        looped: true
-                    }
-                })
-            }}/>
-            <Button text={'unloop'} style={'dark'} size={'large'} onClick={() => {
-                createChangeObjectAction(selection.slideId, selectedObject.id, {
-                    animation: {
-                        ...selectedObject.animation,
-                        looped: false
-                    }
-                })
-            }}/>
-        </div>
-    )
+	const presenter = useAppSelector((state) => state)
+	const selection = presenter.selection
+	const slides = presenter.presentation.slides
+	const selectedObject = slides
+		.find((slide) => slide.id === selection.slideId)
+		.objects.find((obj) => obj.id == selection.objectId)
+	const animation = selectedObject?.animation
+	const { createChangeObjectAction, createChangeKeyframeSelectionAction } = useAppActions()
+	const [keyframeTimeState, setKeyframeTimeState] = useState(0)
+	return (
+		<div className={styles.animationBar}>
+			<div className={styles.bigContainer}>
+				<InputField
+					label={'X:'}
+					type={'number'}
+					size={'Large'}
+					initialValue={Math.floor(selectedObject?.baseState.x)}
+					suffix={'px'}
+				/>
+				<InputField
+					label={'Y:'}
+					type={'number'}
+					size={'Large'}
+					initialValue={Math.floor(selectedObject?.baseState.y)}
+					suffix={'px'}
+				/>
+			</div>
+			<div className={styles.mediumContainer}>
+				<InputField
+					label={'Rotation:'}
+					type={'number'}
+					size={'Medium'}
+					initialValue={Math.floor(selectedObject?.baseState.rotation)}
+					suffix={'deg'}
+				/>
+				<InputField
+					label={'Width:'}
+					type={'number'}
+					size={'Medium'}
+					initialValue={Math.floor(selectedObject?.baseState.width)}
+					suffix={'px'}
+				/>
+				<InputField
+					label={'Height:'}
+					type={'number'}
+					size={'Medium'}
+					initialValue={Math.floor(selectedObject?.baseState.height)}
+					suffix={'px'}
+				/>
+			</div>
+			<div className={styles.mediumContainer}>
+				<div className={styles.horizontalContainer}>
+					<InputField
+						label={'time:'}
+						type={'number'}
+						initialValue={0}
+						size={'Small'}
+						suffix={'sec'}
+						onChange={(time) => {
+							console.log(Number(time))
+							setKeyframeTimeState(Number(time))
+						}}
+					/>
+					<Button
+						text={'add keyframe'}
+						style={'dark'}
+						size={'large'}
+						onClick={() => {
+							createChangeObjectAction(selection.slideId, selectedObject.id, {
+								animation: {
+									...selectedObject.animation,
+									duration: Math.max(
+										keyframeTimeState,
+										selectedObject.animation.duration,
+									),
+									stateList: [
+										...selectedObject.animation.stateList.map((state) => ({
+											...state,
+											keyPercent:
+												((state.keyPercent *
+													selectedObject.animation.duration) /
+													100 /
+													Math.max(
+														keyframeTimeState,
+														selectedObject.animation.duration,
+													)) *
+												100,
+										})),
+										{
+											id: Math.random().toString(16).slice(2),
+											keyPercent:
+												(keyframeTimeState /
+													Math.max(
+														keyframeTimeState,
+														selectedObject.animation.duration,
+													)) *
+												100,
+											state: selectedObject.baseState,
+										},
+									],
+								},
+							})
+							createChangeKeyframeSelectionAction('')
+						}}
+					/>
+					<Button
+						text={'delete keyframe'}
+						style={'dark'}
+						size={'large'}
+						onClick={() => {
+							createChangeObjectAction(selection.slideId, selectedObject.id, {
+								animation: {
+									...selectedObject.animation,
+									stateList: selectedObject.animation.stateList.filter(
+										(state) => state.id !== selection.keyFrameId,
+									),
+								},
+							})
+							createChangeKeyframeSelectionAction('')
+						}}
+					/>
+				</div>
+				<Timeline animation={animation} chosenState={selection.keyFrameId}></Timeline>
+			</div>
+			<div className={styles.loopWrapper}>
+				<Button
+					text={'loop'}
+					style={'dark'}
+					size={'medium'}
+					onClick={() => {
+						createChangeObjectAction(selection.slideId, selectedObject.id, {
+							animation: {
+								...selectedObject.animation,
+								looped: true,
+							},
+						})
+					}}
+				/>
+				<Button
+					text={'unloop'}
+					style={'dark'}
+					size={'medium'}
+					onClick={() => {
+						createChangeObjectAction(selection.slideId, selectedObject.id, {
+							animation: {
+								...selectedObject.animation,
+								looped: false,
+							},
+						})
+					}}
+				/>
+			</div>
+		</div>
+	)
 }
 
-export {AnimationBar}
+export { AnimationBar }
