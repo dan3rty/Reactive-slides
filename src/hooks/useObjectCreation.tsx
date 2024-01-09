@@ -185,8 +185,23 @@ function useObjectCreation({ rect, editedSlideRef }: useObjectCreationProps): {
 			x: event.clientX - rect.x,
 			y: event.clientY - rect.y,
 		}
-		previewObject.style.width = secondPosition.x - firstPosition.x + 'px'
-		previewObject.style.height = secondPosition.y - firstPosition.y + 'px'
+		if (firstPosition.x < secondPosition.x && firstPosition.y < secondPosition.y) {
+			previewObject.style.width = secondPosition.x - firstPosition.x + 'px'
+			previewObject.style.height = secondPosition.y - firstPosition.y + 'px'
+		} else if (firstPosition.x < secondPosition.x && firstPosition.y > secondPosition.y) {
+			previewObject.style.top = secondPosition.y + 'px'
+			previewObject.style.width = secondPosition.x - firstPosition.x + 'px'
+			previewObject.style.height = firstPosition.y - secondPosition.y + 'px'
+		} else if (firstPosition.x > secondPosition.x && firstPosition.y < secondPosition.y) {
+			previewObject.style.left = secondPosition.x + 'px'
+			previewObject.style.width = firstPosition.x - secondPosition.x + 'px'
+			previewObject.style.height = secondPosition.y - firstPosition.y + 'px'
+		} else if (firstPosition.x > secondPosition.x && firstPosition.y > secondPosition.y) {
+			previewObject.style.left = secondPosition.x + 'px'
+			previewObject.style.top = secondPosition.y + 'px'
+			previewObject.style.width = firstPosition.x - secondPosition.x + 'px'
+			previewObject.style.height = firstPosition.y - secondPosition.y + 'px'
+		}
 	}
 
 	function handleAddDown(event: MouseEvent) {
