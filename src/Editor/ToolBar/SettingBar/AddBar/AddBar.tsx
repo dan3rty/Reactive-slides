@@ -155,7 +155,7 @@ function AddBar({ slideRect }: AddBarProps) {
 				<Button
 					text={'Background'}
 					style={'light'}
-					size={'medium'}
+					size={'big'}
 					onClick={toggleBackgroundColorPickerState}
 				/>
 				{isBackgroundColorPicker && (
