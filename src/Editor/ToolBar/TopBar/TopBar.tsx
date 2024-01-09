@@ -17,7 +17,8 @@ function TopBar() {
 	function convertToPdf() {
 		const pdf = new jsPDF('l', 'mm', [width, height], true)
 		let pagesCounter = 1
-		const promises = refs.current.map(async (slideRef) => {
+		const saveSlides = refs.current.filter((slide) => slide)
+		const promises = saveSlides.map(async (slideRef) => {
 			slideRef.style.display = 'block'
 			const canvas = await html2canvas(slideRef, {
 				// eslint-disable-next-line no-empty-pattern
