@@ -16,6 +16,14 @@ console.error = (function (_error) {
 	}
 })(console.error)
 
+console.warn = function (_warn) {
+	return function (...message) {
+		if (typeof message[0] !== 'string' || message[0].indexOf('StyledComponents') === -1) {
+			_warn.apply(console, message)
+		}
+	}
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<Provider store={store}>

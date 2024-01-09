@@ -196,7 +196,6 @@ type ObjectSelectionProps = {
 	slideId: string
 	scale: number
 	slideRef: React.MutableRefObject<HTMLDivElement>
-	keyframeId?: string
 }
 
 function ObjectSelection({
@@ -205,7 +204,6 @@ function ObjectSelection({
 	slideId,
 	scale,
 	slideRef,
-	keyframeId,
 }: ObjectSelectionProps) {
 	if (!selectedObject.current) {
 		return null
@@ -216,7 +214,6 @@ function ObjectSelection({
 		elementRef: ref,
 		elementId: object.id,
 		slideId,
-		keyframeId,
 	})
 
 	const rotation = selectedObject.current.style.rotate
@@ -262,7 +259,7 @@ function ObjectSelection({
 		return () => {
 			selectionRef.current?.removeEventListener('mousemove', (e) => onMouseMove(e))
 			document.removeEventListener('mousedown', onMouseDown)
-			ref.current?.removeEventListener('mousedown', startMoving)
+			ref.current.removeEventListener('mousedown', startMoving)
 		}
 	}, [startMoving, onMouseDown])
 
