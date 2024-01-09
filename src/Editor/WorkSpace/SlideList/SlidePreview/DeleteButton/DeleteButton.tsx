@@ -4,12 +4,9 @@ import styles from './DeleteButton.css'
 type DeleteButtonProps = {
 	deleteSlideOnClick: () => void
 }
-function DeleteButton({deleteSlideOnClick}: DeleteButtonProps) {
+function DeleteButton({ deleteSlideOnClick }: DeleteButtonProps) {
 	return (
-		<div
-			onClick={deleteSlideOnClick}
-			className={styles.deleteSlide}
-		>
+		<div onClick={deleteSlideOnClick} className={styles.deleteSlide}>
 			{DeleteButtonIcon}
 		</div>
 	)
