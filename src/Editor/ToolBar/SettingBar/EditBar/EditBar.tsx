@@ -77,6 +77,14 @@ function EditBar() {
 					size={'Large'}
 					initialValue={Math.floor(selectedObject.baseState.x)}
 					suffix={'px'}
+					onChange={(value) => {
+						createChangeObjectAction(selection.slideId, selectedObject.id, {
+							baseState: {
+								...selectedObject.baseState,
+								x: Number(value),
+							},
+						})
+					}}
 				/>
 				<InputField
 					label={'Y:'}
@@ -84,22 +92,31 @@ function EditBar() {
 					size={'Large'}
 					initialValue={Math.floor(selectedObject.baseState.y)}
 					suffix={'px'}
+					onChange={(value) => {
+						createChangeObjectAction(selection.slideId, selectedObject.id, {
+							baseState: {
+								...selectedObject.baseState,
+								y: Number(value),
+							},
+						})
+					}}
 				/>
 			</div>
 			<div className={styles.mediumContainer}>
-				<InputField
-					label={'Rotation:'}
-					type={'number'}
-					size={'Medium'}
-					initialValue={Math.floor(selectedObject.baseState.rotation)}
-					suffix={'deg'}
-				/>
 				<InputField
 					label={'Width:'}
 					type={'number'}
 					size={'Medium'}
 					initialValue={Math.floor(selectedObject.baseState.width)}
 					suffix={'px'}
+					onChange={(value) => {
+						createChangeObjectAction(selection.slideId, selectedObject.id, {
+							baseState: {
+								...selectedObject.baseState,
+								width: Number(value),
+							},
+						})
+					}}
 				/>
 				<InputField
 					label={'Height:'}
@@ -107,6 +124,14 @@ function EditBar() {
 					size={'Medium'}
 					initialValue={Math.floor(selectedObject.baseState.height)}
 					suffix={'px'}
+					onChange={(value) => {
+						createChangeObjectAction(selection.slideId, selectedObject.id, {
+							baseState: {
+								...selectedObject.baseState,
+								height: Number(value),
+							},
+						})
+					}}
 				/>
 			</div>
 			<div className={styles.mediumContainer}>
