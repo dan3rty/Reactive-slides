@@ -87,6 +87,7 @@ type CornerProps = {
 	canChangeHeight: boolean
 	canChangeTop: boolean
 	canChangeLeft: boolean
+	keyframeId: string
 }
 
 function Corner({
@@ -101,6 +102,7 @@ function Corner({
 	canChangeLeft,
 	canChangeHeight,
 	canChangeTop,
+	keyframeId,
 }: CornerProps) {
 	const { createChangeObjectAction } = useAppActions()
 	const slides = useAppSelector((state) => state).presentation.slides
@@ -166,7 +168,27 @@ function Corner({
 						width,
 						height,
 					}
-					createChangeObjectAction(slideId, objectId, { baseState: newBaseState })
+					if (keyframeId) {
+						createChangeObjectAction(slideId, objectId, {
+							baseState: newBaseState,
+						})
+					} else {
+						const newStateList = object.animation.stateList.map((state) => {
+							if (state.id === keyframeId) {
+								return {
+									...state,
+									state: newBaseState,
+								}
+							}
+							return state
+						})
+						createChangeObjectAction(slideId, objectId, {
+							animation: {
+								...object.animation,
+								stateList: newStateList,
+							},
+						})
+					}
 				},
 			})
 		}
@@ -208,6 +230,7 @@ function ObjectSelection({
 	if (!selectedObject.current) {
 		return null
 	}
+	const selection = useAppSelector((state) => state).selection
 	const ref = useRef(null)
 	const selectionRef = useRef<HTMLDivElement>(null)
 	const { startMoving } = useDraggableObject({
@@ -321,6 +344,7 @@ function ObjectSelection({
 				canChangeHeight={true}
 				canChangeLeft={true}
 				canChangeTop={true}
+				keyframeId={selection.keyFrameId}
 			/>
 			<Corner
 				x={'50%'}
@@ -334,6 +358,7 @@ function ObjectSelection({
 				canChangeHeight={true}
 				canChangeLeft={false}
 				canChangeTop={true}
+				keyframeId={selection.keyFrameId}
 			/>
 			<Corner
 				x={'100%'}
@@ -347,6 +372,7 @@ function ObjectSelection({
 				canChangeHeight={true}
 				canChangeLeft={false}
 				canChangeTop={true}
+				keyframeId={selection.keyFrameId}
 			/>
 			<Corner
 				x={'100%'}
@@ -360,6 +386,7 @@ function ObjectSelection({
 				canChangeHeight={false}
 				canChangeLeft={false}
 				canChangeTop={false}
+				keyframeId={selection.keyFrameId}
 			/>
 			<Corner
 				x={'100%'}
@@ -373,6 +400,7 @@ function ObjectSelection({
 				canChangeHeight={true}
 				canChangeLeft={false}
 				canChangeTop={false}
+				keyframeId={selection.keyFrameId}
 			/>
 			<Corner
 				x={'50%'}
@@ -386,6 +414,7 @@ function ObjectSelection({
 				canChangeHeight={true}
 				canChangeLeft={false}
 				canChangeTop={false}
+				keyframeId={selection.keyFrameId}
 			/>
 			<Corner
 				x={'0%'}
@@ -399,6 +428,7 @@ function ObjectSelection({
 				canChangeHeight={true}
 				canChangeLeft={true}
 				canChangeTop={false}
+				keyframeId={selection.keyFrameId}
 			/>
 			<Corner
 				x={'0%'}
@@ -412,6 +442,7 @@ function ObjectSelection({
 				canChangeHeight={false}
 				canChangeLeft={true}
 				canChangeTop={false}
+				keyframeId={selection.keyFrameId}
 			/>
 		</div>
 	)
