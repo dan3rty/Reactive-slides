@@ -18,7 +18,7 @@ function Dot({ duration, offset, isChosen, id }: Dot) {
 				className={circleStyle}
 				onClick={() => createChangeKeyframeSelectionAction(id)}
 			></div>
-			<span className={styles.timelineLineDotText}>{duration.toFixed(1)}</span>
+			<span className={styles.timelineLineDotText}>{+duration.toFixed(2)}</span>
 		</div>
 	)
 }
