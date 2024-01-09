@@ -9,7 +9,8 @@ console.error = (function (_error) {
 	return function (...message) {
 		if (
 			typeof message[0] !== 'string' ||
-			message[0].indexOf('component is `contentEditable`') === -1
+			(message[0].indexOf('component is `contentEditable`') === -1 &&
+				message[0].indexOf('static flag') === -1)
 		) {
 			_error.apply(console, message)
 		}
