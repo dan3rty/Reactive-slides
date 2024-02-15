@@ -5,9 +5,10 @@ import { TitleActions } from './title'
 import { PreviewModeActions } from './previewMode'
 import { HistoryActions } from './history'
 
-function createAddSlideAction() {
+function createAddSlideAction(slideId: string) {
 	return {
 		type: SlideActions.ADD_SLIDE,
+		payload: slideId,
 	}
 }
 

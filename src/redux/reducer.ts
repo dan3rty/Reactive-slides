@@ -21,7 +21,13 @@ const rootReducer = (
 ) => {
 	switch (action.type) {
 		case SlideActions.ADD_SLIDE: {
-			const newSlides = state.presentation.slides.concat(generateBlankSlide())
+			const slides = state.presentation.slides
+			const currentSlideIndex = slides.findIndex((slide) => slide.id === action.payload)
+			const newSlides = [
+				...slides.slice(0, currentSlideIndex + 1),
+				generateBlankSlide(),
+				...slides.slice(currentSlideIndex + 1),
+			]
 			const newState: Presenter = {
 				...state,
 				presentation: {
