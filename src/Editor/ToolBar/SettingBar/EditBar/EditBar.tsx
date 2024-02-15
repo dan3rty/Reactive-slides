@@ -20,6 +20,7 @@ import styles from './EditBar.css'
 
 function EditBar() {
 	const [isTextColorPicker, setStateTextColorPicker] = useState(false)
+	const [isPrimitiveColorPicker, setStatePrimitiveColorPicker] = useState(false)
 
 	const presenter = useAppSelector((state) => state)
 	const selection = presenter.selection
@@ -28,6 +29,7 @@ function EditBar() {
 		.find((slide) => slide.id === selection.slideId)
 		.objects.find((obj) => obj.id == selection.objectId)
 	const isTextBlock = selectedObject.blockType === 'text'
+	const isPrimitiveBlock = selectedObject.blockType === 'primitive'
 	let isBold = false
 	let isItalic = false
 	let isUnderstroke = false
@@ -39,13 +41,20 @@ function EditBar() {
 		isStrokethrough = selectedObject.strokethrough
 	}
 	const toggleTextColorPickerState = () => setStateTextColorPicker((state) => !state)
-
+	const togglePrimitiveColorPickerState = () => setStatePrimitiveColorPicker((state) => !state)
 	const textColorPickerRef = useRef(null)
+	const primitiveColorPickerRef = useRef(null)
 
 	const buttonContainerEl = useRef<HTMLDivElement>(null)
 
 	const handleWindowClick = (event: MouseEvent) => {
 		if (textColorPickerRef.current && !textColorPickerRef.current.contains(event.target)) {
+			setStateTextColorPicker(false)
+		}
+		if (
+			primitiveColorPickerRef.current &&
+			!primitiveColorPickerRef.current.contains(event.target)
+		) {
 			setStateTextColorPicker(false)
 		}
 	}
@@ -158,6 +167,14 @@ function EditBar() {
 						}}
 					/>
 				)}
+				{isPrimitiveBlock && (
+					<Button
+						text={'Figure color'}
+						style={'light'}
+						size={'medium'}
+						onClick={togglePrimitiveColorPickerState}
+					/>
+				)}
 				<div className={styles.buttonHorizontalContainer} ref={buttonContainerEl}>
 					{isTextColorPicker && (
 						<div
@@ -174,6 +191,37 @@ function EditBar() {
 							<ColorPicker
 								onColorPick={(color) => {
 									if (selectedObject.blockType === BlockType.TEXT) {
+										createChangeObjectAction(
+											selection.slideId,
+											selectedObject.id,
+											{
+												color: {
+													hsl: color,
+													opacity: 1,
+													percent: '100%',
+												},
+											},
+										)
+									}
+								}}
+							/>
+						</div>
+					)}
+					{isPrimitiveColorPicker && (
+						<div
+							ref={primitiveColorPickerRef}
+							className={styles.colorPicker}
+							style={{
+								top:
+									buttonContainerEl.current.offsetHeight +
+									buttonContainerEl.current.offsetTop +
+									10,
+								left: buttonContainerEl.current.offsetLeft,
+							}}
+						>
+							<ColorPicker
+								onColorPick={(color) => {
+									if (selectedObject.blockType === BlockType.PRIMITIVE) {
 										createChangeObjectAction(
 											selection.slideId,
 											selectedObject.id,

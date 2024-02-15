@@ -33,9 +33,7 @@ function createObjectToAdd(blockType, imageValue, firstPosition, secondPosition,
 						: blockType === 'triangle'
 						? Type.Primitives.TRIANGLE
 						: Type.Primitives.CIRCLE,
-				color: {
-					colors: [{ hsl: '#808080', opacity: 0 }],
-				},
+				color: { hsl: '#808080', opacity: 0 },
 				baseState: {
 					width:
 						(firstPosition.x > secondPosition.x
